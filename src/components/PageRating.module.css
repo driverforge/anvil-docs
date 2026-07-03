@@ -1,0 +1,72 @@
+.pageRating {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ifm-toc-border-color);
+}
+
+.heading {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button {
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.375rem 0.5rem;
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition:
+    transform var(--ifm-transition-fast),
+    border-color var(--ifm-transition-fast),
+    background-color var(--ifm-transition-fast);
+}
+
+.button:hover {
+  transform: scale(1.15);
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 32rem;
+}
+
+.label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.5rem;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font: inherit;
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+}
+
+.submit {
+  align-self: flex-start;
+}
+
+.thanks {
+  font-weight: 500;
+  margin: 0;
+}

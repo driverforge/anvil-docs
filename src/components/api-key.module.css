@@ -1,0 +1,160 @@
+/**
+ * Styles for the dynamic API-key UI in docs code blocks.
+ * Uses Infima theme vars so dark/light modes are handled for free.
+ */
+
+.placeholderWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.placeholderButton {
+  display: inline;
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--ifm-color-primary);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+.placeholderButton:hover,
+.placeholderButton:focus-visible {
+  text-decoration-style: solid;
+  outline: none;
+}
+
+.picker {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.375rem;
+  min-width: 300px;
+  max-width: 420px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-hr-border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 0.375rem;
+  z-index: 200;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.8125rem;
+}
+
+[data-theme='dark'] .picker {
+  background: var(--ifm-background-surface-color);
+  border-color: #3f3f46;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.pickerHeader {
+  padding: 0.375rem 0.625rem;
+  color: var(--ifm-font-color-secondary);
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.pickerRow {
+  display: block;
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0.625rem;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  font: inherit;
+}
+
+.pickerRow:hover,
+.pickerRow:focus-visible {
+  background: rgba(59, 130, 246, 0.08);
+  outline: none;
+}
+
+[data-theme='dark'] .pickerRow:hover,
+[data-theme='dark'] .pickerRow:focus-visible {
+  background: rgba(102, 157, 241, 0.12);
+}
+
+.pickerRowSelected {
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+}
+
+.codeBlockWrapper {
+  position: relative;
+  display: block;
+}
+
+.codeBlockControls {
+  position: absolute;
+  /* Tuned to vertically centre the 2rem controls in a single-line block
+     (~3.3rem tall); on multi-line blocks they still sit near the top-right. */
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* We render our own copy control (next to the project selector) so both live in
+   one container with shared styling. Hide Docusaurus's built-in copy button, but
+   ONLY inside our wrapper — other code blocks keep the theme's copy button. */
+.codeBlockWrapper :global(div[class*='buttonGroup']) {
+  display: none;
+}
+
+/* Icon-only control (copy button): keep it roughly square. */
+.controlButtonIcon {
+  justify-content: center;
+  padding: 0;
+  width: 2rem;
+}
+
+.controlButtonIcon svg {
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+.controlButton {
+  appearance: none;
+  /* Match the height of Docusaurus's copy button to the right (~2rem) so the
+     two controls line up. Height + centering rather than vertical padding. */
+  box-sizing: border-box;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-hr-border-color);
+  border-radius: 0.375rem;
+  padding: 0 0.5rem;
+  font-size: 0.6875rem;
+  font-family: var(--ifm-font-family-base);
+  color: var(--ifm-font-color-secondary);
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.controlButton:hover,
+.controlButton:focus-visible {
+  color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  outline: none;
+}
+
+[data-theme='dark'] .controlButton {
+  background: #242528;
+  border-color: #3f3f46;
+}

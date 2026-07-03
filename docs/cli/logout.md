@@ -1,0 +1,34 @@
+---
+sidebar_position: 18
+---
+
+# anvil logout
+
+Log out and remove your stored Driverforge credentials.
+
+:::info Preview
+The `anvil` CLI is in **preview**. Commands and flags documented here may change
+before the stable release. Follow along or share feedback on our
+[roadmap](https://driverforge.canny.io).
+:::
+
+## Usage
+
+```bash
+anvil logout
+```
+
+## What it does
+
+Revokes the stored credentials and clears your saved [organization](/cli/org) and
+[device](/cli/device) context. It's safe to run when you're already signed out.
+
+## Examples
+
+```bash
+anvil logout
+```
+
+## Global flags
+
+Every `anvil` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.

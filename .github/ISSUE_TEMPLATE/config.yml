@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the docs
+    url: https://docs.driverforge.dev
+    about: The live documentation — check here first; your question may already be answered.
+  - name: Anvil support
+    url: https://support.driverforge.com
+    about: Questions about using Anvil itself (not the docs) — start here.
