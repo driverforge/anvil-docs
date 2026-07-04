@@ -15,11 +15,6 @@ try {
 }
 
 const umamiWebsiteId = process.env.UMAMI_WEBSITE_ID;
-// URL of the Anvil app — used by the docs API-key feature to call
-// the cross-origin `/api/docs/projects` proxy.
-// Local dev (docusaurus start): defaults to app.driverforge.test.
-// Production (docker build): overridden via Dockerfile ARG APP_URL.
-const appUrl = process.env.APP_URL || 'https://app.driverforge.test';
 
 const config: Config = {
   title: 'Anvil Documentation',
@@ -32,6 +27,11 @@ const config: Config = {
 
   url: 'https://docs.driverforge.dev',
   baseUrl: '/',
+
+  // Emit trailing-slash URLs so the sitemap + links match what the host serves
+  // 200 (it 301-redirects no-slash -> slash). Without this the Algolia DocSearch
+  // crawler hits redirects it won't follow and ignores every deep page.
+  trailingSlash: true,
 
   organizationName: 'driverforge',
   projectName: 'anvil-docs',
@@ -93,6 +93,10 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
+          // "Edit this page" -> the public mirror (driverforge/anvil-docs), where
+          // the docs live at docs/ (the apps/anvil-docs/ prefix is stripped on
+          // sync). Docusaurus appends the source path (docs/<file>) to this base.
+          editUrl: 'https://github.com/driverforge/anvil-docs/edit/main/',
         },
         blog: false,
         theme: {
@@ -119,9 +123,24 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/anvil-social-card.png',
+    // Algolia DocSearch. All three values are public (search-only key is
+    // client-side by design), so they're hardcoded rather than routed through
+    // gayle. The Admin/write key (crawler) is never committed.
+    algolia: {
+      appId: 'E09E8I6JYN',
+      apiKey: 'f6d1caacb3efc3c5ce1a9b7c1176ea6a',
+      indexName: 'Anvil Docs',
+      // Off: the site is single-version / single-language, so contextual scoping
+      // adds nothing — and it would filter on a `docusaurus_tag` facet the
+      // current crawler doesn't emit, returning zero results.
+      contextualSearch: false,
+    },
     colorMode: {
       defaultMode: 'dark',
       respectPrefersColorScheme: true,
+      // Built-in toggle removed in favour of the custom Theme selector navbar
+      // item (src/components/ThemeSelector). The colorMode API still works.
+      disableSwitch: true,
     },
     navbar: {
       title: 'Anvil Documentation',
@@ -169,16 +188,41 @@ const config: Config = {
           position: 'left',
           className: 'navbar-preview',
         },
+        // Search sits at the end of the left group — after the section tabs,
+        // before the right-side Help/Theme/Login/CTA cluster.
         {
-          href: appUrl,
-          label: 'Open Anvil',
+          type: 'search',
+          position: 'left',
+        },
+        {
+          type: 'dropdown',
+          label: 'Help',
+          position: 'right',
+          items: [
+            {
+              label: 'Email support',
+              href: 'mailto:support@driverforge.com',
+            },
+            {
+              label: 'Forum',
+              href: 'https://driverforge.canny.io/feature-requests',
+            },
+          ],
+        },
+        {
+          type: 'custom-themeSelector',
           position: 'right',
         },
         {
-          href: 'https://github.com/driverforge',
+          href: 'https://id.driverforge.com/login',
+          label: 'Login',
           position: 'right',
-          className: 'header-github-link',
-          'aria-label': 'GitHub',
+        },
+        {
+          href: 'https://driverforge.dev/#waitlist',
+          label: 'Join the Waitlist',
+          position: 'right',
+          className: 'navbar-cta',
         },
       ],
     },
@@ -189,16 +233,24 @@ const config: Config = {
           title: 'Learn',
           items: [
             {
-              label: 'Overview',
-              to: '/',
+              label: 'Platform',
+              to: '/platform/overview',
             },
             {
-              label: 'Quick Start',
-              to: '/getting-started/quick-start',
+              label: 'SDK',
+              to: '/sdk/overview',
             },
             {
-              label: 'Installation',
-              to: '/sdk/installation',
+              label: 'Agent',
+              to: '/agent/overview',
+            },
+            {
+              label: 'CLI',
+              to: '/cli/overview',
+            },
+            {
+              label: 'CI/CD',
+              to: '/cicd/overview',
             },
           ],
         },
@@ -217,6 +269,10 @@ const config: Config = {
               label: 'Share Feedback',
               href: 'https://driverforge.canny.io/feature-requests',
             },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/driverforge',
+            },
           ],
         },
         {
@@ -233,7 +289,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Driverforge`,
+      copyright: `Copyright © ${new Date().getFullYear()} Driverforge Pty Ltd`,
     },
     prism: {
       theme: prismThemes.github,

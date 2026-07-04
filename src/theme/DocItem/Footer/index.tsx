@@ -1,20 +1,12 @@
 import React from 'react';
-import Footer from '@theme-original/DocItem/Footer';
-import type FooterType from '@theme/DocItem/Footer';
-import type { WrapperProps } from '@docusaurus/types';
 import PageRating from '../../../components/PageRating';
 
-type Props = WrapperProps<typeof FooterType>;
-
 /**
- * Wraps the original doc-item footer to append the per-page feedback widget
- * (see PageRating). Swizzle wrapper — https://docusaurus.io/docs/swizzling
+ * Full override of the doc-item footer with the feedback footer (see
+ * PageRating). The docs use no tags or last-updated metadata, and PageRating
+ * renders its own "Edit this page" link (from the doc's editUrl), so we replace
+ * the theme footer rather than wrap it. Swizzle — https://docusaurus.io/docs/swizzling
  */
-export default function FooterWrapper(props: Props) {
-  return (
-    <>
-      <Footer {...props} />
-      <PageRating />
-    </>
-  );
+export default function DocItemFooter() {
+  return <PageRating />;
 }

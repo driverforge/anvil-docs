@@ -3,18 +3,27 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import PageRating from '../../src/components/PageRating';
 
 const mockPathname = '/sdk/installation';
-// `@docusaurus/router` is a Docusaurus build-time alias, not a resolvable
-// package, so the mock must be declared virtual for jest to hoist it.
+const mockEditUrl = 'https://github.com/driverforge/anvil-docs/edit/main/docs/sdk/installation.md';
+
+// Both are Docusaurus build-time aliases, not resolvable packages, so the mocks
+// must be declared virtual for jest to hoist them.
 jest.mock('@docusaurus/router', () => ({ useLocation: () => ({ pathname: mockPathname }) }), {
   virtual: true,
 });
+jest.mock(
+  '@docusaurus/plugin-content-docs/client',
+  () => ({ useDoc: () => ({ metadata: { editUrl: mockEditUrl } }) }),
+  { virtual: true },
+);
 
-// The component inlines APP_URL from process.env at import time; jest.setup sets
-// it to app.driverforge.test.
 const FEEDBACK_URL = `${process.env.APP_URL || 'https://app.driverforge.dev'}/api/docs/feedback`;
 
 function bodyOf(call: unknown[]): Record<string, unknown> {
   return JSON.parse((call[1] as RequestInit).body as string);
+}
+
+function hrefOf(text: string): string | null {
+  return screen.getByText(text).closest('a')!.getAttribute('href');
 }
 
 describe('PageRating', () => {
@@ -40,26 +49,32 @@ describe('PageRating', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the prompt and four rating buttons', () => {
+  it('renders the rating prompt, buttons, and footer links', () => {
     render(<PageRating />);
 
-    expect(screen.getByText('Was this page helpful?')).toBeInTheDocument();
+    expect(screen.getByText('How helpful was this page?')).toBeInTheDocument();
     expect(screen.getByLabelText('Not helpful at all')).toBeInTheDocument();
-    expect(screen.getByLabelText('Not very helpful')).toBeInTheDocument();
-    expect(screen.getByLabelText('Helpful')).toBeInTheDocument();
     expect(screen.getByLabelText('Very helpful')).toBeInTheDocument();
+
+    // Page-specific action links (global CTAs live in the site footer).
+    expect(hrefOf('Open an issue')).toBe(
+      'https://github.com/driverforge/anvil-docs/issues/new/choose',
+    );
+    expect(hrefOf('Edit this page')).toBe(mockEditUrl);
+    expect(screen.queryByText('Need more help?')).not.toBeInTheDocument();
   });
 
-  it('POSTs the rating and reveals the comment form on click', async () => {
+  it('POSTs the rating and reveals the comment form on click (buttons stay)', async () => {
     render(<PageRating />);
 
     fireEvent.click(screen.getByLabelText('Very helpful'));
 
-    // Comment form appears.
-    expect(await screen.findByLabelText('How can we improve this page?')).toBeInTheDocument();
-    expect(screen.queryByLabelText('Very helpful')).not.toBeInTheDocument();
+    // Comment form appears; the emoji buttons remain (now marked pressed).
+    expect(
+      await screen.findByLabelText('How can we improve this page for you?'),
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText('Very helpful')).toHaveAttribute('aria-pressed', 'true');
 
-    // Rating POSTed with path + rating.
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
     const [url, opts] = fetchMock.mock.calls[0];
     expect(url).toBe(FEEDBACK_URL);
@@ -74,7 +89,7 @@ describe('PageRating', () => {
     render(<PageRating />);
 
     fireEvent.click(screen.getByLabelText('Not very helpful'));
-    fireEvent.change(await screen.findByLabelText('How can we improve this page?'), {
+    fireEvent.change(await screen.findByLabelText('How can we improve this page for you?'), {
       target: { value: '  the install step is out of date  ' },
     });
     fireEvent.click(screen.getByText('Submit feedback'));
@@ -84,7 +99,7 @@ describe('PageRating', () => {
     expect((patch[1] as RequestInit).method).toBe('PATCH');
     expect(bodyOf(patch)).toEqual({
       id: 'fb-1',
-      comment: 'the install step is out of date', // trimmed
+      comment: 'the install step is out of date',
     });
     expect(await screen.findByText('Thanks for helping us improve the docs.')).toBeInTheDocument();
   });
@@ -95,7 +110,6 @@ describe('PageRating', () => {
     fireEvent.click(screen.getByLabelText('Helpful'));
     fireEvent.click(await screen.findByText('Submit feedback'));
 
-    // Only the rating POST — no comment PATCH.
     await screen.findByText('Thanks for helping us improve the docs.');
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect((fetchMock.mock.calls[0][1] as RequestInit).method).toBe('POST');
@@ -109,10 +123,7 @@ describe('PageRating', () => {
     render(<PageRating />);
 
     fireEvent.click(screen.getByLabelText('Helpful'));
-
-    // Form still shows; submitting with a comment does not PATCH (no row id) and
-    // does not throw.
-    fireEvent.change(await screen.findByLabelText('How can we improve this page?'), {
+    fireEvent.change(await screen.findByLabelText('How can we improve this page for you?'), {
       target: { value: 'still broken' },
     });
     fireEvent.click(screen.getByText('Submit feedback'));

@@ -1,0 +1,69 @@
+.theme {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  /* Match the "Join the Waitlist" CTA rendered height (34.25px). Fixed px (not
+     rem — the base font is ~15px here) + border-box so the <select>'s taller
+     intrinsic line-box doesn't inflate it. */
+  height: 34px;
+  padding: 0 1.7rem 0 2rem;
+  font: inherit;
+  font-size: 0.875rem; /* match .navbar__link */
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ifm-navbar-link-color);
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition:
+    color var(--ifm-transition-fast),
+    border-color var(--ifm-transition-fast);
+}
+
+.select:hover {
+  color: var(--ifm-navbar-link-hover-color);
+  border-color: var(--ifm-color-primary);
+}
+
+.select:focus-visible {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+}
+
+/* Icon + chevron are decorative overlays; pointer-events off so clicks open
+   the underlying <select>. */
+.icon,
+.chevron {
+  position: absolute;
+  pointer-events: none;
+  color: var(--ifm-navbar-link-color);
+}
+
+.icon {
+  left: 0.5rem;
+  width: 18px;
+  height: 18px;
+}
+
+.chevron {
+  right: 0.4rem;
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+/* On mobile the navbar collapses to a hamburger and the full Theme <select> is
+   available inside that menu. Hide the top-bar copy so it doesn't crowd and
+   overlap the search icon. (996px = Docusaurus's navbar collapse breakpoint.) */
+@media (max-width: 996px) {
+  :global(.navbar__items--right) .theme {
+    display: none;
+  }
+}
