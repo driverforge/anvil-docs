@@ -24,6 +24,48 @@ end
 
 You don't need to modify your handler implementations at all.
 
+### Agent Discovery
+
+Capture is only active when the [Anvil Agent](/agent/overview) is present on the controller. The SDK checks for it once Control4 has established bindings (in `OnDriverLateInit`):
+
+- **Agent found.** Anything captured during startup is delivered, and live streaming begins.
+- **No agent.** Startup capture is discarded and the SDK goes inert. Handler calls pass straight through to your code with no capture, no queuing, and no network activity, which is what makes it safe to [ship the same build everywhere](/sdk/installation#shipping-your-driver).
+
+Events that fire before discovery completes are buffered in memory, capped at 500 (oldest dropped first). If the agent is installed after your driver loads, the SDK detects it and starts capturing from that moment on.
+
+## What You See
+
+For each event, Anvil shows:
+
+**The handler name:**
+```
+OnPropertyChanged
+```
+
+**The arguments Control4 passed**, matched to your parameter names where Lua's introspection allows (positional otherwise):
+```
+sProperty: "Volume"
+```
+
+**The return values** from your handler, including multiple returns.
+
+**Timing:**
+```
+Duration: 3ms
+```
+
+**And if something broke, the full error:**
+```
+ERROR: attempt to index nil value
+  driver.lua:142: in function <OnPropertyChanged>
+```
+
+Error stack traces include the value of every local variable in every frame at the moment of the error, so you can see exactly what your code was working with when it failed. Long values are bounded: strings truncate at 512 characters, and tables are capped in depth and size.
+
+### Sensitive Data
+
+The SDK doesn't scan for or redact sensitive-looking values, so what your handler receives is what appears in Anvil. The exception is `GetPrivateKeyPassword`: the SDK records that the handler fired, but replaces its arguments with `[REDACTED]` and withholds its return value.
+
 ## Captured Handlers
 
 The SDK instruments **157 handlers** across all Control4 event categories. Here's the complete list:
@@ -287,31 +329,6 @@ The SDK instruments **157 handlers** across all Control4 event categories. Here'
 | `OnZipcodeChanged` | Zipcode changed |
 | `OnPIP` | PIP event |
 | `OnTimezoneChanged` | Timezone changed |
-
-## What You See
-
-For each event, Anvil shows:
-
-**The handler name:**
-```
-OnPropertyChanged
-```
-
-**The arguments Control4 passed:**
-```
-sProperty: "Volume"
-```
-
-**Timing:**
-```
-Duration: 3ms
-```
-
-**And if something broke, the full error:**
-```
-ERROR: attempt to index nil value
-  driver.lua:142: in function <OnPropertyChanged>
-```
 
 ## What's NOT Captured
 

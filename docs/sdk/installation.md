@@ -79,6 +79,17 @@ The `Anvil:OnDriverInit(function(strDIR) ... end, strDIR)` wrapper ensures:
 
 **All other lifecycle methods are automatically instrumented.** You don't need to wrap `OnDriverLateInit`, `OnPropertyChanged`, `ExecuteCommand`, or any of the [100+ auto-captured handlers](/sdk/automatic-capture) — just write them normally and they'll appear in Anvil.
 
+### Load order: define handlers first
+
+When the SDK loads, it wraps every C4 event handler your driver has defined so far, taking ownership of the handler globals (`OnDriverLateInit`, `OnPropertyChanged`, and the rest) so their events can be observed. Requiring it from `OnDriverInit` satisfies this naturally: Control4 calls `OnDriverInit` after your whole file has executed, so every top-level handler already exists.
+
+The contract to keep in mind: **every C4 handler must be defined before the SDK loads.** A handler defined afterwards replaces the SDK's wrapper for that event:
+
+- Events for that handler stop appearing in Anvil.
+- If the replaced handler is `OnDriverLateInit`, the SDK never finishes initialising: [agent discovery](/sdk/automatic-capture#agent-discovery) never runs and nothing streams at all.
+
+The SDK detects the situation and prints a warning to the controller log naming the redefined handler. If events go missing, that warning is the first thing to look for.
+
 ### Advanced configuration
 
 `Anvil:Init()` accepts an optional third argument for advanced options:
@@ -100,6 +111,13 @@ If your driver uses a logging library, passing it to `Anvil:Init()` enables auto
 
 See the [API Reference](/sdk/api-reference) for the complete list of options.
 
+## Shipping your driver
+
+There's no need for a separate release build without Anvil. Ship the driver you developed, SDK and `Anvil:Init()` call included:
+
+- **The agent is the switch.** The SDK only captures on controllers where the Anvil Agent is installed and authenticated. On any other controller it goes inert after [agent discovery](/sdk/automatic-capture#agent-discovery): no capture, no queuing, and nothing leaves the controller.
+- **Your API key can ship too.** Anvil API keys are publishable: they identify your project to the agent but grant no access to your data.
+
 ## Troubleshooting
 
 ### SDK not loading
@@ -118,6 +136,7 @@ See the [API Reference](/sdk/api-reference) for the complete list of options.
 
 - Verify the agent's **Authentication status** property shows you're logged in
 - Confirm API keys match
+- Check the controller log for a warning about a redefined handler (see [load order](#load-order-define-handlers-first))
 - Try triggering an action manually
 
 See [Troubleshooting](/reference/troubleshooting) for more help.
