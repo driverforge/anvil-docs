@@ -86,6 +86,7 @@ const sidebars: SidebarsConfig = {
     'sdk/automatic-capture',
     'sdk/manual-capture',
     'sdk/log-forwarding',
+    'sdk/trust',
     'sdk/api-reference',
   ],
 

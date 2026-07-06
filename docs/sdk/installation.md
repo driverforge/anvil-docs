@@ -73,6 +73,7 @@ end
 `OnDriverInit` is a special case in the Control4 lifecycle. It runs before the SDK has a chance to instrument your handler functions, so it can't be auto-captured like other methods.
 
 The `Anvil:OnDriverInit(function(strDIR) ... end, strDIR)` wrapper ensures:
+
 - Your init code is captured as an event with timing and error handling
 - Any errors in your init code are reported with full stack traces
 - The SDK is fully initialized before your code runs
@@ -117,6 +118,7 @@ There's no need for a separate release build without Anvil. Ship the driver you 
 
 - **The agent is the switch.** The SDK only captures on controllers where the Anvil Agent is installed and authenticated. On any other controller it goes inert after [agent discovery](/sdk/automatic-capture#agent-discovery): no capture, no queuing, and nothing leaves the controller.
 - **Your API key can ship too.** Anvil API keys are publishable: they identify your project to the agent but grant no access to your data.
+- **Your telemetry can't be lured away.** Before a driver sends anything, the SDK cryptographically verifies that the device it discovered is the genuine Anvil Agent; an impostor posing as the agent gets nothing. See [Agent Verification](/sdk/trust).
 
 ## Troubleshooting
 
