@@ -24,28 +24,10 @@ const sidebars: SidebarsConfig = {
     'platform/overview',
     {
       type: 'category',
-      label: 'Organizations',
-      collapsed: false,
-      items: [
-        {type: 'doc', id: 'platform/organizations', label: 'Managing your organization'},
-        'platform/members',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Projects',
-      collapsed: false,
-      items: [
-        {type: 'doc', id: 'platform/projects', label: 'Managing projects'},
-        {type: 'doc', id: 'security/api-keys', label: 'API keys'},
-      ],
-    },
-    {
-      type: 'category',
       label: 'Events',
       collapsed: false,
       items: [
-        {type: 'doc', id: 'platform/events', label: 'Overview'},
+        { type: 'doc', id: 'platform/events', label: 'Overview' },
         'platform/captured-handlers',
       ],
     },
@@ -53,29 +35,37 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Logs',
       collapsed: false,
-      items: [
-        {type: 'doc', id: 'platform/logs', label: 'Overview'},
-        'platform/logs-vs-events',
-      ],
+      items: [{ type: 'doc', id: 'platform/logs', label: 'Overview' }, 'platform/logs-vs-events'],
     },
     {
       type: 'category',
       label: 'Errors',
       collapsed: false,
-      items: [
-        {type: 'doc', id: 'platform/errors', label: 'Overview'},
-        'platform/error-grouping',
-      ],
+      items: [{ type: 'doc', id: 'platform/errors', label: 'Overview' }, 'platform/error-grouping'],
     },
-    'platform/devices',
     {
       type: 'category',
-      label: 'Subscription & billing',
+      label: 'Projects',
       collapsed: false,
       items: [
-        'platform/plans',
-        'platform/subscription',
-        'platform/billing',
+        { type: 'doc', id: 'platform/projects', label: 'Managing projects' },
+        { type: 'doc', id: 'security/api-keys', label: 'API keys' },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Organizations',
+      collapsed: false,
+      items: [
+        { type: 'doc', id: 'platform/organizations', label: 'Managing your organization' },
+        'platform/members',
+        'platform/devices',
+        {
+          type: 'category',
+          label: 'Subscription & billing',
+          collapsed: false,
+          items: ['platform/plans', 'platform/subscription', 'platform/billing'],
+        },
       ],
     },
   ],
