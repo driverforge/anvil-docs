@@ -4,8 +4,8 @@ sidebar_position: 5
 
 # anvil deploy
 
-Deploy your driver to a controller without leaving the terminal or switching
-contexts.
+Build and deploy your driver to a controller without leaving the terminal or
+switching contexts.
 
 :::info Preview
 The `anvil` CLI is in **preview**. Commands and flags documented here may change
@@ -19,44 +19,44 @@ before the stable release. Follow along or share feedback on our
 anvil deploy [options]
 ```
 
-`deploy` sends the built `.c4z` to the [Anvil Agent](/agent/overview) on the
-controller over a secure connection. The agent installs it and reloads the
-running driver for you.
+`deploy` builds your driver (respecting `-c/--configuration`), then sends the
+`.c4z` to the [Anvil Agent](/agent/overview) on the controller over a secure
+connection. The agent installs it and reloads the running driver for you. What
+you deploy is always your current source: there is no stale artifact to forget
+about.
+
+Every deploy **bumps the driver's version** per the project's
+[versioning scheme](/cli/versioning): Director only reloads a driver when it
+sees a higher `<version>`, so each deploy consumes a version slot. The bump is
+persisted back to your `driver.xml` after the build succeeds.
 
 ## Prerequisites
 
+- The project is [initialised](/cli/init) (`anvil init`)
 - You're [signed in](/cli/login) (`anvil login`)
 - A target controller is [selected](/cli/device) (`anvil device select`)
-- The driver has been built (`anvil build`) — or use `anvil build --deploy` to
-  do both at once
 - The [Anvil Agent](/agent/overview) is installed and running on the controller
 
 ## Options
 
-| Option | Description |
-|--------|-------------|
-| `--device` | Controller to deploy to (name, hostname, or id) — overrides the selected one |
-| `--select` | Re-select the target controller before deploying |
-| `--configuration`, `-c` | Build configuration of the artifact to deploy (matches the `anvil build --configuration` you used) |
+| Option                  | Description                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| `--device`              | Controller to deploy to (name, hostname, or id) — overrides the selected one |
+| `--select`              | Re-select the target controller before deploying                             |
+| `--configuration`, `-c` | Build configuration to build and deploy                                      |
 
 ## Examples
 
-Deploy the latest build to the selected controller:
+Build and deploy to the selected controller:
 
 ```bash
 anvil deploy
 ```
 
-Deploy the `release` build to a specific controller:
+Build and deploy the `release` configuration to a specific controller:
 
 ```bash
 anvil deploy --configuration release --device "Plant Room"
-```
-
-Build and deploy in one step:
-
-```bash
-anvil build --deploy
 ```
 
 ## First deploy

@@ -6,8 +6,8 @@ description: Map your existing driverpackager build step to the anvil GitHub Act
 # Migrating from driverpackager
 
 If you package drivers with the `snap-one/drivers-driverpackager` action, the
-`anvil` integrations replace it. `anvil build` covers most of what
-driverpackager did, with a few intentional differences noted below.
+`anvil` integrations replace it. Every driverpackager input has an `anvil`
+equivalent; the mapping is below.
 
 :::info Preview
 The `anvil` GitHub Action and Buildkite plugin are in **preview**. This page
@@ -33,28 +33,39 @@ documents the planned migration — the details here may change before release.
 
 ## Input mapping
 
-| driverpackager input | anvil equivalent | Notes                                                                                                 |
-| -------------------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
-| `projectDir`         | `project-dir`    | `anvil` walks up from this directory to find `src/manifest.c4zproj`. Defaults to the checkout root.   |
-| `version`            | `increment`      | Bumps the driver version (`patch` / `minor` / `major`) instead of setting an absolute version string. |
-| `updateModified`     | _(automatic)_    | `anvil` always updates the driver's modified timestamp on build — there's no flag to turn it off.     |
-| `c4zproj`            | _(none)_         | The manifest is always `src/manifest.c4zproj`; its path isn't configurable.                           |
-| `outputDir`          | _(none)_         | The `.c4z` is always written to the project's `dist/` directory.                                      |
-| `allowexecute`       | _(none)_         | There's no equivalent for enabling the Lua command window / DevLog.                                   |
+| driverpackager input | anvil equivalent               | Notes                                                                                                                                                                                                           |
+| -------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `projectDir`         | `project-dir`                  | `anvil` walks up from this directory to find `src/manifest.c4zproj`. Defaults to the checkout root.                                                                                                             |
+| `version`            | `--version` (via `args`)       | Stamps the exact `<version>` you give, persisted to `driver.xml` on success. Or use `increment: true` to bump per the project's [versioning scheme](/cli/versioning) instead of managing version strings in CI. |
+| `updateModified`     | _(automatic)_                  | `anvil` always updates the driver's modified timestamp on build — there's no flag to turn it off.                                                                                                               |
+| `c4zproj`            | `--c4zproj` (via `args`)       | Path to the manifest. Defaults to `src/manifest.c4zproj`.                                                                                                                                                       |
+| `outputDir`          | `--output-dir` (via `args`)    | Directory for the built `.c4z`. Defaults to the project's `dist/`.                                                                                                                                              |
+| `allowexecute`       | `--allow-execute` (via `args`) | Development builds: appends `C4:AllowExecute(true)` to the built driver script, enabling Director's Lua command window. Applied to the artifact only, never written to source.                                  |
+
+CLI flags without a dedicated action input are passed through `args`:
+
+```yaml
+- uses: driverforge/anvil-github-action@v1
+  with:
+    command: build
+    project-dir: ./driver
+    args: --c4zproj packaging/manifest.c4zproj --output-dir ./out
+```
 
 ## Differences to know about
 
-`anvil` is opinionated about driver project layout, which removes a few of
-driverpackager's knobs:
+`anvil` defaults to a conventional layout instead of requiring configuration:
+the manifest at `src/manifest.c4zproj` and output in `dist/`. A project laid
+out that way needs no flags at all; one that isn't can point `--c4zproj` and
+`--output-dir` wherever it likes.
 
-- **Manifest location** — `anvil` expects `src/manifest.c4zproj`. Point
-  `project-dir` at the directory containing `src/` and it finds the manifest
-  automatically.
-- **Output location** — the `.c4z` always lands in `dist/`. Collect it from
-  there as a build artifact instead of choosing an output directory.
-- **`allowexecute`** — there is no equivalent today. `anvil` supports script
-  **encryption** (`encrypt`), which is a different capability. If your workflow
-  depends on `allowexecute`, let us know on the
-  [roadmap](https://driverforge.canny.io) so we can scope it.
+Two of driverpackager's inputs deserve a closer look:
 
-{/* TODO: if the CLI grows c4zproj / outputDir / allowexecute flags, update this table and drop the "none" rows. */}
+- **`version`**: driverpackager set an absolute version string on every build,
+  which meant your CI owned the version. `anvil build --version` reproduces
+  that exactly, but `increment: true` is usually the better migration: the
+  version lives in `driver.xml`, and each release build bumps it per the
+  project's [versioning scheme](/cli/versioning).
+- **`allowexecute`**: `--allow-execute` enables Director's Lua command window
+  in the built artifact without touching your source. Script **encryption**
+  (`encrypt`) is a separate capability and unchanged.

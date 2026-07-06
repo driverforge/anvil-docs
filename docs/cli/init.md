@@ -45,15 +45,24 @@ Run it from inside an existing driver project — a directory with
    loads.
 3. **Linking an Anvil project** — pick an existing one or create a new one — and
    provisioning an [API key](/security/api-keys).
-4. **Optionally setting up a [build config](/cli/build-configuration)** — a
+4. **Choosing a [versioning scheme](/cli/versioning)** — date-based for new
+   drivers; for an existing driver the wizard inspects the current `<version>`,
+   proposes the matching scheme (date-shaped stays date, anything else becomes
+   an incrementing integer), and states the choice before writing it. The
+   scheme is what `--increment` and the ship commands bump with.
+5. **Optionally setting up a [build config](/cli/build-configuration)** — a
    committed `src/config.lua` (your default configuration) plus a
    `src/config.release.lua` override, loaded by your driver via `require('config')`
    and swapped per build with [`anvil build --configuration`](/cli/build). These
    are committed and hold no secrets (your Anvil key is inlined in the driver, not
    in config).
-5. **Detecting a logger** in your entry file to forward log output from.
-6. **Writing `.anvil/config.json`** — a committed record of the integration, with
-   no secrets in it.
+6. **Detecting a logger** in your entry file to forward log output from.
+7. **Writing `.anvil/config.json`** — a committed record of the integration
+   (including your versioning scheme), with no secrets in it.
+
+Initialising is also what unlocks version management and the ship commands:
+[`sync`](/cli/sync) and [`deploy`](/cli/deploy) require an initialised project,
+and `build --increment` needs the versioning scheme recorded here.
 
 ## Review before anything is written
 
@@ -64,10 +73,10 @@ and the changes are applied atomically — if anything fails, it rolls back.
 
 ## Options
 
-| Option | Description |
-|--------|-------------|
-| `--project` | Link a specific Anvil project without prompting — `<org-slug>/<project-slug>` (or just a project slug). |
-| `--sdk-version` | The Anvil SDK version to embed (e.g. `1.0.0`). Defaults to the latest. |
+| Option          | Description                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------------------- |
+| `--project`     | Link a specific Anvil project without prompting — `<org-slug>/<project-slug>` (or just a project slug). |
+| `--sdk-version` | The Anvil SDK version to embed (e.g. `1.0.0`). Defaults to the latest.                                  |
 
 ## Updating the SDK
 
@@ -77,7 +86,7 @@ setup, or `anvil init --sdk-version <x.y.z>` to re-embed a different SDK build.
 ## After setup
 
 ```bash
-anvil build && anvil deploy
+anvil deploy
 ```
 
 If you set up a build config, review the committed `src/config.lua` (and any

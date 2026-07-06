@@ -23,11 +23,11 @@ require('vendor.anvil_client')
 Anvil:Init("your-api-key", C4:GetDriverFileName())
 ```
 
-| Method | Purpose |
-|--------|---------|
-| `Anvil:Init()` | Initialize the SDK |
-| `Anvil:SetTimer()` | Create a timer with error capture |
-| `Anvil:captureError()` | Manually report an error |
+| Method                 | Purpose                           |
+| ---------------------- | --------------------------------- |
+| `Anvil:Init()`         | Initialize the SDK                |
+| `Anvil:SetTimer()`     | Create a timer with error capture |
+| `Anvil:captureError()` | Manually report an error          |
 
 ## Automatic vs Manual Capture
 
@@ -62,14 +62,14 @@ See [Manual Capture](/sdk/manual-capture) for details.
 
 Each event includes:
 
-| Field | Description |
-|-------|-------------|
-| **Event name** | Which handler was called (`OnPropertyChanged`, `ExecuteCommand`, etc.) |
-| **Arguments** | The exact data Control4 passed to your handler |
-| **Duration** | How long your handler took to execute |
-| **Error** | Stack trace if something threw |
-| **Timestamp** | When the event occurred |
-| **Driver version** | From your `driver.xml` `semver` (or `version` if `semver` is not specified) |
+| Field              | Description                                                            |
+| ------------------ | ---------------------------------------------------------------------- |
+| **Event name**     | Which handler was called (`OnPropertyChanged`, `ExecuteCommand`, etc.) |
+| **Arguments**      | The exact data Control4 passed to your handler                         |
+| **Duration**       | How long your handler took to execute                                  |
+| **Error**          | Stack trace if something threw                                         |
+| **Timestamp**      | When the event occurred                                                |
+| **Driver version** | From your `driver.xml` `<version>`                                     |
 
 ## Next Steps
 

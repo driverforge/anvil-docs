@@ -37,25 +37,25 @@ steps:
       - driverforge/anvil#v1.0.0:
           command: build
           configuration: release
-          increment: patch
+          increment: true
 ```
 
 ## Configuration
 
-| Property        | Description                                                                                                                 |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `version`       | The `anvil` release to install — a pinned version (e.g. `1.4.0`) or `latest` (the default). Pin it for reproducible builds. |
-| `command`       | The `anvil` command to run (e.g. `build`). Omit to only install the CLI onto `PATH` for the step's own command.             |
-| `project-dir`   | Driver project directory. Defaults to the checkout root; `anvil` walks up to find `src/manifest.c4zproj`.                   |
-| `configuration` | Build configuration to apply — swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                      |
-| `increment`     | Bump the driver version before building: `patch`, `minor`, or `major`.                                                      |
-| `encrypt`       | Encrypt the driver script for this build. Defaults to the driver's `driver.xml`; set `false` to force it off.               |
-| `sourcemap`     | Emit a Lua source map alongside the `.c4z`.                                                                                 |
-| `unpack`        | Also leave an unpacked copy of the driver in `dist/`.                                                                       |
-| `deploy`        | Deploy the driver to a controller after building. Mutually exclusive with `sync`.                                           |
-| `sync`          | Hot-sync the driver into the running instance after building. Mutually exclusive with `deploy`.                             |
-| `args`          | Additional raw flags passed straight through to `anvil`.                                                                    |
-| `cache-dir`     | Per-agent download cache directory (default `~/.cache/anvil-buildkite`).                                                    |
+| Property        | Description                                                                                                                       |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `version`       | The `anvil` release to install — a pinned version (e.g. `1.4.0`) or `latest` (the default). Pin it for reproducible builds.       |
+| `command`       | The `anvil` command to run (e.g. `build`). Omit to only install the CLI onto `PATH` for the step's own command.                   |
+| `project-dir`   | Driver project directory. Defaults to the checkout root; `anvil` walks up to find `src/manifest.c4zproj`.                         |
+| `configuration` | Build configuration to apply — swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                            |
+| `increment`     | Bump the driver version before building, per the project's [versioning scheme](/cli/versioning). Requires an initialised project. |
+| `encrypt`       | Encrypt the driver script for this build. Defaults to the driver's `driver.xml`; set `false` to force it off.                     |
+| `sourcemap`     | Emit a Lua source map alongside the `.c4z`.                                                                                       |
+| `unpack`        | Also leave an unpacked copy of the driver in `dist/`.                                                                             |
+| `deploy`        | Deploy the driver to a controller after building. Mutually exclusive with `sync`.                                                 |
+| `sync`          | Hot-sync the driver into the running instance after building. Mutually exclusive with `deploy`.                                   |
+| `args`          | Additional raw flags passed straight through to `anvil`.                                                                          |
+| `cache-dir`     | Per-agent download cache directory (default `~/.cache/anvil-buildkite`).                                                          |
 
 ## How it works
 

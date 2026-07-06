@@ -174,7 +174,7 @@ function OnDriverInit(strDIR)
 
     Anvil:OnDriverInit(function(strDIR)
         -- Your init code here
-        C4:UpdateProperty("Version", C4:GetDriverConfigInfo("semver"))
+        C4:UpdateProperty("Version", C4:GetDriverConfigInfo("version"))
         InitializeDevice()
     end, strDIR)
 end

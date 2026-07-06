@@ -105,6 +105,7 @@ const sidebars: SidebarsConfig = {
         'cli/authentication',
         'cli/context',
         'cli/build-configuration',
+        'cli/versioning',
         'cli/source-maps',
         'cli/error-reporting',
         'cli/upgrading',

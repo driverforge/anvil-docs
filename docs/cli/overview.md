@@ -19,10 +19,10 @@ before the stable release. Follow along or share feedback on our
 
 - **Build drivers** — Bundle Lua source with squish and produce a `.c4z`
   package, with optional script encryption and source maps
-- **Deploy** — Push a built driver to a controller through the Anvil Agent and
-  watch it reload, without switching to Composer
-- **Sync** — Hot-swap a driver's Lua into the running instance for fast
-  iteration, skipping the full reload
+- **Deploy** — Build your driver and push it to a controller through the Anvil
+  Agent, watching it reload, without switching to Composer
+- **Sync** — Build and hot-swap a driver's Lua into the running instance for
+  fast iteration, skipping the full reload
 - **Manage context** — Sign in once, then choose the organization and the target
   controller the deploy commands act on
 - **Upgrade the agent** — Update the Anvil Agent running on a controller to the
@@ -60,11 +60,14 @@ anvil build
 # 2. Sign in (opens your browser) and choose an organization
 anvil login
 
-# 3. Pick the controller to deploy to
+# 3. Set up the project for Anvil (SDK, project link, versioning scheme)
+anvil init
+
+# 4. Pick the controller to deploy to
 anvil device select
 
-# 4. Build and deploy in one step
-anvil build --deploy
+# 5. Build and deploy in one step
+anvil deploy
 ```
 
 ## Commands
@@ -80,8 +83,8 @@ anvil build --deploy
 
 **Deploy**
 
-- [`anvil deploy`](/cli/deploy) — Deploy a built driver to a controller (full reload)
-- [`anvil sync`](/cli/sync) — Hot-swap a driver's Lua without a full reload
+- [`anvil deploy`](/cli/deploy) — Build and deploy your driver to a controller (full reload)
+- [`anvil sync`](/cli/sync) — Build and hot-swap your driver's Lua without a full reload
 
 **Account & context**
 
@@ -109,10 +112,10 @@ usage of any command.
 
 These apply to every command:
 
-| Flag | Description |
-|------|-------------|
-| `--verbose`, `-v` | Verbose output |
-| `--project-dir` | Driver project directory (default: current directory) |
-| `--no-tui` | Disable the interactive TUI and print plain output (also applied automatically when piped or under `CI`) |
-| `--no-update-check` | Don't check for a newer `anvil` release after the command runs |
-| `--help`, `-h` | Show help for the command |
+| Flag                | Description                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------------- |
+| `--verbose`, `-v`   | Verbose output                                                                                           |
+| `--project-dir`     | Driver project directory (default: current directory)                                                    |
+| `--no-tui`          | Disable the interactive TUI and print plain output (also applied automatically when piped or under `CI`) |
+| `--no-update-check` | Don't check for a newer `anvil` release after the command runs                                           |
+| `--help`, `-h`      | Show help for the command                                                                                |

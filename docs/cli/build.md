@@ -28,36 +28,39 @@ anvil build [options]
 ```
 
 Run it from a driver project — a directory with `src/manifest.c4zproj` (the CLI
-walks up from the current directory to find it). The driver name comes from the
-manifest; `driver.xml` and the `squishy` build file live alongside it in `src/`.
+walks up from the current directory to find it, or point `--c4zproj` at a
+manifest elsewhere). The driver name comes from the manifest; `driver.xml` and
+the `squishy` build file live alongside it in `src/`.
 
 ## What it does
 
 1. Reads `src/manifest.c4zproj` to determine the driver name and contents
 2. Bundles the Lua modules described by your `squishy` file into a single
    `driver.lua`
-3. Stamps `driver.xml` (version, modified time) and, when configured, encrypts
-   the driver script
+3. Stamps `driver.xml` (modified time, plus the version when you ask for a
+   bump) and, when configured, encrypts the driver script
 4. Packages everything into a `.c4z` in `dist/`
 5. Optionally emits a source map and/or an unpacked copy
 
 ## Options
 
-| Option | Description |
-|--------|-------------|
-| `--configuration`, `-c` | Build a named configuration — swaps `src/config.<name>.lua` in as `config.lua` for this build. Omit to build the default `config.lua` as-is |
-| `--increment`, `-i` | Bump the version before building. Defaults to `patch`; use `-i=minor` or `-i=major` for the others |
-| `--sourcemap`, `-s` | Also emit a Lua source map (`dist/<driver>.lua.map`) |
-| `--unpack`, `-u` | Also leave an unpacked copy of the package in `dist/` |
-| `--encrypt` | Force script encryption on for this build (`--encrypt=false` forces it off). Default follows `driver.xml` |
-| `--deploy` | After a successful build, [deploy](/cli/deploy) to the selected controller |
-| `--sync` | After a successful build, [hot-swap](/cli/sync) onto the selected controller |
+| Option                  | Description                                                                                                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--configuration`, `-c` | Build a named configuration — swaps `src/config.<name>.lua` in as `config.lua` for this build. Omit to build the default `config.lua` as-is                                 |
+| `--increment`, `-i`     | Bump the version per the project's [versioning scheme](/cli/versioning) before building. Requires an [initialised](/cli/init) project                                       |
+| `--version`             | Stamp an exact `<version>` for this build, persisted to `driver.xml` on success. Works without init; mutually exclusive with `--increment`                                  |
+| `--c4zproj`             | Path to the `.c4zproj` manifest (default `src/manifest.c4zproj`)                                                                                                            |
+| `--output-dir`, `-o`    | Directory for the built `.c4z` (default `dist/`)                                                                                                                            |
+| `--sourcemap`, `-s`     | Also emit a Lua source map (`dist/<driver>.lua.map`)                                                                                                                        |
+| `--unpack`, `-u`        | Also leave an unpacked copy of the package in `dist/`                                                                                                                       |
+| `--encrypt`             | Force script encryption on for this build (`--encrypt=false` forces it off). Default follows `driver.xml`                                                                   |
+| `--allow-execute`       | Development build: append `C4:AllowExecute(true)` to the built driver script, enabling Director's Lua command window. Applied to the artifact only, never written to source |
 
-`--deploy` and `--sync` are mutually exclusive.
+Shipping is its own command now: [`anvil sync`](/cli/sync) and [`anvil deploy`](/cli/deploy) each build first, so there is no `build --sync` or `build --deploy`.
 
 ## Output
 
-A build writes to `dist/` (always — there is no output-directory flag):
+A build writes to `dist/` (or the directory you pass with `-o/--output-dir`):
 
 ```
 dist/
@@ -81,10 +84,10 @@ name (`my-driver.c4z`). A named configuration is suffixed so builds coexist —
 
 ### Versioning
 
-Versioning is opt-in. If `driver.xml` carries a `<semver>`, `anvil` manages the
-Control4 integer `<version>` from it and `--increment` bumps the semver. A
-driver without a `<semver>` is built exactly as authored; `--increment` then
-bumps the integer `<version>` directly. No `package.json` is involved either way.
+A plain build never touches the driver's `<version>`: what's authored is what
+ships. Pass `--increment` to bump it per the project's versioning scheme, or
+`--version` to stamp an exact value. See [Versioning](/cli/versioning) for the
+schemes and the full picture of when versions change.
 
 ## Examples
 
@@ -94,16 +97,16 @@ Basic build:
 anvil build
 ```
 
-Release build (swaps in `config.release.lua`) with a patch bump and a source map:
+Release build (swaps in `config.release.lua`) with a version bump and a source map:
 
 ```bash
 anvil build --configuration release -i -s
 ```
 
-Build the release configuration and hot-swap it onto the selected controller:
+Build with the manifest and output directory somewhere non-standard:
 
 ```bash
-anvil build -c release --sync
+anvil build --c4zproj packaging/manifest.c4zproj -o build/out
 ```
 
 ## Source maps

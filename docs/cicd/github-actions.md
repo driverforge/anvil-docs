@@ -43,25 +43,25 @@ steps:
       command: build
       project-dir: ./driver
       configuration: release
-      increment: patch
+      increment: true
 ```
 
 ## Inputs
 
-| Input           | Description                                                                                                                 |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `version`       | The `anvil` release to install — a pinned version (e.g. `1.4.0`) or `latest` (the default). Pin it for reproducible builds. |
-| `command`       | The `anvil` command to run (e.g. `build`). Omit to only install the CLI onto `PATH`.                                        |
-| `project-dir`   | Driver project directory. Defaults to the workspace root; `anvil` walks up to find `src/manifest.c4zproj`.                  |
-| `configuration` | Build configuration to apply — swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                      |
-| `increment`     | Bump the driver version before building: `patch`, `minor`, or `major`.                                                      |
-| `encrypt`       | Encrypt the driver script for this build. Defaults to the driver's `driver.xml`; set `false` to force it off.               |
-| `sourcemap`     | Emit a Lua source map alongside the `.c4z`.                                                                                 |
-| `unpack`        | Also leave an unpacked copy of the driver in `dist/`.                                                                       |
-| `deploy`        | Deploy the driver to a controller after building. Mutually exclusive with `sync`.                                           |
-| `sync`          | Hot-sync the driver into the running instance after building. Mutually exclusive with `deploy`.                             |
-| `args`          | Additional raw flags passed straight through to `anvil`, for anything not covered above.                                    |
-| `github-token`  | Reserved for future use. Release binaries download from public storage, so no token is required today.                      |
+| Input           | Description                                                                                                                       |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `version`       | The `anvil` release to install — a pinned version (e.g. `1.4.0`) or `latest` (the default). Pin it for reproducible builds.       |
+| `command`       | The `anvil` command to run (e.g. `build`). Omit to only install the CLI onto `PATH`.                                              |
+| `project-dir`   | Driver project directory. Defaults to the workspace root; `anvil` walks up to find `src/manifest.c4zproj`.                        |
+| `configuration` | Build configuration to apply — swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                            |
+| `increment`     | Bump the driver version before building, per the project's [versioning scheme](/cli/versioning). Requires an initialised project. |
+| `encrypt`       | Encrypt the driver script for this build. Defaults to the driver's `driver.xml`; set `false` to force it off.                     |
+| `sourcemap`     | Emit a Lua source map alongside the `.c4z`.                                                                                       |
+| `unpack`        | Also leave an unpacked copy of the driver in `dist/`.                                                                             |
+| `deploy`        | Deploy the driver to a controller after building. Mutually exclusive with `sync`.                                                 |
+| `sync`          | Hot-sync the driver into the running instance after building. Mutually exclusive with `deploy`.                                   |
+| `args`          | Additional raw flags passed straight through to `anvil`, for anything not covered above.                                          |
+| `github-token`  | Reserved for future use. Release binaries download from public storage, so no token is required today.                            |
 
 ## Outputs
 
