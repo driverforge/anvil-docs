@@ -6,6 +6,16 @@ sidebar_position: 1
 
 The Anvil SDK is a Lua library that instruments your Control4 driver. It captures every event the system sends to your handlers and streams them to Anvil.
 
+## Open Source
+
+The SDK is open source under the MIT license, and the code lives at [github.com/driverforge/control4-anvil-sdk](https://github.com/driverforge/control4-anvil-sdk).
+
+Everything you vendor into your driver is plain, readable Lua. You can audit every line before it ships under your name, verify the [capture behaviour](/sdk/automatic-capture) matches what these docs claim and diff releases before upgrading.
+
+The SDK is exactly the kind of code that deserves this scrutiny. It sits inside your driver, wraps your handlers, and forwards telemetry, and you shouldn't have to take our word for what code with that much access does. There is no opaque blob in your `vendor/` directory, and there never will be.
+
+If you find something odd, or want to make the SDK better, [issues](https://github.com/driverforge/control4-anvil-sdk/issues) and [pull requests](https://github.com/driverforge/control4-anvil-sdk/pulls) are welcome.
+
 ## What It Does
 
 When you add the SDK to your driver:
