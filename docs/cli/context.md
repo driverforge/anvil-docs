@@ -6,12 +6,12 @@ sidebar_position: 3
 
 The deploy commands act on a specific controller inside a specific organization.
 The CLI remembers both so you don't have to pass them every time: pick an
-**organization** with [`anvil org`](/cli/org), then a target **device**
-(controller) with [`anvil device`](/cli/device). Both require you to be
+**organization** with [`driverforge org`](/cli/org), then a target **device**
+(controller) with [`driverforge device`](/cli/device). Both require you to be
 [signed in](/cli/authentication).
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
@@ -38,5 +38,5 @@ the right one on later deploys.
 
 ## Commands
 
-- [`anvil org`](/cli/org) — choose the active organization (`list` / `select` / `show`)
-- [`anvil device`](/cli/device) — choose the target controller (`list` / `select` / `show`)
+- [`driverforge org`](/cli/org) — choose the active organization (`list` / `select` / `show`)
+- [`driverforge device`](/cli/device) — choose the target controller (`list` / `select` / `show`)

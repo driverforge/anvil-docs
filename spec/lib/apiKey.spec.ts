@@ -91,7 +91,7 @@ describe('apiKey.ts', () => {
 
     it('matches the lowercase-hyphenated variant', () => {
       expect(
-        containsApiKeyPlaceholder('anvil init my-driver --apikey "your-api-key"'),
+        containsApiKeyPlaceholder('driverforge init my-driver --apikey "your-api-key"'),
       ).toBe(true);
     });
 
@@ -113,10 +113,10 @@ describe('apiKey.ts', () => {
     it('replaces your-api-key', () => {
       expect(
         replaceApiKeyPlaceholders(
-          'anvil init my-driver --apikey "your-api-key"',
+          'driverforge init my-driver --apikey "your-api-key"',
           'real-key',
         ),
-      ).toBe('anvil init my-driver --apikey "real-key"');
+      ).toBe('driverforge init my-driver --apikey "real-key"');
     });
 
     it('replaces multiple occurrences of mixed variants', () => {

@@ -2,13 +2,13 @@
 sidebar_position: 5
 ---
 
-# anvil deploy
+# deploy
 
 Build and deploy your driver to a controller without leaving the terminal or
 switching contexts.
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
@@ -16,7 +16,7 @@ before the stable release. Follow along or share feedback on our
 ## Usage
 
 ```bash
-anvil deploy [options]
+driverforge deploy [options]
 ```
 
 `deploy` builds your driver (respecting `-c/--configuration`), then sends the
@@ -32,9 +32,9 @@ persisted back to your `driver.xml` after the build succeeds.
 
 ## Prerequisites
 
-- The project is [initialised](/cli/init) (`anvil init`)
-- You're [signed in](/cli/login) (`anvil login`)
-- A target controller is [selected](/cli/device) (`anvil device select`)
+- The project is [initialised](/cli/init) (`driverforge init`)
+- You're [signed in](/cli/login) (`driverforge login`)
+- A target controller is [selected](/cli/device) (`driverforge device select`)
 - The [Anvil Agent](/agent/overview) is installed and running on the controller
 
 ## Options
@@ -50,13 +50,13 @@ persisted back to your `driver.xml` after the build succeeds.
 Build and deploy to the selected controller:
 
 ```bash
-anvil deploy
+driverforge deploy
 ```
 
 Build and deploy the `release` configuration to a specific controller:
 
 ```bash
-anvil deploy --configuration release --device "Plant Room"
+driverforge deploy --configuration release --device "Plant Room"
 ```
 
 ## First deploy
@@ -68,7 +68,7 @@ property values the driver needs, then finishes the deploy. Every deploy after
 that updates the driver in place automatically.
 
 Prefer to set it up by hand? Add the driver to a room once in Composer Pro and
-run `anvil deploy` again — the CLI picks up from there.
+run `driverforge deploy` again — the CLI picks up from there.
 
 ## Troubleshooting
 
@@ -76,10 +76,10 @@ run `anvil deploy` again — the CLI picks up from there.
   can't be reached at the controller's address. See the
   [agent docs](/agent/overview).
 - **Agent out of date** — the agent on the controller is too old to accept a
-  deploy. Update it with [`anvil agent upgrade`](/cli/agent).
+  deploy. Update it with [`driverforge agent upgrade`](/cli/agent).
 - **Deploy failed** — the controller rejected the driver or it errored on init.
   When the agent captures an Anvil error report, the CLI prints a link to it.
 
 ## Global flags
 
-Every `anvil` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.
+Every `driverforge` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.

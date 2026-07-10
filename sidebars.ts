@@ -93,6 +93,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'cli/overview',
+        'cli/installation',
         'cli/authentication',
         'cli/context',
         'cli/build-configuration',

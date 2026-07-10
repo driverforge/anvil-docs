@@ -130,14 +130,14 @@ describe('TokenAwareCodeBlock', () => {
     render(
       <ApiKeyProvider>
         <TokenAwareCodeBlock OriginalCode={FakeOriginalCode}>
-          {'anvil init my-driver --apikey "your-api-key"'}
+          {'driverforge init my-driver --apikey "your-api-key"'}
         </TokenAwareCodeBlock>
       </ApiKeyProvider>,
     );
 
     await waitFor(() =>
       expect(screen.getByTestId('code').textContent).toBe(
-        'anvil init my-driver --apikey "real-key-one"',
+        'driverforge init my-driver --apikey "real-key-one"',
       ),
     );
   });

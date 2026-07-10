@@ -20,8 +20,8 @@ Managing devices requires the **owner** or **admin** role.
 
 The organization-level **Devices** page lists every controller registered to your
 organization, with its name, address, and status (for example **Active** or
-**Revoked**). The [`anvil device`](/cli/context) commands work against this same
-list — `anvil device list` shows these controllers and `anvil device select`
+**Revoked**). The [`driverforge device`](/cli/context) commands work against this same
+list — `driverforge device list` shows these controllers and `driverforge device select`
 chooses which one the CLI deploys to.
 
 <Screenshot name="devices" alt="The Devices page listing controllers with their status and the per-device actions menu." />
@@ -55,5 +55,5 @@ can have. If you hit the limit, revoke a controller you no longer use or
 ## Further reading
 
 - [Anvil Agent](/agent/overview) — how a controller registers and what the agent does
-- [`anvil device`](/cli/context) — selecting the deploy target from the CLI
-- [`anvil deploy`](/cli/deploy) / [`anvil sync`](/cli/sync) — pushing drivers to a controller
+- [`driverforge device`](/cli/context) — selecting the deploy target from the CLI
+- [`driverforge deploy`](/cli/deploy) / [`driverforge sync`](/cli/sync) — pushing drivers to a controller

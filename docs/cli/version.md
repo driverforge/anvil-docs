@@ -2,13 +2,13 @@
 sidebar_position: 12
 ---
 
-# anvil version
+# version
 
-Print the `anvil` CLI version — and, when a controller is selected, the Director
+Print the `driverforge` CLI version — and, when a controller is selected, the Director
 and Anvil Agent versions running on it.
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
@@ -16,11 +16,11 @@ before the stable release. Follow along or share feedback on our
 ## Usage
 
 ```bash
-anvil version
+driverforge version
 ```
 
 With no controller selected, it prints just the CLI version. Once you've
-[selected a controller](/cli/context) (`anvil device select`), `version` also
+[selected a controller](/cli/context) (`driverforge device select`), `version` also
 reaches that controller's [Anvil Agent](/agent/overview) (best-effort) and reports:
 
 - **Controller** — the controller's name
@@ -33,4 +33,4 @@ version is always printed regardless.
 
 ## Global flags
 
-Every `anvil` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.
+Every `driverforge` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.

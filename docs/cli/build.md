@@ -2,19 +2,19 @@
 sidebar_position: 4
 ---
 
-# anvil build
+# build
 
 Bundle your Lua source and produce a `.c4z` driver package. Building is entirely
 local — no account or controller required.
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
 
 :::tip Fast by design
-`anvil` is a self-contained native binary. It runs the whole build in one
+`driverforge` is a self-contained native binary. It runs the whole build in one
 process — bundling, encryption, and packaging — instead of orchestrating the
 chain of separate scripts and tools typically needed to package Control4
 drivers. Builds finish in a fraction of the time, and produce a standard `.c4z`
@@ -24,7 +24,7 @@ that Composer and your controllers install and run exactly like any other.
 ## Usage
 
 ```bash
-anvil build [options]
+driverforge build [options]
 ```
 
 Run it from a driver project — a directory with `src/manifest.c4zproj` (the CLI
@@ -56,7 +56,7 @@ the `squishy` build file live alongside it in `src/`.
 | `--encrypt`             | Force script encryption on for this build (`--encrypt=false` forces it off). Default follows `driver.xml`                                                                   |
 | `--allow-execute`       | Development build: append `C4:AllowExecute(true)` to the built driver script, enabling Director's Lua command window. Applied to the artifact only, never written to source |
 
-Shipping is its own command now: [`anvil sync`](/cli/sync) and [`anvil deploy`](/cli/deploy) each build first, so there is no `build --sync` or `build --deploy`.
+Shipping is its own command now: [`driverforge sync`](/cli/sync) and [`driverforge deploy`](/cli/deploy) each build first, so there is no `build --sync` or `build --deploy`.
 
 ## Output
 
@@ -71,7 +71,7 @@ dist/
 
 ### Build configurations
 
-`anvil build` uses your committed `src/config.lua` as the driver's configuration.
+`driverforge build` uses your committed `src/config.lua` as the driver's configuration.
 Pass `--configuration <name>` (or `-c <name>`) to swap a committed
 `src/config.<name>.lua` override in for the build instead — for example
 `--configuration release`. It's an opt-in system; see
@@ -79,7 +79,7 @@ Pass `--configuration <name>` (or `-c <name>`) to swap a committed
 
 **Naming.** A plain build (the default configuration) keeps the driver's naked
 name (`my-driver.c4z`). A named configuration is suffixed so builds coexist —
-`anvil build --configuration release` produces `my-driver-release.c4z` and adds a
+`driverforge build --configuration release` produces `my-driver-release.c4z` and adds a
 `(release)` suffix to the device name in Composer.
 
 ### Versioning
@@ -94,31 +94,31 @@ schemes and the full picture of when versions change.
 Basic build:
 
 ```bash
-anvil build
+driverforge build
 ```
 
 Release build (swaps in `config.release.lua`) with a version bump and a source map:
 
 ```bash
-anvil build --configuration release -i -s
+driverforge build --configuration release -i -s
 ```
 
 Build with the manifest and output directory somewhere non-standard:
 
 ```bash
-anvil build --c4zproj packaging/manifest.c4zproj -o build/out
+driverforge build --c4zproj packaging/manifest.c4zproj -o build/out
 ```
 
 ## Source maps
 
 Build with `--sourcemap` to emit a `.map` alongside the package so Anvil can map
 error stack traces back to your original source files instead of the bundled
-output. See [`anvil sourcemap`](/cli/source-maps) for the details.
+output. See [`driverforge sourcemap`](/cli/source-maps) for the details.
 
 ```bash
-anvil build --sourcemap
+driverforge build --sourcemap
 ```
 
 ## Global flags
 
-Every `anvil` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.
+Every `driverforge` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.

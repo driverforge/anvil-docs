@@ -4,14 +4,14 @@ sidebar_position: 2
 
 # Authentication
 
-The Anvil CLI authenticates you with Driverforge so it can act on your behalf —
+The Driverforge CLI authenticates you with Driverforge so it can act on your behalf —
 listing your organizations, talking to your controllers, and deploying drivers.
-You sign in once with [`anvil login`](/cli/login); the CLI stores the credentials
+You sign in once with [`driverforge login`](/cli/login); the CLI stores the credentials
 locally and refreshes them automatically, so you rarely think about it again until
-you [`anvil logout`](/cli/logout).
+you [`driverforge logout`](/cli/logout).
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
@@ -21,7 +21,7 @@ before the stable release. Follow along or share feedback on our
 No — the core of the CLI works anonymously. You can author, [build](/cli/build),
 package, encrypt, and [source-map](/cli/source-maps) a driver entirely offline,
 with no account and nothing to sign up for. That's the whole local development
-loop, available the moment you install `anvil`.
+loop, available the moment you install `driverforge`.
 
 Signing in unlocks the parts that go through the Anvil cloud — anything that needs
 Driverforge to know who you are and which controllers are yours:
@@ -31,13 +31,13 @@ to choose where those act.
 
 ## How it works
 
-`anvil login` uses the OAuth 2.0 device authorization grant: it shows a short
+`driverforge login` uses the OAuth 2.0 device authorization grant: it shows a short
 code, opens your browser to confirm it, and waits while you authorize — your
 password is never entered into or seen by the CLI. Credentials are stored locally
 and refreshed automatically.
 
 ## Commands
 
-- [`anvil login`](/cli/login) — sign in to Driverforge
-- [`anvil logout`](/cli/logout) — sign out and remove stored credentials
-- [`anvil whoami`](/cli/whoami) — show the currently signed-in user
+- [`driverforge login`](/cli/login) — sign in to Driverforge
+- [`driverforge logout`](/cli/logout) — sign out and remove stored credentials
+- [`driverforge whoami`](/cli/whoami) — show the currently signed-in user

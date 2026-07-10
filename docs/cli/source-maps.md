@@ -9,7 +9,7 @@ your original source files, so error reports point at real file names and line
 numbers instead of the squished output.
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
@@ -24,10 +24,10 @@ true location in your [error reports](/platform/errors).
 
 ## Generating a source map
 
-Pass `--sourcemap` (or `-s`) to [`anvil build`](/cli/build):
+Pass `--sourcemap` (or `-s`) to [`driverforge build`](/cli/build):
 
 ```bash
-anvil build --sourcemap
+driverforge build --sourcemap
 ```
 
 This writes the map next to the bundled output as `dist/<driver>.lua.map`. It
@@ -36,7 +36,7 @@ and the step is skipped.
 
 ```bash
 # A production build with a version bump and a source map
-anvil build --configuration release -i --sourcemap
+driverforge build --configuration release -i --sourcemap
 ```
 
 :::info Uploading to Anvil
@@ -49,7 +49,7 @@ workflow.
 ## Prerequisites
 
 Source map generation reads your `squishy` file to find the module boundaries.
-This is the same file [`anvil build`](/cli/build) uses to bundle the driver:
+This is the same file [`driverforge build`](/cli/build) uses to bundle the driver:
 
 ```lua
 Module "utils.logging" "src/utils/logging.lua"

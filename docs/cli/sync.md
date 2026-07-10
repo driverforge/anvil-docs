@@ -2,14 +2,14 @@
 sidebar_position: 6
 ---
 
-# anvil sync
+# sync
 
 Build your driver and hot-swap its Lua into the running instance on a
 controller: fast, with no full reload. Ideal for tight edit-test loops while
 developing.
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
@@ -17,7 +17,7 @@ before the stable release. Follow along or share feedback on our
 ## Usage
 
 ```bash
-anvil sync [options]
+driverforge sync [options]
 ```
 
 `sync` builds first (respecting `-c/--configuration`), then ships the bundled
@@ -30,9 +30,9 @@ the driver's structure hasn't changed. A sync never changes the driver's
 
 ## Prerequisites
 
-- The project is [initialised](/cli/init) (`anvil init`)
-- You're [signed in](/cli/login) (`anvil login`)
-- A target controller is [selected](/cli/device) (`anvil device select`)
+- The project is [initialised](/cli/init) (`driverforge init`)
+- You're [signed in](/cli/login) (`driverforge login`)
+- A target controller is [selected](/cli/device) (`driverforge device select`)
 - The [Anvil Agent](/agent/overview) is installed and running on the controller
 - The driver is already installed on the controller — [`deploy`](/cli/deploy) it
   once first so there's a running instance to hot-swap into
@@ -72,21 +72,21 @@ Keep these in mind:
 Build and hot-swap onto the selected controller:
 
 ```bash
-anvil sync
+driverforge sync
 ```
 
 Build and sync the `release` configuration:
 
 ```bash
-anvil sync -c release
+driverforge sync -c release
 ```
 
 Force a full deploy instead:
 
 ```bash
-anvil sync --deploy
+driverforge sync --deploy
 ```
 
 ## Global flags
 
-Every `anvil` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.
+Every `driverforge` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.

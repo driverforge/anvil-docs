@@ -2,14 +2,14 @@
 sidebar_position: 21
 ---
 
-# anvil upgrade
+# upgrade
 
 Show — and, interactively, apply — everything upgradable in the current context:
-the `anvil` CLI itself and the [Anvil Agent](/cli/agent) on the selected
+the `driverforge` CLI itself and the [Anvil Agent](/cli/agent) on the selected
 controller.
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
@@ -17,7 +17,7 @@ before the stable release. Follow along or share feedback on our
 ## Usage
 
 ```bash
-anvil upgrade
+driverforge upgrade
 ```
 
 ## What it does
@@ -31,14 +31,14 @@ on the [selected controller](/cli/device), then:
 - **Non-interactively** (piped, or under `CI`), it only reports what's available
   and the exact command to run, and changes nothing.
 
-To upgrade only a controller's agent, use [`anvil agent upgrade`](/cli/agent).
+To upgrade only a controller's agent, use [`driverforge agent upgrade`](/cli/agent).
 
 ## Examples
 
 ```bash
-anvil upgrade
+driverforge upgrade
 ```
 
 ## Global flags
 
-Every `anvil` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.
+Every `driverforge` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.

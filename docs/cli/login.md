@@ -2,7 +2,7 @@
 sidebar_position: 17
 ---
 
-# anvil login
+# login
 
 Authenticate with Driverforge. Sign in once and the CLI stores and refreshes your
 credentials, so the commands that reach the Anvil cloud — [`deploy`](/cli/deploy),
@@ -10,7 +10,7 @@ credentials, so the commands that reach the Anvil cloud — [`deploy`](/cli/depl
 [`agent`](/cli/agent) — work without prompting again.
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
@@ -18,12 +18,12 @@ before the stable release. Follow along or share feedback on our
 ## Usage
 
 ```bash
-anvil login [options]
+driverforge login [options]
 ```
 
 ## What it does
 
-`anvil login` uses the OAuth 2.0 device authorization grant: it shows a short
+`driverforge login` uses the OAuth 2.0 device authorization grant: it shows a short
 code, opens your browser to confirm it, and waits while you authorize. **Your
 password is never entered into or seen by the CLI.** After you authorize, it
 stores the credentials locally and prompts you to pick the
@@ -42,15 +42,15 @@ stores the credentials locally and prompts you to pick the
 Sign in interactively:
 
 ```bash
-anvil login
+driverforge login
 ```
 
 Sign in on a headless machine and pick an org non-interactively:
 
 ```bash
-anvil login --no-browser --org acme
+driverforge login --no-browser --org acme
 ```
 
 ## Global flags
 
-Every `anvil` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.
+Every `driverforge` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.

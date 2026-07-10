@@ -8,7 +8,7 @@ When something goes wrong, the CLI distinguishes a condition it *expected* from 
 genuine *bug*, and treats them differently.
 
 :::info Preview
-The `anvil` CLI is in **preview**. Commands and flags documented here may change
+The `driverforge` CLI is in **preview**. Commands and flags documented here may change
 before the stable release. Follow along or share feedback on our
 [roadmap](https://driverforge.canny.io).
 :::
