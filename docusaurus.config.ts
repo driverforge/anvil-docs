@@ -112,8 +112,11 @@ const config: Config = {
           {
             tagName: 'script' as const,
             attributes: {
-              defer: 'true',
-              src: '/api/sc/um/script.js',
+              // Blocked until the user consents to the analytics category; the
+              // cookie-consent plugin activates it by swapping data-src -> src.
+              type: 'text/plain',
+              'data-category': 'analytics',
+              'data-src': '/api/sc/um/script.js',
               'data-website-id': umamiWebsiteId,
             },
           },
@@ -285,6 +288,9 @@ const config: Config = {
             {
               label: 'Privacy',
               href: 'https://driverforge.com/privacy',
+            },
+            {
+              html: '<button type="button" class="footer__link-item footer__cookie-preferences" data-cc="show-preferencesModal">Cookie preferences</button>',
             },
           ],
         },

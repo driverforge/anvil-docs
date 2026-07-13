@@ -679,3 +679,48 @@ button[class*='copyButton'] {
 .navbar__items--right {
   column-gap: 0.75rem;
 }
+
+/* ==========================================================================
+   Cookie consent (vanilla-cookieconsent)
+   Branded via Infima variables so it follows the light/dark theme; the
+   plugin's own dark theme class (`cc--darkmode`) is kept in sync with
+   `data-theme` by CookieConsentBanner.
+   ========================================================================== */
+#cc-main {
+  --cc-font-family: var(--ifm-font-family-base);
+  --cc-modal-border-radius: 0.9rem;
+  --cc-btn-border-radius: var(--ifm-global-radius);
+
+  --cc-bg: var(--ifm-background-surface-color);
+  --cc-primary-color: var(--ifm-font-color-base);
+  --cc-secondary-color: var(--ifm-font-color-secondary);
+  --cc-separator-border-color: var(--ifm-hr-border-color);
+  --cc-footer-bg: var(--ifm-background-color);
+  --cc-footer-border-color: var(--ifm-hr-border-color);
+
+  --cc-btn-primary-bg: var(--ifm-color-primary);
+  --cc-btn-primary-border-color: var(--ifm-color-primary);
+  --cc-btn-primary-hover-bg: var(--ifm-color-primary-dark);
+  --cc-btn-primary-hover-border-color: var(--ifm-color-primary-dark);
+
+  --cc-toggle-on-bg: var(--ifm-color-primary);
+
+  --cc-overlay-bg: rgba(0, 0, 0, 0.55);
+}
+
+[data-theme='dark'] #cc-main {
+  --cc-btn-primary-color: #1f1f21;
+  --cc-btn-primary-hover-color: #1f1f21;
+  --cc-toggle-readonly-bg: #33477a;
+}
+
+/* The footer "Cookie preferences" trigger is a <button> amongst links —
+   strip button chrome so it matches .footer__link-item styling. */
+.footer__cookie-preferences {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+}
