@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'anvil-docs',
   preset: '../../jest.preset.js',
   testEnvironment: 'jsdom',
