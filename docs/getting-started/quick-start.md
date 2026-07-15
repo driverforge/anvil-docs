@@ -29,13 +29,16 @@ Make sure the vendor directory is included in your manifest:
 ```
 
 :::tip Using Squish?
-If your project uses a squishy file, add the SDK module to it:
+If your project uses a squishy file, you can bundle the SDK into your squished
+driver instead of shipping the vendor directory:
 
 ```lua
-Module "vendor.anvil_client" "vendor/anvil_client.lua"
+Module "vendor.anvil-sdk" "vendor/anvil-sdk.lua"
 ```
 
-Then use `require('vendor.anvil_client')` instead of `require('vendor/anvil_client.lua')` in the next step.
+The `require('vendor.anvil-sdk')` call in the next step is the same either
+way — squish satisfies it from the bundle; otherwise Director resolves the
+vendored file from your packaged driver.
 :::
 
 ## 3. Initialize Anvil in OnDriverInit
@@ -44,7 +47,7 @@ Update your `OnDriverInit` function to load the SDK and initialize it with your 
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor/anvil_client.lua')
+    require('vendor.anvil-sdk')
 
     Anvil:Init("YOUR_API_KEY", C4:GetDriverFileName())
 

@@ -25,7 +25,7 @@ Make sure `Anvil:Init()` is called:
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor.anvil_client')
+    require('vendor.anvil-sdk')
     Anvil:Init(apiKey, C4:GetDriverFileName())
     -- ...
 end
@@ -46,8 +46,8 @@ Try changing a property or executing a command in Composer. If basic events don'
 Your `require()` path must match your directory structure:
 
 ```lua
--- If file is at src/vendor/anvil_client.lua
-require('vendor.anvil_client')
+-- If file is at src/vendor/anvil-sdk.lua
+require('vendor.anvil-sdk')
 ```
 
 ### Check the Manifest

@@ -23,7 +23,7 @@ your_driver/
 │   ├── driver.lua
 │   ├── driver.xml
 │   └── vendor/
-│       └── anvil_client.lua
+│       └── anvil-sdk.lua
 └── manifest.c4zproj
 ```
 
@@ -44,13 +44,16 @@ Include the vendor directory in your `manifest.c4zproj`:
 
 ### Squish configuration
 
-If your project uses a squishy build file, add the SDK module:
+If your project uses a squishy build file, you can bundle the SDK into your
+squished driver instead of shipping the vendor directory:
 
 ```lua
-Module "vendor.anvil_client" "vendor/anvil_client.lua"
+Module "vendor.anvil-sdk" "vendor/anvil-sdk.lua"
 ```
 
-When using squish, require with dot notation: `require('vendor.anvil_client')` instead of `require('vendor/anvil_client.lua')`.
+The `require('vendor.anvil-sdk')` call is identical either way — squish
+satisfies it from the bundle, otherwise Director resolves the vendored file
+from the packaged driver (which is how the worked example driver ships).
 
 ### Initialization
 
@@ -58,7 +61,7 @@ Add the SDK initialization to your `OnDriverInit`, using your API key from **Set
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor/anvil_client.lua')
+    require('vendor.anvil-sdk')
 
     Anvil:Init("YOUR_API_KEY", C4:GetDriverFileName())
 

@@ -29,7 +29,7 @@ No. Just add the SDK and call `Anvil:Init()`. Your existing handler code works u
 Two lines in `OnDriverInit`:
 
 ```lua
-require('vendor.anvil_client')
+require('vendor.anvil-sdk')
 Anvil:Init(apiKey, C4:GetDriverFileName())
 ```
 

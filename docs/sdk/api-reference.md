@@ -52,7 +52,7 @@ The keys are Anvil's canonical levels (always lowercase), the values are the met
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor.anvil_client')
+    require('vendor.anvil-sdk')
     Anvil:Init("proj_abc123", C4:GetDriverFileName())
 end
 ```
@@ -169,7 +169,7 @@ Anvil:OnDriverInit(callback, ...)
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor.anvil_client')
+    require('vendor.anvil-sdk')
     Anvil:Init("proj_abc123", C4:GetDriverFileName())
 
     Anvil:OnDriverInit(function(strDIR)

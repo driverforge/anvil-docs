@@ -29,7 +29,7 @@ When you add the SDK to your driver:
 After loading the SDK, you get access to the `Anvil` global:
 
 ```lua
-require('vendor.anvil_client')
+require('vendor.anvil-sdk')
 Anvil:Init("your-api-key", C4:GetDriverFileName())
 ```
 
