@@ -19,7 +19,20 @@ before the stable release. Follow along or share feedback on our
 driverforge version
 ```
 
-With no controller selected, it prints just the CLI version. Once you've
+With no controller selected, it prints just the CLI version.
+
+## `--version`
+
+The conventional flag works too, printing the same CLI version line and
+nothing else:
+
+```bash
+driverforge --version
+```
+
+Unlike the subcommand, the flag never reaches out to a controller and skips
+the CLI's first-run prompts and update check entirely — safe for scripts and
+shell prompts. Once you've
 [selected a controller](/cli/context) (`driverforge device select`), `version` also
 reaches that controller's [Anvil Agent](/agent/overview) (best-effort) and reports:
 

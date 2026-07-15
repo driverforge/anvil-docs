@@ -67,6 +67,50 @@ A plain build (the default configuration) keeps the driver's naked name
 `driverforge build --configuration release` produces `my-driver-release.c4z` and adds a
 `(release)` suffix to the device name in Composer.
 
+That default is right for dev variants, but a release configuration usually
+wants the naked name — the artifact you ship shouldn't be decorated. A
+configuration can opt out of the suffixes with `suffix: false` in the project
+config (below) or per-invocation with `--no-suffix`.
+
+## Per-configuration defaults
+
+If your project is [initialised](/cli/init), the committed
+`.driverforge/config.json` can attach defaults to a configuration, keyed by its
+name, so one flagless command produces the right artifact:
+
+```json
+"configurations": {
+  "release": { "encrypt": true, "suffix": false }
+}
+```
+
+| Key       | Effect                                                                                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `encrypt` | Default for script encryption: `true` always encrypts this configuration, `false` never does. Unset follows `driver.xml` as authored                       |
+| `suffix`  | `false` builds the naked driver name — no `-<name>` artifact suffix and no `(name)` device-name suffix. Unset/`true` keeps the standard suffixing          |
+
+With that entry, `driverforge build -c release` alone produces an encrypted
+`my-driver.c4z` — no remembering `--encrypt` for the build that matters most.
+The defaults also apply when [`sync`](/cli/sync) or [`deploy`](/cli/deploy)
+build that configuration, so shipping produces the same artifact as building.
+
+**Precedence: flag → project config → authored source.** Explicit flags always
+win: `--encrypt=false` overrides `"encrypt": true`, and `--no-suffix=false`
+forces the suffix back on over `"suffix": false`. With no config file (or no
+entry for the configuration), nothing changes — the block is a defaults
+overlay, never a requirement.
+
+**The config file never defines what configurations exist.** That stays with
+the `config.<name>.lua` files: an entry here with no matching file is inert,
+and `-c <name>` without the file still stops the build.
+
+:::caution Suffix opt-out shares the default build's output path
+A `suffix: false` configuration writes `dist/my-driver.c4z` — the same path as
+a plain `driverforge build`. That's the point for a release configuration (the
+shipped artifact gets the real name), but the two builds overwrite each other
+in `dist/`.
+:::
+
 ## Related
 
 - [`driverforge build`](/cli/build) — the `--configuration` flag

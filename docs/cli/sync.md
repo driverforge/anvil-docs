@@ -20,7 +20,9 @@ before the stable release. Follow along or share feedback on our
 driverforge sync [options]
 ```
 
-`sync` builds first (respecting `-c/--configuration`), then ships the bundled
+`sync` builds first (respecting `-c/--configuration`, including the
+configuration's [defaults](/cli/build-configuration#per-configuration-defaults)
+from the project config), then ships the bundled
 Lua to the [Anvil Agent](/agent/overview), which swaps it into the
 already-loaded driver. What you sync is always your current source: there is no
 stale artifact to forget about. Because it skips the install-and-reload cycle a

@@ -19,7 +19,9 @@ before the stable release. Follow along or share feedback on our
 driverforge deploy [options]
 ```
 
-`deploy` builds your driver (respecting `-c/--configuration`), then sends the
+`deploy` builds your driver (respecting `-c/--configuration`, including the
+configuration's [defaults](/cli/build-configuration#per-configuration-defaults)
+from the project config), then sends the
 `.c4z` to the [Anvil Agent](/agent/overview) on the controller over a secure
 connection. The agent installs it and reloads the running driver for you. What
 you deploy is always your current source: there is no stale artifact to forget

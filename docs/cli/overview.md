@@ -101,3 +101,7 @@ These apply to every command:
 | `--no-tui`          | Disable the interactive TUI and print plain output (also applied automatically when piped or under `CI`) |
 | `--no-update-check` | Don't check for a newer `driverforge` release after the command runs                                           |
 | `--help`, `-h`      | Show help for the command                                                                                |
+
+`driverforge --version` (on the bare command) prints the CLI version and exits — see
+[`driverforge version`](/cli/version) for the richer report that includes the
+selected controller.

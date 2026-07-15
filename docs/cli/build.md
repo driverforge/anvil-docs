@@ -53,7 +53,8 @@ the `squishy` build file live alongside it in `src/`.
 | `--output-dir`, `-o`    | Directory for the built `.c4z` (default `dist/`)                                                                                                                            |
 | `--sourcemap`, `-s`     | Also emit a Lua source map (`dist/<driver>.lua.map`)                                                                                                                        |
 | `--unpack`, `-u`        | Also leave an unpacked copy of the package in `dist/`                                                                                                                       |
-| `--encrypt`             | Force script encryption on for this build (`--encrypt=false` forces it off). Default follows `driver.xml`                                                                   |
+| `--encrypt`             | Force script encryption on for this build (`--encrypt=false` forces it off). Default follows the configuration's entry in the project config, then `driver.xml`             |
+| `--no-suffix`           | Build a named configuration under the naked driver name — no `-<name>` artifact or `(name)` device-name suffix (`--no-suffix=false` forces suffixing back on)               |
 | `--allow-execute`       | Development build: append `C4:AllowExecute(true)` to the built driver script, enabling Director's Lua command window. Applied to the artifact only, never written to source |
 
 Shipping is its own command now: [`driverforge sync`](/cli/sync) and [`driverforge deploy`](/cli/deploy) each build first, so there is no `build --sync` or `build --deploy`.
@@ -80,7 +81,16 @@ Pass `--configuration <name>` (or `-c <name>`) to swap a committed
 **Naming.** A plain build (the default configuration) keeps the driver's naked
 name (`my-driver.c4z`). A named configuration is suffixed so builds coexist —
 `driverforge build --configuration release` produces `my-driver-release.c4z` and adds a
-`(release)` suffix to the device name in Composer.
+`(release)` suffix to the device name in Composer. A release configuration can
+opt out of the suffixes — `--no-suffix`, or `"suffix": false` in the project
+config — to ship under the naked name; see
+[Per-configuration defaults](/cli/build-configuration#per-configuration-defaults).
+
+**Per-configuration defaults.** An [initialised](/cli/init) project can set
+encryption and naming defaults per configuration in `.driverforge/config.json`,
+so `driverforge build -c release` alone produces the final release artifact. Flags
+always override the config. See
+[Per-configuration defaults](/cli/build-configuration#per-configuration-defaults).
 
 ### Versioning
 
@@ -101,6 +111,15 @@ Release build (swaps in `config.release.lua`) with a version bump and a source m
 
 ```bash
 driverforge build --configuration release -i -s
+```
+
+Full release artifact — encrypted, naked name — with no config file, using
+flags alone (or set these once per configuration in the
+[project config](/cli/build-configuration#per-configuration-defaults) and drop
+the flags):
+
+```bash
+driverforge build -c release --encrypt --no-suffix
 ```
 
 Build with the manifest and output directory somewhere non-standard:
