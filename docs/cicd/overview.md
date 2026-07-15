@@ -12,9 +12,9 @@ Run `driverforge` in your pipeline to build and ship your Control4 drivers autom
 - **[Buildkite plugin](/cicd/buildkite)** — `driverforge/anvil-buildkite-plugin`, for Buildkite pipelines.
 
 :::info Preview
-The `driverforge` GitHub Action and Buildkite plugin are in **preview**. This section
-documents the planned interface so you can see where things are headed — the
-shapes here may change before release. Follow along or vote on our
+The `driverforge` GitHub Action and Buildkite plugin are available today and in
+**preview**: while the CLI is pre-1.0, the interfaces may still evolve between
+releases. Pin your versions, and follow along or vote on our
 [roadmap](https://driverforge.canny.io).
 :::
 
@@ -34,7 +34,7 @@ pattern:
 # GitHub Actions
 - uses: driverforge/anvil-github-action@v1
   with:
-    version: '1.4.0'
+    version: '0.1.0'
 - run: driverforge build -c release
 ```
 

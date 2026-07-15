@@ -10,8 +10,9 @@ If you package drivers with the `snap-one/drivers-driverpackager` action, the
 equivalent; the mapping is below.
 
 :::info Preview
-The `driverforge` GitHub Action and Buildkite plugin are in **preview**. This page
-documents the planned migration — the details here may change before release.
+The `driverforge` GitHub Action and Buildkite plugin are available today and in
+**preview**: while the CLI is pre-1.0, the interfaces may still evolve between
+releases.
 :::
 
 ## Before and after
@@ -36,7 +37,7 @@ documents the planned migration — the details here may change before release.
 | driverpackager input | driverforge equivalent               | Notes                                                                                                                                                                                                           |
 | -------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `projectDir`         | `project-dir`                  | `driverforge` walks up from this directory to find `src/manifest.c4zproj`. Defaults to the checkout root.                                                                                                             |
-| `version`            | `--version` (via `args`)       | Stamps the exact `<version>` you give, persisted to `driver.xml` on success. Or use `increment: true` to bump per the project's [versioning scheme](/cli/versioning) instead of managing version strings in CI. |
+| `version`            | `driver-version`               | Stamps the exact `<version>` you give, persisted to `driver.xml` on success. Or use `increment: true` to bump per the project's [versioning scheme](/cli/versioning) instead of managing version strings in CI. |
 | `updateModified`     | _(automatic)_                  | `driverforge` always updates the driver's modified timestamp on build — there's no flag to turn it off.                                                                                                               |
 | `c4zproj`            | `--c4zproj` (via `args`)       | Path to the manifest. Defaults to `src/manifest.c4zproj`.                                                                                                                                                       |
 | `outputDir`          | `--output-dir` (via `args`)    | Directory for the built `.c4z`. Defaults to the project's `dist/`.                                                                                                                                              |
@@ -62,10 +63,15 @@ out that way needs no flags at all; one that isn't can point `--c4zproj` and
 Two of driverpackager's inputs deserve a closer look:
 
 - **`version`**: driverpackager set an absolute version string on every build,
-  which meant your CI owned the version. `driverforge build --version` reproduces
+  which meant your CI owned the version. The `driver-version` input reproduces
   that exactly, but `increment: true` is usually the better migration: the
   version lives in `driver.xml`, and each release build bumps it per the
   project's [versioning scheme](/cli/versioning).
+- **Shell hacks you no longer need**: pipelines built on driverpackager often
+  `sed` an `encryption` attribute into `driver.xml` before packaging, or rename
+  the built `.c4z` afterwards. Those are inputs now — `encrypt: true` and
+  `no-suffix: true` produce an encrypted artifact under the plain driver name
+  in one step.
 - **`allowexecute`**: `--allow-execute` enables Director's Lua command window
   in the built artifact without touching your source. Script **encryption**
   (`encrypt`) is a separate capability and unchanged.
