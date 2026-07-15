@@ -132,6 +132,7 @@ const sidebars: SidebarsConfig = {
     'cicd/overview',
     'cicd/github-actions',
     'cicd/buildkite',
+    'cicd/gitlab',
     'cicd/migrating-from-driverpackager',
   ],
 };

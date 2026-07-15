@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 description: Map your existing driverpackager build step to the driverforge GitHub Action or Buildkite plugin.
 ---
 
