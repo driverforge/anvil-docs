@@ -38,6 +38,18 @@ describe('docusaurus.config.ts', () => {
     expect(loader!.attributes!.src).toBeUndefined();
   });
 
+  it('gives every headTag an attributes object (Docusaurus schema requires it)', () => {
+    // Docusaurus validates headTags with Joi at build time and rejects any
+    // entry missing `attributes` — the HtmlTagObject *type* marks it optional,
+    // so only this (and the real build) catches it.
+    process.env.GA_MEASUREMENT_ID = 'G-TEST123';
+    const config = loadConfig();
+
+    for (const tag of (config.headTags ?? []) as HeadTag[]) {
+      expect(tag.attributes).toBeDefined();
+    }
+  });
+
   it('emits a live gtag bootstrap that only queues into dataLayer', () => {
     process.env.GA_MEASUREMENT_ID = 'G-TEST123';
     const config = loadConfig();

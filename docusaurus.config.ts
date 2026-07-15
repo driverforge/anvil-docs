@@ -120,6 +120,8 @@ const config: Config = {
       ? [
           {
             tagName: 'script' as const,
+            // Required by Docusaurus's headTags schema even when empty.
+            attributes: {},
             // The bootstrap only queues into dataLayer — no cookies/requests
             // until the consent-gated loader below runs, so it can stay live.
             innerHTML:
