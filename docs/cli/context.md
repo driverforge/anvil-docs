@@ -40,3 +40,9 @@ the right one on later deploys.
 
 - [`driverforge org`](/cli/org) — choose the active organization (`list` / `select` / `show`)
 - [`driverforge device`](/cli/device) — choose the target controller (`list` / `select` / `show`)
+
+## In your prompt
+
+Using the [Spaceship prompt](/cli/spaceship)? A small zsh section can show the
+active org and controller right in your shell prompt, so you always know what
+a deploy will target.
