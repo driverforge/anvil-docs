@@ -106,7 +106,7 @@ const config: Config = {
     ],
   ],
 
-  // GA4 via the Google tag gateway (DF-634): /gt is intercepted by
+  // GA4 via the Google tag gateway: /gt is intercepted by
   // Cloudflare at the edge on the proxied docs host, so no nginx proxying is
   // involved. Snippet shape mirrors GoogleTag in @driverforge/monitoring-next
   // (not importable here — its package entry points at unbuilt dist output).
