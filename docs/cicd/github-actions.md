@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: driverforge/anvil-github-action@v1
         with:
-          version: '0.1.0' # pinned, or 'latest'
+          version: '%%CLI_VERSION%%' # pinned, or 'latest'
       - run: driverforge build -c release
 ```
 
@@ -71,7 +71,7 @@ steps:
 
 | Input           | Description                                                                                                                       |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `version`       | The `driverforge` release to install — a pinned version (e.g. `0.1.0`) or `latest` (the default). Pin it for reproducible builds.       |
+| `version`       | The `driverforge` release to install — a pinned version (e.g. `%%CLI_VERSION%%`) or `latest` (the default). Pin it for reproducible builds.       |
 | `command`       | The `driverforge` command to run (e.g. `build`). Omit to only install the CLI onto `PATH`.                                              |
 | `project-dir`   | Driver project directory. Defaults to the workspace root; `driverforge` walks up to find `src/manifest.c4zproj`.                        |
 | `configuration` | Build configuration to apply — swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                            |

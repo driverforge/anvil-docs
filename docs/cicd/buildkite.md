@@ -24,7 +24,7 @@ steps:
   - command: driverforge build -c release
     plugins:
       - driverforge/anvil#v1.0.0:
-          version: '0.1.0' # pinned, or 'latest'
+          version: '%%CLI_VERSION%%' # pinned, or 'latest'
 ```
 
 ## Run a target directly
@@ -44,7 +44,7 @@ steps:
 
 | Property        | Description                                                                                                                       |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `version`       | The `driverforge` release to install — a pinned version (e.g. `0.1.0`) or `latest` (the default). Pin it for reproducible builds.       |
+| `version`       | The `driverforge` release to install — a pinned version (e.g. `%%CLI_VERSION%%`) or `latest` (the default). Pin it for reproducible builds.       |
 | `command`       | The `driverforge` command to run (e.g. `build`). Omit to only install the CLI onto `PATH` for the step's own command.                   |
 | `project-dir`   | Driver project directory. Defaults to the checkout root; `driverforge` walks up to find `src/manifest.c4zproj`.                         |
 | `configuration` | Build configuration to apply — swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                            |

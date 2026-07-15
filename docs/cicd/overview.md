@@ -34,7 +34,7 @@ pattern:
 # GitHub Actions
 - uses: driverforge/anvil-github-action@v1
   with:
-    version: '0.1.0'
+    version: '%%CLI_VERSION%%'
 - run: driverforge build -c release
 ```
 

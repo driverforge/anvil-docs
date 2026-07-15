@@ -23,7 +23,7 @@ Copy this into `.gitlab-ci.yml` at the root of your driver repository:
 
 ```yaml
 variables:
-  DRIVERFORGE_VERSION: '0.1.0' # pin — a new release shouldn't change your build unannounced
+  DRIVERFORGE_VERSION: '%%CLI_VERSION%%' # pin — a new release shouldn't change your build unannounced
 
 .install-driverforge:
   image: alpine:3.20

@@ -1,6 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import {cliVersionRemark} from './src/lib/cliVersion';
 
 // Load .env at config-load time so values are available for fields like
 // the navbar href below. docusaurus-plugin-dotenv (registered under
@@ -97,6 +98,10 @@ const config: Config = {
           // the docs live at docs/ (the apps/anvil-docs/ prefix is stripped on
           // sync). Docusaurus appends the source path (docs/<file>) to this base.
           editUrl: 'https://github.com/driverforge/anvil-docs/edit/main/',
+          // Substitute %%CLI_VERSION%% tokens with the current CLI release at
+          // build time (latest release manifest, checked-in fallback) so
+          // pinned-version examples track releases. See src/lib/cliVersion.ts.
+          remarkPlugins: [cliVersionRemark],
         },
         blog: false,
         theme: {
