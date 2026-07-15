@@ -14,7 +14,7 @@ try {
   // No .env file — rely on process.env / defaults.
 }
 
-const umamiWebsiteId = process.env.UMAMI_WEBSITE_ID;
+const gaMeasurementId = process.env.GA_MEASUREMENT_ID;
 
 const config: Config = {
   title: 'Anvil Documentation',
@@ -106,9 +106,23 @@ const config: Config = {
     ],
   ],
 
+  // GA4 via the Google tag gateway (DF-634): /gt is intercepted by
+  // Cloudflare at the edge on the proxied docs host, so no nginx proxying is
+  // involved. Snippet shape mirrors GoogleTag in @driverforge/monitoring-next
+  // (not importable here — its package entry points at unbuilt dist output).
   headTags: [
-    ...(umamiWebsiteId
+    ...(gaMeasurementId
       ? [
+          {
+            tagName: 'script' as const,
+            // The bootstrap only queues into dataLayer — no cookies/requests
+            // until the consent-gated loader below runs, so it can stay live.
+            innerHTML:
+              'window.dataLayer = window.dataLayer || [];' +
+              'function gtag(){dataLayer.push(arguments);}' +
+              "gtag('js', new Date());" +
+              `gtag('config', '${gaMeasurementId}');`,
+          },
           {
             tagName: 'script' as const,
             attributes: {
@@ -116,8 +130,7 @@ const config: Config = {
               // cookie-consent plugin activates it by swapping data-src -> src.
               type: 'text/plain',
               'data-category': 'analytics',
-              'data-src': '/api/sc/um/script.js',
-              'data-website-id': umamiWebsiteId,
+              'data-src': `/gt/?id=${gaMeasurementId}`,
             },
           },
         ]

@@ -1,9 +1,9 @@
 describe('docusaurus.config.ts', () => {
-  const originalUmamiId = process.env.UMAMI_WEBSITE_ID;
+  const originalGaId = process.env.GA_MEASUREMENT_ID;
 
   afterEach(() => {
-    if (originalUmamiId === undefined) delete process.env.UMAMI_WEBSITE_ID;
-    else process.env.UMAMI_WEBSITE_ID = originalUmamiId;
+    if (originalGaId === undefined) delete process.env.GA_MEASUREMENT_ID;
+    else process.env.GA_MEASUREMENT_ID = originalGaId;
     jest.resetModules();
   });
 
@@ -16,34 +16,49 @@ describe('docusaurus.config.ts', () => {
     return config!;
   };
 
-  it('keeps the Umami script consent-blocked (text/plain + data-src)', () => {
-    process.env.UMAMI_WEBSITE_ID = 'test-website-id';
+  type HeadTag = {
+    tagName: string;
+    attributes?: Record<string, string>;
+    innerHTML?: string;
+  };
+
+  it('keeps the GA loader consent-blocked (text/plain + data-src)', () => {
+    process.env.GA_MEASUREMENT_ID = 'G-TEST123';
     const config = loadConfig();
 
-    const scripts = (config.headTags ?? []) as Array<{
-      tagName: string;
-      attributes: Record<string, string>;
-    }>;
-    const umami = scripts.find((t) => t.attributes['data-src'] === '/api/sc/um/script.js');
+    const scripts = (config.headTags ?? []) as HeadTag[];
+    const loader = scripts.find(
+      (t) => t.attributes?.['data-src'] === '/gt/?id=G-TEST123',
+    );
 
-    expect(umami).toBeDefined();
-    expect(umami!.attributes.type).toBe('text/plain');
-    expect(umami!.attributes['data-category']).toBe('analytics');
+    expect(loader).toBeDefined();
+    expect(loader!.attributes!.type).toBe('text/plain');
+    expect(loader!.attributes!['data-category']).toBe('analytics');
     // An executable `src` would bypass consent entirely.
-    expect(umami!.attributes.src).toBeUndefined();
+    expect(loader!.attributes!.src).toBeUndefined();
   });
 
-  it('emits no Umami script when UMAMI_WEBSITE_ID is unset', () => {
-    delete process.env.UMAMI_WEBSITE_ID;
+  it('emits a live gtag bootstrap that only queues into dataLayer', () => {
+    process.env.GA_MEASUREMENT_ID = 'G-TEST123';
     const config = loadConfig();
 
-    const scripts = (config.headTags ?? []) as Array<{
-      tagName: string;
-      attributes: Record<string, string>;
-    }>;
-    expect(
-      scripts.find((t) => t.attributes?.['data-src'] === '/api/sc/um/script.js')
-    ).toBeUndefined();
+    const scripts = (config.headTags ?? []) as HeadTag[];
+    const bootstrap = scripts.find((t) => t.innerHTML?.includes('window.dataLayer'));
+
+    expect(bootstrap).toBeDefined();
+    expect(bootstrap!.innerHTML).toContain("gtag('config', 'G-TEST123');");
+    // The bootstrap must not load anything itself — the gated loader does.
+    expect(bootstrap!.attributes?.src).toBeUndefined();
+    expect(bootstrap!.attributes?.['data-src']).toBeUndefined();
+  });
+
+  it('emits no GA tags when GA_MEASUREMENT_ID is unset', () => {
+    delete process.env.GA_MEASUREMENT_ID;
+    const config = loadConfig();
+
+    const scripts = (config.headTags ?? []) as HeadTag[];
+    expect(scripts.find((t) => t.attributes?.['data-src']?.startsWith('/gt/'))).toBeUndefined();
+    expect(scripts.find((t) => t.innerHTML?.includes('window.dataLayer'))).toBeUndefined();
   });
 
   it('offers a cookie preferences trigger in the footer legal links', () => {
