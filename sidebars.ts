@@ -102,6 +102,7 @@ const sidebars: SidebarsConfig = {
         'cli/error-reporting',
         'cli/upgrading',
         'cli/telemetry',
+        'cli/spaceship',
       ],
     },
     {
