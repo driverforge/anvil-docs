@@ -26,7 +26,7 @@ releases.
     outputDir: ./dist
 
 # After — driverforge GitHub Action
-- uses: driverforge/anvil-github-action@v1
+- uses: driverforge/driverforge-github-action@v1
   with:
     command: build
     project-dir: ./driver
@@ -46,7 +46,7 @@ releases.
 CLI flags without a dedicated action input are passed through `args`:
 
 ```yaml
-- uses: driverforge/anvil-github-action@v1
+- uses: driverforge/driverforge-github-action@v1
   with:
     command: build
     project-dir: ./driver

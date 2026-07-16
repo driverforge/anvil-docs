@@ -5,8 +5,8 @@ description: Build and ship Control4 drivers from a Buildkite pipeline with the 
 
 # Buildkite plugin
 
-Run `driverforge` in a Buildkite pipeline with **`driverforge/anvil-buildkite-plugin`**.
-Buildkite lets you reference it with the short `driverforge/anvil` form.
+Run `driverforge` in a Buildkite pipeline with **`driverforge/driverforge-buildkite-plugin`**.
+Buildkite lets you reference it with the short `driverforge/driverforge` form.
 
 :::info Preview
 The `driverforge` Buildkite plugin is available today and in **preview**: while the
@@ -23,7 +23,7 @@ before the step's own command runs:
 steps:
   - command: driverforge build -c release
     plugins:
-      - driverforge/anvil#v1.0.0:
+      - driverforge/driverforge#v1.2.0:
           version: '%%CLI_VERSION%%' # pinned, or 'latest'
 ```
 
@@ -34,7 +34,7 @@ Give it a `command` and the plugin runs that target for you:
 ```yaml
 steps:
   - plugins:
-      - driverforge/anvil#v1.0.0:
+      - driverforge/driverforge#v1.2.0:
           command: build
           configuration: release
           increment: true

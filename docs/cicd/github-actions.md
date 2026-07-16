@@ -5,7 +5,7 @@ description: Build and ship Control4 drivers from a GitHub Actions workflow with
 
 # GitHub Action
 
-Run `driverforge` in a GitHub Actions workflow with **`driverforge/anvil-github-action`**.
+Run `driverforge` in a GitHub Actions workflow with **`driverforge/driverforge-github-action`**.
 
 :::info Preview
 The `driverforge` GitHub Action is available today and in **preview**: while the
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: driverforge/anvil-github-action@v1
+      - uses: driverforge/driverforge-github-action@v1
         with:
           version: '%%CLI_VERSION%%' # pinned, or 'latest'
       - run: driverforge build -c release
@@ -38,7 +38,7 @@ dedicated packaging action:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: driverforge/anvil-github-action@v1
+  - uses: driverforge/driverforge-github-action@v1
     with:
       command: build
       project-dir: ./driver
@@ -57,7 +57,7 @@ decoration:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: driverforge/anvil-github-action@v1
+  - uses: driverforge/driverforge-github-action@v1
     with:
       command: build
       project-dir: ./driver

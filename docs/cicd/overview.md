@@ -8,8 +8,8 @@ description: Run the driverforge CLI in your CI/CD pipeline with the GitHub Acti
 Run `driverforge` in your pipeline to build and ship your Control4 drivers automatically
 — on every push, tag, or release. Two integrations wrap the same CLI:
 
-- **[GitHub Action](/cicd/github-actions)** — `driverforge/anvil-github-action`, for GitHub Actions workflows.
-- **[Buildkite plugin](/cicd/buildkite)** — `driverforge/anvil-buildkite-plugin`, for Buildkite pipelines.
+- **[GitHub Action](/cicd/github-actions)** — `driverforge/driverforge-github-action`, for GitHub Actions workflows.
+- **[Buildkite plugin](/cicd/buildkite)** — `driverforge/driverforge-buildkite-plugin`, for Buildkite pipelines.
 
 :::info Preview
 The `driverforge` GitHub Action and Buildkite plugin are available today and in
@@ -32,7 +32,7 @@ pattern:
 
 ```yaml
 # GitHub Actions
-- uses: driverforge/anvil-github-action@v1
+- uses: driverforge/driverforge-github-action@v1
   with:
     version: '%%CLI_VERSION%%'
 - run: driverforge build -c release
@@ -45,7 +45,7 @@ extra scripting:
 
 ```yaml
 # GitHub Actions
-- uses: driverforge/anvil-github-action@v1
+- uses: driverforge/driverforge-github-action@v1
   with:
     command: build
     configuration: release
