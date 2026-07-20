@@ -36,7 +36,3 @@ Your scheme is recorded in `.driverforge/config` when you initialise the project
 Plain `driverforge build` works on any driverpackager-style project with no account and no setup, and the version passes through exactly as authored. What [`driverforge init`](/cli/init) unlocks is version management and the ship commands: bumping needs a scheme, and the scheme is chosen during init. Without one, `--increment` stops with a friendly "Versioning not configured" pointing you at `driverforge init`, and [`sync`](/cli/sync)/[`deploy`](/cli/deploy) require an initialised project up front.
 
 `--version` is the exception: an explicit value needs no scheme, so it works anywhere, initialised or not.
-
-## What about `<semver>`?
-
-Earlier previews of `driverforge` derived the Control4 `<version>` from a `<semver>` element in `driver.xml`. That's gone. `<semver>` isn't part of the Control4 driver.xml specification, and keeping a second source of truth for the version created more problems than it solved. `driverforge` now ignores the element entirely: it isn't read, written, or removed. If your `driver.xml` still carries one, it has no effect; remove it whenever convenient.
