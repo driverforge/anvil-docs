@@ -23,11 +23,15 @@ but always review the changes before committing.
 ## Usage
 
 ```bash
-driverforge init [--sdk-version <x.y.z>]
+driverforge init
 ```
 
 Run it from inside an existing driver project — a directory with
 `src/manifest.c4zproj`. It's interactive, so run it in a real terminal.
+
+`init` sets a project up exactly **once** and never mutates an initialised
+project — see [Running it again](#running-it-again). SDK updates have one
+owner, the [`driverforge upgrade`](/cli/upgrade) picker.
 
 ## Prerequisites
 
@@ -39,8 +43,10 @@ Run it from inside an existing driver project — a directory with
 
 `driverforge init` retrofits your driver for Anvil, walking you through:
 
-1. **Embedding the Anvil SDK** into your project (under `src/vendor/`), at the
-   latest version or the one you pass to `--sdk-version`.
+1. **Embedding the Anvil SDK** into your project (under `src/vendor/`) — the
+   newest locally cached SDK, or, if none is cached, it offers to download the
+   latest. Updating it later is the [`driverforge upgrade`](/cli/upgrade)
+   picker's job.
 2. **Wrapping your driver's `OnDriverInit`** so Anvil initializes when the driver
    loads.
 3. **Linking an Anvil project** — pick an existing one or create a new one — and
@@ -73,15 +79,31 @@ and the changes are applied atomically — if anything fails, it rolls back.
 
 ## Options
 
-| Option          | Description                                                                                             |
-| --------------- | ------------------------------------------------------------------------------------------------------- |
-| `--project`     | Link a specific Anvil project without prompting — `<org-slug>/<project-slug>` (or just a project slug). |
-| `--sdk-version` | The Anvil SDK version to embed (e.g. `1.0.0`). Defaults to the latest.                                  |
+| Option      | Description                                                                                             |
+| ----------- | ------------------------------------------------------------------------------------------------------- |
+| `--project` | Link a specific Anvil project without prompting — `<org-slug>/<project-slug>` (or just a project slug). |
 
-## Updating the SDK
+## Running it again
 
-Run `driverforge init` again in an already-initialized project to see its current
-setup, or `driverforge init --sdk-version <x.y.z>` to re-embed a different SDK build.
+`driverforge init` on an already-initialised project reports the existing setup as
+an advisory card and exits without touching anything:
+
+```
+┃ This project is already set up for Driverforge.
+┃
+┃ project Eight Sleep
+┃ SDK     0.3.0
+┃ targets debug, release
+┃
+┃  💡  Run `driverforge upgrade` to update the embedded SDK.
+```
+
+The one exception: a config predating the [versioning scheme](/cli/versioning)
+field still gets the one-time versioning interview backfilled — a migration, not
+a setup change.
+
+To update the embedded SDK, select the SDK row in the
+[`driverforge upgrade`](/cli/upgrade) picker.
 
 ## After setup
 

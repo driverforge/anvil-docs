@@ -78,7 +78,7 @@ run `driverforge deploy` again — the CLI picks up from there.
   can't be reached at the controller's address. See the
   [agent docs](/agent/overview).
 - **Agent out of date** — the agent on the controller is too old to accept a
-  deploy. Update it with [`driverforge agent upgrade`](/cli/agent).
+  deploy. Update it with the [`driverforge upgrade`](/cli/upgrade) picker.
 - **Deploy failed** — the controller rejected the driver or it errored on init.
   When the agent captures an Anvil error report, the CLI prints a link to it.
 

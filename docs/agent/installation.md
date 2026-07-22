@@ -48,13 +48,17 @@ After authentication, open the agent's Properties tab. The **Authentication stat
 
 ## Updating
 
-To update to a new version:
+Run [`driverforge upgrade`](/cli/upgrade) and select the **Anvil Agent** row. The
+CLI downloads the new build, verifies its checksum, deploys it to the
+controller, and confirms the agent came back up. The agent reconnects
+automatically after updating.
+
+An agent too old to report its installed filename can't self-upgrade. Update it
+once manually in Composer Pro; after that `driverforge upgrade` can take over:
 
 1. Download the new `anvil-agent.c4z`
 2. Right-click the agent in Composer
 3. Select **Update Driver**
-
-The agent reconnects automatically after updating.
 
 ## Removing
 

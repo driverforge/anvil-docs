@@ -5,7 +5,7 @@ sidebar_position: 6
 # device
 
 Manage the active deploy target — the Control4 controller that [`deploy`](/cli/deploy),
-[`sync`](/cli/sync), and [`agent`](/cli/agent) act on. The CLI remembers it so you
+[`sync`](/cli/sync), and [`upgrade`](/cli/upgrade) act on. The CLI remembers it so you
 don't pass it every time. `driverforge device` on its own does nothing; run one of its
 subcommands.
 

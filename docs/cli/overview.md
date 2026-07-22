@@ -78,8 +78,7 @@ driverforge deploy
 
 **Maintenance**
 
-- [`driverforge agent`](/cli/agent) — Upgrade the Anvil Agent on a controller
-- [`driverforge upgrade`](/cli/upgrade) — Show and apply available upgrades (CLI, agent)
+- [`driverforge upgrade`](/cli/upgrade) — Show and apply available upgrades (CLI, agent, SDK)
 - [`driverforge version`](/cli/version) — Print the CLI version (and the selected controller's versions)
 - [`driverforge completion`](/cli/completion) — Generate a shell autocompletion script
 

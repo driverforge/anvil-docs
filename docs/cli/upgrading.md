@@ -33,15 +33,19 @@ scoop update driverforge      # Windows
 ```
 
 [`driverforge upgrade`](/cli/upgrade) shows everything upgradable in one place — the CLI
-(advisory: it prints the exact command for how you installed it) and the agent —
-and applies them interactively.
+(advisory: it prints the exact command for how you installed it), the agent, and
+the embedded SDK — and applies them interactively.
 
 ## Upgrading the Anvil Agent
 
-[`driverforge agent upgrade`](/cli/agent) updates the [Anvil Agent](/agent/overview) on
-the selected controller to the latest release.
+The [`driverforge upgrade`](/cli/upgrade) picker is how agents get upgraded: select
+the **Anvil Agent** row and confirm, and the CLI updates the agent on the
+[selected controller](/cli/device) to the latest release. Upgrades are
+interactive-only — non-interactively, `driverforge upgrade` reports and never
+mutates.
 
 ## Upgrading the SDK
 
-The Anvil SDK is embedded in your driver. Re-run
-[`driverforge init --sdk-version <x.y.z>`](/cli/init) to re-embed a different SDK build.
+The Anvil SDK is embedded in your driver, and the SDK row of the
+[`driverforge upgrade`](/cli/upgrade) picker is the only way to update it. It
+re-embeds the latest release; a clean git tree is required.

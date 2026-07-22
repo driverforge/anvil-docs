@@ -7,7 +7,7 @@ sidebar_position: 17
 Authenticate with Driverforge. Sign in once and the CLI stores and refreshes your
 credentials, so the commands that reach the Anvil cloud — [`deploy`](/cli/deploy),
 [`sync`](/cli/sync), [`org`](/cli/org), [`device`](/cli/device),
-[`agent`](/cli/agent) — work without prompting again.
+[`upgrade`](/cli/upgrade) — work without prompting again.
 
 :::info Preview
 The `driverforge` CLI is in **preview**. Commands and flags documented here may change

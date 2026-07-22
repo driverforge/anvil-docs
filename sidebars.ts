@@ -110,7 +110,6 @@ const sidebars: SidebarsConfig = {
       label: 'Commands',
       collapsed: false,
       items: [
-        'cli/agent',
         'cli/build',
         'cli/completion',
         {type: 'doc', id: 'cli/debug', className: 'menu-coming-soon'},

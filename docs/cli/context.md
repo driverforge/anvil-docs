@@ -18,8 +18,9 @@ before the stable release. Follow along or share feedback on our
 
 ## How the target is chosen
 
-When you run a deploy command ([`deploy`](/cli/deploy), [`sync`](/cli/sync),
-[`agent`](/cli/agent)), the CLI resolves the controller in this order:
+When you run a controller-scoped command ([`deploy`](/cli/deploy),
+[`sync`](/cli/sync), [`upgrade`](/cli/upgrade)), the CLI resolves the controller
+in this order:
 
 1. An explicit `--device <name|id>` flag
 2. The remembered controller for the active organization

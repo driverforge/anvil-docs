@@ -26,8 +26,8 @@ loop, available the moment you install `driverforge`.
 Signing in unlocks the parts that go through the Anvil cloud — anything that needs
 Driverforge to know who you are and which controllers are yours:
 [`deploy`](/cli/deploy) and [`sync`](/cli/sync) to push a build to a controller,
-[`agent`](/cli/agent) to upgrade one, and [`org`](/cli/org) / [`device`](/cli/device)
-to choose where those act.
+[`upgrade`](/cli/upgrade) to update its agent, and [`org`](/cli/org) /
+[`device`](/cli/device) to choose where those act.
 
 ## How it works
 
