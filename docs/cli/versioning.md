@@ -7,12 +7,6 @@ description: How driverforge manages the Control4 driver version, and the date a
 
 Control4 identifies a driver build by the integer `<version>` in `driver.xml`, and Director only reloads a driver when it sees a **higher** number. `driverforge` manages that integer for you, using a versioning scheme you choose once during [`driverforge init`](/cli/init).
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## The two schemes
 
 Your scheme is recorded in `.driverforge/config` when you initialise the project:

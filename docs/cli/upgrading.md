@@ -8,12 +8,6 @@ slug: /cli/upgrading
 `driverforge` keeps itself, the Anvil Agent, and your embedded SDK current. Here's how
 the pieces fit.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Update notices
 
 After a command runs, the CLI checks — at most once a day, cached — whether a

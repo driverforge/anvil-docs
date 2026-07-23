@@ -6,12 +6,6 @@ sidebar_position: 23
 
 Show the currently signed-in user.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Usage
 
 ```bash

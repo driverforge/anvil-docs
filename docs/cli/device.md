@@ -9,12 +9,6 @@ Manage the active deploy target — the Control4 controller that [`deploy`](/cli
 don't pass it every time. `driverforge device` on its own does nothing; run one of its
 subcommands.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Usage
 
 ```bash

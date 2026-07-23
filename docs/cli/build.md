@@ -7,12 +7,6 @@ sidebar_position: 4
 Bundle your Lua source and produce a `.c4z` driver package. Building is entirely
 local — no account or controller required.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 :::tip Fast by design
 `driverforge` is a self-contained native binary. It runs the whole build in one
 process — bundling, encryption, and packaging — instead of orchestrating the

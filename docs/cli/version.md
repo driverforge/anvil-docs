@@ -7,12 +7,6 @@ sidebar_position: 12
 Print the `driverforge` CLI version — and, when a controller is selected, the Director
 and Anvil Agent versions running on it.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Usage
 
 ```bash

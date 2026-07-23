@@ -9,12 +9,6 @@ credentials, so the commands that reach the Anvil cloud — [`deploy`](/cli/depl
 [`sync`](/cli/sync), [`org`](/cli/org), [`device`](/cli/device),
 [`upgrade`](/cli/upgrade) — work without prompting again.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Usage
 
 ```bash

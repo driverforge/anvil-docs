@@ -8,12 +8,6 @@ The CLI can collect **anonymous usage metrics** to help us improve it. It's
 opt-in: on first interactive launch, `driverforge` asks once whether you'd like to share
 them.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## What's collected
 
 If you opt in, the CLI records things like which commands you run, build timings,

@@ -9,12 +9,6 @@ development. It builds and packages drivers locally, and — once you're signed 
 — deploys them straight to a controller through the Anvil Agent, no manual
 Composer import required.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## What it does
 
 - **Build drivers** — Bundle Lua source with squish and produce a `.c4z`

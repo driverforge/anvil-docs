@@ -9,12 +9,6 @@ config files, with a named override swapped in at build time. It's a lot like
 Release/Debug builds in C++ or .NET: one default, plus named variants you select
 when you build.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 It's entirely optional. A driver can inline its settings (including its Anvil
 [API key](/security/api-keys)) directly and never use any of this.
 

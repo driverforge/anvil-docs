@@ -10,12 +10,6 @@ You sign in once with [`driverforge login`](/cli/login); the CLI stores the cred
 locally and refreshes them automatically, so you rarely think about it again until
 you [`driverforge logout`](/cli/logout).
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Do I have to log in?
 
 No — the core of the CLI works anonymously. You can author, [build](/cli/build),

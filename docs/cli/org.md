@@ -8,12 +8,6 @@ Manage the active organization — the workspace your projects, devices, and bil
 belong to. The CLI remembers it so the deploy commands don't need it every time.
 `driverforge org` on its own does nothing; run one of its subcommands.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Usage
 
 ```bash

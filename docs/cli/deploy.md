@@ -7,12 +7,6 @@ sidebar_position: 5
 Build and deploy your driver to a controller without leaving the terminal or
 switching contexts.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Usage
 
 ```bash

@@ -7,12 +7,6 @@ sidebar_position: 6
 When something goes wrong, the CLI distinguishes a condition it *expected* from a
 genuine *bug*, and treats them differently.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Expected conditions
 
 Things like "you're not logged in", "this isn't a driver project", "no controller

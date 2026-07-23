@@ -13,12 +13,6 @@ subscription:
 ~/drivers/acme-thermostat  on  main  󰢛 acme/living-room
 ```
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 The section reads only the local context file (`driverforge org current` /
 `driverforge device current` — no network), renders asynchronously so it never
 blocks your prompt, and disappears entirely when no organization is selected.

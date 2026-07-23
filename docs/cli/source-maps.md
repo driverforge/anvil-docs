@@ -8,12 +8,6 @@ Source maps let Anvil translate stack traces from a bundled Lua driver back to
 your original source files, so error reports point at real file names and line
 numbers instead of the squished output.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Why source maps
 
 When a driver is bundled with squish, many source files collapse into a single

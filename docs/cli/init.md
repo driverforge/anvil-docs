@@ -7,12 +7,6 @@ sidebar_position: 8
 Set up Anvil in an existing Control4 driver project — embed the SDK, wrap
 `OnDriverInit`, link an Anvil project, and (optionally) add a build config.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 :::warning Experimental
 `driverforge init` is experimental, and it **modifies files in your driver project** —
 that's the point: it embeds the SDK, wraps `OnDriverInit`, and writes config. It

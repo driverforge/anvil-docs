@@ -181,8 +181,8 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'platformSidebar',
-          label: 'Platform',
+          sidebarId: 'cliSidebar',
+          label: 'CLI',
           position: 'left',
         },
         {
@@ -199,10 +199,9 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'cliSidebar',
-          label: 'CLI',
+          sidebarId: 'platformSidebar',
+          label: 'Platform',
           position: 'left',
-          className: 'navbar-preview',
         },
         {
           type: 'docSidebar',

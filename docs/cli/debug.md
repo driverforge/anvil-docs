@@ -7,12 +7,6 @@ sidebar_position: 10
 Run your driver locally with full IDE debugger support — set breakpoints, step
 through code as it executes, and inspect variables in real time.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 :::info Coming soon
 `driverforge debug` isn't available yet. Follow along or vote for it on our
 [roadmap](https://driverforge.canny.io).

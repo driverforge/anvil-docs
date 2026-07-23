@@ -10,12 +10,6 @@ The CLI remembers both so you don't have to pass them every time: pick an
 (controller) with [`driverforge device`](/cli/device). Both require you to be
 [signed in](/cli/authentication).
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## How the target is chosen
 
 When you run a controller-scoped command ([`deploy`](/cli/deploy),

@@ -7,12 +7,6 @@ sidebar_position: 1
 The Driverforge CLI (`driverforge`) is a single, dependency-free binary. Install
 it with your platform's package manager, or with the install script on Linux.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## macOS
 
 ```bash

@@ -8,12 +8,6 @@ Generate a shell autocompletion script for `driverforge`, so commands, subcomman
 flags tab-complete. `driverforge completion` on its own does nothing; run the subcommand
 for your shell.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Usage
 
 ```bash

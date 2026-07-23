@@ -8,12 +8,6 @@ See — and interactively apply — everything upgradable in the current context
 the `driverforge` CLI itself, the [Anvil Agent](/agent/overview) on the selected
 controller, and the [Anvil SDK](/sdk/overview) embedded in the current project.
 
-:::info Preview
-The `driverforge` CLI is in **preview**. Commands and flags documented here may change
-before the stable release. Follow along or share feedback on our
-[roadmap](https://driverforge.canny.io).
-:::
-
 ## Usage
 
 ```bash
