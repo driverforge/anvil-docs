@@ -49,7 +49,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         { type: 'doc', id: 'platform/projects', label: 'Managing projects' },
-        { type: 'doc', id: 'security/api-keys', label: 'API keys' },
+        { type: 'doc', id: 'security/api-keys', label: 'API keys & tokens' },
       ],
     },
     {

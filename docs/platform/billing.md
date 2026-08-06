@@ -7,8 +7,8 @@ import Screenshot from '@site/src/components/Screenshot';
 
 # Billing
 
-The **Settings → Billing** page is where you manage how your organization pays and
-review what you've been charged.
+The **Settings → Payment** page, under **Billing** in the settings sidebar, is
+where you manage how your organization pays and review what you've been charged.
 
 :::tip
 Managing billing requires the **owner** or **admin** role. Billing is **per
@@ -36,9 +36,10 @@ When you add or update payment, you can also provide a **billing address** and
 
 ## Invoices
 
-Your recent invoices are listed with their date, amount, and status (for example
-**Paid** or **Open**). Each invoice links to a downloadable **PDF** and a hosted
-copy you can view or print.
+Your recent invoices are listed with their number, date, amount, and status (for
+example **Paid** or **Open**). The invoice number opens a hosted copy you can view
+or print, and **Download** saves the PDF. If you need an older invoice than the
+page lists, contact support.
 
 ## Further reading
 

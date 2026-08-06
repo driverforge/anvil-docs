@@ -1,62 +1,81 @@
 ---
 sidebar_position: 1
-description: How Anvil API keys work, why they're safe to commit in your driver, and how to manage them.
+description: How Anvil ingestion tokens work, why they're safe to commit in your driver, and how to rotate them.
 ---
 
-# API Keys
+# API keys and ingestion tokens
 
-Every Anvil project has an **API key** that your driver uses to send telemetry — events, logs, and errors — to your project. It's the value you pass to `Anvil:Init()` in your driver. A new project is created with a **Default API Key** so you can start sending data right away.
+Every Anvil project has an **ingestion token** that your driver uses to send telemetry (events, logs, and errors) to that project. It's the value you pass to `Anvil:Init()` in your driver. A new project is created with one already minted, so you can start sending data right away.
+
+Anvil has two classes of credential, and they behave differently:
+
+| Class | Where it lives | What it's for |
+|-------|----------------|---------------|
+| **Ingestion token** (publishable) | Each project's settings | Sending telemetry from a driver. Safe to embed and distribute. |
+| **API key** (secret) | Organization settings | Server-side access to the Anvil API. A credential to protect. |
+
+The rest of this page is about ingestion tokens, which is what you need to send telemetry. Organization-level secret API keys are still in development; you'll find the placeholder under **Settings → API Keys**.
 
 ## Safe to commit
 
-**You can commit your API key directly in your driver source** — for example, in your `OnDriverInit` function:
+**You can commit your ingestion token directly in your driver source**, for example in your `OnDriverInit` function:
 
 ```lua
 Anvil:Init("dfp_…", C4:GetDriverFileName())
 ```
 
-This is intentional and safe. An Anvil project key is a **publishable** credential. It's designed to be embedded in the driver you distribute to customers, so it already travels inside every copy of your driver. You **don't** need build-time secret injection, environment variables, or a secrets manager for it.
+This is intentional and safe. An ingestion token is a **publishable** credential. It's designed to be embedded in the driver you distribute to customers, so it already travels inside every copy of your driver. You **don't** need build-time secret injection, environment variables, or a secrets manager for it.
 
 :::tip
-Don't build a pipeline to keep your project key out of source control — it's not a secret. Commit it like any other configuration value.
+Don't build a pipeline to keep your ingestion token out of source control. It isn't a secret; commit it like any other configuration value.
 :::
 
-## What an API key can do
+## What an ingestion token can do
 
-Anvil project keys are **publish-only ingestion keys**. A key can do exactly one thing: publish telemetry to the single project it belongs to. It **cannot**:
+Ingestion tokens are **write-only**. A token can do exactly one thing: publish telemetry to the single project it belongs to. It **cannot**:
 
 - read any of your events, logs, or errors,
 - change project or organization settings,
 - access any other project, or
 - act on your account in any way.
 
-That narrow scope is what makes the key safe to embed and distribute. The worst anyone could do with a copy of your key is send extra telemetry into your project — a nuisance, not a breach — and you can cut that off any time by revoking the key.
+That narrow scope is what makes the token safe to embed and distribute. The worst anyone could do with a copy of your token is send extra telemetry into your project, which is a nuisance rather than a breach, and you can cut that off at any time by rotating.
 
-## Recognising a key
+## Recognising a token
 
-Project keys begin with a short prefix:
+Ingestion tokens begin with a short prefix:
 
-- `dfp_…` — a standard project key
-- `dfm_…` — a key for a Monitor-mode project
+- `dfp_…` for a standard project
+- `dfm_…` for a Monitor-mode project
 
-Both are publishable ingestion keys; the prefix just tells you which kind of
-project the key belongs to.
+Both are publishable; the prefix just tells you which kind of project the token
+belongs to. Secret organization API keys use `dfa_…` and `dfs_…` instead, and are
+stored hashed and shown only once.
 
-## Managing keys
+## Managing your ingestion token
 
-Create, view, and revoke keys under **Settings → API Keys** in your Anvil project.
+A project has **one** current ingestion token, because one token gets baked into
+each compiled driver. Managing it is therefore about rotation rather than keeping
+a list of named keys.
 
-- **Create** a key at any time. Give it a descriptive name so you can tell keys
-  apart later, and optionally set an **expiry date** — by default a new key is
-  valid for 12 months. A key with no expiry stays valid indefinitely.
-- **View** existing keys — project keys are publishable, so the full value stays
-  available to copy whenever you need it. Each key shows when it was created, when
-  it was last used, and when it expires.
-- **Revoke** a key to cut it off — for example, if one is being abused to send
-  junk telemetry. You'll confirm by typing the key's name. Revocation takes effect
-  immediately and **cannot be undone**; create a replacement and update your
-  driver. Expired and revoked keys are kept in a list for your reference.
+Open **Settings → Projects**, click the **gear icon** on the project's row, and
+find the **Ingestion Token** section in the drawer that opens.
+
+- **Copy** the current token whenever you need it. Ingestion tokens are
+  publishable, so the full value stays available (reveal it with the eye button,
+  or copy it straight from the masked field).
+- **Rotate** the token with the refresh button next to it. Rotating mints a
+  replacement for your next driver build. Because drivers already installed on
+  customer hardware keep sending with the old token, you choose what happens to
+  it: keep it valid until you revoke it, or expire it in 7, 30, or 90 days.
+- **Revoke** a previous token once you're confident nothing is still using it.
+  Previous tokens stay listed, with their expiry status, until they're gone.
+  You'll confirm by typing the token's last four characters. Revocation takes
+  effect immediately, stops any installed driver still sending with it, and
+  **cannot be undone**.
 
 :::tip
-Use a separate key per driver (or per build configuration) and give each a clear name. If you ever need to revoke one, you only have to update that one driver — not every driver you ship.
+Give a rotation enough grace to reach the field. Pick an expiry window long
+enough for your updated driver to be deployed to every controller that matters,
+then revoke the old token once telemetry stops arriving on it.
 :::

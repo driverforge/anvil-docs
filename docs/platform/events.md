@@ -7,21 +7,22 @@ import Screenshot from '@site/src/components/Screenshot';
 
 # Events
 
-The Events page shows every handler call in your driver in real time. See exactly what Control4 is sending, what arguments are passed, how long each handler takes, and whether it succeeded or threw an error.
+The Events page shows every handler call in your drivers in real time. See exactly what Control4 is sending, what arguments are passed, how long each handler takes, and whether it succeeded or threw an error.
 
 <Screenshot name="events" alt="Events page showing real-time event stream with histogram" />
 
+The page covers every project in your organization. Use the **project filter** at the top to narrow it to one driver, or leave it as-is to watch them all at once. See [Managing projects](/platform/projects) for how the filter works.
+
 ## Real-Time Event Stream
 
-Events stream in as they happen. Each row shows:
+Events stream in as they happen, each one a two-line row:
 
-- **Status** — a coloured indicator showing whether the event succeeded (green), errored (red), warned (amber), or other status
-- **Time** — when the event occurred (hover for the full timestamp)
-- **Duration** — how long your handler took to execute
-- **Event** — the handler name (e.g. `OnPropertyChanged`, `ExecuteCommand`)
-- **Message** — the error message or last log output, if any
+- A **status glyph** showing whether the event succeeded, errored, warned, or something else. The glyph's shape carries the status as well as its colour, so it stays readable without relying on colour alone.
+- The **handler name** (for example `OnPropertyChanged`, `ExecuteCommand`) with its **duration** alongside.
+- Underneath, the **last log output** from that handler, or the error message if it threw.
+- Trailing the row, badges naming the **project** and **platform** the event came from, the **controller** it ran on, and the **time** it occurred (hover for the full timestamp).
 
-New events appear at the top of the list with a brief pulse animation so you can see what just arrived.
+New events appear at the top of the list with a brief pulse animation, tinted by status, so you can see what just arrived.
 
 ### Pause and Resume
 
@@ -40,14 +41,14 @@ Click any event row to open the detail drawer.
 
 <Screenshot name="events-detail" alt="Event detail drawer showing arguments, logs, and timing" />
 
-The drawer has tabs:
+The drawer opens on the **Logs** tab, since what your code did during the handler is usually the reason you clicked. The tabs are:
 
-- **Overview** — duration, result, arguments (as an interactive JSON viewer), and error context if present
-- **Logs** — all log messages captured during this event's execution
-- **Arguments** — full JSON view of the arguments passed by Control4
-- **Error** — if the event threw, shows the error type, value, and full stack trace
+- **Logs**, every log message captured during this event's execution, as a numbered console you can search
+- **Arguments**, a full JSON view of the arguments Control4 passed
+- **Error** if the event threw (the error type, value, and full stack trace), or **Return Value** if it didn't
+- **Details**, the event's metadata (driver, controller, and the like) plus the raw event JSON
 
-Events are shareable — the drawer URL is unique and can be copied and sent to others.
+Events are shareable: use the link button in the drawer header to copy a URL that opens the same event for whoever you send it to.
 
 ## Histogram
 
@@ -56,6 +57,10 @@ Above the event list, a stacked bar chart shows event volume over time. Bars are
 The histogram automatically adjusts its bucket size based on the selected time range.
 
 ## Filtering
+
+### Projects
+
+The project filter narrows the stream (and the histogram and facet counts along with it) to the projects you tick. Your selection is held in the URL, so a filtered view is a link you can share.
 
 ### Time Range
 
@@ -83,5 +88,11 @@ Facet filtering (Status, Event Name, Controller) is available on paid plans. Imp
 
 Navigate the event list without leaving your keyboard:
 
-- `j` / `k` — move down / up through events
-- `Enter` — open the selected event's detail drawer
+- `j` / `k` (or `↓` / `↑`) to move down and up through events
+- `Enter` to open the selected event's detail drawer, and `Esc` to close it
+
+With the drawer open, `j` and `k` move it straight to the next or previous event. Press `?` for the full shortcut list, including time-range and pause shortcuts.
+
+:::note
+If every project in the current filter is a Monitor-mode project, Events disappears from the sidebar: production monitoring is concerned with logs and errors rather than the handler-by-handler stream. Selecting a project that isn't in Monitor mode brings it back.
+:::

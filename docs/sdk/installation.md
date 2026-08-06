@@ -57,7 +57,7 @@ from the packaged driver (which is how the worked example driver ships).
 
 ### Initialization
 
-Add the SDK initialization to your `OnDriverInit`, using your API key from **Settings > API Keys** in Anvil:
+Add the SDK initialization to your `OnDriverInit`, using your project's ingestion token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Ingestion Token**):
 
 ```lua
 function OnDriverInit(strDIR)

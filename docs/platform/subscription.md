@@ -7,9 +7,9 @@ import Screenshot from '@site/src/components/Screenshot';
 
 # Subscription
 
-The **Settings → Subscription** page shows your organization's current
-[plan](/platform/plans), how much of it you're using, and the controls to change
-plans.
+The **Settings → Subscription** page, under **Billing** in the settings sidebar,
+shows your organization's current [plan](/platform/plans), how much of it you're
+using, and the controls to change plans.
 
 :::tip
 Managing the subscription requires the **owner** or **admin** role. Billing is

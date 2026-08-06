@@ -8,7 +8,8 @@ import Screenshot from '@site/src/components/Screenshot';
 # Members & roles
 
 Invite people to your organization and control what they can do. Member
-management lives under **Settings → Members**.
+management lives under **Settings → Members**, reached from **Settings** in the
+sidebar.
 
 :::tip
 Inviting, removing, and re-roling members requires the **owner** or **admin**
@@ -51,10 +52,11 @@ seats or change plans.
 
 ### Managing pending invitations
 
-Under **Invited Members**, each pending invitation can be:
+Under **Invited Members**, each pending invitation shows when it was sent and when
+it expires, and can be:
 
-- **Resend** — send a fresh email and reset the 7-day expiry.
-- **Revoke** — cancel the invitation so the link no longer works.
+- **Resend invitation**, to send a fresh email and reset the 7-day expiry.
+- **Revoke invitation**, to cancel it so the link no longer works.
 
 ## Changing a member's role
 
@@ -69,8 +71,9 @@ Under **Invited Members**, each pending invitation can be:
 
 ## Rules that keep things safe
 
-- You can't manage members with the same or higher privilege than your own role —
-  an admin can't change or remove an owner, for instance.
+- You can't manage members with **higher** privilege than your own role. An admin
+  can't change or remove an owner, for instance, but one admin can manage another
+  and one owner can manage another.
 - You can't remove or demote the **last owner**; promote someone else to owner
   first.
 

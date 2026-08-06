@@ -7,19 +7,21 @@ import Screenshot from '@site/src/components/Screenshot';
 
 # Errors
 
-The Errors page groups exceptions thrown by your driver so you can focus on unique issues rather than wading through duplicates. Each error group shows how often it occurs, when it was last seen, and a trend sparkline.
+The Errors page groups exceptions thrown by your drivers so you can focus on unique issues rather than wading through duplicates. Each error group shows how often it occurs, when it was last seen, and a trend sparkline.
 
 <Screenshot name="errors" alt="Errors page showing grouped errors with counts and sparklines" />
 
+The page covers every project in your organization. Use the **project filter** at the top to narrow it to one driver. See [Managing projects](/platform/projects) for how the filter works.
+
 ## Error Groups
 
-Errors are automatically grouped by their fingerprint (see [Error Grouping](/platform/error-grouping) for details). The error list shows:
+Errors are automatically grouped by their fingerprint (see [Error Grouping](/platform/error-grouping) for details). Each row in the list shows:
 
-- **Type and Value** — the error type (e.g. `LuaError`) and the error message
-- **Count** — total number of occurrences
-- **Last Seen** — when the error last occurred (hover for full timestamp)
-- **Age** — how long ago the error was first seen
-- **Trend** — a sparkline showing occurrence frequency over the last 24 hours
+- The error **type** (for example `LuaError`) and its **value**, the error message
+- **Last seen** and **First seen**, both relative, with the full timestamp on hover
+- Badges naming the **project** and **platform** the error came from
+- A **trend** sparkline of occurrence frequency across the selected time range
+- A **count** of total occurrences
 
 This lets you quickly see which errors are frequent, which are new, and which are trending up or down.
 
@@ -46,22 +48,21 @@ A table of every individual occurrence of this error, showing:
 
 Navigate between occurrences using the **Previous** / **Next** buttons, or jump to the first or last occurrence.
 
-### Info
+### Sidebar
 
-Metadata about the error group:
-
-- **Affected versions** — which driver versions have produced this error
-- **Affected controllers** — which controllers it's occurred on
-- **Affected drivers** — which drivers it's appeared in
-- **Event name** — the handler that was executing when the error occurred
+Alongside the stack trace, a sidebar summarises the group: when it was **last
+seen** and **first seen**, and which driver **versions** have produced it. It also
+has a shortcut to configure an issue tracker, so errors can become work items in
+Jira, Linear, GitHub, and similar tools. That integration is still in development;
+see [Managing your organization](/platform/organizations).
 
 ### Context
 
-Expandable sections showing:
+Expandable sections below the stack trace:
 
-- **Tags** — key-value pairs attached to the error
-- **Context data** — full JSON payload from the error context
-- **Grouping info** — the fingerprint strategy, hash, and raw grouping data used to identify this error group
+- **Tags**, key-value pairs attached to the error
+- **Contexts**, the full JSON payload from the error context
+- **Event Grouping Information**, the fingerprint strategy, hash, and raw grouping data used to identify this error group (collapsed by default)
 
 ## Histogram
 
@@ -81,5 +82,7 @@ Note that errors in `C4:SetTimer` and `C4:url()` callbacks need manual instrumen
 
 ## Keyboard Navigation
 
-- `j` / `k` — move down / up through error groups
-- `Enter` — open the selected error's detail page
+- `j` / `k` (or `↓` / `↑`) to move down and up through error groups
+- `Enter` to open the selected error's detail page
+
+Press `?` for the full shortcut list.

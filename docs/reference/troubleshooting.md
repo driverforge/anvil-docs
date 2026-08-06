@@ -31,9 +31,9 @@ function OnDriverInit(strDIR)
 end
 ```
 
-### Check Your API Key
+### Check Your Ingestion Token
 
-The API key passed to `Anvil:Init()` must be an active Project Ingestion key for your Anvil project. Copy it directly from **Settings > API Keys** in Anvil to avoid typos, and make sure it hasn't been revoked. See [API Keys](/security/api-keys) for how keys work and how to create a replacement.
+The token passed to `Anvil:Init()` must be an active ingestion token for your Anvil project. In Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token directly from **Ingestion Token** to avoid typos. Check it hasn't expired or been revoked: a token you rotated away from will still be listed under **Previous tokens** with its status. See [API keys and ingestion tokens](/security/api-keys) for how tokens work and how to rotate.
 
 ### Trigger an Event
 
