@@ -23,7 +23,9 @@ it the same way you installed it:
 ```bash
 brew upgrade driverforge      # macOS
 scoop update driverforge      # Windows
+
 # Linux / WSL: re-run the install script
+sh -c "$(curl -fsSL https://go.driverforge.com/get)"
 ```
 
 [`driverforge upgrade`](/cli/upgrade) shows everything upgradable in one place — the CLI
