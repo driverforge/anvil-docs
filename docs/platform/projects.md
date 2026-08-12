@@ -8,7 +8,7 @@ import Screenshot from '@site/src/components/Screenshot';
 # Managing projects
 
 A **project** is where a driver's telemetry lives. Each project has its own
-[ingestion token](/security/api-keys) and its own settings. Most teams use one
+[driver token](/security/api-keys) and its own settings. Most teams use one
 project per driver, often with separate projects for development and production.
 You can create as many projects as your [plan](/platform/plans) allows.
 
@@ -56,9 +56,9 @@ Then:
    is for.
 4. Click **Create Project**.
 
-When the project is created, Anvil generates its **ingestion token** so you can
-start sending telemetry immediately (see [API keys and ingestion
-tokens](/security/api-keys)), then takes you straight to the setup instructions
+When the project is created, Anvil mints its **driver token** so you can start
+sending telemetry immediately (see [Driver tokens and API
+keys](/security/api-keys)), then takes you straight to the setup instructions
 with the filter narrowed to your new project.
 
 From there, follow the [Quick Start](/getting-started/quick-start) to wire the SDK
@@ -89,8 +89,9 @@ about a single project lives there:
 - **Project Slug**, the short identifier used when a project appears in a URL
   (lowercase letters, numbers, and hyphens).
 - **Description**, the optional description.
-- **Ingestion Token**, the credential your driver sends telemetry with. See
-  [API keys and ingestion tokens](/security/api-keys) for how to rotate it.
+- **Driver Token**, the value your driver sends telemetry with. It identifies
+  the project and is created with it. See
+  [Driver tokens and API keys](/security/api-keys) for why it's safe to commit.
 - **Danger Zone**, to delete the project.
 
 Click **Save Changes** to apply your edits.
@@ -102,14 +103,15 @@ Click **Save Changes** to apply your edits.
 3. In the confirmation dialog, type the project's name exactly, then confirm.
 
 :::warning
-Deleting a project is permanent. Its events, logs, errors, and ingestion tokens
-are removed and can't be recovered. Migrate or export anything you still need
-first.
+Deleting a project is permanent. Its events, logs, errors, and its driver token
+are removed and can't be recovered — and because the token goes with it, any
+installed driver still sending with it stops resolving. Migrate or export
+anything you still need first.
 :::
 
 ## Further reading
 
 - [Quick Start](/getting-started/quick-start), wire the SDK into your driver and send your first events
-- [API keys and ingestion tokens](/security/api-keys), how project ingestion credentials work
+- [Driver tokens and API keys](/security/api-keys), how a project's token works and why it's safe to commit
 - [Members & roles](/platform/members), who can create and manage projects
 - [Plans](/platform/plans), project limits by plan

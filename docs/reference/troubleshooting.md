@@ -31,9 +31,13 @@ function OnDriverInit(strDIR)
 end
 ```
 
-### Check Your Ingestion Token
+### Check Your Driver Token
 
-The token passed to `Anvil:Init()` must be an active ingestion token for your Anvil project. In Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token directly from **Ingestion Token** to avoid typos. Check it hasn't expired or been revoked: a token you rotated away from will still be listed under **Previous tokens** with its status. See [API keys and ingestion tokens](/security/api-keys) for how tokens work and how to rotate.
+The token passed to `Anvil:Init()` must be the driver token of the project you're expecting data in. In Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token directly from **Driver Token** to avoid typos.
+
+A driver token doesn't expire and can't be revoked, so there's no status to check — if it's the right value for the right project, it works. The usual causes are a typo, or a token copied from a different project than the one you're watching. Confirm the token in your driver matches the project whose Events page you have open.
+
+See [Driver tokens and API keys](/security/api-keys) for how tokens work.
 
 ### Trigger an Event
 

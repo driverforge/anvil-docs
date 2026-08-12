@@ -10,7 +10,7 @@ Release/Debug builds in C++ or .NET: one default, plus named variants you select
 when you build.
 
 It's entirely optional. A driver can inline its settings (including its Anvil
-[API key](/security/api-keys)) directly and never use any of this.
+[driver token](/security/api-keys)) directly and never use any of this.
 
 ## `config.lua` — your default
 
@@ -39,8 +39,8 @@ There's no separate default/`debug` file: the default configuration **is**
 
 `config.lua` and its overrides are committed, real files — nothing is generated
 and nothing is gitignored. That's safe because **config files hold no secrets**:
-your Anvil API key is a publishable credential inlined directly in the driver
-(see [API Keys](/security/api-keys)), not stored in config.
+your Anvil driver token is a publishable value inlined directly in the driver
+(see [Driver tokens](/security/api-keys)), not stored in config.
 
 This is deliberate. `config.lua` has to exist on disk for `require('config')`,
 your IDE, and your linter — so making it a real committed file, rather than a
@@ -109,4 +109,4 @@ in `dist/`.
 
 - [`driverforge build`](/cli/build) — the `--configuration` flag
 - [`driverforge init`](/cli/init) — opt into a build config
-- [API Keys](/security/api-keys) — why the key is safe to inline
+- [Driver tokens and API keys](/security/api-keys) — why the token is safe to inline

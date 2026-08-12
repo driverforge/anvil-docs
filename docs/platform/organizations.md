@@ -69,7 +69,7 @@ The settings sidebar also holds:
 - **Members**, covered in [Members & roles](/platform/members).
 - **Projects** and **Devices**, the same pages the main sidebar links to.
 - **API Keys**, for organization-level secret keys that grant API access. These
-  are still in development; the per-project [ingestion
+  are still in development; the per-project [driver
   tokens](/security/api-keys) your drivers use live in each project's settings.
 - **Integrations**, for connecting Anvil to issue trackers, chat, and alerting
   tools. Also still in development, with a link to vote on what you'd like to see

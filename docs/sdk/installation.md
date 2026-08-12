@@ -57,7 +57,7 @@ from the packaged driver (which is how the worked example driver ships).
 
 ### Initialization
 
-Add the SDK initialization to your `OnDriverInit`, using your project's ingestion token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Ingestion Token**):
+Add the SDK initialization to your `OnDriverInit`, using your project's driver token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Driver Token**):
 
 ```lua
 function OnDriverInit(strDIR)
@@ -120,7 +120,7 @@ See the [API Reference](/sdk/api-reference) for the complete list of options.
 There's no need for a separate release build without Anvil. Ship the driver you developed, SDK and `Anvil:Init()` call included:
 
 - **The agent is the switch.** The SDK only captures on controllers where the Anvil Agent is installed and authenticated. On any other controller it goes inert after [agent discovery](/sdk/automatic-capture#agent-discovery): no capture, no queuing, and nothing leaves the controller.
-- **Your API key can ship too.** Anvil API keys are publishable: they identify your project to the agent but grant no access to your data.
+- **Your driver token can ship too.** A driver token is publishable: it identifies your project to the agent but grants no access to your data.
 - **Your telemetry can't be lured away.** Before a driver sends anything, the SDK cryptographically verifies that the device it discovered is the genuine Anvil Agent; an impostor posing as the agent gets nothing. See [Agent Verification](/sdk/trust).
 
 ## Troubleshooting

@@ -43,7 +43,7 @@ vendored file from your packaged driver.
 
 ## 3. Initialize Anvil in OnDriverInit
 
-Update your `OnDriverInit` function to load the SDK and initialize it with your ingestion token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Ingestion Token**):
+Update your `OnDriverInit` function to load the SDK and initialize it with your project's driver token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Driver Token**):
 
 ```lua
 function OnDriverInit(strDIR)
