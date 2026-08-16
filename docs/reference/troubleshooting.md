@@ -8,6 +8,19 @@ Common issues and how to fix them.
 
 ## No Events Appearing
 
+### Check the Controller's OS Version
+
+Anvil requires **Control4 OS 3.3.1 or newer**. Below that the SDK switches itself off at load, so a correctly-installed driver produces no telemetry at all — which looks identical to a broken setup.
+
+Check the controller's logs for this line when the driver loads:
+
+```
+Anvil: this controller is running Control4 OS older than 3.3.1 - the SDK has
+disabled itself and the driver will run uninstrumented.
+```
+
+Or ask the SDK directly — `Anvil:TelemetryStatus()` returns `unsupported-runtime` on a controller below the floor. If you see either, nothing else on this page will help: the controller needs upgrading.
+
 ### Check the Agent
 
 1. Open Composer Pro

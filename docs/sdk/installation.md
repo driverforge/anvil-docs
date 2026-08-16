@@ -9,6 +9,21 @@ import DownloadSDK from '@site/src/components/DownloadSDK';
 
 ## Prerequisites
 
+### Control4 OS 3.3.1 or newer {#control4-os-331-or-newer}
+
+Anvil requires **Control4 OS 3.3.1 or newer** on the controller running your driver.
+
+Telemetry needs the Anvil Agent alongside your driver, and the agent needs 3.3.1. Below that the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all — same return values, same errors, nothing captured, nothing retained. It says so once on the console rather than failing quietly:
+
+```
+Anvil: this controller is running Control4 OS older than 3.3.1 - the SDK has
+disabled itself and the driver will run uninstrumented.
+```
+
+So a driver that ships with the SDK is safe to install anywhere; it simply produces no telemetry on a controller too old to deliver it. Ask the SDK what it is doing with `Anvil:TelemetryStatus()`, which reports `unsupported-runtime` in that case.
+
+### The Anvil Agent
+
 The Anvil SDK requires the Anvil Agent to be installed and authenticated on your controller. The agent is a one-time setup per controller — all drivers on the same controller share it. See the [Agent Installation](/agent/installation) guide for instructions.
 
 ## Download

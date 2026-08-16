@@ -11,8 +11,13 @@ Anvil is easy to add to your driver. Install the agent, add the client library a
 
 ## Prerequisites
 
+- **Control4 OS 3.3.1 or newer** on the controller running your driver
 - The Anvil Agent installed and authenticated on your controller ([setup guide](/agent/installation))
 - A project created in [Anvil](https://app.driverforge.dev)
+
+:::info Older controllers
+On anything below OS 3.3.1 the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all. Nothing breaks — you just get no telemetry. See [SDK installation](/sdk/installation#control4-os-331-or-newer) for what that looks like.
+:::
 
 ## 1. Download the Anvil SDK
 

@@ -18,7 +18,7 @@ This design means adding Anvil to your driver has virtually no performance impac
 
 ## Requirements
 
-- Control4 OS 3.1.0 or later
+- Control4 OS 3.3.1 or later
 - At least one driver with the Anvil SDK
 - Outbound network access from the controller:
 

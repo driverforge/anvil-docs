@@ -38,6 +38,12 @@ The Anvil SDK automatically captures proxy commands, life-cycle events and callb
 2. **Add the Anvil SDK** - A small Lua library that instruments your driver automatically
 3. **Watch the stream** - Events appear in real-time as your driver runs
 
+## Requirements
+
+Anvil needs **Control4 OS 3.3.1 or newer** on the controller running your driver.
+
+On older controllers the SDK disables itself at load, so a driver that ships with it is safe to install anywhere — it simply produces no telemetry where it cannot be delivered. See [SDK installation](/sdk/installation#control4-os-331-or-newer).
+
 ## Getting Started
 
 Ready to see what your driver is actually doing? Start with the [Quick Start](/getting-started/quick-start) guide.
