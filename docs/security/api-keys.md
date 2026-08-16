@@ -5,7 +5,7 @@ description: How your project's driver token works, why it's safe to commit, and
 
 # Driver tokens and API keys
 
-Every Anvil project has a **driver token** that your driver uses to send telemetry (events, logs, and errors) to that project. It's the value you pass to `Anvil:Init()` in your driver. The token is created with the project, so you can start sending data the moment the project exists.
+Every Anvil project has a **driver token** that your driver uses to send telemetry (events, logs, and errors) to that project. It's the value you pass to `Driverforge:Init()` in your driver. The token is created with the project, so you can start sending data the moment the project exists.
 
 Anvil has two classes of credential, and they behave differently:
 
@@ -21,7 +21,7 @@ The rest of this page is about your driver token, which is what you need to send
 **You can commit your driver token directly in your driver source**, for example in your `OnDriverInit` function:
 
 ```lua
-Anvil:Init("drv_…", C4:GetDriverFileName())
+Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
 ```
 
 This is intentional and safe, and it's worth knowing _why_ rather than taking it on trust.

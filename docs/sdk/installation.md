@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-description: Add the Anvil SDK to your Control4 driver and configure it to stream events.
+description: Add the Driverforge SDK to your Control4 driver and configure it to stream events.
 ---
 
 import DownloadSDK from '@site/src/components/DownloadSDK';
@@ -24,11 +24,11 @@ So a driver that ships with the SDK is safe to install anywhere; it simply produ
 
 ### The Anvil Agent
 
-The Anvil SDK requires the Anvil Agent to be installed and authenticated on your controller. The agent is a one-time setup per controller — all drivers on the same controller share it. See the [Agent Installation](/agent/installation) guide for instructions.
+The Driverforge SDK requires the Anvil Agent to be installed and authenticated on your controller. The agent is a one-time setup per controller — all drivers on the same controller share it. See the [Agent Installation](/agent/installation) guide for instructions.
 
 ## Download
 
-Download the latest Anvil SDK and place the contents in your driver's `vendor/` directory:
+Download the latest Driverforge SDK and place the contents in your driver's `vendor/` directory:
 
 <DownloadSDK />
 
@@ -38,7 +38,7 @@ your_driver/
 │   ├── driver.lua
 │   ├── driver.xml
 │   └── vendor/
-│       └── anvil-sdk.lua
+│       └── driverforge-sdk.lua
 └── manifest.c4zproj
 ```
 
@@ -63,10 +63,10 @@ If your project uses a squishy build file, you can bundle the SDK into your
 squished driver instead of shipping the vendor directory:
 
 ```lua
-Module "vendor.anvil-sdk" "vendor/anvil-sdk.lua"
+Module "vendor.driverforge-sdk" "vendor/driverforge-sdk.lua"
 ```
 
-The `require('vendor.anvil-sdk')` call is identical either way — squish
+The `require('vendor.driverforge-sdk')` call is identical either way — squish
 satisfies it from the bundle, otherwise Director resolves the vendored file
 from the packaged driver (which is how the worked example driver ships).
 
@@ -76,9 +76,9 @@ Add the SDK initialization to your `OnDriverInit`, using your project's driver t
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor.anvil-sdk')
+    require('vendor.driverforge-sdk')
 
-    Anvil:Init("YOUR_API_KEY", C4:GetDriverFileName())
+    Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
 
     Anvil:OnDriverInit(function(strDIR)
         -- Your existing OnDriverInit code goes here
@@ -111,10 +111,10 @@ The SDK detects the situation and prints a warning to the controller log naming 
 
 ### Advanced configuration
 
-`Anvil:Init()` accepts an optional third argument for advanced options:
+`Driverforge:Init()` accepts an optional second argument for advanced options:
 
 ```lua
-Anvil:Init("YOUR_API_KEY", C4:GetDriverFileName(), {
+Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK", {
     -- Forward your existing logger to Anvil
     logger = myLogger,
 
@@ -126,13 +126,13 @@ Anvil:Init("YOUR_API_KEY", C4:GetDriverFileName(), {
 })
 ```
 
-If your driver uses a logging library, passing it to `Anvil:Init()` enables automatic log forwarding. See [Log Forwarding](/sdk/log-forwarding) for details.
+If your driver uses a logging library, passing it to `Driverforge:Init()` enables automatic log forwarding. See [Log Forwarding](/sdk/log-forwarding) for details.
 
 See the [API Reference](/sdk/api-reference) for the complete list of options.
 
 ## Shipping your driver
 
-There's no need for a separate release build without Anvil. Ship the driver you developed, SDK and `Anvil:Init()` call included:
+There's no need for a separate release build without Anvil. Ship the driver you developed, SDK and `Driverforge:Init()` call included:
 
 - **The agent is the switch.** The SDK only captures on controllers where the Anvil Agent is installed and authenticated. On any other controller it goes inert after [agent discovery](/sdk/automatic-capture#agent-discovery): no capture, no queuing, and nothing leaves the controller.
 - **Your driver token can ship too.** A driver token is publishable: it identifies your project to the agent but grants no access to your data.
@@ -148,14 +148,14 @@ There's no need for a separate release build without Anvil. Ship the driver you 
 
 ### Driver not connecting to agent
 
-- Ensure `Anvil:Init()` is called in `OnDriverInit`
+- Ensure `Driverforge:Init()` is called in `OnDriverInit`
 - Reload your driver (disable and re-enable in Composer)
-- Check the API key is correct
+- Check the driver token is correct
 
 ### No events in Anvil
 
 - Verify the agent's **Authentication status** property shows you're logged in
-- Confirm API keys match
+- Confirm the driver token matches the project you are watching
 - Check the controller log for a warning about a redefined handler (see [load order](#load-order-define-handlers-first))
 - Try triggering an action manually
 

@@ -22,15 +22,15 @@ All standard C4 event handlers - over 100 of them. `OnPropertyChanged`, `Execute
 
 ### Do I need to modify my existing handlers?
 
-No. Just add the SDK and call `Anvil:Init()`. Your existing handler code works unchanged.
+No. Just add the SDK and call `Driverforge:Init()`. Your existing handler code works unchanged.
 
 ### What's the minimum code I need to add?
 
 Two lines in `OnDriverInit`:
 
 ```lua
-require('vendor.anvil-sdk')
-Anvil:Init(apiKey, C4:GetDriverFileName())
+require('vendor.driverforge-sdk')
+Driverforge:Init(driverToken)
 ```
 
 ### Does it work with existing drivers?
@@ -49,7 +49,7 @@ Minimal. Each handler call adds roughly 1ms of overhead for the instrumentation 
 
 ### Does my driver still work without the agent?
 
-Yes. If the agent isn't installed, the SDK operates in a no-op mode. Your driver works normally, events just don't stream anywhere. It's safe to leave the Anvil SDK and `Anvil:Init()` call in your release builds — in no-op mode it adds virtually zero overhead to your driver.
+Yes. If the agent isn't installed, the SDK operates in a no-op mode. Your driver works normally, events just don't stream anywhere. It's safe to leave the Driverforge SDK and `Driverforge:Init()` call in your release builds — in no-op mode it adds virtually zero overhead to your driver.
 
 ### What data is sent?
 

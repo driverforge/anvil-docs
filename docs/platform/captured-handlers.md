@@ -5,7 +5,7 @@ description: The handler calls Anvil captures automatically, and how to see whic
 
 # Captured Handlers
 
-The Anvil SDK automatically captures handler calls from your driver — there's
+The Driverforge SDK automatically captures handler calls from your driver — there's
 nothing to wire up per handler. Every captured call appears on the
 [Events](/platform/events) page in real time.
 

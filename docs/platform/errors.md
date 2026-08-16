@@ -76,7 +76,7 @@ The same pause/resume controls from Events and Logs are available — pause the 
 
 ## Automatic Capture
 
-Errors in event handlers are captured automatically. You don't need to add any error handling code — just add the Anvil SDK and errors appear in Anvil.
+Errors in event handlers are captured automatically. You don't need to add any error handling code — just add the Driverforge SDK and errors appear in Anvil.
 
 Note that errors in `C4:SetTimer` and `C4:url()` callbacks need manual instrumentation because `C4` is a protected userdata object. See [Manual Capture](/sdk/manual-capture) for details.
 

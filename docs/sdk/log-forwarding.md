@@ -4,14 +4,14 @@ sidebar_position: 5
 
 # Log Forwarding
 
-The Anvil SDK can forward your driver's log messages to Anvil in real time, so they appear on the [Logs](/platform/logs) page alongside your events and errors. No changes to your existing logging code required.
+The Driverforge SDK can forward your driver's log messages to Anvil in real time, so they appear on the [Logs](/platform/logs) page alongside your events and errors. No changes to your existing logging code required.
 
 ## Automatic Forwarding (Recommended)
 
-Pass your logger to `Anvil:Init()` and all log calls are automatically intercepted and forwarded:
+Pass your logger to `Driverforge:Init()` and all log calls are automatically intercepted and forwarded:
 
 ```lua
-Anvil:Init("YOUR_API_KEY", C4:GetDriverFileName(), {
+Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK", {
     logger = myLogger
 })
 ```
@@ -31,7 +31,7 @@ In practice this means **most loggers work with no `logMap` at all**:
 `logMap` is only needed when a method has a **genuinely renamed** counterpart — typically when the canonical level word doesn't appear in the method name at all. For example, a logger that uses `Alert` for the fatal level:
 
 ```lua
-Anvil:Init("YOUR_API_KEY", C4:GetDriverFileName(), {
+Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK", {
     logger = Log,
     logMap = {
         fatal = "Alert",   -- only the semantic mismatch needs an entry

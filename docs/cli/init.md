@@ -37,7 +37,7 @@ owner, the [`driverforge upgrade`](/cli/upgrade) picker.
 
 `driverforge init` retrofits your driver for Anvil, walking you through:
 
-1. **Embedding the Anvil SDK** into your project (under `src/vendor/`) — the
+1. **Embedding the Driverforge SDK** into your project (under `src/vendor/`) — the
    newest locally cached SDK, or, if none is cached, it offers to download the
    latest. Updating it later is the [`driverforge upgrade`](/cli/upgrade)
    picker's job.

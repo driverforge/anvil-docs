@@ -19,9 +19,9 @@ Anvil is easy to add to your driver. Install the agent, add the client library a
 On anything below OS 3.3.1 the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all. Nothing breaks — you just get no telemetry. See [SDK installation](/sdk/installation#control4-os-331-or-newer) for what that looks like.
 :::
 
-## 1. Download the Anvil SDK
+## 1. Download the Driverforge SDK
 
-Download the latest Anvil SDK and place the contents in your driver's `vendor/` directory.
+Download the latest Driverforge SDK and place the contents in your driver's `vendor/` directory.
 
 <DownloadSDK />
 
@@ -38,10 +38,10 @@ If your project uses a squishy file, you can bundle the SDK into your squished
 driver instead of shipping the vendor directory:
 
 ```lua
-Module "vendor.anvil-sdk" "vendor/anvil-sdk.lua"
+Module "vendor.driverforge-sdk" "vendor/driverforge-sdk.lua"
 ```
 
-The `require('vendor.anvil-sdk')` call in the next step is the same either
+The `require('vendor.driverforge-sdk')` call in the next step is the same either
 way — squish satisfies it from the bundle; otherwise Director resolves the
 vendored file from your packaged driver.
 :::
@@ -52,9 +52,9 @@ Update your `OnDriverInit` function to load the SDK and initialize it with your 
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor.anvil-sdk')
+    require('vendor.driverforge-sdk')
 
-    Anvil:Init("YOUR_API_KEY", C4:GetDriverFileName())
+    Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
 
     Anvil:OnDriverInit(function(strDIR)
         -- Your existing OnDriverInit code goes here

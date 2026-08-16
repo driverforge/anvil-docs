@@ -42,6 +42,6 @@ mutates.
 
 ## Upgrading the SDK
 
-The Anvil SDK is embedded in your driver, and the SDK row of the
+The Driverforge SDK is embedded in your driver, and the SDK row of the
 [`driverforge upgrade`](/cli/upgrade) picker is the only way to update it. It
 re-embeds the latest release; a clean git tree is required.

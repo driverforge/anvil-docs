@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Automatic Capture
 
-The Anvil SDK automatically instruments all standard Control4 event handlers. Every time Control4 calls one of these functions, you'll see it in Anvil with the exact arguments that were passed.
+The Driverforge SDK automatically instruments all standard Control4 event handlers. Every time Control4 calls one of these functions, you'll see it in Anvil with the exact arguments that were passed.
 
 ## How It Works
 

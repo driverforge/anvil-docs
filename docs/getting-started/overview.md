@@ -22,7 +22,7 @@ Developing Control4 drivers can feel like working in the dark:
 
 ## What Anvil Does
 
-The Anvil SDK automatically captures proxy commands, life-cycle events and callbacks, logs and errors in your driver and streams them in real time to the Anvil platform so you can see exactly what's happening in your driver.
+The Driverforge SDK automatically captures proxy commands, life-cycle events and callbacks, logs and errors in your driver and streams them in real time to the Anvil platform so you can see exactly what's happening in your driver.
 
 ![Anvil architecture: Your driver → Anvil Agent → Anvil](/img/anvil-architecture.svg)
 
@@ -35,7 +35,7 @@ The Anvil SDK automatically captures proxy commands, life-cycle events and callb
 ## How It Works
 
 1. **Install the Agent** - A system driver on your dev controller that streams data to Anvil
-2. **Add the Anvil SDK** - A small Lua library that instruments your driver automatically
+2. **Add the Driverforge SDK** - A small Lua library that instruments your driver automatically
 3. **Watch the stream** - Events appear in real-time as your driver runs
 
 ## Requirements

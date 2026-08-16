@@ -4,25 +4,28 @@ sidebar_position: 6
 
 # API Reference
 
-Complete reference for the Anvil SDK.
+Complete reference for the Driverforge SDK.
 
 ---
 
-## `Anvil:Init()`
+## `Driverforge:Init()`
 
 Initialize the SDK. Call this in `OnDriverInit` before anything else.
 
 ```lua
-Anvil:Init(apiKey, driverFileName, opts?)
+Driverforge:Init(token, opts?)
 ```
 
 ### Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `apiKey` | string | Yes | Your Project Ingestion API key from Anvil |
-| `driverFileName` | string | Yes | Usually `C4:GetDriverFileName()` |
+| `token` | string | Yes | Your project's [driver token](/security/api-keys) (`drv_…`) |
 | `opts` | table | No | Configuration options |
+
+The driver's filename is not a parameter. The SDK reads it from
+`C4:GetDriverFileName()` itself, so the name it reports always matches the file
+actually running.
 
 ### Options
 
@@ -38,7 +41,7 @@ For each canonical level (`fatal`, `error`, `warn`, `info`, `debug`, `trace`), A
 `logMap` is only needed when a method has a **genuinely renamed** counterpart — typically when the canonical level word doesn't appear in the method name at all. For example, a logger that uses `Alert` for the fatal level:
 
 ```lua
-Anvil:Init("proj_abc123", C4:GetDriverFileName(), {
+Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK", {
     logger = Log,
     logMap = {
         fatal = "Alert",   -- only the semantic mismatch needs an entry
@@ -52,8 +55,8 @@ The keys are Anvil's canonical levels (always lowercase), the values are the met
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor.anvil-sdk')
-    Anvil:Init("proj_abc123", C4:GetDriverFileName())
+    require('vendor.driverforge-sdk')
+    Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
 end
 ```
 
@@ -96,12 +99,12 @@ end)
 
 ---
 
-## `Anvil:captureError()`
+## `Anvil:CaptureError()`
 
 Manually capture an error. Use this for URL callbacks and other async contexts.
 
 ```lua
-Anvil:captureError(message, stacktrace?, context?)
+Anvil:CaptureError(message, stacktrace?, context?)
 ```
 
 ### Parameters
@@ -123,10 +126,10 @@ Anvil:captureError(message, stacktrace?, context?)
 
 ```lua
 -- Basic
-Anvil:captureError("Connection failed")
+Anvil:CaptureError("Connection failed")
 
 -- With context
-Anvil:captureError("Parse error", nil, {
+Anvil:CaptureError("Parse error", nil, {
     eventName = "API_Response",
     args = {
         endpoint = "/devices",
@@ -139,7 +142,7 @@ C4:url():OnDone(function(transfer, responses, errCode, errMsg)
     local ok, err = xpcall(function()
         ProcessResponse(responses)
     end, function(e)
-        Anvil:captureError(e, nil, {
+        Anvil:CaptureError(e, nil, {
             eventName = "HTTP_Callback",
             args = { url = requestUrl }
         })
@@ -169,8 +172,8 @@ Anvil:OnDriverInit(callback, ...)
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor.anvil-sdk')
-    Anvil:Init("proj_abc123", C4:GetDriverFileName())
+    require('vendor.driverforge-sdk')
+    Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
 
     Anvil:OnDriverInit(function(strDIR)
         -- Your init code here
@@ -184,7 +187,7 @@ end
 
 ## `Anvil:ForwardLog()`
 
-Manually forward a log message to Anvil. Not needed if you're using the `logger` option in `Anvil:Init()` — see [Automatic Logs](/sdk/log-forwarding).
+Manually forward a log message to Anvil. Not needed if you're using the `logger` option in `Driverforge:Init()` — see [Automatic Logs](/sdk/log-forwarding).
 
 ```lua
 Anvil:ForwardLog(level, message)

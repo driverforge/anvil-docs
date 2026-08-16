@@ -34,19 +34,19 @@ If not logged in:
 
 ### Check Your Driver
 
-Make sure `Anvil:Init()` is called:
+Make sure `Driverforge:Init()` is called:
 
 ```lua
 function OnDriverInit(strDIR)
-    require('vendor.anvil-sdk')
-    Anvil:Init(apiKey, C4:GetDriverFileName())
+    require('vendor.driverforge-sdk')
+    Driverforge:Init(driverToken)
     -- ...
 end
 ```
 
 ### Check Your Driver Token
 
-The token passed to `Anvil:Init()` must be the driver token of the project you're expecting data in. In Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token directly from **Driver Token** to avoid typos.
+The token passed to `Driverforge:Init()` must be the driver token of the project you're expecting data in. In Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token directly from **Driver Token** to avoid typos.
 
 A driver token doesn't expire and can't be revoked, so there's no status to check — if it's the right value for the right project, it works. The usual causes are a typo, or a token copied from a different project than the one you're watching. Confirm the token in your driver matches the project whose Events page you have open.
 
@@ -63,8 +63,8 @@ Try changing a property or executing a command in Composer. If basic events don'
 Your `require()` path must match your directory structure:
 
 ```lua
--- If file is at src/vendor/anvil-sdk.lua
-require('vendor.anvil-sdk')
+-- If file is at src/vendor/driverforge-sdk.lua
+require('vendor.driverforge-sdk')
 ```
 
 ### Check the Manifest

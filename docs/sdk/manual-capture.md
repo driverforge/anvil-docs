@@ -56,7 +56,7 @@ Anvil:SetTimer(30000, function(timer)
 end)
 ```
 
-## URL Callbacks: Use `Anvil:captureError()`
+## URL Callbacks: Use `Anvil:CaptureError()`
 
 URL callbacks need a bit more work. Wrap your code with `xpcall`:
 
@@ -67,7 +67,7 @@ C4:url():OnDone(function(transfer, responses, errCode, errMsg)
         local data = JSON:decode(responses[transfer].body)
         ProcessResponse(data)
     end, function(e)
-        Anvil:captureError(e)
+        Anvil:CaptureError(e)
         return e
     end)
 end):Get("https://api.example.com/status")
@@ -84,7 +84,7 @@ local function safeCallback(fn)
         local ok, err = xpcall(function()
             fn(table.unpack(args))
         end, function(e)
-            Anvil:captureError(e)
+            Anvil:CaptureError(e)
             return e
         end)
     end
@@ -102,7 +102,7 @@ end)):Get(url)
 Include context to make errors easier to understand:
 
 ```lua
-Anvil:captureError(err, nil, {
+Anvil:CaptureError(err, nil, {
     eventName = "API_Request",
     args = {
         url = "https://api.example.com/status",
@@ -122,10 +122,10 @@ This shows up in Anvil:
     driver.lua:156: in function 'parseResponse'
 ```
 
-## `Anvil:captureError()` Reference
+## `Anvil:CaptureError()` Reference
 
 ```lua
-Anvil:captureError(message, stacktrace?, context?)
+Anvil:CaptureError(message, stacktrace?, context?)
 ```
 
 | Parameter | Type | Description |
@@ -157,7 +157,7 @@ C4:url():OnDone(function(...)
     local ok, err = xpcall(function()
         -- your code
     end, function(e)
-        Anvil:captureError(e)
+        Anvil:CaptureError(e)
         return e
     end)
 end):Get(url)
@@ -165,7 +165,7 @@ end):Get(url)
 
 **Manual errors:**
 ```lua
-Anvil:captureError("Something went wrong", nil, {
+Anvil:CaptureError("Something went wrong", nil, {
     eventName = "CustomOperation",
     args = { detail = "value" }
 })

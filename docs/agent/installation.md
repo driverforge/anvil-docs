@@ -38,7 +38,7 @@ Install and authenticate the Anvil Agent on your development controller.
 8. Approve the request to connect Anvil to your Driverforge account
 9. Close the browser and return to Composer
 
-The Anvil Agent is now ready. Any driver that includes the Anvil SDK will discover the agent and stream events to the Anvil Platform.
+The Anvil Agent is now ready. Any driver that includes the Driverforge SDK will discover the agent and stream events to the Anvil Platform.
 
 ## Verify
 

@@ -5,7 +5,7 @@ description: The cryptographic handshake that ensures your driver's telemetry on
 
 # Agent Verification
 
-When a driver instrumented with the Anvil SDK sends telemetry, that data should reach the genuine Anvil agent on the controller — and nothing else. This page explains the mechanism that guarantees it, in enough detail that you can audit the claim rather than take our word for it.
+When a driver instrumented with the Driverforge SDK sends telemetry, that data should reach the genuine Anvil agent on the controller — and nothing else. This page explains the mechanism that guarantees it, in enough detail that you can audit the claim rather than take our word for it.
 
 :::info Security by default
 
@@ -24,7 +24,7 @@ Transparency, trust, and security by default are foundations of how Driverforge 
 
 The SDK finds the agent by looking for a device with the agent's driver filename. On a controller where the genuine agent is installed, that's unambiguous — Control4 treats the agent as a singleton, so only one can exist. The gap is a controller where **no** agent is installed: nothing stops another driver from adopting the agent's filename and presenting itself as the agent.
 
-Without verification, an instrumented driver would then hand that impostor its telemetry — including captured handler arguments and, on errors, local variable values. That's the exposure this mechanism closes. (Note that the ingestion API key a driver carries is _designed_ to be publishable — it is not a secret, and it is not what an impostor would be after. The telemetry stream is.)
+Without verification, an instrumented driver would then hand that impostor its telemetry — including captured handler arguments and, on errors, local variable values. That's the exposure this mechanism closes. (Note that the driver token a driver carries is _designed_ to be publishable — it is not a secret, and it is not what an impostor would be after. The telemetry stream is.)
 
 ## The two phases
 
@@ -38,7 +38,7 @@ Verification rests on a one-time **setup** that happens when the agent registers
 
 2. **The agent registers with Anvil.** After the operator signs in, the agent authenticates to the Anvil cloud and registers the controller, sending the SHA-256 **fingerprint** of its certificate. The cloud records the binding: _this controller holds the key behind this fingerprint._
 
-3. **The cloud issues a signed attestation.** In response, Anvil returns a short-lived, signed statement — an **attestation** — that vouches for the binding: _"The controller with this identifier holds the certificate with this fingerprint."_ It is signed with Anvil's attestation key (held in a cloud key-management service) and is valid only for a bounded window and only for consumption by an Anvil SDK.
+3. **The cloud issues a signed attestation.** In response, Anvil returns a short-lived, signed statement — an **attestation** — that vouches for the binding: _"The controller with this identifier holds the certificate with this fingerprint."_ It is signed with Anvil's attestation key (held in a cloud key-management service) and is valid only for a bounded window and only for consumption by an Driverforge SDK.
 
 4. **The agent keeps it fresh.** The agent re-registers on every boot, so the attestation it holds is always current.
 

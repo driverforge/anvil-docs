@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Overview
 
-The Anvil Agent is a driver that runs on a Control4 controller and is used by the Anvil SDK included with your drivers. It handles all the networking and authentication so your driver doesn't have to.
+The Anvil Agent is a driver that runs on a Control4 controller and is used by the Driverforge SDK included with your drivers. It handles all the networking and authentication so your driver doesn't have to.
 
 ## Why Use an Agent?
 
@@ -19,7 +19,7 @@ This design means adding Anvil to your driver has virtually no performance impac
 ## Requirements
 
 - Control4 OS 3.3.1 or later
-- At least one driver with the Anvil SDK
+- At least one driver with the Driverforge SDK
 - Outbound network access from the controller:
 
 | Host | Port | Protocol |
