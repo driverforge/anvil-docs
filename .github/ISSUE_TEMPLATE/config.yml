@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Read the docs
-    url: https://docs.driverforge.dev
+    url: https://docs.driverforge.com
     about: The live documentation — check here first; your question may already be answered.
   - name: Anvil support
     url: https://support.driverforge.com

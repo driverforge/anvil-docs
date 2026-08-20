@@ -1,6 +1,6 @@
 # Anvil Documentation
 
-Source for the Anvil documentation site — **<https://docs.driverforge.dev>**.
+Source for the Anvil documentation site — **<https://docs.driverforge.com>**.
 
 Anvil is the observability platform for Control4 drivers by [Driverforge](https://driverforge.com): capture errors (with full stack traces), event timings, and logs from your driver and see what Control4 is sending it. These docs cover installing and using the SDK, the agent, the CLI, and the platform.
 

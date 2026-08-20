@@ -5,7 +5,7 @@ import styles from './api-key.module.css';
 
 // Anvil app URL for the anonymous sign-in deep link. Inlined at build time by
 // docusaurus-plugin-dotenv from `.env` (or process.env in Docker builds).
-const APP_URL = process.env.APP_URL || 'https://app.driverforge.dev';
+const APP_URL = process.env.APP_URL || 'https://dev.driverforge.com';
 
 interface Props {
   onClose: () => void;

@@ -26,7 +26,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://docs.driverforge.dev',
+  url: 'https://docs.driverforge.com',
   baseUrl: '/',
 
   // Emit trailing-slash URLs so the sitemap + links match what the host serves
@@ -241,7 +241,7 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://driverforge.dev/#waitlist',
+          href: 'https://driverforge.com/anvil/#waitlist',
           label: 'Join the Waitlist',
           position: 'right',
           className: 'navbar-cta',

@@ -13,7 +13,7 @@ Anvil is easy to add to your driver. Install the agent, add the client library a
 
 - **Control4 OS 3.3.1 or newer** on the controller running your driver
 - The Anvil Agent installed and authenticated on your controller ([setup guide](/agent/installation))
-- A project created in [Anvil](https://app.driverforge.dev)
+- A project created in [Anvil](https://dev.driverforge.com)
 
 :::info Older controllers
 On anything below OS 3.3.1 the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all. Nothing breaks — you just get no telemetry. See [SDK installation](/sdk/installation#control4-os-331-or-newer) for what that looks like.
@@ -72,7 +72,7 @@ Build your driver and load it onto your controller. Events will start streaming 
 
 ## 5. View your data in Anvil
 
-Open your project in [Anvil](https://app.driverforge.dev) to see data flowing in real time. The [Events](/platform/events) page shows every handler call as it happens, [Logs](/platform/logs) shows your driver's log output, and [Errors](/platform/errors) surfaces any exceptions with full stack traces. Interact with your driver in a navigator or Composer to see events appear instantly.
+Open your project in [Anvil](https://dev.driverforge.com) to see data flowing in real time. The [Events](/platform/events) page shows every handler call as it happens, [Logs](/platform/logs) shows your driver's log output, and [Errors](/platform/errors) surfaces any exceptions with full stack traces. Interact with your driver in a navigator or Composer to see events appear instantly.
 
 ## Next Steps
 

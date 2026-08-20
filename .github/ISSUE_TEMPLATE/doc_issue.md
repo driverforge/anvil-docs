@@ -6,7 +6,7 @@ labels: docs
 
 **Page**
 
-<!-- Link to the affected page(s) on https://docs.driverforge.dev -->
+<!-- Link to the affected page(s) on https://docs.driverforge.com -->
 
 **What's wrong**
 

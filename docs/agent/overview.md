@@ -24,7 +24,7 @@ This design means adding Anvil to your driver has virtually no performance impac
 
 | Host | Port | Protocol |
 |------|------|----------|
-| ingest.driverforge.dev | 8883 | MQTTS (MQTT over TLS) |
+| ingest.driverforge.com | 8883 | MQTTS (MQTT over TLS) |
 
 Most networks allow outbound connections by default. If you're behind a restrictive firewall, ensure this endpoint is permitted.
 

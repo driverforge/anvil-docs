@@ -30,7 +30,7 @@ Or ask the SDK directly — `Anvil:TelemetryStatus()` returns `unsupported-runti
 If not logged in:
 - Re-authenticate via **Actions** > **Get authentication link**
 - Check the controller has internet access
-- Verify outbound access to `ingest.driverforge.dev:8883` is not blocked by a firewall
+- Verify outbound access to `ingest.driverforge.com:8883` is not blocked by a firewall
 
 ### Check Your Driver
 

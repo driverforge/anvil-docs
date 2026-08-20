@@ -15,7 +15,7 @@ import {
 // Anvil app URL for the cross-origin `/api/docs/projects` proxy. Inlined at
 // build time by docusaurus-plugin-dotenv from `.env` (or process.env when
 // running inside the Docker container).
-const APP_URL = process.env.APP_URL || 'https://app.driverforge.dev';
+const APP_URL = process.env.APP_URL || 'https://dev.driverforge.com';
 
 interface ApiKeyContextValue {
   state: ApiKeyState;

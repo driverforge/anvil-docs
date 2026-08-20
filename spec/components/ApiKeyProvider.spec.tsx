@@ -255,7 +255,7 @@ describe('ApiKeyProvider', () => {
 
     await waitFor(() =>
       expect(fetchSpy).toHaveBeenCalledWith(
-        'https://app.driverforge.test/api/docs/projects',
+        'https://dev.driverforge.test/api/docs/projects',
         { credentials: 'include' },
       ),
     );

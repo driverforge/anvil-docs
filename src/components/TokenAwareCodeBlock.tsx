@@ -10,7 +10,7 @@ import {
 } from '../lib/apiKey';
 import styles from './api-key.module.css';
 
-const APP_URL = process.env.APP_URL || 'https://app.driverforge.dev';
+const APP_URL = process.env.APP_URL || 'https://dev.driverforge.com';
 
 interface Props {
   children?: React.ReactNode;

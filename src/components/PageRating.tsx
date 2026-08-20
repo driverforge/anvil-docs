@@ -18,7 +18,7 @@ const ISSUE_URL = 'https://github.com/driverforge/anvil-docs/issues/new/choose';
 // Anvil app URL. Feedback is recorded via the cross-origin `/api/docs/feedback`
 // proxy (the docs site is a different TLD and can't reach the graph directly).
 // Inlined at build time by docusaurus-plugin-dotenv; defaults for dev.
-const APP_URL = process.env.APP_URL || 'https://app.driverforge.dev';
+const APP_URL = process.env.APP_URL || 'https://dev.driverforge.com';
 
 // Record a page rating. Returns the feedback row id (so a comment can be
 // attached), or null on any failure — feedback is best-effort and never blocks

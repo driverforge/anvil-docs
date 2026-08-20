@@ -75,6 +75,6 @@ Free plans include a single project. Paid plans support unlimited projects.
 
 ### How far back can I see events?
 
-Data retention varies by plan. Check the [pricing page](https://driverforge.dev/pricing) for details on each plan's retention period.
+Data retention varies by plan. Check the [pricing page](https://driverforge.com/anvil/pricing) for details on each plan's retention period.
 
 Having issues? See the [Troubleshooting](/reference/troubleshooting) page.

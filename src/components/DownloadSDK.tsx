@@ -5,7 +5,7 @@ import { buildSignInUrl } from '../lib/apiKey';
 const RELEASES_BASE =
   'https://releases.driverforge.com/driverforge-releases';
 
-const APP_URL = process.env.APP_URL || 'https://app.driverforge.dev';
+const APP_URL = process.env.APP_URL || 'https://dev.driverforge.com';
 
 interface Manifest {
   version: string;

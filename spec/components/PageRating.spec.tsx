@@ -16,7 +16,7 @@ jest.mock(
   { virtual: true },
 );
 
-const FEEDBACK_URL = `${process.env.APP_URL || 'https://app.driverforge.dev'}/api/docs/feedback`;
+const FEEDBACK_URL = `${process.env.APP_URL || 'https://dev.driverforge.com'}/api/docs/feedback`;
 
 function bodyOf(call: unknown[]): Record<string, unknown> {
   return JSON.parse((call[1] as RequestInit).body as string);

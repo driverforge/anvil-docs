@@ -37,11 +37,11 @@ describe('apiKey.ts', () => {
   describe('buildSignInUrl', () => {
     it('builds an app sign-in URL with returnTo pointing at the current docs url', () => {
       const url = buildSignInUrl(
-        'https://app.driverforge.dev',
-        'https://docs.driverforge.dev/getting-started/quick-start',
+        'https://dev.driverforge.com',
+        'https://docs.driverforge.com/getting-started/quick-start',
       );
       expect(url).toBe(
-        'https://app.driverforge.dev/auth/login?returnTo=https%3A%2F%2Fdocs.driverforge.dev%2Fgetting-started%2Fquick-start',
+        'https://dev.driverforge.com/auth/login?returnTo=https%3A%2F%2Fdocs.driverforge.com%2Fgetting-started%2Fquick-start',
       );
     });
   });
