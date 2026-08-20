@@ -44,9 +44,72 @@ function writeStoredSelection(id: string) {
   }
 }
 
+/** What one load of the proxy resolved to: the state to show, and the flag. */
+interface ProjectsLoad {
+  state: ApiKeyState;
+  previewMode: boolean;
+}
+
+const ERROR_LOAD: ProjectsLoad = { state: { status: 'error' }, previewMode: false };
+
+/**
+ * A 401 is not a failure — the reader is simply anonymous. The proxy still
+ * returns `previewMode` so download CTAs can be gated during invite-only
+ * preview, and a body that will not parse just leaves the flag false.
+ */
+async function readAnonymousLoad(res: Response): Promise<ProjectsLoad> {
+  try {
+    const body = (await res.json()) as { previewMode?: boolean };
+    return { state: { status: 'anonymous' }, previewMode: body?.previewMode === true };
+  } catch {
+    return { state: { status: 'anonymous' }, previewMode: false };
+  }
+}
+
+function toApiKeyState(projects: DocsProject[]): ApiKeyState {
+  if (projects.length === 0) {
+    // Signed in but no project with an active token yet — a normal
+    // "onboarding not finished" state, not a load failure. Surfaces a
+    // friendly "create a project" prompt rather than an error.
+    return { status: 'no-projects' };
+  }
+
+  const selected = resolveSelectedProject(projects, readStoredSelection());
+  // `selected` is unreachable-null in practice given the guard above, but
+  // keep the type system honest rather than asserting.
+  return selected
+    ? { status: 'ready', projects, selectedProjectId: selected.id }
+    : { status: 'error' };
+}
+
+/**
+ * One call to the cross-origin proxy, resolved to what the UI should show.
+ *
+ * Every failure mode collapses to the same error state, so this returns a
+ * value rather than setting React state — which keeps the effect below to
+ * nothing but cancellation.
+ */
+async function loadProjects(): Promise<ProjectsLoad> {
+  if (!APP_URL) return ERROR_LOAD;
+
+  try {
+    const res = await fetch(`${APP_URL}/api/docs/projects`, { credentials: 'include' });
+
+    if (res.status === 401) return readAnonymousLoad(res);
+    if (!res.ok) return ERROR_LOAD;
+
+    const body = (await res.json()) as { projects: DocsProject[]; previewMode?: boolean };
+    const projects = Array.isArray(body.projects) ? body.projects : [];
+
+    return { state: toApiKeyState(projects), previewMode: body.previewMode === true };
+  } catch {
+    return ERROR_LOAD;
+  }
+}
+
 /**
  * Wraps the docs site with API-key state. On mount (client-side
- * only) it calls the cross-origin proxy on app.driverforge.dev which
+ * only) it calls the cross-origin proxy on the Anvil app, which
  * reads the shared appSession cookie and returns the user's projects.
  */
 export function ApiKeyProvider({
@@ -58,72 +121,13 @@ export function ApiKeyProvider({
   const [previewMode, setPreviewMode] = useState(false);
 
   useEffect(() => {
-    if (!APP_URL) {
-      setState({ status: 'error' });
-      return;
-    }
-
     let cancelled = false;
 
-    (async () => {
-      try {
-        const res = await fetch(`${APP_URL}/api/docs/projects`, {
-          credentials: 'include',
-        });
-
-        if (cancelled) return;
-
-        if (res.status === 401) {
-          // Anonymous, but the proxy still returns previewMode so we can gate
-          // download CTAs during invite-only preview.
-          try {
-            const body = (await res.json()) as { previewMode?: boolean };
-            if (!cancelled) setPreviewMode(body?.previewMode === true);
-          } catch {
-            // ignore — previewMode stays false
-          }
-          if (!cancelled) setState({ status: 'anonymous' });
-          return;
-        }
-
-        if (!res.ok) {
-          setState({ status: 'error' });
-          return;
-        }
-
-        const body = (await res.json()) as {
-          projects: DocsProject[];
-          previewMode?: boolean;
-        };
-        if (cancelled) return;
-        setPreviewMode(body.previewMode === true);
-
-        const projects = Array.isArray(body.projects) ? body.projects : [];
-        if (projects.length === 0) {
-          // Signed in but no project with an active token yet — a normal
-          // "onboarding not finished" state, not a load failure. Surfaces a
-          // friendly "create a project" prompt rather than an error.
-          setState({ status: 'no-projects' });
-          return;
-        }
-
-        const stored = readStoredSelection();
-        const selected = resolveSelectedProject(projects, stored);
-        if (!selected) {
-          // Unreachable in practice (we guard against empty projects
-          // above), but keep the type-system honest.
-          setState({ status: 'error' });
-          return;
-        }
-        setState({
-          status: 'ready',
-          projects,
-          selectedProjectId: selected.id,
-        });
-      } catch {
-        if (!cancelled) setState({ status: 'error' });
-      }
-    })();
+    void loadProjects().then((load) => {
+      if (cancelled) return;
+      setPreviewMode(load.previewMode);
+      setState(load.state);
+    });
 
     return () => {
       cancelled = true;
