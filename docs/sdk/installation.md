@@ -72,13 +72,13 @@ from the packaged driver (which is how the worked example driver ships).
 
 ### Initialization
 
-Add the SDK initialization to your `OnDriverInit`, using your project's driver token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Driver Token**):
+Add the SDK initialization to your `OnDriverInit`, using your project's project token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Project Token**):
 
 ```lua
 function OnDriverInit(strDIR)
     require('vendor.driverforge-sdk')
 
-    Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
+    Driverforge:Init("YOUR_API_KEY")
 
     Anvil:OnDriverInit(function(strDIR)
         -- Your existing OnDriverInit code goes here
@@ -114,7 +114,7 @@ The SDK detects the situation and prints a warning to the controller log naming 
 `Driverforge:Init()` accepts an optional second argument for advanced options:
 
 ```lua
-Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK", {
+Driverforge:Init("YOUR_API_KEY", {
     -- Forward your existing logger to Anvil
     logger = myLogger,
 
@@ -135,7 +135,7 @@ See the [API Reference](/sdk/api-reference) for the complete list of options.
 There's no need for a separate release build without Anvil. Ship the driver you developed, SDK and `Driverforge:Init()` call included:
 
 - **The agent is the switch.** The SDK only captures on controllers where the Anvil Agent is installed and authenticated. On any other controller it goes inert after [agent discovery](/sdk/automatic-capture#agent-discovery): no capture, no queuing, and nothing leaves the controller.
-- **Your driver token can ship too.** A driver token is publishable: it identifies your project to the agent but grants no access to your data.
+- **Your project token can ship too.** A project token is publishable: it identifies your project to the agent but grants no access to your data.
 - **Your telemetry can't be lured away.** Before a driver sends anything, the SDK cryptographically verifies that the device it discovered is the genuine Anvil Agent; an impostor posing as the agent gets nothing. See [Agent Verification](/sdk/trust).
 
 ## Troubleshooting
@@ -150,12 +150,12 @@ There's no need for a separate release build without Anvil. Ship the driver you 
 
 - Ensure `Driverforge:Init()` is called in `OnDriverInit`
 - Reload your driver (disable and re-enable in Composer)
-- Check the driver token is correct
+- Check the project token is correct
 
 ### No events in Anvil
 
 - Verify the agent's **Authentication status** property shows you're logged in
-- Confirm the driver token matches the project you are watching
+- Confirm the project token matches the project you are watching
 - Check the controller log for a warning about a redefined handler (see [load order](#load-order-define-handlers-first))
 - Try triggering an action manually
 

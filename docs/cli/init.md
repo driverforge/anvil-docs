@@ -44,7 +44,7 @@ owner, the [`driverforge upgrade`](/cli/upgrade) picker.
 2. **Wrapping your driver's `OnDriverInit`** so Anvil initializes when the driver
    loads.
 3. **Linking an Anvil project** — pick an existing one or create a new one — and
-   provisioning an [API key](/security/api-keys).
+   provisioning an [API key](/platform/project-tokens).
 4. **Choosing a [versioning scheme](/cli/versioning)** — date-based for new
    drivers; for an existing driver the wizard inspects the current `<version>`,
    proposes the matching scheme (date-shaped stays date, anything else becomes

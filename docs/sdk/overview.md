@@ -32,7 +32,7 @@ Loading the SDK gives you two globals, split by what they do.
 
 ```lua
 require('vendor.driverforge-sdk')
-Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
+Driverforge:Init("YOUR_API_KEY")
 ```
 
 `Anvil` is the instrumentation surface — everything you call while your driver

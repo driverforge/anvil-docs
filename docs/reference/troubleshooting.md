@@ -44,13 +44,13 @@ function OnDriverInit(strDIR)
 end
 ```
 
-### Check Your Driver Token
+### Check Your Project Token
 
-The token passed to `Driverforge:Init()` must be the driver token of the project you're expecting data in. In Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token directly from **Driver Token** to avoid typos.
+The token passed to `Driverforge:Init()` must be the project token of the project you're expecting data in. In Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token directly from **Project Token** to avoid typos.
 
-A driver token doesn't expire and can't be revoked, so there's no status to check — if it's the right value for the right project, it works. The usual causes are a typo, or a token copied from a different project than the one you're watching. Confirm the token in your driver matches the project whose Events page you have open.
+A project token doesn't expire and can't be revoked, so there's no status to check — if it's the right value for the right project, it works. The usual causes are a typo, or a token copied from a different project than the one you're watching. Confirm the token in your driver matches the project whose Events page you have open.
 
-See [Driver tokens and API keys](/security/api-keys) for how tokens work.
+See [Project tokens](/platform/project-tokens) for how tokens work.
 
 ### Trigger an Event
 

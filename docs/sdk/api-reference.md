@@ -20,7 +20,7 @@ Driverforge:Init(token, opts?)
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `token` | string | Yes | Your project's [driver token](/security/api-keys) (`drv_…`) |
+| `token` | string | Yes | Your project's [project token](/platform/project-tokens) (`drv_…`) |
 | `opts` | table | No | Configuration options |
 
 The driver's filename is not a parameter. The SDK reads it from
@@ -41,7 +41,7 @@ For each canonical level (`fatal`, `error`, `warn`, `info`, `debug`, `trace`), A
 `logMap` is only needed when a method has a **genuinely renamed** counterpart — typically when the canonical level word doesn't appear in the method name at all. For example, a logger that uses `Alert` for the fatal level:
 
 ```lua
-Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK", {
+Driverforge:Init("YOUR_API_KEY", {
     logger = Log,
     logMap = {
         fatal = "Alert",   -- only the semantic mismatch needs an entry
@@ -56,7 +56,7 @@ The keys are Anvil's canonical levels (always lowercase), the values are the met
 ```lua
 function OnDriverInit(strDIR)
     require('vendor.driverforge-sdk')
-    Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
+    Driverforge:Init("YOUR_API_KEY")
 end
 ```
 
@@ -173,7 +173,7 @@ Anvil:OnDriverInit(callback, ...)
 ```lua
 function OnDriverInit(strDIR)
     require('vendor.driverforge-sdk')
-    Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
+    Driverforge:Init("YOUR_API_KEY")
 
     Anvil:OnDriverInit(function(strDIR)
         -- Your init code here

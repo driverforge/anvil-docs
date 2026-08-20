@@ -67,7 +67,7 @@ The dashboard is the organization's bird's-eye view, covering whatever the proje
 
 <Screenshot name="org-dashboard" alt="Organization dashboard" />
 
-If you narrow the filter to a single project that has never received data, the dashboard shows that project's setup instructions instead of empty tiles, complete with its driver token. It reverts to the usual dashboard as soon as data starts flowing.
+If you narrow the filter to a single project that has never received data, the dashboard shows that project's setup instructions instead of empty tiles, complete with its project token. It reverts to the usual dashboard as soon as data starts flowing.
 
 ## Real-time streaming
 
@@ -94,6 +94,6 @@ On macOS, `Ctrl+Alt` is shown as `⌃⌥`.
 Beyond the data views, the platform is where you manage everything around your drivers:
 
 - [Organizations](/platform/organizations), your top-level workspace, with [members & roles](/platform/members)
-- [Projects](/platform/projects), one per driver, each with its own [driver token](/security/api-keys)
+- [Projects](/platform/projects), one per driver, each with its own [project token](/platform/project-tokens)
 - [Devices](/platform/devices), the controllers you deploy to
 - [Subscription](/platform/subscription) and [payment](/platform/billing), covering your [plan](/platform/plans), usage, and cards

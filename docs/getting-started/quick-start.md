@@ -48,13 +48,13 @@ vendored file from your packaged driver.
 
 ## 3. Initialize Anvil in OnDriverInit
 
-Update your `OnDriverInit` function to load the SDK and initialize it with your project's driver token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Driver Token**):
+Update your `OnDriverInit` function to load the SDK and initialize it with your project's project token (in Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token from **Project Token**):
 
 ```lua
 function OnDriverInit(strDIR)
     require('vendor.driverforge-sdk')
 
-    Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK")
+    Driverforge:Init("YOUR_API_KEY")
 
     Anvil:OnDriverInit(function(strDIR)
         -- Your existing OnDriverInit code goes here

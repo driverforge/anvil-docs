@@ -24,7 +24,7 @@ Transparency, trust, and security by default are foundations of how Driverforge 
 
 The SDK finds the agent by looking for a device with the agent's driver filename. On a controller where the genuine agent is installed, that's unambiguous — Control4 treats the agent as a singleton, so only one can exist. The gap is a controller where **no** agent is installed: nothing stops another driver from adopting the agent's filename and presenting itself as the agent.
 
-Without verification, an instrumented driver would then hand that impostor its telemetry — including captured handler arguments and, on errors, local variable values. That's the exposure this mechanism closes. (Note that the driver token a driver carries is _designed_ to be publishable — it is not a secret, and it is not what an impostor would be after. The telemetry stream is.)
+Without verification, an instrumented driver would then hand that impostor its telemetry — including captured handler arguments and, on errors, local variable values. That's the exposure this mechanism closes. (Note that the project token a driver carries is _designed_ to be publishable — it is not a secret, and it is not what an impostor would be after. The telemetry stream is.)
 
 ## The two phases
 

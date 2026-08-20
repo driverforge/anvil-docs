@@ -11,7 +11,7 @@ The Driverforge SDK can forward your driver's log messages to Anvil in real time
 Pass your logger to `Driverforge:Init()` and all log calls are automatically intercepted and forwarded:
 
 ```lua
-Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK", {
+Driverforge:Init("YOUR_API_KEY", {
     logger = myLogger
 })
 ```
@@ -31,7 +31,7 @@ In practice this means **most loggers work with no `logMap` at all**:
 `logMap` is only needed when a method has a **genuinely renamed** counterpart — typically when the canonical level word doesn't appear in the method name at all. For example, a logger that uses `Alert` for the fatal level:
 
 ```lua
-Driverforge:Init("drv_3HipSk6nrxTCGGDvhDB8hXpmmEK", {
+Driverforge:Init("YOUR_API_KEY", {
     logger = Log,
     logMap = {
         fatal = "Alert",   -- only the semantic mismatch needs an entry
