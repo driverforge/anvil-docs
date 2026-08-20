@@ -10,9 +10,9 @@ import { API_KEY_PLACEHOLDER_RE } from '../../src/lib/apiKey';
  *
  * That makes the feature fail silently: replace the placeholder with a literal
  * token and the page still looks correct, the picker just stops appearing and
- * every reader copies someone else's project token instead of their own.
- * DF-927 and DF-973 did exactly that, and it removed the last placeholder in
- * the docs without anything objecting.
+ * every reader copies someone else's project token instead of their own. Two
+ * earlier doc passes did exactly that, between them removing the last
+ * placeholder on the site without anything objecting.
  */
 
 const DOCS = path.join(__dirname, '..', '..', 'docs');
