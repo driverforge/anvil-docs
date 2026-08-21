@@ -236,8 +236,10 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://id.driverforge.com/login',
-          label: 'Login',
+          // A component, not an href: it deep-links back to the page you are
+          // reading and says "Dashboard" once you are signed in, neither of
+          // which a static navbar entry can express. See SignInNavbarItem.
+          type: 'custom-signIn',
           position: 'right',
         },
         {

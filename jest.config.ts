@@ -21,5 +21,8 @@ module.exports = {
   moduleNameMapper: {
     // CSS modules — proxy so any class name is accessible
     '\\.(css|less|scss)$': '<rootDir>/spec/__mocks__/styleMock.js',
+    // Docusaurus resolves its own aliases at build time, so they do not exist
+    // on disk for jest to find.
+    '^@docusaurus/useIsBrowser$': '<rootDir>/spec/__mocks__/useIsBrowser.js',
   },
 };
