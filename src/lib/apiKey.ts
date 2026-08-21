@@ -95,6 +95,24 @@ export function resolveSelectedProject(
 }
 
 /**
+ * What the navbar needs to know, which is less than the full state.
+ *
+ * `unknown` is not "signed out" — it is "not yet answered". The provider starts
+ * there on both the server and the first client render, and a navbar that
+ * guesses during it renders the wrong thing and then corrects itself in front
+ * of the reader.
+ *
+ * `no-projects` is signed in: authenticated, just not onboarded.
+ */
+export type SignedInState = 'unknown' | 'signed-in' | 'signed-out';
+
+export function signedInFromStatus(status: ApiKeyState['status']): SignedInState {
+  if (status === 'loading') return 'unknown';
+  if (status === 'ready' || status === 'no-projects') return 'signed-in';
+  return 'signed-out';
+}
+
+/**
  * Build the sign-in URL that deep-links the user back to the current
  * docs page after authenticating on the app.
  */

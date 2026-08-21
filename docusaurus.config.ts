@@ -243,10 +243,11 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://driverforge.com/anvil/#waitlist',
-          label: 'Join the Waitlist',
+          // Also a component: a reader who is signed in already has an account,
+          // so the CTA hides for them. See WaitlistNavbarItem, which carries
+          // the navbar-cta class the styling keys off.
+          type: 'custom-waitlistCta',
           position: 'right',
-          className: 'navbar-cta',
         },
       ],
     },

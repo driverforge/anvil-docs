@@ -2,7 +2,7 @@ import React from 'react';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 
 import { useApiKey } from './ApiKeyProvider';
-import { buildSignInUrl } from '../lib/apiKey';
+import { buildSignInUrl, signedInFromStatus } from '../lib/apiKey';
 
 const APP_URL = process.env.APP_URL || 'https://dev.driverforge.com';
 
@@ -22,14 +22,15 @@ export default function SignInNavbarItem() {
   // hydrates matches what was served. `window` is only read after that.
   const isBrowser = useIsBrowser();
   const { state } = useApiKey();
+  const signedIn = signedInFromStatus(state.status);
 
-  // `no-projects` is signed in — authenticated, just not onboarded. Only
-  // `anonymous`, `error` and `loading` are treated as signed out, and the
-  // provider starts at `loading` on both server and first client render, so
-  // the signed-out link is what renders until the session resolves.
-  const signedIn = state.status === 'ready' || state.status === 'no-projects';
+  // Render nothing until the session answers. Showing "Login" here is right
+  // for the anonymous majority but wrong for everyone else, and being wrong
+  // shows: the label visibly rewrote itself to "Dashboard" once the fetch
+  // landed. Appearing a beat late is quieter than correcting in public.
+  if (signedIn === 'unknown') return null;
 
-  if (signedIn) {
+  if (signedIn === 'signed-in') {
     return (
       <a className="navbar__item navbar__link" href={APP_URL}>
         Dashboard

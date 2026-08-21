@@ -75,13 +75,13 @@ describe('SignInNavbarItem', () => {
     expect(href).not.toContain('id.driverforge.com');
   });
 
-  it('omits returnTo before hydration, when there is no current URL', () => {
+  it('omits returnTo before hydration, when there is no current URL', async () => {
     isBrowser = false;
     respondWith(401, {});
     renderItem();
 
     // Still a usable sign-in link, just without the deep link.
-    const link = screen.getByRole('link', { name: 'Login' });
+    const link = await screen.findByRole('link', { name: 'Login' });
     expect(link).toHaveAttribute('href', `${APP}/auth/login`);
   });
 
@@ -103,13 +103,28 @@ describe('SignInNavbarItem', () => {
     expect(await screen.findByRole('link', { name: 'Dashboard' })).toBeInTheDocument();
   });
 
-  it('shows sign-in while the session is still resolving', () => {
-    // The provider starts at `loading` on both server and first client render.
-    // Rendering the signed-out link there is what keeps hydration consistent.
+  it('renders nothing while the session is still resolving', async () => {
+    // Showing "Login" here was right for the anonymous majority and wrong for
+    // everyone else, and being wrong showed: the label visibly rewrote itself
+    // to "Dashboard" once the fetch landed.
     respondWith(200, signedIn);
     renderItem();
 
-    expect(screen.getByRole('link', { name: 'Login' })).toBeInTheDocument();
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+
+    // ...and it does resolve, rather than staying blank.
+    expect(await screen.findByRole('link', { name: 'Dashboard' })).toBeInTheDocument();
+  });
+
+  it('never shows the sign-in label to a reader who turns out to be signed in', async () => {
+    // The flash, asserted directly: at no point should "Login" appear on the
+    // way to "Dashboard".
+    respondWith(200, signedIn);
+    renderItem();
+
+    expect(screen.queryByRole('link', { name: 'Login' })).not.toBeInTheDocument();
+    await screen.findByRole('link', { name: 'Dashboard' });
+    expect(screen.queryByRole('link', { name: 'Login' })).not.toBeInTheDocument();
   });
 
   it('falls back to sign-in when the session cannot be loaded', async () => {
