@@ -116,6 +116,28 @@ const config: Config = {
   // involved. Snippet shape mirrors GoogleTag in @driverforge/monitoring-next
   // (not importable here — its package entry points at unbuilt dist output).
   headTags: [
+    {
+      // Runs before first paint so the navbar is already correct when the page
+      // appears — no label rewriting itself, no items appearing and pushing
+      // Help and the theme picker sideways.
+      //
+      // The session cookie is httpOnly and this site is static HTML, so
+      // neither the browser nor a server can read it here. `df_signed_in` is a
+      // readable boolean the app writes alongside it, carrying nothing private
+      // (see libs/identity/src/signed-in-hint.ts). It only picks which of two
+      // already-rendered variants CSS shows; ApiKeyProvider corrects it once
+      // the real fetch lands.
+      //
+      // Absent, blocked or throwing all fall through to signed-out, which is
+      // also what a crawler sees.
+      tagName: 'script' as const,
+      attributes: {},
+      innerHTML:
+        '(function(){try{' +
+        "document.documentElement.setAttribute('data-auth'," +
+        "/(?:^|; )df_signed_in=1(?:;|$)/.test(document.cookie)?'in':'out');" +
+        "}catch(e){document.documentElement.setAttribute('data-auth','out');}})();",
+    },
     ...(gaMeasurementId
       ? [
           {

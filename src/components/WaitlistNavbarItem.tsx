@@ -1,30 +1,25 @@
 import React from 'react';
 
-import { useApiKey } from './ApiKeyProvider';
-import { signedInFromStatus } from '../lib/apiKey';
-
 const WAITLIST_URL = 'https://driverforge.com/anvil/#waitlist';
 
 /**
  * The navbar's sign-up call to action.
  *
- * Hidden from anyone already signed in — they have an account, so inviting
- * them to join the waitlist for one is noise at best and confusing at worst.
+ * Hidden from anyone signed in — they have an account, so inviting them to
+ * join a waitlist for one is noise at best and confusing at worst.
  *
- * Also hidden until the session answers, for the same reason the sign-in
- * control is: rendering it and then removing it is more distracting than
- * showing it a beat late.
+ * Always rendered, hidden by CSS rather than by a condition, for the same
+ * reasons as SignInNavbarItem: identical markup for every reader, correct
+ * before first paint, and nothing appearing late to move the navbar. It also
+ * means the link stays in the served HTML, so crawlers and readers without JS
+ * still see it.
  *
- * The CTA styling keys off `.navbar__link.navbar-cta` in custom.css, so those
- * class names are load-bearing rather than decorative.
+ * `navbar__link navbar-cta` is the pair custom.css keys the button styling
+ * off, so those class names are load-bearing rather than decorative.
  */
 export default function WaitlistNavbarItem() {
-  const { state } = useApiKey();
-
-  if (signedInFromStatus(state.status) !== 'signed-out') return null;
-
   return (
-    <a className="navbar__item navbar__link navbar-cta" href={WAITLIST_URL}>
+    <a className="navbar__item navbar__link navbar-cta df-auth-out" href={WAITLIST_URL}>
       Join the Waitlist
     </a>
   );

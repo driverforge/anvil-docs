@@ -1,11 +1,9 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import SignInNavbarItem from '../../src/components/SignInNavbarItem';
-import { ApiKeyProvider } from '../../src/components/ApiKeyProvider';
 
 // Docusaurus's hook returns false during SSR and the first client render.
-// Driven per-test so both sides of that split are covered.
 let isBrowser = true;
 jest.mock('@docusaurus/useIsBrowser', () => ({
   __esModule: true,
@@ -13,126 +11,60 @@ jest.mock('@docusaurus/useIsBrowser', () => ({
 }));
 
 // Mirrors the component: the value is environment-driven, so pinning a literal
-// here would make the spec fail wherever APP_URL happens to differ.
+// here would break the spec wherever APP_URL differs.
 const APP = process.env.APP_URL || 'https://dev.driverforge.com';
 
-function respondWith(status: number, body: unknown) {
-  global.fetch = jest.fn(() =>
-    Promise.resolve({ ok: status < 400, status, json: async () => body } as Response),
-  ) as unknown as typeof fetch;
-}
-
-const signedIn = {
-  projects: [{ id: 'p-1', name: 'One', slug: 'one', orgName: 'Acme', apiKey: 'k' }],
-};
-
-function renderItem() {
-  render(
-    <ApiKeyProvider>
-      <SignInNavbarItem />
-    </ApiKeyProvider>,
-  );
-}
-
 describe('SignInNavbarItem', () => {
-  const originalFetch = global.fetch;
-
   beforeEach(() => {
     isBrowser = true;
   });
 
-  afterEach(() => {
-    global.fetch = originalFetch;
-    window.localStorage.clear();
+  it('renders both variants, so the markup does not depend on the session', () => {
+    // This is what lets the served HTML be identical for every reader, and so
+    // what keeps hydration clean and the navbar from re-laying out.
+    render(<SignInNavbarItem />);
+
+    expect(screen.getByRole('link', { name: 'Login' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Dashboard' })).toBeInTheDocument();
   });
 
-  it('offers sign-in to an anonymous reader', async () => {
-    respondWith(401, {});
-    renderItem();
+  it('marks each variant for the CSS that shows one and hides the other', () => {
+    render(<SignInNavbarItem />);
 
-    const link = await screen.findByRole('link', { name: 'Login' });
-    expect(link).toHaveAttribute('href', expect.stringContaining(`${APP}/auth/login`));
+    expect(screen.getByRole('link', { name: 'Login' })).toHaveClass('df-auth-out');
+    expect(screen.getByRole('link', { name: 'Dashboard' })).toHaveClass('df-auth-in');
   });
 
-  it('deep-links back to the page being read', async () => {
-    respondWith(401, {});
-    renderItem();
+  it('deep-links sign-in back to the page being read', () => {
+    render(<SignInNavbarItem />);
 
-    const link = await screen.findByRole('link', { name: 'Login' });
-    const href = link.getAttribute('href') ?? '';
-
-    // The whole point: sign-in returns you to where you were, not to the app.
+    const href = screen.getByRole('link', { name: 'Login' }).getAttribute('href') ?? '';
     expect(new URL(href).searchParams.get('returnTo')).toBe(window.location.href);
   });
 
-  it('routes through the app rather than straight to Kratos', async () => {
-    respondWith(401, {});
-    renderItem();
-
-    const href = (await screen.findByRole('link', { name: 'Login' })).getAttribute('href') ?? '';
+  it('routes sign-in through the app rather than straight to Kratos', () => {
+    render(<SignInNavbarItem />);
 
     // Going direct to id.driverforge.com is what dropped returnTo entirely.
+    const href = screen.getByRole('link', { name: 'Login' }).getAttribute('href') ?? '';
     expect(href).not.toContain('id.driverforge.com');
   });
 
-  it('omits returnTo before hydration, when there is no current URL', async () => {
+  it('omits returnTo before hydration, when there is no current URL', () => {
     isBrowser = false;
-    respondWith(401, {});
-    renderItem();
+    render(<SignInNavbarItem />);
 
-    // Still a usable sign-in link, just without the deep link.
-    const link = await screen.findByRole('link', { name: 'Login' });
-    expect(link).toHaveAttribute('href', `${APP}/auth/login`);
-  });
-
-  it('shows the dashboard to a signed-in reader', async () => {
-    respondWith(200, signedIn);
-    renderItem();
-
-    const link = await screen.findByRole('link', { name: 'Dashboard' });
-    expect(link).toHaveAttribute('href', APP);
-    expect(screen.queryByRole('link', { name: 'Login' })).not.toBeInTheDocument();
-  });
-
-  it('treats a signed-in reader with no projects as signed in', async () => {
-    // Authenticated, just not onboarded — inviting them to sign in again is
-    // the confusing case this exists to remove.
-    respondWith(200, { projects: [] });
-    renderItem();
-
-    expect(await screen.findByRole('link', { name: 'Dashboard' })).toBeInTheDocument();
-  });
-
-  it('renders nothing while the session is still resolving', async () => {
-    // Showing "Login" here was right for the anonymous majority and wrong for
-    // everyone else, and being wrong showed: the label visibly rewrote itself
-    // to "Dashboard" once the fetch landed.
-    respondWith(200, signedIn);
-    renderItem();
-
-    expect(screen.queryByRole('link')).not.toBeInTheDocument();
-
-    // ...and it does resolve, rather than staying blank.
-    expect(await screen.findByRole('link', { name: 'Dashboard' })).toBeInTheDocument();
-  });
-
-  it('never shows the sign-in label to a reader who turns out to be signed in', async () => {
-    // The flash, asserted directly: at no point should "Login" appear on the
-    // way to "Dashboard".
-    respondWith(200, signedIn);
-    renderItem();
-
-    expect(screen.queryByRole('link', { name: 'Login' })).not.toBeInTheDocument();
-    await screen.findByRole('link', { name: 'Dashboard' });
-    expect(screen.queryByRole('link', { name: 'Login' })).not.toBeInTheDocument();
-  });
-
-  it('falls back to sign-in when the session cannot be loaded', async () => {
-    respondWith(500, {});
-    renderItem();
-
-    await waitFor(() =>
-      expect(screen.getByRole('link', { name: 'Login' })).toBeInTheDocument(),
+    // Still a usable sign-in link — the deep link is an improvement on it, not
+    // a precondition — and only the href differs, never the layout.
+    expect(screen.getByRole('link', { name: 'Login' })).toHaveAttribute(
+      'href',
+      `${APP}/auth/login`,
     );
+  });
+
+  it('points the signed-in variant at the app', () => {
+    render(<SignInNavbarItem />);
+
+    expect(screen.getByRole('link', { name: 'Dashboard' })).toHaveAttribute('href', APP);
   });
 });

@@ -724,3 +724,28 @@ button[class*='copyButton'] {
   cursor: pointer;
   text-align: left;
 }
+
+/* --------------------------------------------------------------------------
+   Auth-dependent navbar items
+
+   Both variants are always in the markup, so the HTML is identical for every
+   reader and React hydrates without a mismatch. Which one is visible is
+   decided by `data-auth` on <html>, set before first paint by the head script
+   in docusaurus.config.ts and corrected by ApiKeyProvider once the session
+   fetch resolves.
+
+   Signed-out is the default: it is what a crawler, a reader with JS disabled,
+   and anyone whose hint is missing all get — and it is the safe thing to be
+   wrong about, since it offers a way in rather than implying an account.
+   -------------------------------------------------------------------------- */
+.df-auth-in {
+  display: none;
+}
+
+html[data-auth='in'] .df-auth-in {
+  display: inline-flex;
+}
+
+html[data-auth='in'] .df-auth-out {
+  display: none;
+}

@@ -8,6 +8,7 @@ import React, {
 import {
   DocsProject,
   ApiKeyState,
+  signedInFromStatus,
   SELECTED_PROJECT_STORAGE_KEY,
   resolveSelectedProject,
 } from '../lib/apiKey';
@@ -127,6 +128,15 @@ export function ApiKeyProvider({
       if (cancelled) return;
       setPreviewMode(load.previewMode);
       setState(load.state);
+
+      // The head script guessed from a cookie before paint; this is the
+      // answer. Correcting it here keeps the navbar honest when the hint is
+      // stale — an expired session, or a sign-out that happened on another
+      // origin — without anything re-rendering.
+      document.documentElement.setAttribute(
+        'data-auth',
+        signedInFromStatus(load.state.status) === 'signed-in' ? 'in' : 'out',
+      );
     });
 
     return () => {
