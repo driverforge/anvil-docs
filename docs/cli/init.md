@@ -96,6 +96,11 @@ The one exception: a config predating the [versioning scheme](/cli/versioning)
 field still gets the one-time versioning interview backfilled — a migration, not
 a setup change.
 
+If the setup has since been *broken* rather than merely already done — a
+reverted edit, a missing `src/vendor/`, a file that didn't survive a clone —
+that's [`driverforge doctor`](/cli/doctor). It checks each piece `init` puts in
+place and offers to restore what's gone.
+
 To update the embedded SDK, select the SDK row in the
 [`driverforge upgrade`](/cli/upgrade) picker.
 

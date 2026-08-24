@@ -115,6 +115,7 @@ const sidebars: SidebarsConfig = {
         {type: 'doc', id: 'cli/debug', className: 'menu-coming-soon'},
         'cli/deploy',
         'cli/device',
+        {type: 'doc', id: 'cli/doctor', className: 'menu-experimental'},
         {type: 'doc', id: 'cli/init', className: 'menu-experimental'},
         'cli/login',
         'cli/logout',
