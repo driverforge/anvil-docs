@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-description: Create and manage organizations — the top-level workspace that holds your projects, members, devices, and billing.
+description: Create and manage organizations, the top-level workspace that holds your projects, members, devices, and billing.
 ---
 
 import Screenshot from '@site/src/components/Screenshot';
@@ -44,8 +44,8 @@ settings) switches to that organization.
 
 Go to **Settings → General** (owners and admins only):
 
-- **Organization Name** — how the organization appears throughout Anvil.
-- **Organization Slug** — the short identifier used in your Anvil URLs (lowercase
+- **Organization Name**: how the organization appears throughout Anvil.
+- **Organization Slug**: the short identifier used in your Anvil URLs (lowercase
   letters, numbers, and hyphens).
 
 Click **Save Changes** to apply.

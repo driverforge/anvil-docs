@@ -16,7 +16,7 @@ Driverforge:Init("YOUR_API_KEY", {
 })
 ```
 
-That's it. Calls to `myLogger:info()`, `myLogger:error()`, etc. now appear in Anvil automatically. Your logger continues to work exactly as before — same methods, same output. Every call is forwarded regardless of the log level set in Composer, so the [Logs](/platform/logs) page always has the full picture even when the controller's own output is filtered.
+That's it. Calls to `myLogger:info()`, `myLogger:error()`, etc. now appear in Anvil automatically. Your logger continues to work exactly as before: same methods, same output. Every call is forwarded regardless of the log level set in Composer, so the [Logs](/platform/logs) page always has the full picture even when the controller's own output is filtered.
 
 ### Custom Method Names
 
@@ -24,11 +24,11 @@ For each canonical level (`fatal`, `error`, `warn`, `info`, `debug`, `trace`), A
 
 In practice this means **most loggers work with no `logMap` at all**:
 
-- A Pino-style logger with `info`/`error`/etc. — picked by the lowercase variant
-- Snap One's standard `c4_log`, with `Info`/`Error`/etc. — picked by the PascalCase variant
-- A logger using `INFO`/`ERROR` — picked by the UPPERCASE variant
+- A Pino-style logger with `info`/`error`/etc., picked by the lowercase variant
+- Snap One's standard `c4_log`, with `Info`/`Error`/etc., picked by the PascalCase variant
+- A logger using `INFO`/`ERROR`: picked by the UPPERCASE variant
 
-`logMap` is only needed when a method has a **genuinely renamed** counterpart — typically when the canonical level word doesn't appear in the method name at all. For example, a logger that uses `Alert` for the fatal level:
+`logMap` is only needed when a method has a **genuinely renamed** counterpart: typically when the canonical level word doesn't appear in the method name at all. For example, a logger that uses `Alert` for the fatal level:
 
 ```lua
 Driverforge:Init("YOUR_API_KEY", {

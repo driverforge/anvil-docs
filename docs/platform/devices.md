@@ -66,6 +66,6 @@ are being turned away because the quota is full.
 
 ## Further reading
 
-- [Anvil Agent](/agent/overview) — how a controller registers and what the agent does
-- [`driverforge device`](/cli/context) — selecting the deploy target from the CLI
-- [`driverforge deploy`](/cli/deploy) / [`driverforge sync`](/cli/sync) — pushing drivers to a controller
+- [Anvil Agent](/agent/overview): how a controller registers and what the agent does
+- [`driverforge device`](/cli/context): selecting the deploy target from the CLI
+- [`driverforge deploy`](/cli/deploy) / [`driverforge sync`](/cli/sync): pushing drivers to a controller

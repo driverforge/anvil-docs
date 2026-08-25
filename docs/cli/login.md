@@ -5,9 +5,9 @@ sidebar_position: 17
 # login
 
 Authenticate with Driverforge. Sign in once and the CLI stores and refreshes your
-credentials, so the commands that reach the Anvil cloud — [`deploy`](/cli/deploy),
+credentials, so the commands that reach the Anvil cloud ([`deploy`](/cli/deploy),
 [`sync`](/cli/sync), [`org`](/cli/org), [`device`](/cli/device),
-[`upgrade`](/cli/upgrade) — work without prompting again.
+[`upgrade`](/cli/upgrade)) work without prompting again.
 
 ## Usage
 
@@ -28,7 +28,7 @@ stores the credentials locally and prompts you to pick the
 
 | Option | Description |
 |--------|-------------|
-| `--no-browser` | Don't open a browser automatically — visit the printed URL yourself |
+| `--no-browser` | Don't open a browser automatically; visit the printed URL yourself |
 | `--org` | Organization to use after signing in (name, slug, or id); skips the picker |
 
 ## Examples

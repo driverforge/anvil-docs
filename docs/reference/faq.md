@@ -49,7 +49,7 @@ Minimal. Each handler call adds roughly 1ms of overhead for the instrumentation 
 
 ### Does my driver still work without the agent?
 
-Yes. If the agent isn't installed, the SDK operates in a no-op mode. Your driver works normally, events just don't stream anywhere. It's safe to leave the Driverforge SDK and `Driverforge:Init()` call in your release builds — in no-op mode it adds virtually zero overhead to your driver.
+Yes. If the agent isn't installed, the SDK operates in a no-op mode. Your driver works normally, events just don't stream anywhere. It's safe to leave the Driverforge SDK and `Driverforge:Init()` call in your release builds; in no-op mode it adds virtually zero overhead to your driver.
 
 ### What data is sent?
 
@@ -67,7 +67,7 @@ Anvil captures the actual argument values passed to your handlers and the conten
 
 ### Can I filter the event stream?
 
-Yes. Basic filtering — by handler name, type, and severity — is available on all plans. Advanced filtering, including free text search, is available on paid plans.
+Yes. Basic filtering (by handler name, type, and severity) is available on all plans. Advanced filtering, including free text search, is available on paid plans.
 
 ### Can I have multiple projects?
 

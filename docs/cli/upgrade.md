@@ -4,7 +4,7 @@ sidebar_position: 21
 
 # upgrade
 
-See — and interactively apply — everything upgradable in the current context:
+See, and interactively apply, everything upgradable in the current context:
 the `driverforge` CLI itself, the [Anvil Agent](/agent/overview) on the selected
 controller, and the [Driverforge SDK](/sdk/overview) embedded in the current project.
 
@@ -16,15 +16,15 @@ driverforge upgrade
 
 ## The picker
 
-`driverforge upgrade` shows one row per component — **driverforge CLI**,
-**Anvil Agent** (the [selected controller](/cli/device)), **Driverforge SDK** (the
-current project) — with current → latest versions and status. The CLI's version
+`driverforge upgrade` shows one row per component: **driverforge CLI**,
+**Anvil Agent** (the [selected controller](/cli/device)), and **Driverforge SDK** (the
+current project). Each row shows current → latest versions and status. The CLI's version
 check here is always live, never the daily cached answer behind the passive
 [update notice](/cli/upgrading#update-notices).
 
 Rows with an update available are selectable checkboxes. **Nothing is
-pre-selected** — an upgrade is always an explicit choice, and confirming the
-selection is the consent: there is no further prompt.
+pre-selected**: an upgrade is always an explicit choice, and confirming the
+selection is the consent; there is no further prompt.
 
 | Key | Action |
 |-----|--------|
@@ -35,13 +35,13 @@ selection is the consent: there is no further prompt.
 
 What confirming does, per row:
 
-- **Anvil Agent** — upgrades the agent on the selected controller directly:
-  download, SHA-256 verify, deploy under the installed filename, restart, and
-  confirm it came back up via a health poll.
-- **Driverforge SDK** — re-embeds the latest Driverforge SDK in the current project
+- **Anvil Agent**: upgrades the agent on the selected controller directly
+  (download, SHA-256 verify, deploy under the installed filename, restart, and
+  confirm it came back up via a health poll).
+- **Driverforge SDK**: re-embeds the latest Driverforge SDK in the current project
   (`src/vendor/driverforge-sdk.lua`, and `.driverforge/config.json` is bumped to
-  match). A dirty git tree is refused first — commit or stash, then re-run.
-- **driverforge CLI** — doesn't upgrade (a package manager owns the binary).
+  match). A dirty git tree is refused first: commit or stash, then re-run.
+- **driverforge CLI**: doesn't upgrade (a package manager owns the binary).
   After the other upgrades finish, the CLI prints the right upgrade command for
   how it was installed (brew, scoop, or the install script).
 
@@ -58,7 +58,7 @@ once in Composer Pro ([instructions](/agent/installation#updating)); after that
 
 Piped, under `CI`, or with `--no-tui`, `driverforge upgrade` is report-only: it
 prints the status table and never mutates. There is **no non-interactive way to
-upgrade an agent** — this is deliberate. Upgrades act on a connected controller
+upgrade an agent**; this is deliberate. Upgrades act on a connected controller
 and are always an interactive choice.
 
 ## Examples

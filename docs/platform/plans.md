@@ -11,9 +11,9 @@ your limits and which features are available.
 
 Plans differ along a couple of dimensions:
 
-- **Limits** — how many members, projects, and devices an organization can have,
+- **Limits**: how many members, projects, and devices an organization can have,
   and how long your events, logs, and errors are retained.
-- **Features** — capabilities like facet filtering and search across the data
+- **Features**: capabilities like facet filtering and search across the data
   pages, work login (Google Workspace, Microsoft 365), and single sign-on.
 
 The core events, logs, and errors views and live streaming are available on every

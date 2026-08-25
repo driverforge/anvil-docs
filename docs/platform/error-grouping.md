@@ -17,7 +17,7 @@ To see all occurrences of a given error, click the **View More Occurrences** but
 
 <Screenshot name="errors-occurrences" alt="List of error occurrences for a single error group" />
 
-Selecting a specific occurrence takes you to the detail page for that individual occurrence — useful for comparing context, arguments, or driver versions across different instances of the same error.
+Selecting a specific occurrence takes you to the detail page for that individual occurrence, useful for comparing context, arguments, or driver versions across different instances of the same error.
 
 You can also navigate between occurrences using the **Previous** / **Next** buttons on the detail page without returning to the list.
 
@@ -39,7 +39,7 @@ Two errors are grouped together when they have the same error type, originate fr
 
 ### Example
 
-These two errors would be grouped together — same type, same location, same call path:
+These two errors would be grouped together (same type, same location, same call path):
 
 ```
 ERROR: attempt to index nil value (local 'device')
@@ -59,14 +59,14 @@ ERROR: attempt to index nil value (local 'device')
 
 On any error detail page, expand the **Grouping Info** section to see:
 
-- **Grouped by** — the strategy used (currently "exception stacktrace - all frames")
-- **Hash** — the unique SHA-256 fingerprint for this error group
-- **Raw grouping data** — toggle to see the exact data used to generate the fingerprint
+- **Grouped by**: the strategy used (currently "exception stacktrace - all frames")
+- **Hash**: the unique SHA-256 fingerprint for this error group
+- **Raw grouping data**: toggle to see the exact data used to generate the fingerprint
 
 ## The Fingerprint Hash
 
 Each error group has a unique hash. This is useful for:
 
 - **Referencing specific issues** in bug reports or tickets
-- **Tracking recurrence** — if a previously fixed bug returns, it'll have the same fingerprint
+- **Tracking recurrence**: if a previously fixed bug returns, it'll have the same fingerprint
 - **API integrations** that need to identify specific error types

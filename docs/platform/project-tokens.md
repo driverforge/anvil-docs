@@ -11,7 +11,7 @@ Anvil has two classes of credential, and they behave differently:
 
 | Class                          | Where it lives                                          | What it's for                                                            |
 | ------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------------------ |
-| **Static token** (publishable) | On the thing it identifies — a project, an installation | Naming which project telemetry belongs to. Safe to embed and distribute. |
+| **Static token** (publishable) | On the thing it identifies: a project, an installation | Naming which project telemetry belongs to. Safe to embed and distribute. |
 | **API key** (secret)           | Organization settings                                   | Server-side access to the Anvil API. A credential to protect.            |
 
 The rest of this page is about your project token, which is what you need to send telemetry. Organization-level secret API keys are still in development; you'll find the placeholder under **Settings → API Keys**.
@@ -55,14 +55,14 @@ drv_3HipSk6nrxTCGGDvhDB8hXpmmEK
 
 Other prefixes you may come across:
 
-- `inst_…` identifies an installation — a specific site where a dealer installed your driver.
+- `inst_…` identifies an installation: a specific site where a dealer installed your driver.
 - `dfa_…` and `dfs_…` are secret organization API keys. Anything starting `df` is a secret, always. These are stored hashed and shown only once, so they behave nothing like a project token.
 
 ## Your project token doesn't expire
 
 A project has **one** project token, for its whole life. There's nothing to rotate, expire or revoke, and no list of old tokens to keep track of.
 
-Open **Settings → Projects**, click the **gear icon** on the project's row, and find the **Project Token** section in the drawer that opens. Copy it whenever you need it — the full value stays available, because it isn't a secret.
+Open **Settings → Projects**, click the **gear icon** on the project's row, and find the **Project Token** section in the drawer that opens. Copy it whenever you need it; the full value stays available, because it isn't a secret.
 
 This is deliberate. Your token ships inside compiled drivers installed on controllers in customers' homes, and those aren't updated in place. A token that could be revoked would mean an action in Anvil could stop every installed copy of your driver reporting, without stopping anyone who had already taken a copy of the value. Since the token grants nothing on its own, there's nothing worth that trade.
 

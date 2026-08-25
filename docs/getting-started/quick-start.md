@@ -16,7 +16,7 @@ Anvil is easy to add to your driver. Install the agent, add the client library a
 - A project created in [Anvil](https://dev.driverforge.com)
 
 :::info Older controllers
-On anything below OS 3.3.1 the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all. Nothing breaks — you just get no telemetry. See [SDK installation](/sdk/installation#control4-os-331-or-newer) for what that looks like.
+On anything below OS 3.3.1 the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all. Nothing breaks; you just get no telemetry. See [SDK installation](/sdk/installation#control4-os-331-or-newer) for what that looks like.
 :::
 
 ## 1. Download the Driverforge SDK
@@ -42,7 +42,7 @@ Module "vendor.driverforge-sdk" "vendor/driverforge-sdk.lua"
 ```
 
 The `require('vendor.driverforge-sdk')` call in the next step is the same either
-way — squish satisfies it from the bundle; otherwise Director resolves the
+way: squish satisfies it from the bundle; otherwise Director resolves the
 vendored file from your packaged driver.
 :::
 
@@ -63,7 +63,7 @@ end
 ```
 
 :::info
-`OnDriverInit` is a special case — it runs before the SDK can auto-instrument, so it needs the explicit `Anvil:OnDriverInit` wrapper. All other lifecycle methods (`OnDriverLateInit`, `OnPropertyChanged`, etc.) are automatically instrumented — just write them normally.
+`OnDriverInit` is a special case: it runs before the SDK can auto-instrument, so it needs the explicit `Anvil:OnDriverInit` wrapper. All other lifecycle methods (`OnDriverLateInit`, `OnPropertyChanged`, etc.) are automatically instrumented; just write them normally.
 :::
 
 ## 4. Build and deploy

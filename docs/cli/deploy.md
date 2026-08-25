@@ -37,7 +37,7 @@ persisted back to your `driver.xml` after the build succeeds.
 
 | Option                  | Description                                                                  |
 | ----------------------- | ---------------------------------------------------------------------------- |
-| `--device`              | Controller to deploy to (name, hostname, or id) — overrides the selected one |
+| `--device`              | Controller to deploy to (name, hostname, or id); overrides the selected one |
 | `--select`              | Re-select the target controller before deploying                             |
 | `--configuration`, `-c` | Build configuration to build and deploy                                      |
 
@@ -58,22 +58,22 @@ driverforge deploy --configuration release --device "Plant Room"
 ## First deploy
 
 The first time you deploy a new driver, it doesn't exist in the controller's
-project yet — so the CLI walks you through adding it. It guides you through
+project yet, so the CLI walks you through adding it. It guides you through
 choosing where in the project to create the device, naming it, and setting any
 property values the driver needs, then finishes the deploy. Every deploy after
 that updates the driver in place automatically.
 
 Prefer to set it up by hand? Add the driver to a room once in Composer Pro and
-run `driverforge deploy` again — the CLI picks up from there.
+run `driverforge deploy` again; the CLI picks up from there.
 
 ## Troubleshooting
 
-- **Agent unreachable** — the Anvil Agent isn't installed, isn't running, or
+- **Agent unreachable**: the Anvil Agent isn't installed, isn't running, or
   can't be reached at the controller's address. See the
   [agent docs](/agent/overview).
-- **Agent out of date** — the agent on the controller is too old to accept a
+- **Agent out of date**: the agent on the controller is too old to accept a
   deploy. Update it with the [`driverforge upgrade`](/cli/upgrade) picker.
-- **Deploy failed** — the controller rejected the driver or it errored on init.
+- **Deploy failed**: the controller rejected the driver or it errored on init.
   When the agent captures an Anvil error report, the CLI prints a link to it.
 
 ## Global flags

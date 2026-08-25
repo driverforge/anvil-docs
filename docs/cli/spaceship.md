@@ -4,8 +4,8 @@ sidebar_position: 14
 
 # Spaceship prompt
 
-Show your active Driverforge [context](/cli/context) — the selected
-organization and controller — right in your shell prompt, the way
+Show your active Driverforge [context](/cli/context) (the selected
+organization and controller) right in your shell prompt, the way
 [Spaceship](https://spaceship-prompt.sh) shows the git branch or the Azure
 subscription:
 
@@ -14,13 +14,13 @@ subscription:
 ```
 
 The section reads only the local context file (`driverforge org current` /
-`driverforge device current` — no network), renders asynchronously so it never
+`driverforge device current`; no network), renders asynchronously so it never
 blocks your prompt, and disappears entirely when no organization is selected.
 
 ## Install
 
 Save the snippet below as `~/.config/spaceship/driverforge.zsh`, then in your
-`~/.zshrc` — **after** Spaceship is initialised:
+`~/.zshrc`, **after** Spaceship is initialised:
 
 ```bash
 source ~/.config/spaceship/driverforge.zsh
@@ -84,15 +84,15 @@ Override any of these in `~/.zshrc` before sourcing the file:
 | `SPACESHIP_DRIVERFORGE_SHOW`             | `true`         | `false` hides the section entirely                             |
 | `SPACESHIP_DRIVERFORGE_SHOW_DEVICE`      | `true`         | `false` shows only the org, never the controller               |
 | `SPACESHIP_DRIVERFORGE_PREFIX`           | `using `       | Text before the section (matches Spaceship's Azure section)    |
-| `SPACESHIP_DRIVERFORGE_SYMBOL`           | `󰢛 ` (anvil)  | Section symbol — see the font note below                       |
+| `SPACESHIP_DRIVERFORGE_SYMBOL`           | `󰢛 ` (anvil)  | Section symbol: see the font note below                       |
 | `SPACESHIP_DRIVERFORGE_DEVICE_SEPARATOR` | `/`            | Separator in `org/device`                                      |
 | `SPACESHIP_DRIVERFORGE_COLOR`            | `#79C0FF`      | Section colour (any zsh `%F` value: ANSI index or `#rrggbb`)   |
-| `SPACESHIP_DRIVERFORGE_COMMAND`          | `driverforge`  | Binary to query — point at a dev build if you have one         |
+| `SPACESHIP_DRIVERFORGE_COMMAND`          | `driverforge`  | Binary to query: point at a dev build if you have one         |
 
 ## Font note
 
 The default symbol is the Material Design *anvil* glyph (`nf-md-anvil`,
-`U+F089B`), which needs a full **Nerd Font** — a plain Powerline font (including
+`U+F089B`), which needs a full **Nerd Font**: a plain Powerline font (including
 plain Fira Code) only carries the Powerline glyphs and will show a
 missing-glyph box. Either install one:
 
@@ -108,5 +108,5 @@ SPACESHIP_DRIVERFORGE_SYMBOL="🛠️ "
 
 ## Related
 
-- [Context](/cli/context) — how org and controller selection works
-- [`driverforge org`](/cli/org) / [`driverforge device`](/cli/device) — the commands the section reads
+- [Context](/cli/context): how org and controller selection works
+- [`driverforge org`](/cli/org) / [`driverforge device`](/cli/device): the commands the section reads

@@ -32,7 +32,7 @@ jobs:
 
 ## Run a target directly
 
-Pass a `command` and the action runs it for you in one step — a drop-in for a
+Pass a `command` and the action runs it for you in one step: a drop-in for a
 dedicated packaging action:
 
 ```yaml
@@ -71,21 +71,21 @@ steps:
 
 | Input           | Description                                                                                                                       |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `version`       | The `driverforge` release to install — a pinned version (e.g. `%%CLI_VERSION%%`) or `latest` (the default). Pin it for reproducible builds.       |
+| `version`       | The `driverforge` release to install: a pinned version (e.g. `%%CLI_VERSION%%`) or `latest` (the default). Pin it for reproducible builds.       |
 | `command`       | The `driverforge` command to run (e.g. `build`). Omit to only install the CLI onto `PATH`.                                              |
 | `project-dir`   | Driver project directory. Defaults to the workspace root; `driverforge` walks up to find `src/manifest.c4zproj`.                        |
-| `configuration` | Build configuration to apply — swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                            |
+| `configuration` | Build configuration to apply; swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                            |
 | `increment`     | Bump the driver version before building, per the project's [versioning scheme](/cli/versioning). Requires an initialised project. |
-| `driver-version` | Stamp an exact driver `<version>` for this build — the value your release pipeline owns. Works without init; mutually exclusive with `increment`. |
+| `driver-version` | Stamp an exact driver `<version>` for this build: the value your release pipeline owns. Works without init; mutually exclusive with `increment`. |
 | `encrypt`       | Encrypt the driver script for this build. Defaults to the configuration's entry in the [project config](/cli/build-configuration#per-configuration-defaults), then the driver's `driver.xml`; set `false` to force it off. |
-| `no-suffix`     | Build a named configuration under the naked driver name — no `-<name>` artifact or `(name)` device-name suffix. Set `false` to force suffixing back on. |
+| `no-suffix`     | Build a named configuration under the naked driver name: no `-<name>` artifact or `(name)` device-name suffix. Set `false` to force suffixing back on. |
 | `sourcemap`     | Emit a Lua source map alongside the `.c4z`.                                                                                       |
 | `unpack`        | Also leave an unpacked copy of the driver in `dist/`.                                                                             |
 | `args`          | Additional raw flags passed straight through to `driverforge`, for anything not covered above.                                          |
 | `github-token`  | Reserved for future use. Release binaries download from public storage, so no token is required today.                            |
 
 To ship after building, set `command: deploy` or `command: sync` instead of
-`build` — [`driverforge deploy`](/cli/deploy) and [`driverforge sync`](/cli/sync) are their
+`build`: [`driverforge deploy`](/cli/deploy) and [`driverforge sync`](/cli/sync) are their
 own commands that build first, so there is no `deploy`/`sync` input on a
 `build`.
 
@@ -104,5 +104,5 @@ binary in the runner's tool-cache directory (`driverforge/<version>/<arch>`), so
 repeat runs on the same version don't re-download. If you set `command`, it
 then runs `driverforge <command>` with the inputs above.
 
-The built `.c4z` lands in your project's `dist/` directory — upload it with
+The built `.c4z` lands in your project's `dist/` directory; upload it with
 `actions/upload-artifact` or attach it to a release as a later step.

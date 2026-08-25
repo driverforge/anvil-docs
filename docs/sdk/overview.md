@@ -35,7 +35,7 @@ require('vendor.driverforge-sdk')
 Driverforge:Init("YOUR_API_KEY")
 ```
 
-`Anvil` is the instrumentation surface — everything you call while your driver
+`Anvil` is the instrumentation surface, everything you call while your driver
 runs:
 
 | Method                    | Purpose                                     |

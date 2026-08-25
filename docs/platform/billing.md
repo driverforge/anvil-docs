@@ -12,7 +12,7 @@ where you manage how your organization pays and review what you've been charged.
 
 :::tip
 Managing billing requires the **owner** or **admin** role. Billing is **per
-organization** — each one has its own payment methods and invoice history.
+organization**: each one has its own payment methods and invoice history.
 :::
 
 <Screenshot name="billing" alt="The Billing page showing the payment method and the invoice list." />
@@ -25,7 +25,7 @@ The card marked as default is the one used for your subscription.
    method** if one is already on file).
 2. Enter your card details and save.
 
-Cards are handled securely through our payment processor — Anvil never stores your
+Cards are handled securely through our payment processor; Anvil never stores your
 full card number. You can add more than one card, change which is the default, and
 remove cards you no longer use.
 
@@ -43,5 +43,5 @@ page lists, contact support.
 
 ## Further reading
 
-- [Subscription](/platform/subscription) — view your plan and usage, upgrade, downgrade, or cancel
-- [Plans](/platform/plans) — what each tier includes
+- [Subscription](/platform/subscription): view your plan and usage, upgrade, downgrade, or cancel
+- [Plans](/platform/plans): what each tier includes

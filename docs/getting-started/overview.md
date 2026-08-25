@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 slug: /
-description: Anvil gives you visibility into what's happening inside your Control4 driver — events, logs, and errors in real time.
+description: "Anvil gives you visibility into what's happening inside your Control4 driver: events, logs, and errors in real time."
 ---
 
 import Screenshot from '@site/src/components/Screenshot';
@@ -30,7 +30,7 @@ The Driverforge SDK automatically captures proxy commands, life-cycle events and
 
 **Catch errors instantly** - When something throws, you'll see the full stack trace and the context that caused it. No more silent failures.
 
-**Understand the proxies** - Learn what proxies send your driver when users interact with it. See exactly what Control4 sends in response to user action to rapidly understand what needs implementing in your driver. No more guessing what Control4 sends — see the event appear in real time within the Anvil platform as actions are taken in navigators, network responses, timer callbacks and more.
+**Understand the proxies** - Learn what proxies send your driver when users interact with it. See exactly what Control4 sends in response to user action to rapidly understand what needs implementing in your driver. No more guessing what Control4 sends: see the event appear in real time within the Anvil platform as actions are taken in navigators, network responses, timer callbacks and more.
 
 ## How It Works
 
@@ -42,7 +42,7 @@ The Driverforge SDK automatically captures proxy commands, life-cycle events and
 
 Anvil needs **Control4 OS 3.3.1 or newer** on the controller running your driver.
 
-On older controllers the SDK disables itself at load, so a driver that ships with it is safe to install anywhere — it simply produces no telemetry where it cannot be delivered. See [SDK installation](/sdk/installation#control4-os-331-or-newer).
+On older controllers the SDK disables itself at load, so a driver that ships with it is safe to install anywhere; it simply produces no telemetry where it cannot be delivered. See [SDK installation](/sdk/installation#control4-os-331-or-newer).
 
 ## Getting Started
 

@@ -4,7 +4,7 @@ sidebar_position: 19
 
 # org
 
-Manage the active organization — the workspace your projects, devices, and billing
+Manage the active organization: the workspace your projects, devices, and billing
 belong to. The CLI remembers it so the deploy commands don't need it every time.
 `driverforge org` on its own does nothing; run one of its subcommands.
 
@@ -30,7 +30,7 @@ driverforge org list
 
 ### driverforge org select [name|slug|id]
 
-Switch the active organization. Matches a slug, id, or exact name — or shows a
+Switch the active organization. Matches a slug, id, or exact name. It shows a
 picker when given no argument.
 
 ```bash

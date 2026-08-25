@@ -70,9 +70,9 @@ Select a time range from the dropdown: 15 minutes, 1 hour, 4 hours, 1 day, 2 day
 
 Filter by multiple dimensions simultaneously:
 
-- **Status** — Success, OK, Error, Fatal, Warning, Info, Debug, Trace
-- **Event Name** — multi-select dropdown showing all captured handlers with counts
-- **Controller** — filter by specific controller (shown as formatted MAC address)
+- **Status**: Success, OK, Error, Fatal, Warning, Info, Debug, Trace
+- **Event Name**: multi-select dropdown showing all captured handlers with counts
+- **Controller**: filter by specific controller (shown as formatted MAC address)
 
 Each facet shows the count of matching events, so you can see the distribution at a glance.
 

@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # device
 
-Manage the active deploy target — the Control4 controller that [`deploy`](/cli/deploy),
+Manage the active deploy target: the Control4 controller that [`deploy`](/cli/deploy),
 [`sync`](/cli/sync), and [`upgrade`](/cli/upgrade) act on. The CLI remembers it so you
 don't pass it every time. `driverforge device` on its own does nothing; run one of its
 subcommands.
@@ -35,7 +35,7 @@ driverforge device list
 ### driverforge device select [name|id]
 
 Choose the active controller. Matches its friendly name, hostname, Control4 device
-id, or id — or shows a picker when given no argument. Only **active** controllers
+id, or id. It shows a picker when given no argument. Only **active** controllers
 can be selected, and selecting one pins its TLS certificate fingerprint so later
 deploys verify they're talking to the right controller.
 

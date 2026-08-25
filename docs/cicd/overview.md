@@ -6,10 +6,10 @@ description: Run the driverforge CLI in your CI/CD pipeline with the GitHub Acti
 # Overview
 
 Run `driverforge` in your pipeline to build and ship your Control4 drivers automatically
-— on every push, tag, or release. Two integrations wrap the same CLI:
+on every push, tag, or release. Two integrations wrap the same CLI:
 
-- **[GitHub Action](/cicd/github-actions)** — `driverforge/driverforge-github-action`, for GitHub Actions workflows.
-- **[Buildkite plugin](/cicd/buildkite)** — `driverforge/driverforge-buildkite-plugin`, for Buildkite pipelines.
+- **[GitHub Action](/cicd/github-actions)**: `driverforge/driverforge-github-action`, for GitHub Actions workflows.
+- **[Buildkite plugin](/cicd/buildkite)**: `driverforge/driverforge-buildkite-plugin`, for Buildkite pipelines.
 
 :::info Preview
 The `driverforge` GitHub Action and Buildkite plugin are available today and in
@@ -27,8 +27,8 @@ That gives you two ways to use them.
 ### Just set up the environment
 
 Omit the command and the integration simply makes `driverforge` available, so you can
-call it however you like from your own scripts — the `actions/setup-node`
-pattern:
+call it however you like from your own scripts (the `actions/setup-node`
+pattern):
 
 ```yaml
 # GitHub Actions
@@ -40,8 +40,8 @@ pattern:
 
 ### Run a target directly
 
-Give it a `command` and it runs that target in a single declarative step — no
-extra scripting:
+Give it a `command` and it runs that target in a single declarative step (no
+extra scripting):
 
 ```yaml
 # GitHub Actions
@@ -55,7 +55,7 @@ extra scripting:
 
 Nothing extra on the runner. `driverforge` is a self-contained native binary, so the
 integration downloads the pinned release, verifies its checksum, and adds it to
-`PATH` — no Lua, LuaRocks, or container image required.
+`PATH`: no Lua, LuaRocks, or container image required.
 
 We recommend **pinning a version** (rather than `latest`) so a new release can't
 change your build without you choosing to upgrade.

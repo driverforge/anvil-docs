@@ -4,7 +4,7 @@ sidebar_position: 10
 
 # debug
 
-Run your driver locally with full IDE debugger support — set breakpoints, step
+Run your driver locally with full IDE debugger support: set breakpoints, step
 through code as it executes, and inspect variables in real time.
 
 :::info Coming soon

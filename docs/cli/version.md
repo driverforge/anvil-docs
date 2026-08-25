@@ -4,7 +4,7 @@ sidebar_position: 12
 
 # version
 
-Print the `driverforge` CLI version — and, when a controller is selected, the Director
+Print the `driverforge` CLI version and, when a controller is selected, the Director
 and Anvil Agent versions running on it.
 
 ## Usage
@@ -25,17 +25,17 @@ driverforge --version
 ```
 
 Unlike the subcommand, the flag never reaches out to a controller and skips
-the CLI's first-run prompts and update check entirely — safe for scripts and
+the CLI's first-run prompts and update check entirely, so it is safe for scripts and
 shell prompts. Once you've
 [selected a controller](/cli/context) (`driverforge device select`), `version` also
 reaches that controller's [Anvil Agent](/agent/overview) (best-effort) and reports:
 
-- **Controller** — the controller's name
-- **Director** — the Control4 Director (OS) version
-- **Anvil Agent** — the agent version installed on the controller
-- **MAC** — the controller's MAC address
+- **Controller**: the controller's name
+- **Director**: the Control4 Director (OS) version
+- **Anvil Agent**: the agent version installed on the controller
+- **MAC**: the controller's MAC address
 
-If the controller can't be reached, that line reads `unreachable` — the CLI
+If the controller can't be reached, that line reads `unreachable`; the CLI
 version is always printed regardless.
 
 ## Global flags

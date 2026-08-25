@@ -41,10 +41,10 @@ A formatted, syntax-highlighted view of the call stack showing file names, line 
 
 A table of every individual occurrence of this error, showing:
 
-- **Error ID** — unique identifier (click to view that specific occurrence)
-- **Timestamp** — when it happened
-- **Message** — the error message for this occurrence
-- **Version** — the driver version that produced it
+- **Error ID**: unique identifier (click to view that specific occurrence)
+- **Timestamp**: when it happened
+- **Message**: the error message for this occurrence
+- **Version**: the driver version that produced it
 
 Navigate between occurrences using the **Previous** / **Next** buttons, or jump to the first or last occurrence.
 
@@ -72,11 +72,11 @@ A bar chart above the error list shows error volume over time. Hover for counts 
 
 New errors stream in via WebSocket. When a new occurrence of an existing error arrives, the group's count, last seen, and sparkline update in place. New error groups appear at the top of the list.
 
-The same pause/resume controls from Events and Logs are available — pause the stream to inspect, and a badge shows how many errors are buffered.
+The same pause/resume controls from Events and Logs are available: pause the stream to inspect, and a badge shows how many errors are buffered.
 
 ## Automatic Capture
 
-Errors in event handlers are captured automatically. You don't need to add any error handling code — just add the Driverforge SDK and errors appear in Anvil.
+Errors in event handlers are captured automatically. You don't need to add any error handling code; just add the Driverforge SDK and errors appear in Anvil.
 
 Note that errors in `C4:SetTimer` and `C4:url()` callbacks need manual instrumentation because `C4` is a protected userdata object. See [Manual Capture](/sdk/manual-capture) for details.
 

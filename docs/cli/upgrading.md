@@ -10,14 +10,14 @@ the pieces fit.
 
 ## Update notices
 
-After a command runs, the CLI checks — at most once a day, cached — whether a
+After a command runs, the CLI checks (at most once a day, cached) whether a
 newer `driverforge` release is available, and prints a one-line notice if so. It's quiet
 by design: the notice goes to stderr, never stdout, and never appears in CI or
 non-interactive shells. Turn it off with `--no-update-check`.
 
 ## Upgrading the CLI
 
-`driverforge` is installed by a package manager, which owns the binary — so you upgrade
+`driverforge` is installed by a package manager, which owns the binary, so you upgrade
 it the same way you installed it:
 
 ```bash
@@ -28,16 +28,16 @@ scoop update driverforge      # Windows
 sh -c "$(curl -fsSL https://go.driverforge.com/get)"
 ```
 
-[`driverforge upgrade`](/cli/upgrade) shows everything upgradable in one place — the CLI
+[`driverforge upgrade`](/cli/upgrade) shows everything upgradable in one place: the CLI
 (advisory: it prints the exact command for how you installed it), the agent, and
-the embedded SDK — and applies them interactively.
+the embedded SDK. It applies them interactively.
 
 ## Upgrading the Anvil Agent
 
 The [`driverforge upgrade`](/cli/upgrade) picker is how agents get upgraded: select
 the **Anvil Agent** row and confirm, and the CLI updates the agent on the
 [selected controller](/cli/device) to the latest release. Upgrades are
-interactive-only — non-interactively, `driverforge upgrade` reports and never
+interactive-only: non-interactively, `driverforge upgrade` reports and never
 mutates.
 
 ## Upgrading the SDK

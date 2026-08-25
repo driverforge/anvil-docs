@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-description: Manage your personal Anvil account — profile, password, passkeys, connected logins, sessions, and two-factor authentication.
+description: 'Manage your personal Anvil account: profile, password, passkeys, connected logins, sessions, and two-factor authentication.'
 ---
 
 # Account settings
@@ -17,13 +17,13 @@ account settings open in Anvil's dedicated account area.
 
 ## What you can manage
 
-- **Profile** — your name, email, and avatar.
-- **Password** — change your password.
-- **Passkeys** — add passkeys for passwordless sign-in.
-- **Connected accounts** — link or unlink social logins (such as Google) you use
+- **Profile**: your name, email, and avatar.
+- **Password**: change your password.
+- **Passkeys**: add passkeys for passwordless sign-in.
+- **Connected accounts**: link or unlink social logins (such as Google) you use
   to sign in.
-- **Two-factor authentication** — add a second factor for extra security.
-- **Sessions** — review where you're signed in and sign out other sessions.
+- **Two-factor authentication**: add a second factor for extra security.
+- **Sessions**: review where you're signed in and sign out other sessions.
 
 ## Account vs organization
 

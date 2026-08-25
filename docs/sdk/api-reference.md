@@ -38,7 +38,7 @@ actually running.
 
 For each canonical level (`fatal`, `error`, `warn`, `info`, `debug`, `trace`), Anvil probes your logger for a method matching common case variants in this order: lowercase → PascalCase → UPPERCASE. The first match is wrapped. So a logger with `info`/`Info`/`INFO` style methods works without any `logMap`.
 
-`logMap` is only needed when a method has a **genuinely renamed** counterpart — typically when the canonical level word doesn't appear in the method name at all. For example, a logger that uses `Alert` for the fatal level:
+`logMap` is only needed when a method has a **genuinely renamed** counterpart: typically when the canonical level word doesn't appear in the method name at all. For example, a logger that uses `Alert` for the fatal level:
 
 ```lua
 Driverforge:Init("YOUR_API_KEY", {
@@ -187,7 +187,7 @@ end
 
 ## `Anvil:ForwardLog()`
 
-Manually forward a log message to Anvil. Not needed if you're using the `logger` option in `Driverforge:Init()` — see [Automatic Logs](/sdk/log-forwarding).
+Manually forward a log message to Anvil. Not needed if you're using the `logger` option in `Driverforge:Init()`; see [Automatic Logs](/sdk/log-forwarding).
 
 ```lua
 Anvil:ForwardLog(level, message)

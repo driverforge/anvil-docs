@@ -44,21 +44,21 @@ steps:
 
 | Property        | Description                                                                                                                       |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `version`       | The `driverforge` release to install — a pinned version (e.g. `%%CLI_VERSION%%`) or `latest` (the default). Pin it for reproducible builds.       |
+| `version`       | The `driverforge` release to install: a pinned version (e.g. `%%CLI_VERSION%%`) or `latest` (the default). Pin it for reproducible builds.       |
 | `command`       | The `driverforge` command to run (e.g. `build`). Omit to only install the CLI onto `PATH` for the step's own command.                   |
 | `project-dir`   | Driver project directory. Defaults to the checkout root; `driverforge` walks up to find `src/manifest.c4zproj`.                         |
-| `configuration` | Build configuration to apply — swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                            |
+| `configuration` | Build configuration to apply: swaps in `config.<name>.lua` (e.g. `release`, `debug`).                                            |
 | `increment`     | Bump the driver version before building, per the project's [versioning scheme](/cli/versioning). Requires an initialised project. |
-| `driver-version` | Stamp an exact driver `<version>` for this build — the value your release pipeline owns. Works without init; mutually exclusive with `increment`. |
+| `driver-version` | Stamp an exact driver `<version>` for this build: the value your release pipeline owns. Works without init; mutually exclusive with `increment`. |
 | `encrypt`       | Encrypt the driver script for this build. Defaults to the configuration's entry in the [project config](/cli/build-configuration#per-configuration-defaults), then the driver's `driver.xml`; set `false` to force it off. |
-| `no-suffix`     | Build a named configuration under the naked driver name — no `-<name>` artifact or `(name)` device-name suffix. Set `false` to force suffixing back on. |
+| `no-suffix`     | Build a named configuration under the naked driver name: no `-<name>` artifact or `(name)` device-name suffix. Set `false` to force suffixing back on. |
 | `sourcemap`     | Emit a Lua source map alongside the `.c4z`.                                                                                       |
 | `unpack`        | Also leave an unpacked copy of the driver in `dist/`.                                                                             |
 | `args`          | Additional raw flags passed straight through to `driverforge`.                                                                          |
 | `cache-dir`     | Per-agent download cache directory (default `~/.cache/driverforge-buildkite`).                                                    |
 
 To ship after building, set `command: deploy` or `command: sync` instead of
-`build` — [`driverforge deploy`](/cli/deploy) and [`driverforge sync`](/cli/sync) are their
+`build`. [`driverforge deploy`](/cli/deploy) and [`driverforge sync`](/cli/sync) are their
 own commands that build first, so there is no `deploy`/`sync` property on a
 `build`.
 
@@ -66,7 +66,7 @@ own commands that build first, so there is no `deploy`/`sync` property on a
 
 The plugin's `environment` hook detects the agent's OS and architecture,
 downloads the pinned `driverforge` release, verifies its checksum, and adds it to
-`PATH` — so `driverforge` is available whether or not you set `command`. Downloads are
+`PATH`, so `driverforge` is available whether or not you set `command`. Downloads are
 cached per agent under `cache-dir` (default `~/.cache/driverforge-buildkite`), keyed
 by version, so a persistent agent doesn't re-download on every build.
 

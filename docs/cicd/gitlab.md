@@ -5,7 +5,7 @@ description: Build and ship Control4 drivers from a GitLab CI/CD pipeline with t
 
 # GitLab CI/CD
 
-There's no dedicated GitLab integration (yet) — but `driverforge` is a
+There's no dedicated GitLab integration (yet), but `driverforge` is a
 self-contained native binary, so running it in a GitLab pipeline is a short
 `before_script`: download a pinned release, verify its checksum, put it on
 `PATH`. The template below is the same install the
@@ -13,7 +13,7 @@ self-contained native binary, so running it in a GitLab pipeline is a short
 perform, written out as plain `.gitlab-ci.yml`.
 
 :::tip Want a first-class GitLab component?
-Tell us — vote for it on our [roadmap](https://driverforge.canny.io) and we'll
+Tell us: vote for it on our [roadmap](https://driverforge.canny.io) and we'll
 prioritise accordingly.
 :::
 
@@ -95,8 +95,8 @@ release job shrink to `driverforge build -c release --version …`.
   GitLab.com shared runners. On self-hosted arm64 runners swap in
   `linux_arm64`; darwin archives exist for macOS runners too.
 - **Driver not at the repo root?** Pass `--project-dir path/to/driver` to
-  `driverforge build` — see [`driverforge build`](/cli/build) for the full
+  `driverforge build`; see [`driverforge build`](/cli/build) for the full
   option list.
 - **Shipping** (`driverforge deploy` / `driverforge sync`) needs network reach to the
-  target controller, which hosted CI runners won't have — those commands are
+  target controller, which hosted CI runners won't have; those commands are
   for [dev-loop use](/cli/deploy), not pipelines.

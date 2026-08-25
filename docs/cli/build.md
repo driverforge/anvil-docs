@@ -5,11 +5,11 @@ sidebar_position: 4
 # build
 
 Bundle your Lua source and produce a `.c4z` driver package. Building is entirely
-local — no account or controller required.
+local: no account or controller required.
 
 :::tip Fast by design
 `driverforge` is a self-contained native binary. It runs the whole build in one
-process — bundling, encryption, and packaging — instead of orchestrating the
+process (bundling, encryption, and packaging) instead of orchestrating the
 chain of separate scripts and tools typically needed to package Control4
 drivers. Builds finish in a fraction of the time, and produce a standard `.c4z`
 that Composer and your controllers install and run exactly like any other.
@@ -21,7 +21,7 @@ that Composer and your controllers install and run exactly like any other.
 driverforge build [options]
 ```
 
-Run it from a driver project — a directory with `src/manifest.c4zproj` (the CLI
+Run it from a driver project: a directory with `src/manifest.c4zproj` (the CLI
 walks up from the current directory to find it, or point `--c4zproj` at a
 manifest elsewhere). The driver name comes from the manifest; `driver.xml` and
 the `squishy` build file live alongside it in `src/`.
@@ -40,7 +40,7 @@ the `squishy` build file live alongside it in `src/`.
 
 | Option                  | Description                                                                                                                                                                 |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--configuration`, `-c` | Build a named configuration — swaps `src/config.<name>.lua` in as `config.lua` for this build. Omit to build the default `config.lua` as-is                                 |
+| `--configuration`, `-c` | Build a named configuration: swaps `src/config.<name>.lua` in as `config.lua` for this build. Omit to build the default `config.lua` as-is                                 |
 | `--increment`, `-i`     | Bump the version per the project's [versioning scheme](/cli/versioning) before building. Requires an [initialised](/cli/init) project                                       |
 | `--version`             | Stamp an exact `<version>` for this build, persisted to `driver.xml` on success. Works without init; mutually exclusive with `--increment`                                  |
 | `--c4zproj`             | Path to the `.c4zproj` manifest (default `src/manifest.c4zproj`)                                                                                                            |
@@ -48,7 +48,7 @@ the `squishy` build file live alongside it in `src/`.
 | `--sourcemap`, `-s`     | Also emit a Lua source map (`dist/<driver>.lua.map`)                                                                                                                        |
 | `--unpack`, `-u`        | Also leave an unpacked copy of the package in `dist/`                                                                                                                       |
 | `--encrypt`             | Force script encryption on for this build (`--encrypt=false` forces it off). Default follows the configuration's entry in the project config, then `driver.xml`             |
-| `--no-suffix`           | Build a named configuration under the naked driver name — no `-<name>` artifact or `(name)` device-name suffix (`--no-suffix=false` forces suffixing back on)               |
+| `--no-suffix`           | Build a named configuration under the naked driver name: no `-<name>` artifact or `(name)` device-name suffix (`--no-suffix=false` forces suffixing back on)               |
 | `--allow-execute`       | Development build: append `C4:AllowExecute(true)` to the built driver script, enabling Director's Lua command window. Applied to the artifact only, never written to source |
 
 Shipping is its own command now: [`driverforge sync`](/cli/sync) and [`driverforge deploy`](/cli/deploy) each build first, so there is no `build --sync` or `build --deploy`.
@@ -68,16 +68,16 @@ dist/
 
 `driverforge build` uses your committed `src/config.lua` as the driver's configuration.
 Pass `--configuration <name>` (or `-c <name>`) to swap a committed
-`src/config.<name>.lua` override in for the build instead — for example
+`src/config.<name>.lua` override in for the build instead, for example
 `--configuration release`. It's an opt-in system; see
 [Build configuration](/cli/build-configuration) for the full picture.
 
 **Naming.** A plain build (the default configuration) keeps the driver's naked
-name (`my-driver.c4z`). A named configuration is suffixed so builds coexist —
+name (`my-driver.c4z`). A named configuration is suffixed so builds coexist:
 `driverforge build --configuration release` produces `my-driver-release.c4z` and adds a
 `(release)` suffix to the device name in Composer. A release configuration can
-opt out of the suffixes — `--no-suffix`, or `"suffix": false` in the project
-config — to ship under the naked name; see
+opt out of the suffixes (`--no-suffix`, or `"suffix": false` in the project
+config) to ship under the naked name; see
 [Per-configuration defaults](/cli/build-configuration#per-configuration-defaults).
 
 **Per-configuration defaults.** An [initialised](/cli/init) project can set
@@ -107,7 +107,7 @@ Release build (swaps in `config.release.lua`) with a version bump and a source m
 driverforge build --configuration release -i -s
 ```
 
-Full release artifact — encrypted, naked name — with no config file, using
+Full release artifact (encrypted, naked name) with no config file, using
 flags alone (or set these once per configuration in the
 [project config](/cli/build-configuration#per-configuration-defaults) and drop
 the flags):

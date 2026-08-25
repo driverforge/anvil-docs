@@ -13,7 +13,7 @@ import DownloadSDK from '@site/src/components/DownloadSDK';
 
 Anvil requires **Control4 OS 3.3.1 or newer** on the controller running your driver.
 
-Telemetry needs the Anvil Agent alongside your driver, and the agent needs 3.3.1. Below that the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all — same return values, same errors, nothing captured, nothing retained. It says so once on the console rather than failing quietly:
+Telemetry needs the Anvil Agent alongside your driver, and the agent needs 3.3.1. Below that the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all: same return values, same errors, nothing captured, nothing retained. It says so once on the console rather than failing quietly:
 
 ```
 Anvil: this controller is running Control4 OS older than 3.3.1 - the SDK has
@@ -24,7 +24,7 @@ So a driver that ships with the SDK is safe to install anywhere; it simply produ
 
 ### The Anvil Agent
 
-The Driverforge SDK requires the Anvil Agent to be installed and authenticated on your controller. The agent is a one-time setup per controller — all drivers on the same controller share it. See the [Agent Installation](/agent/installation) guide for instructions.
+The Driverforge SDK requires the Anvil Agent to be installed and authenticated on your controller. The agent is a one-time setup per controller; all drivers on the same controller share it. See the [Agent Installation](/agent/installation) guide for instructions.
 
 ## Download
 
@@ -66,7 +66,7 @@ squished driver instead of shipping the vendor directory:
 Module "vendor.driverforge-sdk" "vendor/driverforge-sdk.lua"
 ```
 
-The `require('vendor.driverforge-sdk')` call is identical either way — squish
+The `require('vendor.driverforge-sdk')` call is identical either way: squish
 satisfies it from the bundle, otherwise Director resolves the vendored file
 from the packaged driver (which is how the worked example driver ships).
 
@@ -96,7 +96,7 @@ The `Anvil:OnDriverInit(function(strDIR) ... end, strDIR)` wrapper ensures:
 - Any errors in your init code are reported with full stack traces
 - The SDK is fully initialized before your code runs
 
-**All other lifecycle methods are automatically instrumented.** You don't need to wrap `OnDriverLateInit`, `OnPropertyChanged`, `ExecuteCommand`, or any of the [100+ auto-captured handlers](/sdk/automatic-capture) — just write them normally and they'll appear in Anvil.
+**All other lifecycle methods are automatically instrumented.** You don't need to wrap `OnDriverLateInit`, `OnPropertyChanged`, `ExecuteCommand`, or any of the [100+ auto-captured handlers](/sdk/automatic-capture); just write them normally and they'll appear in Anvil.
 
 ### Load order: define handlers first
 

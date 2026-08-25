@@ -5,7 +5,7 @@ description: The handler calls Anvil captures automatically, and how to see whic
 
 # Captured Handlers
 
-The Driverforge SDK automatically captures handler calls from your driver — there's
+The Driverforge SDK automatically captures handler calls from your driver: there's
 nothing to wire up per handler. Every captured call appears on the
 [Events](/platform/events) page in real time.
 
@@ -29,5 +29,5 @@ define yet.
 
 On the [Events](/platform/events) page, the **Implementation Status** filter
 switches between all events, only implemented handlers, or only unimplemented
-ones — unimplemented events render at reduced opacity so they stand out. It's a
+ones; unimplemented events render at reduced opacity so they stand out. It's a
 quick way to see which Control4 events your driver still needs to handle.

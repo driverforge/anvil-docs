@@ -38,7 +38,7 @@ releases.
 | -------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `projectDir`         | `project-dir`                  | `driverforge` walks up from this directory to find `src/manifest.c4zproj`. Defaults to the checkout root.                                                                                                             |
 | `version`            | `driver-version`               | Stamps the exact `<version>` you give, persisted to `driver.xml` on success. Or use `increment: true` to bump per the project's [versioning scheme](/cli/versioning) instead of managing version strings in CI. |
-| `updateModified`     | _(automatic)_                  | `driverforge` always updates the driver's modified timestamp on build — there's no flag to turn it off.                                                                                                               |
+| `updateModified`     | _(automatic)_                  | `driverforge` always updates the driver's modified timestamp on build; there's no flag to turn it off.                                                                                                               |
 | `c4zproj`            | `--c4zproj` (via `args`)       | Path to the manifest. Defaults to `src/manifest.c4zproj`.                                                                                                                                                       |
 | `outputDir`          | `--output-dir` (via `args`)    | Directory for the built `.c4z`. Defaults to the project's `dist/`.                                                                                                                                              |
 | `allowexecute`       | `--allow-execute` (via `args`) | Development builds: appends `C4:AllowExecute(true)` to the built driver script, enabling Director's Lua command window. Applied to the artifact only, never written to source.                                  |
@@ -69,7 +69,7 @@ Two of driverpackager's inputs deserve a closer look:
   project's [versioning scheme](/cli/versioning).
 - **Shell hacks you no longer need**: pipelines built on driverpackager often
   `sed` an `encryption` attribute into `driver.xml` before packaging, or rename
-  the built `.c4z` afterwards. Those are inputs now — `encrypt: true` and
+  the built `.c4z` afterwards. Those are inputs now: `encrypt: true` and
   `no-suffix: true` produce an encrypted artifact under the plain driver name
   in one step.
 - **`allowexecute`**: `--allow-execute` enables Director's Lua command window

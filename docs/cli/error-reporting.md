@@ -17,11 +17,11 @@ reports them anywhere.
 ## Unexpected errors
 
 If the CLI hits something it didn't anticipate, it shows a crash card and **offers
-to send an error report** so we can fix it. Reporting is **opt-in, per error** —
+to send an error report** so we can fix it. Reporting is **opt-in, per error**:
 you're asked each time, and nothing is sent unless you agree.
 
 A report contains the command you ran, which flags were set (their names only, not
-their values), and the error itself — **never your source code or file contents**.
+their values), and the error itself, **never your source code or file contents**.
 
 ## Turning it off
 

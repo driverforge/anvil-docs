@@ -7,7 +7,7 @@ sidebar_position: 4
 Some contexts can't be automatically instrumented. `C4` is a protected userdata object in Lua, so we can't wrap its methods. Timer callbacks and URL responses need explicit handling.
 
 :::tip
-This page covers **error** capture in async contexts. For **log** forwarding, see [Log Forwarding](/sdk/log-forwarding) — Anvil can wrap your existing logger so log messages are forwarded automatically.
+This page covers **error** capture in async contexts. For **log** forwarding, see [Log Forwarding](/sdk/log-forwarding): Anvil can wrap your existing logger so log messages are forwarded automatically.
 :::
 
 ## Why This Matters
@@ -21,7 +21,7 @@ C4:SetTimer(5000, function(timer)
 end)
 ```
 
-Control4 logs the error to the Lua output, but it's easy to miss — buried in log output that gets lost between Composer refreshes and driver reloads. Anvil can't instrument `C4:SetTimer` callbacks automatically because `C4` is a protected userdata object.
+Control4 logs the error to the Lua output, but it's easy to miss, buried in log output that gets lost between Composer refreshes and driver reloads. Anvil can't instrument `C4:SetTimer` callbacks automatically because `C4` is a protected userdata object.
 
 ## Timers: Use `Anvil:SetTimer()`
 

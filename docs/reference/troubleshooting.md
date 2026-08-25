@@ -10,7 +10,7 @@ Common issues and how to fix them.
 
 ### Check the Controller's OS Version
 
-Anvil requires **Control4 OS 3.3.1 or newer**. Below that the SDK switches itself off at load, so a correctly-installed driver produces no telemetry at all — which looks identical to a broken setup.
+Anvil requires **Control4 OS 3.3.1 or newer**. Below that the SDK switches itself off at load, so a correctly-installed driver produces no telemetry at all, which looks identical to a broken setup.
 
 Check the controller's logs for this line when the driver loads:
 
@@ -19,13 +19,13 @@ Anvil: this controller is running Control4 OS older than 3.3.1 - the SDK has
 disabled itself and the driver will run uninstrumented.
 ```
 
-Or ask the SDK directly — `Anvil:TelemetryStatus()` returns `unsupported-runtime` on a controller below the floor. If you see either, nothing else on this page will help: the controller needs upgrading.
+Or ask the SDK directly: `Anvil:TelemetryStatus()` returns `unsupported-runtime` on a controller below the floor. If you see either, nothing else on this page will help: the controller needs upgrading.
 
 ### Check the Agent
 
 1. Open Composer Pro
 2. Select the Anvil Agent
-3. Check the **Authentication status** property — it should show `Logged in as you@youremail.com`
+3. Check the **Authentication status** property: it should show `Logged in as you@youremail.com`
 
 If not logged in:
 - Re-authenticate via **Actions** > **Get authentication link**
@@ -48,7 +48,7 @@ end
 
 The token passed to `Driverforge:Init()` must be the project token of the project you're expecting data in. In Anvil, open **Settings > Projects**, click the gear icon on your project, and copy the token directly from **Project Token** to avoid typos.
 
-A project token doesn't expire and can't be revoked, so there's no status to check — if it's the right value for the right project, it works. The usual causes are a typo, or a token copied from a different project than the one you're watching. Confirm the token in your driver matches the project whose Events page you have open.
+A project token doesn't expire and can't be revoked, so there's no status to check: if it's the right value for the right project, it works. The usual causes are a typo, or a token copied from a different project than the one you're watching. Confirm the token in your driver matches the project whose Events page you have open.
 
 See [Project tokens](/platform/project-tokens) for how tokens work.
 

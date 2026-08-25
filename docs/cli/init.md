@@ -4,11 +4,11 @@ sidebar_position: 8
 
 # init
 
-Set up Anvil in an existing Control4 driver project — embed the SDK, wrap
+Set up Anvil in an existing Control4 driver project: embed the SDK, wrap
 `OnDriverInit`, link an Anvil project, and (optionally) add a build config.
 
 :::warning Experimental
-`driverforge init` is experimental, and it **modifies files in your driver project** —
+`driverforge init` is experimental, and it **modifies files in your driver project**;
 that's the point: it embeds the SDK, wraps `OnDriverInit`, and writes config. It
 shows you a per-file diff for approval and backs up edited files before writing,
 but always review the changes before committing.
@@ -20,11 +20,11 @@ but always review the changes before committing.
 driverforge init
 ```
 
-Run it from inside an existing driver project — a directory with
+Run it from inside an existing driver project: a directory with
 `src/manifest.c4zproj`. It's interactive, so run it in a real terminal.
 
 `init` sets a project up exactly **once** and never mutates an initialised
-project — see [Running it again](#running-it-again). SDK updates have one
+project (see [Running it again](#running-it-again)). SDK updates have one
 owner, the [`driverforge upgrade`](/cli/upgrade) picker.
 
 ## Prerequisites
@@ -37,27 +37,27 @@ owner, the [`driverforge upgrade`](/cli/upgrade) picker.
 
 `driverforge init` retrofits your driver for Anvil, walking you through:
 
-1. **Embedding the Driverforge SDK** into your project (under `src/vendor/`) — the
+1. **Embedding the Driverforge SDK** into your project (under `src/vendor/`): the
    newest locally cached SDK, or, if none is cached, it offers to download the
    latest. Updating it later is the [`driverforge upgrade`](/cli/upgrade)
    picker's job.
 2. **Wrapping your driver's `OnDriverInit`** so Anvil initializes when the driver
    loads.
-3. **Linking an Anvil project** — pick an existing one or create a new one — and
+3. **Linking an Anvil project** (pick an existing one or create a new one) and
    provisioning an [API key](/platform/project-tokens).
-4. **Choosing a [versioning scheme](/cli/versioning)** — date-based for new
+4. **Choosing a [versioning scheme](/cli/versioning)**: date-based for new
    drivers; for an existing driver the wizard inspects the current `<version>`,
    proposes the matching scheme (date-shaped stays date, anything else becomes
    an incrementing integer), and states the choice before writing it. The
    scheme is what `--increment` and the ship commands bump with.
-5. **Optionally setting up a [build config](/cli/build-configuration)** — a
+5. **Optionally setting up a [build config](/cli/build-configuration)**: a
    committed `src/config.lua` (your default configuration) plus a
    `src/config.release.lua` override, loaded by your driver via `require('config')`
    and swapped per build with [`driverforge build --configuration`](/cli/build). These
    are committed and hold no secrets (your Anvil key is inlined in the driver, not
    in config).
 6. **Detecting a logger** in your entry file to forward log output from.
-7. **Writing `.driverforge/config`** — a committed record of the integration
+7. **Writing `.driverforge/config`**: a committed record of the integration
    (including your versioning scheme), with no secrets in it.
 
 Initialising is also what unlocks version management and the ship commands:
@@ -69,13 +69,13 @@ and `build --increment` needs the versioning scheme recorded here.
 Before changing a single file, `driverforge init` shows you a **per-file diff of every
 proposed change** and asks for approval. If your project is a git repository, it
 offers to create a branch first. Edited files are backed up to `<file>.bak` while writing,
-and the changes are applied atomically — if anything fails, it rolls back.
+and the changes are applied atomically: if anything fails, it rolls back.
 
 ## Options
 
 | Option      | Description                                                                                             |
 | ----------- | ------------------------------------------------------------------------------------------------------- |
-| `--project` | Link a specific Anvil project without prompting — `<org-slug>/<project-slug>` (or just a project slug). |
+| `--project` | Link a specific Anvil project without prompting: `<org-slug>/<project-slug>` (or just a project slug). |
 
 ## Running it again
 
@@ -93,11 +93,11 @@ an advisory card and exits without touching anything:
 ```
 
 The one exception: a config predating the [versioning scheme](/cli/versioning)
-field still gets the one-time versioning interview backfilled — a migration, not
+field still gets the one-time versioning interview backfilled: a migration, not
 a setup change.
 
-If the setup has since been *broken* rather than merely already done — a
-reverted edit, a missing `src/vendor/`, a file that didn't survive a clone —
+If the setup has since been *broken* rather than merely already done (a
+reverted edit, a missing `src/vendor/`, a file that didn't survive a clone),
 that's [`driverforge doctor`](/cli/doctor). It checks each piece `init` puts in
 place and offers to restore what's gone.
 

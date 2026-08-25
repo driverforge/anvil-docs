@@ -25,7 +25,7 @@ driverforge build --sourcemap
 ```
 
 This writes the map next to the bundled output as `dist/<driver>.lua.map`. It
-works for any squished driver — a driver that isn't squished has nothing to map,
+works for any squished driver; a driver that isn't squished has nothing to map,
 and the step is skipped.
 
 ```bash
@@ -34,8 +34,8 @@ driverforge build --configuration release -i --sourcemap
 ```
 
 :::info Uploading to Anvil
-Generating the map is built in today. Automatic upload to Anvil — so stack
-traces are translated for you — isn't part of the CLI yet; reach out to
+Generating the map is built in today. Automatic upload to Anvil (so stack
+traces are translated for you) isn't part of the CLI yet; reach out to
 [support@driverforge.com](mailto:support@driverforge.com) if you need it for your
 workflow.
 :::

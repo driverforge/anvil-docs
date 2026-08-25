@@ -21,7 +21,7 @@ in this order:
 3. An interactive picker (when nothing is remembered)
 
 Pass `--select` to any deploy command to force the picker and re-choose. The CLI
-never silently picks a default — deploying to the wrong controller is risky, so
+never silently picks a default: deploying to the wrong controller is risky, so
 the choice is always explicit.
 
 ## Why the IP, not the hostname
@@ -33,8 +33,8 @@ the right one on later deploys.
 
 ## Commands
 
-- [`driverforge org`](/cli/org) — choose the active organization (`list` / `select` / `show`)
-- [`driverforge device`](/cli/device) — choose the target controller (`list` / `select` / `show`)
+- [`driverforge org`](/cli/org): choose the active organization (`list` / `select` / `show`)
+- [`driverforge device`](/cli/device): choose the target controller (`list` / `select` / `show`)
 
 ## In your prompt
 

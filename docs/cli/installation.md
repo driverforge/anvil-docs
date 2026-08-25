@@ -15,7 +15,7 @@ brew install driverforge
 ```
 
 Homebrew (6.0 and later) refuses to install from a third-party tap until you
-explicitly trust it — this is standard for all non-official taps, not specific
+explicitly trust it; this is standard for all non-official taps, not specific
 to Driverforge. When brew asks, review the tap and trust it:
 
 ```bash
@@ -24,7 +24,7 @@ brew trust driverforge/tap
 
 then re-run `brew install driverforge`. Trusting records your one-time consent
 to install packages from our tap. What you're trusting is
-[`driverforge/homebrew-tap`](https://github.com/driverforge/homebrew-tap) — it
+[`driverforge/homebrew-tap`](https://github.com/driverforge/homebrew-tap): it
 contains only the machine-generated cask, updated automatically on each
 release, and the binaries it installs are downloaded from
 `releases.driverforge.com`.

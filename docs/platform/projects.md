@@ -104,7 +104,7 @@ Click **Save Changes** to apply your edits.
 
 :::warning
 Deleting a project is permanent. Its events, logs, errors, and its project token
-are removed and can't be recovered — and because the token goes with it, any
+are removed and can't be recovered. Because the token goes with it, any
 installed driver still sending with it stops resolving. Migrate or export
 anything you still need first.
 :::

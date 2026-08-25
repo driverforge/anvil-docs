@@ -30,10 +30,10 @@ the driver's structure hasn't changed. A sync never changes the driver's
 - You're [signed in](/cli/login) (`driverforge login`)
 - A target controller is [selected](/cli/device) (`driverforge device select`)
 - The [Anvil Agent](/agent/overview) is installed and running on the controller
-- The driver is already installed on the controller — [`deploy`](/cli/deploy) it
+- The driver is already installed on the controller; [`deploy`](/cli/deploy) it
   once first so there's a running instance to hot-swap into
 
-## When sync applies — and when it doesn't
+## When sync applies (and when it doesn't)
 
 Sync only hot-swaps when `driver.xml` is **structurally unchanged** since the
 running build (same actions, properties, commands, connections, etc.). If you've
@@ -58,7 +58,7 @@ Keep these in mind:
 
 | Option                  | Description                                                                |
 | ----------------------- | -------------------------------------------------------------------------- |
-| `--device`              | Controller to sync to (name, hostname, or id) — overrides the selected one |
+| `--device`              | Controller to sync to (name, hostname, or id); overrides the selected one |
 | `--select`              | Re-select the target controller first                                      |
 | `--configuration`, `-c` | Build configuration to build and sync                                      |
 | `--deploy`              | Do a full [deploy](/cli/deploy) instead of a hot-swap                      |
