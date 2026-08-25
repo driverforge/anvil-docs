@@ -51,7 +51,7 @@ variables:
 build-driver:
   extends: .install-driverforge
   script:
-    - driverforge build --configuration release
+    - driverforge build --configuration release --warnings-as-errors
   artifacts:
     paths:
       - dist/*.c4z
@@ -88,6 +88,10 @@ release job shrink to `driverforge build -c release --version …`.
 
 ## Notes
 
+- **Fail on warnings.** `--warnings-as-errors` promotes build warnings (such as
+  a `require` with no `Module` line in the squishy manifest) to failures before
+  packaging, so a warned build can't produce the artifact. See
+  [`driverforge build`](/cli/build#warnings).
 - **Pin the version.** `DRIVERFORGE_VERSION` names an immutable release path.
   A `latest/manifest.json` pointer exists if you must track the newest release,
   but a pinned version keeps builds reproducible.

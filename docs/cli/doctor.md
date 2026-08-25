@@ -59,7 +59,10 @@ The two squishy checks matter more than they look. The squisher only preloads
 modules the squishy declares, so a missing declaration isn't a cosmetic
 omission; it's a driver-load error on the controller. The config module is
 only checked when the project has
-[build configurations](/cli/build-configuration).
+[build configurations](/cli/build-configuration). The same class of mistake in
+your own modules is caught at build time:
+[`driverforge build` warns](/cli/build#warnings) when a bundled file requires a
+local module the squishy doesn't declare.
 
 A healthy project finishes here:
 

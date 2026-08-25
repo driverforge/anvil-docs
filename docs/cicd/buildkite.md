@@ -23,7 +23,7 @@ before the step's own command runs:
 steps:
   - command: driverforge build -c release
     plugins:
-      - driverforge/driverforge#v1.2.0:
+      - driverforge/driverforge#v1.3.0:
           version: '%%CLI_VERSION%%' # pinned, or 'latest'
 ```
 
@@ -34,11 +34,29 @@ Give it a `command` and the plugin runs that target for you:
 ```yaml
 steps:
   - plugins:
-      - driverforge/driverforge#v1.2.0:
+      - driverforge/driverforge#v1.3.0:
           command: build
           configuration: release
           increment: true
 ```
+
+## Fail on warnings
+
+`driverforge build` warns when a bundled file requires a local module the squishy
+manifest doesn't declare; the packaged driver would load and then die on the
+controller ([details](/cli/build#warnings)). In a pipeline, promote warnings to
+failures with the `warnings-as-errors` property:
+
+```yaml
+steps:
+  - plugins:
+      - driverforge/driverforge#v1.3.0:
+          command: build
+          configuration: release
+          warnings-as-errors: true
+```
+
+A warned build then fails before packaging, so it can't produce an artifact.
 
 ## Configuration
 
@@ -54,6 +72,7 @@ steps:
 | `no-suffix`     | Build a named configuration under the naked driver name: no `-<name>` artifact or `(name)` device-name suffix. Set `false` to force suffixing back on. |
 | `sourcemap`     | Emit a Lua source map alongside the `.c4z`.                                                                                       |
 | `unpack`        | Also leave an unpacked copy of the driver in `dist/`.                                                                             |
+| `warnings-as-errors` | Fail the build before packaging if it emits any warning; see [Fail on warnings](#fail-on-warnings).                          |
 | `args`          | Additional raw flags passed straight through to `driverforge`.                                                                          |
 | `cache-dir`     | Per-agent download cache directory (default `~/.cache/driverforge-buildkite`).                                                    |
 

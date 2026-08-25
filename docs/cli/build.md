@@ -50,8 +50,41 @@ the `squishy` build file live alongside it in `src/`.
 | `--encrypt`             | Force script encryption on for this build (`--encrypt=false` forces it off). Default follows the configuration's entry in the project config, then `driver.xml`             |
 | `--no-suffix`           | Build a named configuration under the naked driver name: no `-<name>` artifact or `(name)` device-name suffix (`--no-suffix=false` forces suffixing back on)               |
 | `--allow-execute`       | Development build: append `C4:AllowExecute(true)` to the built driver script, enabling Director's Lua command window. Applied to the artifact only, never written to source |
+| `--warnings-as-errors`  | Fail the build (before packaging) when any warning fires. Recommended for CI, where a warned build must not produce an artifact; see [Warnings](#warnings)                 |
 
 Shipping is its own command now: [`driverforge sync`](/cli/sync) and [`driverforge deploy`](/cli/deploy) each build first, so there is no `build --sync` or `build --deploy`.
+
+## Warnings
+
+While bundling, the build checks every `require` in the files your squishy
+manifest names (the `Main` file plus every `Module`). A require whose target
+exists as a Lua file in your source tree but has no `Module` line in
+`src/squishy` produces a warning naming the module and the require that needs
+it:
+
+```
+⚠ driver.lua:12 requires "lib.actions", but squishy has no Module entry for it — the module will not be bundled
+```
+
+Without that entry the module is left out of the packaged `driver.lua`, so the
+build succeeds and the driver dies at that require on the controller. The fix
+is the missing line in `src/squishy`:
+
+```
+Module "lib.actions" "lib/actions.lua"
+```
+
+Only requires that resolve to a file under `src/` are checked: `<name>.lua`
+(dots in the module name act as path separators) or `<name>/init.lua`. A
+require with no matching local file, such as `require('openssl')`, is assumed
+to come from the controller's runtime and never warns.
+
+Warnings are advisory by default: the build completes and packages the
+artifact. Pass `--warnings-as-errors` to fail the build before packaging when
+any warning fires. Use it in CI, where a warned build must not produce an
+artifact; the [GitHub Action](/cicd/github-actions#fail-on-warnings),
+[Buildkite plugin](/cicd/buildkite#fail-on-warnings) and
+[GitLab template](/cicd/gitlab) recipes show it wired in.
 
 ## Output
 
