@@ -10,7 +10,8 @@ self-contained native binary, so running it in a GitLab pipeline is a short
 `before_script`: download a pinned release, verify its checksum, put it on
 `PATH`. The template below is the same install the
 [GitHub Action](/cicd/github-actions) and [Buildkite plugin](/cicd/buildkite)
-perform, written out as plain `.gitlab-ci.yml`.
+perform, written out as plain `.gitlab-ci.yml`. See
+[Installing the CLI](/cli/installation) for the release channel it pulls from.
 
 :::tip Want a first-class GitLab component?
 Tell us: vote for it on our [roadmap](https://driverforge.canny.io) and we'll
