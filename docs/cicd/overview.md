@@ -11,6 +11,10 @@ on every push, tag, or release. Two integrations wrap the same CLI:
 - **[GitHub Action](/cicd/github-actions)**: `driverforge/driverforge-github-action`, for GitHub Actions workflows.
 - **[Buildkite plugin](/cicd/buildkite)**: `driverforge/driverforge-buildkite-plugin`, for Buildkite pipelines.
 
+On anything else, run the CLI directly — it is a self-contained binary, so
+installing it is a few lines of shell. [GitLab CI/CD](/cicd/gitlab) has a
+worked template you can adapt to any runner.
+
 :::info Preview
 The `driverforge` GitHub Action and Buildkite plugin are available today and in
 **preview**: while the CLI is pre-1.0, the interfaces may still evolve between
