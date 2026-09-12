@@ -24,6 +24,8 @@ const config: Config = {
 
   future: {
     v4: true,
+    // Docusaurus 3.10 enables Faster with v4; keep the existing Webpack build.
+    faster: false,
   },
 
   url: 'https://docs.driverforge.com',
@@ -41,6 +43,8 @@ const config: Config = {
 
   markdown: {
     preprocessor: undefined,
+    // Keep existing {#heading-id} anchors supported with the v4 future flags.
+    mdx1Compat: { headingIds: true },
   },
 
   i18n: {
