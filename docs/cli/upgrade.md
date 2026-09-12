@@ -22,9 +22,9 @@ current project). Each row shows current → latest versions and status. The CLI
 check here is always live, never the daily cached answer behind the passive
 [update notice](/cli/upgrading#update-notices).
 
-Rows with an update available are selectable checkboxes. **Nothing is
-pre-selected**: an upgrade is always an explicit choice, and confirming the
-selection is the consent; there is no further prompt.
+Available upgrades are selectable when their prerequisites are met. **Nothing is
+pre-selected**: confirming the selection starts the upgrades. For SDK changes,
+the CLI also offers an optional git branch and commit, as described below.
 
 | Key | Action |
 |-----|--------|
@@ -40,10 +40,11 @@ What confirming does, per row:
   confirm it came back up via a health poll).
 - **Driverforge SDK**: re-embeds the latest Driverforge SDK in the current project
   (`src/vendor/driverforge-sdk.lua`, and `.driverforge/config.json` is bumped to
-  match). A dirty git tree is refused first: commit or stash, then re-run.
-- **driverforge CLI**: doesn't upgrade (a package manager owns the binary).
-  After the other upgrades finish, the CLI prints the right upgrade command for
-  how it was installed (brew, scoop, or the install script).
+  match). With a dirty git tree, the update remains visible but cannot be
+  selected: commit or stash your changes, then re-run.
+- **driverforge CLI**: verifies and replaces the installed binary when its
+  location is writable. The new version runs on your next command. If it cannot
+  update itself, the CLI provides the upgrade command for your installation.
 
 `r` on the SDK row opens that release's notes on GitHub
 (`github.com/driverforge/control4-sdk/releases`).
@@ -53,6 +54,23 @@ An agent too old to report its installed filename can't self-upgrade. Update it
 once in Composer Pro ([instructions](/agent/installation#updating)); after that
 `driverforge upgrade` can take over.
 :::
+
+## SDK branch and commit prompts
+
+When an SDK upgrade will change files in a git repository with an existing
+commit, it offers the same git workflow as [`init`](/cli/init):
+
+1. **Create a git branch for these changes?** Accept to choose a branch name.
+   The default is `driverforge-sdk-<version>`, for example `driverforge-sdk-0.9.2`.
+   If that name already exists, the suggestion gets a numeric suffix such as
+   `-2`. Decline to apply the update on your current branch without committing.
+2. **Commit message** appears if you choose a branch. The default is
+   `chore: update Driverforge SDK to <version>`. Accept or edit it to commit the
+   update, or clear it to leave the changes uncommitted on the new branch.
+
+If the SDK bundle and configuration already match the target release, the CLI
+reports that there is nothing to update and skips both prompts. Projects outside
+git, or without an initial commit, also skip the branch and commit prompts.
 
 ## Non-interactive behaviour
 
