@@ -112,7 +112,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'cli/build',
         'cli/completion',
-        {type: 'doc', id: 'cli/debug', className: 'menu-coming-soon'},
+        {type: 'doc', id: 'cli/debug', className: 'menu-experimental'},
         'cli/deploy',
         'cli/device',
         {type: 'doc', id: 'cli/doctor', className: 'menu-experimental'},
