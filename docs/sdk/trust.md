@@ -7,7 +7,7 @@ description: The cryptographic handshake that ensures your driver's telemetry on
 
 When a driver instrumented with the Driverforge SDK sends telemetry, that data should reach the genuine Anvil agent on the controller, and nothing else. This page explains the mechanism that guarantees it, in enough detail that you can audit the claim rather than take our word for it.
 
-:::info Security by default
+:::info[Security by default]
 
 Transparency, trust, and security by default are foundations of how Driverforge is built, baked in early rather than retrofitted when something demands them. Publishing mechanisms like this one, in full detail and with the code open to inspection, is how we'd rather earn your confidence: with a record you can verify, not assurances.
 

@@ -7,7 +7,7 @@ sidebar_position: 9
 Check that a driver project still has everything [`driverforge init`](/cli/init)
 set up, and restore whatever is missing.
 
-:::warning Experimental
+:::warning[Experimental]
 `driverforge doctor` is experimental. Checking is read-only and safe to run any
 time, but the repairs it offers **modify files in your driver project**: they
 are the same transforms [`driverforge init`](/cli/init) applies. It shows you a

@@ -13,7 +13,7 @@ self-contained native binary, so running it in a GitLab pipeline is a short
 perform, written out as plain `.gitlab-ci.yml`. See
 [Installing the CLI](/cli/installation) for the release channel it pulls from.
 
-:::tip Want a first-class GitLab component?
+:::tip[Want a first-class GitLab component?]
 Tell us: vote for it on our [roadmap](https://driverforge.canny.io) and we'll
 prioritise accordingly.
 :::

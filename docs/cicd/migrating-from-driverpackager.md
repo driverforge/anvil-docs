@@ -9,7 +9,7 @@ If you package drivers with the `snap-one/drivers-driverpackager` action, the
 `driverforge` integrations replace it. Every driverpackager input has a `driverforge`
 equivalent; the mapping is below.
 
-:::info Preview
+:::info[Preview]
 The `driverforge` GitHub Action and Buildkite plugin are available today and in
 **preview**: while the CLI is pre-1.0, the interfaces may still evolve between
 releases.

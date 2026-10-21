@@ -15,7 +15,7 @@ Anvil is easy to add to your driver. Install the agent, add the client library a
 - The Anvil Agent installed and authenticated on your controller ([setup guide](/agent/installation))
 - A project created in [Anvil](https://dev.driverforge.com)
 
-:::info Older controllers
+:::info[Older controllers]
 On anything below OS 3.3.1 the SDK disables itself at load and your driver runs exactly as it would with no SDK vendored at all. Nothing breaks; you just get no telemetry. See [SDK installation](/sdk/installation#control4-os-331-or-newer) for what that looks like.
 :::
 
@@ -33,7 +33,7 @@ Make sure the vendor directory is included in your manifest:
 <Item type="dir" c4zDir="vendor" name="vendor" recurse="true" exclude="false"/>
 ```
 
-:::tip Using Squish?
+:::tip[Using Squish?]
 If your project uses a squishy file, you can bundle the SDK into your squished
 driver instead of shipping the vendor directory:
 

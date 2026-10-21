@@ -15,7 +15,7 @@ On anything else, run the CLI directly — it is a self-contained binary, so
 installing it is a few lines of shell. [GitLab CI/CD](/cicd/gitlab) has a
 worked template you can adapt to any runner.
 
-:::info Preview
+:::info[Preview]
 The `driverforge` GitHub Action and Buildkite plugin are available today and in
 **preview**: while the CLI is pre-1.0, the interfaces may still evolve between
 releases. Pin your versions, and follow along or vote on our

@@ -98,7 +98,7 @@ overlay, never a requirement.
 the `config.<name>.lua` files: an entry here with no matching file is inert,
 and `-c <name>` without the file still stops the build.
 
-:::caution Suffix opt-out shares the default build's output path
+:::caution[Suffix opt-out shares the default build's output path]
 A `suffix: false` configuration writes `dist/my-driver.c4z`: the same path as
 a plain `driverforge build`. That's the point for a release configuration (the
 shipped artifact gets the real name), but the two builds overwrite each other

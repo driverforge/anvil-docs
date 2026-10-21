@@ -8,7 +8,7 @@ description: Build and ship Control4 drivers from a Buildkite pipeline with the 
 Run `driverforge` in a Buildkite pipeline with **`driverforge/driverforge-buildkite-plugin`**.
 Buildkite lets you reference it with the short `driverforge/driverforge` form.
 
-:::info Preview
+:::info[Preview]
 The `driverforge` Buildkite plugin is available today and in **preview**: while the
 CLI is pre-1.0, properties may still evolve between releases. Pin your versions,
 and follow along or vote on our [roadmap](https://driverforge.canny.io).
@@ -92,7 +92,7 @@ by version, so a persistent agent doesn't re-download on every build.
 The built `.c4z` lands in your project's `dist/` directory; collect it as a
 build artifact in a later step.
 
-:::tip Pin to a tag
+:::tip[Pin to a tag]
 Reference a released tag (e.g. `#v1.0.0`) rather than a branch so your pipeline
 is reproducible and a plugin update can't change your build unexpectedly.
 :::

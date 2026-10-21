@@ -33,7 +33,7 @@ and the step is skipped.
 driverforge build --configuration release -i --sourcemap
 ```
 
-:::info Uploading to Anvil
+:::info[Uploading to Anvil]
 Generating the map is built in today. Automatic upload to Anvil (so stack
 traces are translated for you) isn't part of the CLI yet; reach out to
 [support@driverforge.com](mailto:support@driverforge.com) if you need it for your

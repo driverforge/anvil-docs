@@ -7,7 +7,7 @@ sidebar_position: 8
 Set up Anvil in an existing Control4 driver project: embed the SDK, wrap
 `OnDriverInit`, link an Anvil project, and (optionally) add a build config.
 
-:::warning Experimental
+:::warning[Experimental]
 `driverforge init` is experimental, and it **modifies files in your driver project**;
 that's the point: it embeds the SDK, wraps `OnDriverInit`, and writes config. It
 shows you a per-file diff for approval and backs up edited files before writing,

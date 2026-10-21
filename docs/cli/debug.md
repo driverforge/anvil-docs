@@ -8,7 +8,7 @@ Run your driver's Lua on your own machine while a real controller drives it.
 Set breakpoints in your IDE, inspect variables, step through handlers, and save
 a file to have the next event run the new code. No rebuild, no redeploy.
 
-:::note Beta
+:::note[Beta]
 Live debugging is new. If something doesn't behave the way this page describes,
 tell us.
 :::

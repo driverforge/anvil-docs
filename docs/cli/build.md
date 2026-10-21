@@ -7,7 +7,7 @@ sidebar_position: 4
 Bundle your Lua source and produce a `.c4z` driver package. Building is entirely
 local: no account or controller required.
 
-:::tip Fast by design
+:::tip[Fast by design]
 `driverforge` is a self-contained native binary. It runs the whole build in one
 process (bundling, encryption, and packaging) instead of orchestrating the
 chain of separate scripts and tools typically needed to package Control4
