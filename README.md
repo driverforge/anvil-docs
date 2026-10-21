@@ -18,15 +18,15 @@ This repository is the **docs source**, published as a public mirror of Driverfo
 
 ## Development
 
-The site is a standard Docusaurus app:
+The site is a standard Docusaurus app. It uses [Bun](https://bun.sh) (1.4.2) and builds standalone from this repository:
 
 ```sh
-yarn          # install dependencies
-yarn start    # start the dev server with live reload
-yarn build    # build the static site into build/
+bun install      # install dependencies
+bun run start    # start the dev server with live reload
+bun run build    # build the static site into build/
 ```
 
-> **Note:** this repository is mirrored out of a larger monorepo, so a standalone checkout may not build without upstream tooling config. For small documentation edits you don't need a local build — see [CONTRIBUTING.md](CONTRIBUTING.md).
+> **Note:** this repository is mirrored out of a larger monorepo, so changes are imported there for review. For small documentation edits you don't need a local build — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

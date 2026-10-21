@@ -28,16 +28,14 @@ For most contributions — fixing a typo, clarifying a step, adding an example �
 
 ## Building locally
 
-This site is mirrored out of a larger monorepo, so a checkout of **this** repository on its own may not `install` and `build` standalone yet (some tooling config lives upstream). For small documentation edits you don't need a local build — a maintainer builds and previews your change when importing it, and the rendered result deploys from the private pipeline.
+This site is mirrored out of a larger monorepo. For small documentation edits you don't need a local build — a maintainer builds and previews your change when importing it, and the rendered result deploys to Cloudflare Pages.
 
-If you do want a local preview, the site is a standard Docusaurus app:
+If you do want a local preview, the site is a standard Docusaurus app that builds standalone with [Bun](https://bun.sh) 1.4.2:
 
 ```sh
-yarn
-yarn start
+bun install
+bun run start
 ```
-
-If the standalone build can't resolve upstream config, note it in your PR and we'll preview it on import.
 
 ## Commit, issue & PR conventions
 
