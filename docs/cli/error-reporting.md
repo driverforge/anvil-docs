@@ -25,12 +25,13 @@ their values), and the error itself, **never your source code or file contents**
 
 ## Turning it off
 
-Error reporting is off automatically in CI and non-interactive shells. To disable
-it everywhere, set any of:
+Error reporting is off automatically in CI and non-interactive shells, and is
+never offered to a [coding agent](/cli/agents). To disable it everywhere, set
+any of:
 
-- `ANVIL_NO_ERROR_REPORTING=1`
+- `DRIVERFORGE_NO_ERROR_REPORTING=1`
 - `DO_NOT_TRACK=1`
-- `ANVIL_NO_METRICS=1`
+- `DRIVERFORGE_NO_METRICS=1`
 
 See also [Telemetry](/cli/telemetry) for anonymous usage metrics, which are
 separate and likewise opt-in.

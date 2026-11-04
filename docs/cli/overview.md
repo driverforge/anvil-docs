@@ -19,6 +19,8 @@ Composer import required.
   fast iteration, skipping the full reload
 - **Manage context**: Sign in once, then choose the organization and the target
   controller the deploy commands act on
+- **Read telemetry**: Read your driver's logs, errors and events for the
+  version you just deployed, or wait for the next one to arrive
 - **Upgrade the agent**: Update the Anvil Agent running on a controller to the
   latest release
 
@@ -70,6 +72,13 @@ driverforge deploy
 - [`driverforge org`](/cli/org): Choose the active organization
 - [`driverforge device`](/cli/device): Choose the target controller
 
+**Read telemetry**
+
+- [`driverforge logs`](/cli/logs): Read or stream your driver's logs, scoped to a controller and version
+- [`driverforge errors`](/cli/errors): Read or stream your driver's error occurrences
+- [`driverforge events`](/cli/events): Read or stream the events your driver handled
+- [`driverforge get`](/cli/get): Fetch one log, error or event in full
+
 **Maintenance**
 
 - [`driverforge upgrade`](/cli/upgrade): Show and apply available upgrades (CLI, agent, SDK)
@@ -94,6 +103,9 @@ These apply to every command:
 | `--no-tui`          | Disable the interactive TUI and print plain output (also applied automatically when piped or under `CI`) |
 | `--no-update-check` | Don't check for a newer `driverforge` release after the command runs                                           |
 | `--help`, `-h`      | Show help for the command                                                                                |
+
+Running under a coding agent? See [Coding agents](/cli/agents) for how the CLI
+adapts its output.
 
 `driverforge --version` (on the bare command) prints the CLI version and exits; see
 [`driverforge version`](/cli/version) for the richer report that includes the

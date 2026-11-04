@@ -24,6 +24,16 @@ Pass `--select` to any deploy command to force the picker and re-choose. The CLI
 never silently picks a default: deploying to the wrong controller is risky, so
 the choice is always explicit.
 
+## Reading telemetry
+
+[`logs`](/cli/logs), [`errors`](/cli/errors) and [`events`](/cli/events) read
+from the same remembered organization and controller, but never show a picker.
+Each part of their scope comes from a flag (`--org`, `--project`, `--device`),
+then a `DRIVERFORGE_ORG`/`DRIVERFORGE_PROJECT`/`DRIVERFORGE_DEVICE` variable,
+then the project's `.driverforge/config.json`, then the remembered selection.
+With no controller remembered they use your organization's only controller, and
+stop with a list to choose from when there are several.
+
 ## Why the IP, not the hostname
 
 A Control4 controller's hostname (e.g. `core1-000FFF…`) is an identifier, not a
