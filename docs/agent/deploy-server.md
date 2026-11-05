@@ -67,8 +67,8 @@ locked down:
 - **Signed in.** Every request carries your Driverforge sign-in, and the agent
   checks it belongs to the account the agent is signed in with. Anyone else on
   the network is refused.
-- **Can be switched off.** If you don't deploy to a controller, for example
-  once it's in a customer's home, set **Deploy Server Enabled** to Off.
+- **Can be switched off.** On a development controller you don't deploy to
+  from the CLI, set **Deploy Server Enabled** to Off.
 
 ## Troubleshooting
 
