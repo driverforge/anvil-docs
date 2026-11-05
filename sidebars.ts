@@ -84,6 +84,7 @@ const sidebars: SidebarsConfig = {
     'agent/overview',
     'agent/installation',
     'agent/configuration',
+    'agent/deploy-server',
   ],
 
   cliSidebar: [
