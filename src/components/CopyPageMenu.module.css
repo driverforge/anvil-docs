@@ -1,0 +1,125 @@
+/* Floated so it shares the first line with the page's h1, which follows it in
+   DocItem/Content. */
+.menu {
+  position: relative;
+  float: right;
+  margin: 0.25rem 0 0.5rem 1rem;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 34px;
+  padding: 0 0.5rem 0 0.625rem;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition:
+    border-color var(--ifm-transition-fast),
+    background-color var(--ifm-transition-fast);
+}
+
+.trigger:hover,
+.trigger:focus-visible,
+.trigger[aria-expanded='true'] {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.trigger .icon {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+.items {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.375rem);
+  z-index: var(--ifm-z-index-dropdown);
+  width: 18rem;
+  margin: 0;
+  padding: 0.375rem;
+  list-style: none;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.625rem;
+  box-shadow: var(--ifm-global-shadow-md);
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  width: 100%;
+  padding: 0.5rem 0.625rem;
+  font: inherit;
+  text-align: left;
+  color: var(--ifm-font-color-base);
+  background: transparent;
+  border: 0;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.item:hover,
+.item:focus-visible {
+  outline: none;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 0.125rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.description {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.external {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 0.1875rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.separator {
+  height: 1px;
+  margin: 0.375rem 0.25rem;
+  background: var(--ifm-color-emphasis-200);
+}

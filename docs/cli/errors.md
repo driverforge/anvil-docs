@@ -2,6 +2,9 @@
 sidebar_position: 7
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # errors
 
 Read your driver's error occurrences from the terminal, scoped to the
@@ -64,6 +67,77 @@ around an error:
 driverforge logs --correlation-id <id>
 ```
 
+## Output
+
+In a terminal the output is for reading. Under a [coding agent](/coding-agents/skills/cli), or with `DRIVERFORGE_OUTPUT=json`, the result is one JSON document on stdout and progress is one JSON object per line on stderr.
+
+<Tabs groupId="output">
+<TabItem value="interactive" label="Interactive">
+
+```text
+scope: org=acme project=poolpump device=Living Room version=20261105.2
+
+2026-11-05T03:12:44.231Z  ERROR  v20261105.2  ExecuteCommand  attempt to index a nil value (field 'episode')
+    {
+      "type": "lua:runtime_error",
+      "stacktrace": "driver.lua:212: in function 'PlayEpisode'\ndriver.lua:88: in function 'ExecuteCommand'",
+      "args": ["PLAY", {}],
+      "lastLog": "playing episode 4812"
+    }
+```
+
+</TabItem>
+<TabItem value="structured" label="Structured">
+
+The scope goes to stderr and the entries to stdout, so `jq` sees only the data. Structured, the scope is in the document itself; `count`, `has_more` and `next_cursor` page through larger results, and `wait` is added when the read waited on `--until-match` or `--min-events`.
+
+stdout:
+
+```json
+{
+  "scope": {
+    "org": "acme",
+    "project": "poolpump",
+    "device": { "id": "9e8d7c6b-5a4f-4e3d-a2c1-b0a9f8e7d6c5", "name": "Living Room" },
+    "version": "20261105.2",
+    "since": null,
+    "until": null
+  },
+  "entries": [
+    {
+      "id": "8c1d3e5f-2a4b-4c6d-8e0f-1a3b5c7d9e2f",
+      "type": "error",
+      "timestamp": "2026-11-05T03:12:44.231Z",
+      "level": "error",
+      "name": "ExecuteCommand",
+      "message": "attempt to index a nil value (field 'episode')",
+      "payload": {
+        "type": "lua:runtime_error",
+        "stacktrace": "driver.lua:212: in function 'PlayEpisode'\ndriver.lua:88: in function 'ExecuteCommand'",
+        "args": ["PLAY", {}],
+        "lastLog": "playing episode 4812"
+      },
+      "status": null,
+      "duration_ms": null,
+      "error_id": null,
+      "driver": "poolpump.c4z",
+      "driver_version": "20261105.2",
+      "device": { "id": "000FFF1A2B3C", "name": "Living Room" },
+      "correlation_id": "5b0e8c3a1f7d4e269a4c0b8d7e6f5a41",
+      "truncated": null
+    }
+  ],
+  "count": 1,
+  "has_more": false,
+  "next_cursor": null,
+  "warnings": []
+}
+```
+
+</TabItem>
+</Tabs>
+
+
 ## Examples
 
 Errors from the last deploy:
@@ -71,6 +145,9 @@ Errors from the last deploy:
 ```bash
 driverforge errors --version current
 ```
+
+On a controller others deploy to as well, pass the version your deploy printed
+instead of `current` (see [Versions](/cli/logs#versions)).
 
 Errors from the last ten minutes on one controller:
 

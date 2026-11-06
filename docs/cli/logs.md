@@ -2,6 +2,9 @@
 sidebar_position: 7
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # logs
 
 Read your driver's log entries from the terminal, scoped to the controller
@@ -62,7 +65,9 @@ has more than one, the command stops and lists them so you can pass `--device`.
 | `latest`      | The highest version the controller has reported                         |
 
 `current` relies on the record `driverforge deploy` keeps on your machine, so a
-fresh CI runner has none: pass the version number there instead.
+fresh CI runner has none: pass the version number there instead. It also goes
+stale when another developer deploys to the same controller; on a shared
+controller, pass the number your deploy printed.
 
 Version filtering needs a driver built with an SDK that tags logs and events
 with their version. Entries from older SDKs have no version and only appear
@@ -113,6 +118,64 @@ straight into `jq`.
 Messages are printed exactly as the driver logged them. One longer than
 `--max-payload-bytes` is cut, marked as truncated, and the command prints a
 [`driverforge get`](/cli/get) command that fetches it in full.
+
+### Example
+
+<Tabs groupId="output">
+<TabItem value="interactive" label="Interactive">
+
+```text
+scope: org=acme project=poolpump device=Living Room version=20261105.2
+
+2026-11-05T03:12:44.218Z  INFO   v20261105.2  ExecuteCommand  playing episode 4812
+```
+
+</TabItem>
+<TabItem value="structured" label="Structured">
+
+The scope goes to stderr and the entries to stdout, so `jq` sees only the data. Structured, the scope is in the document itself; `count`, `has_more` and `next_cursor` page through larger results, and `wait` is added when the read waited on `--until-match` or `--min-events`.
+
+stdout:
+
+```json
+{
+  "scope": {
+    "org": "acme",
+    "project": "poolpump",
+    "device": { "id": "9e8d7c6b-5a4f-4e3d-a2c1-b0a9f8e7d6c5", "name": "Living Room" },
+    "version": "20261105.2",
+    "since": null,
+    "until": null
+  },
+  "entries": [
+    {
+      "id": "0d2f6b1a-7c4e-4a39-9b85-3e1f0c7d2a64",
+      "type": "log",
+      "timestamp": "2026-11-05T03:12:44.218Z",
+      "level": "info",
+      "name": "ExecuteCommand",
+      "message": "playing episode 4812",
+      "payload": null,
+      "status": null,
+      "duration_ms": null,
+      "error_id": null,
+      "driver": "poolpump.c4z",
+      "driver_version": "20261105.2",
+      "device": { "id": "000FFF1A2B3C", "name": "Living Room" },
+      "correlation_id": "5b0e8c3a1f7d4e269a4c0b8d7e6f5a41",
+      "truncated": null
+    }
+  ],
+  "count": 1,
+  "has_more": false,
+  "next_cursor": null,
+  "warnings": []
+}
+```
+
+</TabItem>
+</Tabs>
+
 
 ## Exit status
 

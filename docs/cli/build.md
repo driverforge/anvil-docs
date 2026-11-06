@@ -2,6 +2,9 @@
 sidebar_position: 4
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # build
 
 Bundle your Lua source and produce a `.c4z` driver package. Building is entirely
@@ -125,6 +128,55 @@ A plain build never touches the driver's `<version>`: what's authored is what
 ships. Pass `--increment` to bump it per the project's versioning scheme, or
 `--version` to stamp an exact value. See [Versioning](/cli/versioning) for the
 schemes and the full picture of when versions change.
+
+### What it prints
+
+<Tabs groupId="output">
+<TabItem value="interactive" label="Interactive">
+
+```text
+┃ ✓ Build complete
+┃
+┃ driver   poolpump
+┃ version  20261105.2
+┃ artifact dist/poolpump.c4z
+```
+
+</TabItem>
+<TabItem value="structured" label="Structured">
+
+Progress is abbreviated here: each build step reports `running`, then `ok` or `skipped`. A build warning is reported as a `warning` progress line and listed again in the result's `warnings`.
+
+stdout:
+
+```json
+{
+  "driver": "poolpump",
+  "configuration": "default",
+  "version": "20261105.2",
+  "artifact": "dist/poolpump.c4z",
+  "encrypted": false,
+  "unpacked": null,
+  "sourcemap": null,
+  "warnings": []
+}
+```
+
+stderr:
+
+```json
+{"progress": {"status": "running", "message": "Building (default)"}}
+{"progress": {"status": "running", "message": "Resolve project"}}
+{"progress": {"status": "ok", "message": "Resolve project (4ms)"}}
+{"progress": {"status": "running", "message": "Squish Lua"}}
+{"progress": {"status": "ok", "message": "Squish Lua (38ms)"}}
+{"progress": {"status": "running", "message": "Package .c4z"}}
+{"progress": {"status": "ok", "message": "Package .c4z (12ms)"}}
+{"progress": {"status": "ok", "message": "Build complete"}}
+```
+
+</TabItem>
+</Tabs>
 
 ## Examples
 

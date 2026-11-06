@@ -2,6 +2,9 @@
 sidebar_position: 6
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # sync
 
 Build your driver and hot-swap its Lua into the running instance on a
@@ -42,6 +45,9 @@ changed any of that, a full reload is required and `sync` will offer to run a
 escalation runs the full deploy flow, rebuild and
 [version bump](/cli/versioning) included.
 
+Run by a [coding agent](/cli/agents), `sync` doesn't offer: it stops with the
+error code `deploy_required`, and the agent runs it again with `--deploy`.
+
 Keep these in mind:
 
 - **Load-time init doesn't re-run.** Sync re-runs top-level Lua but not
@@ -62,6 +68,72 @@ Keep these in mind:
 | `--select`              | Re-select the target controller first                                      |
 | `--configuration`, `-c` | Build configuration to build and sync                                      |
 | `--deploy`              | Do a full [deploy](/cli/deploy) instead of a hot-swap                      |
+
+## Output
+
+In a terminal the output is for reading. Under a [coding agent](/coding-agents/skills/cli), or with `DRIVERFORGE_OUTPUT=json`, the result is one JSON document on stdout and progress is one JSON object per line on stderr.
+
+<Tabs groupId="output">
+<TabItem value="interactive" label="Interactive">
+
+```text
+┃ ✓ Sync complete
+┃
+┃ driver     poolpump
+┃ version    20261105.2
+┃ artifact   dist/poolpump.c4z
+┃ controller Living Room
+┃ devices    Pool Pump
+```
+
+</TabItem>
+<TabItem value="structured" label="Structured">
+
+Progress is abbreviated. When the change needs a full deploy, `sync` stops with the error code `deploy_required` instead; run it again with `--deploy`, and the result has `"action": "deploy"`.
+
+stdout:
+
+```json
+{
+  "action": "sync",
+  "reason": null,
+  "build": {
+    "driver": "poolpump",
+    "configuration": "default",
+    "version": "20261105.2",
+    "artifact": "dist/poolpump.c4z",
+    "encrypted": false,
+    "unpacked": null,
+    "sourcemap": null,
+    "warnings": []
+  },
+  "device": {
+    "id": "9e8d7c6b-5a4f-4e3d-a2c1-b0a9f8e7d6c5",
+    "name": "Living Room"
+  },
+  "state": "synced",
+  "version": "20261105.2",
+  "report_url": null,
+  "instances": ["Pool Pump"],
+  "verified": true,
+  "warnings": []
+}
+```
+
+stderr:
+
+```json
+{"progress": {"status": "ok", "message": "Build complete"}}
+{"progress": {"status": "running", "message": "Connecting to Living Room"}}
+{"progress": {"status": "ok", "message": "Connected to Living Room (Anvil Agent 1.0.0)"}}
+{"progress": {"status": "running", "message": "Hot-swapping the driver's Lua"}}
+{"progress": {"status": "ok", "message": "Lua hot-swapped on 1 device"}}
+{"progress": {"status": "ok", "message": "Sync complete"}}
+```
+
+</TabItem>
+</Tabs>
+
 
 ## Examples
 

@@ -2,26 +2,11 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 // One sidebar per top-level navbar tab. The navbar (docusaurus.config.ts) maps
 // each tab to the matching sidebarId via `type: 'docSidebar'`, so choosing a tab
-// swaps the left tree. "General" collects the cross-cutting pages; the other
-// tabs hold their area's docs.
+// swaps the left tree; each tab holds its area's docs.
 const sidebars: SidebarsConfig = {
-  generalSidebar: [
-    {
-      type: 'category',
-      label: 'Getting Started',
-      collapsed: false,
-      items: [
-        'getting-started/overview',
-        'getting-started/quick-start',
-      ],
-    },
-    'account/settings',
-    'reference/troubleshooting',
-    'reference/faq',
-  ],
-
   platformSidebar: [
     'platform/overview',
+    'platform/quick-start',
     {
       type: 'category',
       label: 'Events',
@@ -59,6 +44,7 @@ const sidebars: SidebarsConfig = {
       items: [
         { type: 'doc', id: 'platform/organizations', label: 'Managing your organization' },
         'platform/members',
+        'platform/account',
         'platform/devices',
         {
           type: 'category',
@@ -68,6 +54,7 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
+    'platform/troubleshooting',
   ],
 
   sdkSidebar: [
@@ -88,25 +75,18 @@ const sidebars: SidebarsConfig = {
   ],
 
   cliSidebar: [
-    {
-      type: 'category',
-      label: 'Concepts',
-      collapsed: false,
-      items: [
-        'cli/overview',
-        'cli/installation',
-        'cli/authentication',
-        'cli/context',
-        'cli/build-configuration',
-        'cli/versioning',
-        'cli/source-maps',
-        'cli/error-reporting',
-        'cli/upgrading',
-        'cli/telemetry',
-        'cli/agents',
-        'cli/spaceship',
-      ],
-    },
+    'cli/overview',
+    'cli/installation',
+    'cli/authentication',
+    'cli/context',
+    'cli/build-configuration',
+    'cli/versioning',
+    'cli/source-maps',
+    'cli/error-reporting',
+    'cli/upgrading',
+    'cli/telemetry',
+    'cli/agents',
+    'cli/spaceship',
     {
       type: 'category',
       label: 'Commands',
@@ -117,11 +97,11 @@ const sidebars: SidebarsConfig = {
         {type: 'doc', id: 'cli/debug', className: 'menu-experimental'},
         'cli/deploy',
         'cli/device',
-        {type: 'doc', id: 'cli/doctor', className: 'menu-experimental'},
+        'cli/doctor',
         'cli/errors',
         'cli/events',
         'cli/get',
-        {type: 'doc', id: 'cli/init', className: 'menu-experimental'},
+        'cli/init',
         'cli/login',
         'cli/logout',
         'cli/logs',
@@ -130,6 +110,26 @@ const sidebars: SidebarsConfig = {
         'cli/upgrade',
         'cli/version',
         'cli/whoami',
+      ],
+    },
+  ],
+
+  codingAgentsSidebar: [
+    'coding-agents/overview',
+    {
+      type: 'category',
+      label: 'MCP Server',
+      collapsed: false,
+      items: ['coding-agents/mcp/overview', 'coding-agents/mcp/setup', 'coding-agents/mcp/tools'],
+    },
+    {
+      type: 'category',
+      label: 'Agent Skills',
+      collapsed: false,
+      items: [
+        'coding-agents/skills/overview',
+        'coding-agents/skills/cli',
+        'coding-agents/skills/available',
       ],
     },
   ],

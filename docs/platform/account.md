@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_label: Your account
 description: 'Manage your personal Anvil account: profile, password, passkeys, connected logins, sessions, and two-factor authentication.'
 ---
 

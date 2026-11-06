@@ -2,6 +2,9 @@
 sidebar_position: 10
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # debug
 
 Run your driver's Lua on your own machine while a real controller drives it.
@@ -104,6 +107,39 @@ so your debugger has to use a socket of its own rather than stdio.
 | `--lua`                 | Lua 5.1 interpreter to run your driver with (default: `lua5.1`, `luajit` or `lua` on `PATH`) |
 | `--mobdebug`            | Start mobdebug in the local process and connect it to your IDE at `host:port`                |
 | `--no-reload`           | Don't reload your driver when source files change                                            |
+
+## Output
+
+In a terminal the output is for reading. Under a [coding agent](/coding-agents/skills/cli), or with `DRIVERFORGE_OUTPUT=json`, the result is one JSON document on stdout and progress is one JSON object per line on stderr.
+
+<Tabs groupId="output">
+<TabItem value="interactive" label="Interactive">
+
+```text
+✓ Stub online as poolpump; starting the driver locally
+✓ Driver running locally (12 handlers)
+← ExecuteCommand("PLAY",{})
+  | playing episode 4812
+```
+
+</TabItem>
+<TabItem value="structured" label="Structured">
+
+A session writes one JSON object per event on stdout, as it happens, until it ends. `event` is one of `compiled`, `ready`, `callback`, `callback_result`, `c4_call`, `c4_result`, `print`, `runtime_log`, `reloaded`, `fatal`, `stub_online`, `stub_offline`, `stub_log` or `runtime_exited`. Fields that don't apply to an event are left out.
+
+stdout:
+
+```json
+{"event": "stub_online", "driver": "poolpump"}
+{"event": "ready", "handlers": ["ExecuteCommand", "ReceivedFromProxy", "OnPropertyChanged"]}
+{"event": "callback", "summary": "ExecuteCommand(\"PLAY\",{})", "name": "ExecuteCommand", "args": ["PLAY", {}]}
+{"event": "print", "text": "playing episode 4812"}
+{"event": "callback_result", "name": "ExecuteCommand", "ok": true, "handled": true}
+```
+
+</TabItem>
+</Tabs>
+
 
 ## Examples
 

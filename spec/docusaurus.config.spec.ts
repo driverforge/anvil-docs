@@ -82,4 +82,23 @@ describe('docusaurus.config.ts', () => {
     const trigger = legal!.items.find((i) => i.html?.includes('data-cc="show-preferencesModal"'));
     expect(trigger).toBeDefined();
   });
+
+  it('advertises llms.txt to agents reading any page', () => {
+    const config = loadConfig();
+
+    const link = ((config.headTags ?? []) as HeadTag[]).find((t) => t.tagName === 'link');
+    expect(link?.attributes).toEqual({ rel: 'alternate', type: 'text/markdown', href: '/llms.txt' });
+  });
+
+  it("gives the llms plugin the docs' real route base, so the root page links to /index.md", () => {
+    // A bare docsDir: 'docs' made the plugin assume /docs/ and link the root
+    // page (slug: /) to https://docs.driverforge.com/docs, a 404.
+    const config = loadConfig();
+    const presetDocs = (config.presets![0] as [string, { docs: { routeBasePath: string } }])[1].docs;
+    const llms = (config.plugins as unknown[]).find(
+      (p) => Array.isArray(p) && (p[1] as { generateMarkdownFiles?: boolean })?.generateMarkdownFiles,
+    ) as [unknown, { docsDir: { path: string; routeBasePath: string }[] }];
+
+    expect(llms[1].docsDir).toEqual([{ path: 'docs', routeBasePath: presetDocs.routeBasePath }]);
+  });
 });

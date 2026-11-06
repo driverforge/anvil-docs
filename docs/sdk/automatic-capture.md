@@ -66,6 +66,8 @@ Error stack traces include the value of every local variable in every frame at t
 
 The SDK doesn't scan for or redact sensitive-looking values, so what your handler receives is what appears in Anvil. The exception is `GetPrivateKeyPassword`: the SDK records that the handler fired, but replaces its arguments with `[REDACTED]` and withholds its return value.
 
+The same goes for log messages you forward. If your driver handles access codes, credentials or personal information, that data can reach Anvil. Anvil is built for development, so in practice that should be test data on your development controller rather than real customer data.
+
 ## Captured Handlers
 
 The SDK instruments **157 handlers** across all Control4 event categories. Here's the complete list:

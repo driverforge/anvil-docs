@@ -276,25 +276,6 @@ html {
   color: #fbbf24;
 }
 
-/* "Preview" pill on a preview navbar tab (className: navbar-preview) */
-.navbar-preview::after {
-  content: 'Preview';
-  margin-left: 0.4rem;
-  font-size: 0.625rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  line-height: 1;
-  padding: 0.2rem 0.4rem;
-  border-radius: 999px;
-  background: rgba(31, 104, 224, 0.12);
-  color: var(--ifm-color-primary);
-}
-
-[data-theme='dark'] .navbar-preview::after {
-  background: rgba(102, 157, 241, 0.16);
-}
-
 /* ==========================================================================
    Main Content Area
    ========================================================================== */

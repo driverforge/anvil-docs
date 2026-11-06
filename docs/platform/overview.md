@@ -1,15 +1,42 @@
 ---
 sidebar_position: 1
-description: Real-time view of events, logs, and errors from your Control4 drivers.
+slug: /
+description: "Anvil gives you visibility into what's happening inside your Control4 driver: events, logs, and errors in real time."
 ---
 
 import Screenshot from '@site/src/components/Screenshot';
 
 # Overview
 
-The Anvil platform gives you a real-time view of what's happening inside your Control4 drivers. Events, logs, and errors stream in as they happen, so there's no guessing what your driver is doing and no digging through Composer's Lua output.
+Anvil gives you a real-time view of what's happening inside your Control4 drivers. Events, logs, and errors stream in as they happen, so there's no guessing what your driver is doing and no digging through Composer's Lua output.
 
 <Screenshot name="dashboard" alt="Anvil project dashboard" />
+
+## Why Anvil
+
+Developing Control4 drivers can feel like working in the dark:
+
+- **Events are opaque** - Proxies call your driver's code, but it can be hard to know which commands are being received, what data they're sent with, and which events need to be handled in your driver.
+- **Errors vanish** - Uncaught errors are easy to miss, relying on text logging that easily gets lost between Composer refreshes and driver reloads.
+- **Debugging is painful** - Print statements and log diving only get you so far.
+
+Anvil captures every handler call, log line and unhandled error in your driver automatically, and keeps them, so you can see exactly what Control4 sent your driver and what your driver did with it.
+
+## How it works
+
+![Anvil architecture: Your driver → Anvil Agent → Anvil](/img/anvil-architecture.svg)
+
+1. **Install the Agent** - A system driver on your dev controller that streams data to Anvil
+2. **Add the Driverforge SDK** - A small Lua library that instruments your driver automatically
+3. **Watch the stream** - Events appear in real-time as your driver runs
+
+The [Quick start](/platform/quick-start) takes you through all three.
+
+## Requirements
+
+Anvil needs **Control4 OS 3.3.1 or newer** on the controller running your driver.
+
+On older controllers the SDK disables itself at load, so a driver that ships with it is safe to install anywhere; it simply produces no telemetry where it cannot be delivered. See [SDK installation](/sdk/installation#control4-os-331-or-newer).
 
 ## How Anvil is organised
 
@@ -94,6 +121,7 @@ On macOS, `Ctrl+Alt` is shown as `⌃⌥`.
 Beyond the data views, the platform is where you manage everything around your drivers:
 
 - [Organizations](/platform/organizations), your top-level workspace, with [members & roles](/platform/members)
+- [Your account](/platform/account), your personal login, separate from any organization
 - [Projects](/platform/projects), one per driver, each with its own [project token](/platform/project-tokens)
 - [Devices](/platform/devices), the controllers you deploy to
 - [Subscription](/platform/subscription) and [payment](/platform/billing), covering your [plan](/platform/plans), usage, and cards

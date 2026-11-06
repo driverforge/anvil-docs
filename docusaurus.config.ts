@@ -2,6 +2,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import {cliVersionRemark} from './src/lib/cliVersion';
+import llmsPlugin from './src/plugins/llms';
 
 // Load .env at config-load time so values are available for fields like
 // the navbar href below. docusaurus-plugin-dotenv (registered under
@@ -65,28 +66,33 @@ const config: Config = {
     ],
     require.resolve('docusaurus-plugin-image-zoom'),
     [
-      'docusaurus-plugin-llms',
+      // docusaurus-plugin-llms, plus a finishing pass over what it writes.
+      llmsPlugin,
       {
         generateLLMsTxt: true,
         generateLLMsFullTxt: true,
-        docsDir: 'docs',
+        // The docs are served at the site root (routeBasePath: '/' below).
+        // A bare 'docs' makes the plugin assume /docs/, which sends the root
+        // page (slug: /) to /docs.
+        docsDir: [{path: 'docs', routeBasePath: '/'}],
         title: 'Anvil Documentation',
         description:
           'Documentation for Anvil, the observability platform for Control4 drivers by Driverforge',
         excludeImports: true,
         removeDuplicateHeadings: true,
         includeOrder: [
-          'getting-started/*',
           'platform/*',
           'sdk/*',
           'agent/*',
           'cli/*',
-          'reference/*',
+          'coding-agents/**',
         ],
         includeUnmatchedLast: true,
-        pathTransformation: {
-          ignorePaths: ['docs'],
-        },
+        // A sibling .md for every page (/cli/init/ -> /cli/init.md), which
+        // llms.txt links to and the page's Copy menu reads (see
+        // src/theme/DocItem/Content). The finishing pass fails the build if
+        // any page lacks one or any llms.txt link doesn't resolve.
+        generateMarkdownFiles: true,
       },
     ],
   ],
@@ -120,6 +126,14 @@ const config: Config = {
   // involved. Snippet shape mirrors GoogleTag in @driverforge/monitoring-next
   // (not importable here — its package entry points at unbuilt dist output).
   headTags: [
+    {
+      tagName: 'link' as const,
+      attributes: {
+        rel: 'alternate',
+        type: 'text/markdown',
+        href: '/llms.txt',
+      },
+    },
     {
       // Runs before first paint so the navbar is already correct when the page
       // appears — no label rewriting itself, no items appearing and pushing
@@ -201,8 +215,8 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'generalSidebar',
-          label: 'General',
+          sidebarId: 'platformSidebar',
+          label: 'Platform',
           position: 'left',
         },
         {
@@ -225,16 +239,15 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'platformSidebar',
-          label: 'Platform',
+          sidebarId: 'cicdSidebar',
+          label: 'CI/CD',
           position: 'left',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'cicdSidebar',
-          label: 'CI/CD',
+          sidebarId: 'codingAgentsSidebar',
+          label: 'Coding Agents',
           position: 'left',
-          className: 'navbar-preview',
         },
         // Search sits at the end of the left group — after the section tabs,
         // before the right-side Help/Theme/Login/CTA cluster.
@@ -285,7 +298,7 @@ const config: Config = {
           items: [
             {
               label: 'Platform',
-              to: '/platform/overview',
+              to: '/',
             },
             {
               label: 'SDK',
@@ -302,6 +315,10 @@ const config: Config = {
             {
               label: 'CI/CD',
               to: '/cicd/overview',
+            },
+            {
+              label: 'Coding Agents',
+              to: '/coding-agents/overview',
             },
           ],
         },

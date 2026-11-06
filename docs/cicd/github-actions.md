@@ -7,12 +7,6 @@ description: Build and ship Control4 drivers from a GitHub Actions workflow with
 
 Run `driverforge` in a GitHub Actions workflow with **`driverforge/driverforge-github-action`**.
 
-:::info[Preview]
-The `driverforge` GitHub Action is available today and in **preview**: while the
-CLI is pre-1.0, inputs may still evolve between releases. Pin your versions, and
-follow along or vote on our [roadmap](https://driverforge.canny.io).
-:::
-
 ## Set up the environment
 
 Reference the action with no `command` to install `driverforge` and leave it on

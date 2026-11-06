@@ -2,14 +2,16 @@
 sidebar_position: 9
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # doctor
 
 Check that a driver project still has everything [`driverforge init`](/cli/init)
 set up, and restore whatever is missing.
 
-:::warning[Experimental]
-`driverforge doctor` is experimental. Checking is read-only and safe to run any
-time, but the repairs it offers **modify files in your driver project**: they
+:::warning[Repairs modify your driver project]
+Checking is read-only and safe to run any time, but the repairs it offers **modify files in your driver project**: they
 are the same transforms [`driverforge init`](/cli/init) applies. It shows you a
 per-file diff for approval and backs up edited files before writing, but always
 review the changes before committing.
@@ -101,6 +103,53 @@ repair puts the project back to what it claimed to be. Moving to a newer SDK
 stays [`driverforge upgrade`](/cli/upgrade)'s job.
 
 You review a per-file diff and approve it, exactly as with `init`.
+
+Run by a [coding agent](/cli/agents) without `--yes`, `doctor` lists the
+repairs it would make, writes nothing, and exits `1`. Run it again with `--yes`
+to apply them.
+
+## Output
+
+In a terminal the output is for reading. Under a [coding agent](/coding-agents/skills/cli), or with `DRIVERFORGE_OUTPUT=json`, the result is one JSON document on stdout and progress is one JSON object per line on stderr.
+
+<Tabs groupId="output">
+<TabItem value="interactive" label="Interactive">
+
+```text
+Checking this driver's Driverforge setup:
+  ✓ the driver entry requires the SDK and calls Driverforge:Init
+  ✓ src/vendor/driverforge-sdk.lua is present
+  ✓ manifest.c4zproj sets squishLua="true"
+  ✗ manifest.c4zproj ships the vendor dir
+```
+
+</TabItem>
+<TabItem value="structured" label="Structured">
+
+Without `--yes`, `doctor` lists the files it would change in `changes`, writes nothing, and exits `1`. With `--yes` it applies them and `repaired` is `true`. Each check is also reported on stderr as it runs.
+
+stdout:
+
+```json
+{
+  "healthy": false,
+  "checks": [
+    { "name": "entry wiring", "what": "the driver entry requires the SDK and calls Driverforge:Init", "ok": true },
+    { "name": "embedded SDK", "what": "src/vendor/driverforge-sdk.lua is present", "ok": true },
+    { "name": "squishLua", "what": "manifest.c4zproj sets squishLua=\"true\"", "ok": true },
+    { "name": "vendor item", "what": "manifest.c4zproj ships the vendor dir", "ok": false }
+  ],
+  "changes": ["src/manifest.c4zproj"],
+  "repaired": false,
+  "warnings": [
+    { "code": "repair_pending", "message": "Not repaired: re-run with --yes to write the listed changes." }
+  ]
+}
+```
+
+</TabItem>
+</Tabs>
+
 
 ## Options
 

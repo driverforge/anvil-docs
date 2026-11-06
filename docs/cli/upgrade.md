@@ -2,6 +2,9 @@
 sidebar_position: 21
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # upgrade
 
 See, and interactively apply, everything upgradable in the current context:
@@ -78,6 +81,68 @@ Piped, under `CI`, or with `--no-tui`, `driverforge upgrade` is report-only: it
 prints the status table and never mutates. There is **no non-interactive way to
 upgrade an agent**; this is deliberate. Upgrades act on a connected controller
 and are always an interactive choice.
+
+## Output
+
+In a terminal the output is for reading. Under a [coding agent](/coding-agents/skills/cli), or with `DRIVERFORGE_OUTPUT=json`, the result is one JSON document on stdout and progress is one JSON object per line on stderr.
+
+<Tabs groupId="output">
+<TabItem value="interactive" label="Interactive">
+
+```text
+COMPONENT                   CURRENT   LATEST   STATUS
+driverforge CLI             1.0.0     1.0.0    ✓ up to date
+Anvil Agent (Living Room)   1.0.0     1.0.1    ⬆ update available  → driverforge upgrade
+Driverforge SDK             1.0.0     1.0.0    ✓ up to date
+```
+
+</TabItem>
+<TabItem value="structured" label="Structured">
+
+The table is what prints when `upgrade` isn't attached to a terminal; in a terminal it's [the picker](#the-picker). Under a coding agent, `upgrade` only reports: it never shows the picker or applies an upgrade. A component's `status` is `up_to_date`, `update_available`, `blocked` (available, but `note` says why it can't be applied yet), `unknown` (couldn't check) or `not_applicable`.
+
+stdout:
+
+```json
+{
+  "components": [
+    {
+      "name": "driverforge CLI",
+      "detail": null,
+      "current": "1.0.0",
+      "latest": "1.0.0",
+      "status": "up_to_date",
+      "note": "up to date",
+      "command": null,
+      "release_notes_url": null
+    },
+    {
+      "name": "Anvil Agent",
+      "detail": "Living Room",
+      "current": "1.0.0",
+      "latest": "1.0.1",
+      "status": "update_available",
+      "note": "update available",
+      "command": "driverforge upgrade",
+      "release_notes_url": null
+    },
+    {
+      "name": "Driverforge SDK",
+      "detail": null,
+      "current": "1.0.0",
+      "latest": "1.0.0",
+      "status": "up_to_date",
+      "note": "up to date",
+      "command": null,
+      "release_notes_url": null
+    }
+  ]
+}
+```
+
+</TabItem>
+</Tabs>
+
 
 ## Examples
 

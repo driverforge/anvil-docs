@@ -2,6 +2,9 @@
 sidebar_position: 5
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # deploy
 
 Build and deploy your driver to a controller without leaving the terminal or
@@ -28,7 +31,9 @@ persisted back to your `driver.xml` after the build succeeds.
 
 The CLI also remembers, on your machine, which version it deployed to which
 controller, so [`driverforge logs --version current`](/cli/logs#versions) (and
-`errors` and `events`) can read back exactly what that deploy reported.
+`errors` and `events`) can read back exactly what that deploy reported. On a
+controller others deploy to as well, pass the version this command printed
+instead: `current` doesn't see their deploys.
 
 ## Prerequisites
 
@@ -44,6 +49,71 @@ controller, so [`driverforge logs --version current`](/cli/logs#versions) (and
 | `--device`              | Controller to deploy to (name, hostname, or id); overrides the selected one |
 | `--select`              | Re-select the target controller before deploying                             |
 | `--configuration`, `-c` | Build configuration to build and deploy                                      |
+
+## Output
+
+In a terminal the output is for reading. Under a [coding agent](/coding-agents/skills/cli), or with `DRIVERFORGE_OUTPUT=json`, the result is one JSON document on stdout and progress is one JSON object per line on stderr.
+
+<Tabs groupId="output">
+<TabItem value="interactive" label="Interactive">
+
+```text
+┃ ✓ Deployed version 20261105.2
+┃
+┃ driver     poolpump
+┃ version    20261105.2
+┃ artifact   dist/poolpump.c4z
+┃ controller Living Room
+```
+
+</TabItem>
+<TabItem value="structured" label="Structured">
+
+Progress is abbreviated: the build's own steps come first. `state` is `confirmed` once the driver restarts; `confirmed_with_errors` when its init handler threw (`report_url` links to the error); `unconfirmed` when the controller didn't report back in time.
+
+stdout:
+
+```json
+{
+  "action": "deploy",
+  "reason": null,
+  "build": {
+    "driver": "poolpump",
+    "configuration": "default",
+    "version": "20261105.2",
+    "artifact": "dist/poolpump.c4z",
+    "encrypted": false,
+    "unpacked": null,
+    "sourcemap": null,
+    "warnings": []
+  },
+  "device": {
+    "id": "9e8d7c6b-5a4f-4e3d-a2c1-b0a9f8e7d6c5",
+    "name": "Living Room"
+  },
+  "state": "confirmed",
+  "version": "20261105.2",
+  "report_url": null,
+  "warnings": []
+}
+```
+
+stderr:
+
+```json
+{"progress": {"status": "running", "message": "Deploying to Living Room"}}
+{"progress": {"status": "ok", "message": "Build complete"}}
+{"progress": {"status": "running", "message": "Connecting to Living Room"}}
+{"progress": {"status": "ok", "message": "Connected to Living Room (Anvil Agent 1.0.0)"}}
+{"progress": {"status": "running", "message": "Uploading the driver"}}
+{"progress": {"status": "running", "message": "Waiting for Director"}}
+{"progress": {"status": "running", "message": "Restarting the driver"}}
+{"progress": {"status": "ok", "message": "Deployed version 20261105.2"}}
+```
+
+</TabItem>
+</Tabs>
+
 
 ## Examples
 

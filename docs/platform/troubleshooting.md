@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 99
 ---
 
 # Troubleshooting
@@ -58,6 +58,10 @@ Try changing a property or executing a command in Composer. If basic events don'
 
 ## SDK Not Loading
 
+If you set the driver up with [`driverforge init`](/cli/init), run
+[`driverforge doctor`](/cli/doctor) first. It checks each piece `init` put in
+place and offers to restore whatever is missing.
+
 ### Check the Path
 
 Your `require()` path must match your directory structure:
@@ -99,15 +103,6 @@ Enable debug mode on the agent to see what it's receiving:
 1. Select Anvil Agent in Composer
 2. Set **Debug Mode** to "On"
 3. Check Lua Output
-
-## Still Stuck?
-
-If nothing here helps:
-
-1. Enable agent debug mode
-2. Add debug prints to your driver
-3. Check controller logs for errors
-4. Verify network connectivity
 
 ## Need Help?
 

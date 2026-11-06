@@ -159,4 +159,4 @@ There's no need for a separate release build without Anvil. Ship the driver you 
 - Check the controller log for a warning about a redefined handler (see [load order](#load-order-define-handlers-first))
 - Try triggering an action manually
 
-See [Troubleshooting](/reference/troubleshooting) for more help.
+See [Troubleshooting](/platform/troubleshooting) for more help.

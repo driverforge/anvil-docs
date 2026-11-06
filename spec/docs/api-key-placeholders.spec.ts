@@ -19,7 +19,6 @@ const DOCS = path.join(__dirname, '..', '..', 'docs');
 
 /** Pages whose snippets are meant to carry the reader's own token. */
 const SUBSTITUTING_PAGES = [
-  'getting-started/quick-start.md',
   'sdk/overview.md',
   'sdk/installation.md',
   'sdk/api-reference.md',

@@ -51,6 +51,12 @@ driverforge completion fish > ~/.config/fish/completions/driverforge.fish
 driverforge completion powershell | Out-String | Invoke-Expression
 ```
 
+## Output
+
+`completion` prints a shell script, so its output is the same text under a
+[coding agent](/coding-agents/skills/cli) or with `DRIVERFORGE_OUTPUT=json`.
+
+
 ## Global flags
 
 Every `driverforge` command also accepts these global flags: `--verbose`/`-v`, `--project-dir`, `--no-tui`, `--no-update-check`, and `--help`/`-h`. See the [overview](/cli/overview#global-flags) for details.

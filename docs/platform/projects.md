@@ -13,7 +13,7 @@ project per driver, often with separate projects for development and production.
 You can create as many projects as your [plan](/platform/plans) allows.
 
 Projects are not places you navigate into. The [events, logs, and
-errors](/platform/overview) views are scoped to your whole organization, and the
+errors](/) views are scoped to your whole organization, and the
 **project filter** above each one narrows what you're looking at. Selecting a
 single project is how you focus on one driver; leaving everything selected shows
 the organization as a whole.
@@ -61,7 +61,7 @@ sending telemetry immediately (see [Project tokens and API
 keys](/platform/project-tokens)), then takes you straight to the setup instructions
 with the filter narrowed to your new project.
 
-From there, follow the [Quick Start](/getting-started/quick-start) to wire the SDK
+From there, follow the [Quick start](/platform/quick-start) to wire the SDK
 into your driver and send your first events. The setup view is a temporary state:
 once telemetry arrives, that same page becomes the normal dashboard.
 
@@ -111,7 +111,7 @@ anything you still need first.
 
 ## Further reading
 
-- [Quick Start](/getting-started/quick-start), wire the SDK into your driver and send your first events
+- [Quick start](/platform/quick-start), wire the SDK into your driver and send your first events
 - [Project tokens](/platform/project-tokens), how a project's token works and why it's safe to commit
 - [Members & roles](/platform/members), who can create and manage projects
 - [Plans](/platform/plans), project limits by plan

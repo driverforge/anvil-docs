@@ -1,6 +1,7 @@
 import {
   CLI_VERSION_FALLBACK,
   CLI_VERSION_TOKEN,
+  cliVersion,
   cliVersionRemark,
   resetCliVersionCache,
   resolveCliVersion,
@@ -97,6 +98,14 @@ describe('cliVersion.ts', () => {
       const transform = cliVersionRemark(fetchImpl);
       await transform(makeTree());
       await transform(makeTree());
+      expect(fetchImpl).toHaveBeenCalledTimes(1);
+    });
+
+    it('shares its version with cliVersion, so pages and Markdown copies agree', async () => {
+      const fetchImpl = fetchReturning('9.9.9');
+      await cliVersionRemark(fetchImpl)(makeTree());
+
+      await expect(cliVersion(fetchReturning('1.0.0'))).resolves.toBe('9.9.9');
       expect(fetchImpl).toHaveBeenCalledTimes(1);
     });
   });

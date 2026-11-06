@@ -53,12 +53,19 @@ export function resetCliVersionCache(): void {
   cachedVersion = undefined;
 }
 
+// The version for this build, resolved once and shared by the rendered pages
+// (cliVersionRemark) and the generated Markdown (src/plugins/llms.ts), so the
+// two can't disagree.
+export function cliVersion(fetchImpl: typeof fetch = fetch): Promise<string> {
+  return (cachedVersion ??= resolveCliVersion(fetchImpl));
+}
+
 // Remark plugin. The transformer is async (unified awaits it) and the version
 // fetch is memoised, so a build resolves the version once — not once per page.
 // Substitutes the token wherever it appears: code blocks, inline code, prose.
 export function cliVersionRemark(fetchImpl: typeof fetch = fetch) {
   return async (tree: MdastNode): Promise<void> => {
-    const version = await (cachedVersion ??= resolveCliVersion(fetchImpl));
+    const version = await cliVersion(fetchImpl);
     const substitute = (node: MdastNode): void => {
       if (
         typeof node.value === 'string' &&
