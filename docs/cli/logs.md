@@ -92,7 +92,7 @@ when you don't filter by one.
 | `--timeout`           | Longest wait (default 30s when waiting, at most 10m)                          |
 | `--follow`, `-f`      | Stream entries as they arrive, until interrupted or `--timeout`               |
 | `--output`, `-o`      | `text`, `json` or `jsonl`                                                     |
-| `--max-payload-bytes` | Cap each entry's message (default 65536; `0` for no cap)                      |
+| `--max-payload-bytes` | Cap each entry's message and arguments (default 65536; `0` for no cap)        |
 
 ## Waiting for output
 
@@ -112,9 +112,16 @@ first. Piped, or run by a [coding agent](/cli/agents), it is JSON: one document 
 entry. Data goes to stdout and everything else to stderr, so you can pipe
 straight into `jq`.
 
-Messages are printed exactly as the driver logged them. One longer than
-`--max-payload-bytes` is cut, marked as truncated, and the command prints a
-[`driverforge get`](/cli/get) command that fetches it in full.
+Messages are printed exactly as the driver logged them. A log's `payload` is
+`{"args": […], "argsTruncated": false}` when the log call was given anything but
+strings, and `null` otherwise: `args` holds the call's arguments as structured
+JSON, and `argsTruncated` is `true` when the SDK's size limits cut them (see
+[Tables and Other Values](/sdk/log-forwarding#tables-and-other-values)). As
+text, the arguments print as indented JSON under the log line.
+
+A message or arguments longer than `--max-payload-bytes` is cut, marked as
+truncated, and the command prints a [`driverforge get`](/cli/get) command that
+fetches the entry in full.
 
 ### Example
 

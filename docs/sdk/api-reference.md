@@ -190,7 +190,7 @@ end
 Manually forward a log message to Anvil. Not needed if you're using the `logger` option in `Driverforge:Init()`; see [Automatic Logs](/sdk/log-forwarding).
 
 ```lua
-Anvil:ForwardLog(level, message)
+Anvil:ForwardLog(level, ...)
 ```
 
 ### Parameters
@@ -198,13 +198,13 @@ Anvil:ForwardLog(level, message)
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `level` | string | Yes | "DEBUG", "INFO", "WARN", "ERROR", "TRACE" |
-| `message` | string | Yes | The log message |
+| `...` | any | Yes | The same arguments as a log call. Tables and other non-string values are sent as structured data; see [Tables and Other Values](/sdk/log-forwarding#tables-and-other-values) |
 
 ### Example
 
 ```lua
 Anvil:ForwardLog("INFO", "Device connected")
-Anvil:ForwardLog("ERROR", "Failed to parse response")
+Anvil:ForwardLog("DEBUG", "Received response:", response)
 ```
 
 ---

@@ -41,6 +41,7 @@ The detail drawer shows:
 
 - The **level** badge and the full timestamp
 - **Message**, the complete log message (selectable for copying, with a copy button in the header)
+- **Arguments**, the values the log call was given, as a JSON tree, when any of them wasn't a string. A note says so if the SDK's size limits cut them (see [Tables and Other Values](/sdk/log-forwarding#tables-and-other-values))
 - **Context**: the project, platform, controller, and driver the log came from, plus the event that was executing
 - **Tags**, any key-value pairs attached to the log, as JSON
 - **View Related Event**, if the log was captured during an event handler, to jump to that event (see [Logs vs Events](/platform/logs-vs-events))

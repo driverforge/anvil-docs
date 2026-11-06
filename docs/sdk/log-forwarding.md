@@ -43,13 +43,41 @@ The keys are Anvil's canonical levels (always lowercase), the values are the met
 
 See the [API Reference](/sdk/api-reference#logmap) for full details.
 
+## Tables and Other Values
+
+Pass tables straight to a log call; there's no need to encode them first. When any argument isn't a string, Anvil receives the arguments themselves as structured data, and the log's detail view shows them as a JSON tree:
+
+```lua
+Log:Debug("Response received:", { status = 200, body = "OK" })
+```
+
+The message still reads as text, so search keeps working. Numbers and booleans appear in it as themselves, and anything else by its type:
+
+```text
+Response received: [table]
+```
+
+A table whose keys run 1 to n arrives as an array; any other table arrives as an object with string keys. Values JSON can't hold are sent as placeholders: `"[nil]"`, `"[function]"`, `"[userdata]"`, `"[thread]"`, `"[cycle]"` for a table that refers back to itself, and `"nan"`, `"inf"` or `"-inf"` for numbers that aren't finite.
+
+To keep logging cheap on the controller, each log call's arguments are capped:
+
+| Limit | Cap |
+|-------|-----|
+| Nesting | 6 levels |
+| Entries per table | 100 |
+| Bytes per string | 2 KiB, ending in `…` |
+| Values per call | 1000 |
+| Size per call | about 16 KiB |
+
+Anything a cap cuts is replaced with `"[truncated]"` (as the last array element, or a `"[truncated]": true` key in an object), and the detail view says the arguments were cut.
+
 ## Manual Forwarding
 
-If you don't have a logging library, or prefer to control exactly which messages are forwarded, use `Anvil:ForwardLog()` directly:
+If you don't have a logging library, or prefer to control exactly which messages are forwarded, use `Anvil:ForwardLog()` directly. It takes a level and then the same arguments as a log call:
 
 ```lua
 Anvil:ForwardLog("INFO", "Device connected successfully")
-Anvil:ForwardLog("DEBUG", "Received response: " .. response)
+Anvil:ForwardLog("DEBUG", "Received response:", response)
 Anvil:ForwardLog("WARN", "Retrying connection...")
 ```
 
