@@ -174,6 +174,23 @@ stdout:
 </Tabs>
 
 
+### Warnings
+
+A read that succeeds can still carry warnings, each with a stable `code`:
+
+| Code                   | Meaning |
+| ---------------------- | ------- |
+| `no_entries`           | Nothing matched the scope and filters. |
+| `retention_clamped`    | `--since` reaches past your plan's retention; only the last `details.window_minutes` were searched. |
+| `tail_clamped`         | `--tail` is over the maximum; the newest page was returned. Page further with `--before`. |
+| `payload_truncated`    | Some entries were cut at `--max-payload-bytes`. Each is listed in `details.entries`; [`driverforge get`](/cli/get) fetches it in full. |
+| `device_not_reporting` | The controller hasn't reported to Driverforge for 5 minutes or more; `details.last_seen_at` is when it last did (RFC 3339, UTC). Empty results from a controller that isn't reporting say nothing about the driver: check the controller first. |
+
+A wait that times out on a controller that isn't reporting still exits `3`;
+its `wait_timeout` error carries `details.device_not_reporting: true` and
+`details.last_seen_at`, and its hint says to check the controller and its Anvil
+agent rather than to wait longer.
+
 ## Exit status
 
 | Status | Meaning                                                                       |

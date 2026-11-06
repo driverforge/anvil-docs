@@ -166,6 +166,38 @@ An unexpected failure has the code `internal_error` and may carry a
 Branch on the exit status and the `code`, never on the message text, which may
 change.
 
+A wait (`--until-match` or `--min-events`) that ends at `--timeout` exits `3`
+with the code `wait_timeout`. When the controller isn't reporting, its
+`details` add `device_not_reporting: true` and `last_seen_at`, and the hint
+says to check the controller and its Anvil agent rather than to wait longer:
+
+```json
+{
+  "error": {
+    "code": "wait_timeout",
+    "message": "The stop condition wasn't met before --timeout.",
+    "hint": "The controller isn't reporting: check it and its Anvil agent are running before waiting again.",
+    "details": { "device_not_reporting": true, "last_seen_at": "2026-11-05T03:07:12Z" }
+  }
+}
+```
+
+## Warnings
+
+A command that succeeds can still carry `warnings`, each with a stable `code`,
+a `message` and sometimes `details`. `logs`, `errors` and `events` use:
+
+- `no_entries`: nothing matched the scope and filters.
+- `retention_clamped`: `--since` reaches past the plan's retention; only the
+  last `details.window_minutes` were searched.
+- `tail_clamped`: `--tail` is over the maximum; the newest page was returned.
+- `payload_truncated`: some entries were cut at `--max-payload-bytes`;
+  `details.entries` lists them.
+- `device_not_reporting`: the controller hasn't reported to Driverforge for 5
+  minutes or more; `details.last_seen_at` is when it last did (RFC 3339, UTC).
+  Empty results from a controller that isn't reporting say nothing about the
+  driver: check the controller first.
+
 ## Exit status
 
 Every command uses the same exit statuses, in agent mode or not:
