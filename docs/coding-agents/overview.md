@@ -38,8 +38,12 @@ can't:
 |                                                 | MCP server | CLI |
 | ----------------------------------------------- | ---------- | --- |
 | Read errors, events and logs                    | Yes        | Yes |
+| Scope reads to a device and driver version      | Yes        | Yes |
+| Wait for an entry after an action               | Yes        | Yes |
 | Look up an error by its reference               | Yes        | No  |
 | List your projects and fetch setup instructions | Yes        | No  |
+| Workflow prompts (diagnose, observe, verify)    | Yes        | No  |
+| Set up the SDK in a driver                      | No         | Yes |
 | Build, deploy and sync a driver                 | No         | Yes |
 | Needs a terminal                                | No         | Yes |
 

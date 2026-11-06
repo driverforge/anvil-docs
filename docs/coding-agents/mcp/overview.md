@@ -19,14 +19,24 @@ your agent and sign in.
 
 The server gives your agent [tools](/coding-agents/mcp/tools) for:
 
-1. **Finding your projects** - List the projects you belong to, and fetch the
-   instructions for setting the SDK up in a driver
-2. **Reading errors** - List a project's errors, or look one up by the
-   reference shown in Anvil, with its stack trace, the arguments the handler
-   was called with, and what it logged
+1. **Finding your projects and controllers** - List your organizations,
+   projects and devices, and fetch the instructions for setting the SDK up in a
+   driver
+2. **Reading errors** - List a project's errors, look one up by the reference
+   shown in Anvil, or check whether a driver version raised any, with the stack
+   trace, the arguments the handler was called with, and what it logged
 3. **Reading events** - See which handlers Control4 called, with what arguments,
    and what they returned
-4. **Reading logs** - Search what your driver logged, by level, driver, controller or text
+4. **Reading logs** - Search what your driver logged, by level, controller or text
+5. **Waiting for an action** - Ask you to do something on the controller and
+   return as soon as the driver reports it, instead of you pasting logs back
+
+Every read can be scoped to one controller, one driver version and a start time,
+so the agent reads what *your* deploy did, not whatever else is running.
+
+It also offers [prompts](/coding-agents/mcp/tools#prompts) for whole workflows,
+such as diagnosing an error from its reference, and tells your agent how to work
+with telemetry when it connects.
 
 ## It acts as you
 
