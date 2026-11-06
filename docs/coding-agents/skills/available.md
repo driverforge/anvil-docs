@@ -71,11 +71,11 @@ Every job runs the same loop with a different question.
 2. **Deploy.** Run [`driverforge deploy`](/cli/deploy) and keep the `version`
    it returns. Every read in the loop passes it as `--version <n>`. Another
    developer can deploy to the same controller, so read your version by number
-   rather than whatever is running. In CI, take it from the deploy's output:
+   rather than whatever is running. In a script, take it from the deploy's
+   output:
 
    ```bash
-   driverforge deploy > deploy.json
-   V=$(jq -r .version deploy.json)
+   V=$(driverforge deploy | jq -r .version)   # under an agent or with DRIVERFORGE_OUTPUT=json
    driverforge logs --version "$V" --until-match '<regex>' --timeout 30s
    ```
 3. **Trigger the action.** See [Triggering](#triggering) below. A deploy reloads
@@ -145,7 +145,6 @@ Every result carries a stable exit status and, where something is wrong, a
 | Exit `3`, `wait.satisfied: false`                 | Nothing matched before `--timeout`                         | Check the trigger fired and `scope.version` is your deploy's version. Run `driverforge logs --version latest --tail 1`: a higher version there means someone deployed over yours. Don't just wait longer or edit the parser |
 | Exit `0`, warning `no_entries`                    | Nothing recorded for this scope yet                        | Re-run with `--until-match` and `--timeout`. If it's still empty, check the agent is installed and reporting on the controller                                                                                              |
 | Error `context_ambiguous` or `context_unresolved` | No controller, project or organization could be determined | Follow the `hint`: [`driverforge device select`](/cli/device) or the flag it names                                                                                                                                          |
-| Error `no_deploy_recorded`                        | `--version current` has no deploy from this machine        | Pass `--version <n>`, the version your deploy returned                                                                                                                                                                      |
 | Warning `payload_truncated`                       | An entry was cut at `--max-payload-bytes`                  | Fetch it in full with [`driverforge get <id>`](/cli/get). Never reason from the partial payload                                                                                                                             |
 | Exit `4`, `auth_required`                         | Not signed in, or the session expired                      | Run [`driverforge login`](/cli/login) and hand you the link and code from its `action_required` line                                                                                                                        |
 | Exit `6`, `rate_limited`                          | Too many requests                                          | Wait for the stated retry time. Don't loop                                                                                                                                                                                  |

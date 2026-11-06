@@ -26,7 +26,7 @@ read what the driver logged for that deploy only:
 
 ```bash
 driverforge deploy
-driverforge logs --version current --until-match '"data"' --timeout 30s
+driverforge logs --version 2026110502 --until-match '"data"' --timeout 30s
 ```
 
 `driverforge errors` and `driverforge events` work the same way, with the same
@@ -57,17 +57,14 @@ has more than one, the command stops and lists them so you can pass `--device`.
 
 ### Versions
 
-| `--version`   | Reads                                                                   |
-| ------------- | ----------------------------------------------------------------------- |
-| _(not given)_ | Every version                                                           |
-| `<n>`         | That driver version                                                     |
-| `current`     | The version this machine last [deployed](/cli/deploy) to the controller |
-| `latest`      | The highest version the controller has reported                         |
+| `--version`   | Reads                                           |
+| ------------- | ----------------------------------------------- |
+| _(not given)_ | Every version                                   |
+| `<n>`         | That driver version                             |
+| `latest`      | The highest version the controller has reported |
 
-`current` relies on the record `driverforge deploy` keeps on your machine, so a
-fresh CI runner has none: pass the version number there instead. It also goes
-stale when another developer deploys to the same controller; on a shared
-controller, pass the number your deploy printed.
+Pass the version `driverforge deploy` printed. `latest` may be another
+developer's deploy on a shared controller.
 
 Version filtering needs a driver built with an SDK that tags logs and events
 with their version. Entries from older SDKs have no version and only appear
@@ -80,7 +77,7 @@ when you don't filter by one.
 | `--org`               | Organization slug, name or id                                                 |
 | `--project`           | Project slug, name or id                                                      |
 | `--device`            | Controller name, hostname, hardware id or id                                  |
-| `--version`           | A version number, `current` or `latest` (see above)                           |
+| `--version`           | A version number or `latest` (see above)                           |
 | `--since`             | Start of the window: a duration (`30s`, `10m`, `2h`) or an RFC 3339 time      |
 | `--until`             | End of the window, in the same forms                                          |
 | `--tail`              | How many of the newest entries to return (default 100, at most 1000)          |
@@ -186,7 +183,7 @@ stdout:
 | `2`    | A bad flag or value                                                           |
 | `3`    | A wait ended at `--timeout` without its condition being met                   |
 | `4`    | Not signed in, or the session expired                                         |
-| `5`    | The organization, project, device or `--version current` couldn't be resolved |
+| `5`    | The organization, project or device couldn't be resolved                      |
 | `6`    | Rate limited                                                                  |
 | `130`  | Interrupted                                                                   |
 
@@ -195,7 +192,7 @@ stdout:
 Read what the last deploy logged:
 
 ```bash
-driverforge logs --version current
+driverforge logs --version 2026110502
 ```
 
 Read from a specific controller and version, with no project or selection:

@@ -30,11 +30,12 @@ Two parts work together:
 ## Shipped with the CLI
 
 The skills ship inside the `driverforge` CLI, so the version you install always
-matches the CLI it describes. One command installs them, and running it again
-after you upgrade the CLI updates them:
+matches the CLI it describes. One command installs them, and another brings
+them up to date after you upgrade the CLI:
 
 ```bash
 driverforge skills install
+driverforge skills update
 ```
 
 The skills cover the routine. For anything they don't, point your agent at

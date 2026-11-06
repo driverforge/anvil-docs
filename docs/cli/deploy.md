@@ -29,11 +29,9 @@ Every deploy **bumps the driver's version** per the project's
 sees a higher `<version>`, so each deploy consumes a version slot. The bump is
 persisted back to your `driver.xml` after the build succeeds.
 
-The CLI also remembers, on your machine, which version it deployed to which
-controller, so [`driverforge logs --version current`](/cli/logs#versions) (and
-`errors` and `events`) can read back exactly what that deploy reported. On a
-controller others deploy to as well, pass the version this command printed
-instead: `current` doesn't see their deploys.
+The command prints the version it deployed. Pass it to
+[`driverforge logs --version`](/cli/logs#versions) (and `errors` and `events`)
+to read back exactly what that deploy reported.
 
 ## Prerequisites
 
@@ -140,10 +138,10 @@ that updates the driver in place automatically.
 Prefer to set it up by hand? Add the driver to a room once in Composer Pro and
 run `driverforge deploy` again; the CLI picks up from there.
 
-Once it's deployed, read what the driver reports:
+Once it's deployed, read what the driver reports, using the version it printed:
 
 ```bash
-driverforge logs --version current
+driverforge logs --version 2026110502
 ```
 
 ## Troubleshooting

@@ -170,16 +170,16 @@ change.
 
 Every command uses the same exit statuses, in agent mode or not:
 
-| Status | Meaning                                                                                                                                                          |
-| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `0`    | Success                                                                                                                                                          |
-| `1`    | Any other failure                                                                                                                                                |
-| `2`    | A bad flag or value, or an answer a prompt would have asked for (`usage_error`, `input_required`)                                                                |
-| `3`    | A wait ended at `--timeout` without its condition being met                                                                                                      |
-| `4`    | Not signed in, or the session expired (`auth_required`)                                                                                                          |
-| `5`    | The organization, project or controller couldn't be determined, the directory isn't an initialised driver project, or `--version current` has no deploy recorded |
-| `6`    | Rate limited, or a plan limit reached (`rate_limited`, `project_limit_reached`)                                                                                  |
-| `130`  | Interrupted                                                                                                                                                      |
+| Status | Meaning                                                                                                              |
+| ------ | -------------------------------------------------------------------------------------------------------------------- |
+| `0`    | Success                                                                                                              |
+| `1`    | Any other failure, such as `skill_not_installed` (no skills installed by `driverforge` in the searched directories)  |
+| `2`    | A bad flag or value, or an answer a prompt would have asked for (`usage_error`, `input_required`)                    |
+| `3`    | A wait ended at `--timeout` without its condition being met                                                          |
+| `4`    | Not signed in, or the session expired (`auth_required`)                                                              |
+| `5`    | The organization, project or controller couldn't be determined, or the directory isn't an initialised driver project |
+| `6`    | Rate limited, or a plan limit reached (`rate_limited`, `project_limit_reached`)                                      |
+| `130`  | Interrupted                                                                                                          |
 
 ## Installing skills
 
@@ -214,16 +214,25 @@ driverforge skills install --global
 
 ## Keeping skills up to date
 
-After you [upgrade the CLI](/cli/upgrading), run the same command again:
+After you [upgrade the CLI](/cli/upgrading), update the installed skills:
 
 ```bash
-driverforge skills install
+driverforge skills update
 ```
 
-Installing again replaces the copy an earlier install wrote, so the skills
-match the CLI you now have. For each skill, the output says whether it was
-`installed`, `updated` or `unchanged`. Run it where you installed: add
-`--global` to update the skills in `~/.agents/skills/`, or the same `--path`
-you used.
+This updates every skill `driverforge` installed, in both standard locations:
+`.agents/skills/` at the root of the current Git repository, and
+`~/.agents/skills/`. For each skill, the output says whether it was `updated`
+or `unchanged`.
+
+| Option     | Description                                   |
+| ---------- | --------------------------------------------- |
+| `--global` | Update only the skills in `~/.agents/skills/` |
+| `--path`   | Update only the skills in this directory      |
+
+Name a skill to update only that one: `driverforge skills update anvil-driver-dev-cycle`.
+
+If no skills installed by `driverforge` are found, the command fails with
+`skill_not_installed` and lists the directories it searched.
 
 To see the skills the CLI ships, run `driverforge skills list`.

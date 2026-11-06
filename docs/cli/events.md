@@ -38,7 +38,7 @@ It works exactly like [`driverforge logs`](/cli/logs): the same
 | `--org`               | Organization slug, name or id                                                          |
 | `--project`           | Project slug, name or id                                                               |
 | `--device`            | Controller name, hostname, hardware id or id                                           |
-| `--version`           | A version number, `current` or `latest`                                                |
+| `--version`           | A version number or `latest`                                                           |
 | `--since`             | Start of the window: a duration (`30s`, `10m`, `2h`) or an RFC 3339 time               |
 | `--until`             | End of the window, in the same forms                                                   |
 | `--tail`              | How many of the newest events to return (default 100, at most 1000)                    |
@@ -138,11 +138,8 @@ stdout:
 What the driver received from its proxy since the last deploy:
 
 ```bash
-driverforge events --version current --name ReceivedFromProxy
+driverforge events --version 2026110502 --name ReceivedFromProxy
 ```
-
-On a controller others deploy to as well, pass the version your deploy printed
-instead of `current` (see [Versions](/cli/logs#versions)).
 
 Wait for the next property change:
 

@@ -39,7 +39,7 @@ It works exactly like [`driverforge logs`](/cli/logs): the same
 | `--org`               | Organization slug, name or id                                            |
 | `--project`           | Project slug, name or id                                                 |
 | `--device`            | Controller name, hostname, hardware id or id                             |
-| `--version`           | A version number, `current` or `latest`                                  |
+| `--version`           | A version number or `latest`                                             |
 | `--since`             | Start of the window: a duration (`30s`, `10m`, `2h`) or an RFC 3339 time |
 | `--until`             | End of the window, in the same forms                                     |
 | `--tail`              | How many of the newest occurrences to return (default 100, at most 1000) |
@@ -143,11 +143,8 @@ stdout:
 Errors from the last deploy:
 
 ```bash
-driverforge errors --version current
+driverforge errors --version 2026110502
 ```
-
-On a controller others deploy to as well, pass the version your deploy printed
-instead of `current` (see [Versions](/cli/logs#versions)).
 
 Errors from the last ten minutes on one controller:
 
@@ -158,7 +155,7 @@ driverforge errors --device bench-a --since 10m
 Wait for an error after triggering an action, and fail if none arrives:
 
 ```bash
-driverforge errors --version current --min-events 1 --timeout 60s
+driverforge errors --version 2026110502 --min-events 1 --timeout 60s
 ```
 
 ## Global flags
