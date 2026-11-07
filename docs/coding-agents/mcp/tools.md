@@ -15,7 +15,11 @@ projects your account belongs to. Every tool only reads: none of them changes a
 project, a device or a driver. Tools that take a `projectId` accept either the
 project's ID or its slug.
 
-All results are JSON.
+All results are JSON. Every tool publishes an output schema describing its
+successful result, so an agent that supports structured tool output can read
+the result's shape before calling the tool. A successful result comes back as
+structured content that matches the schema, and as text for agents that don't
+read structured content.
 
 ## Signing in
 
@@ -86,37 +90,6 @@ agent uses when you ask it to set Anvil up in a driver.
 | `projectId` | Yes      | The project's ID or slug.                                                                                                                                   |
 | `platform`  | No       | The target platform: `CONTROL4` or `SAVANT`. Defaults to the project's platform. Only Control4 is supported yet: `SAVANT` returns `platform_not_supported`. |
 
-## Scoping telemetry reads
-
-`list_events`, `list_logs` and `list_error_occurrences` share these inputs, so
-an agent can scope every read the same way.
-
-| Input              | Description                                                                                                                                                                                                                                                                                      |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `projectId`        | Required. The project's ID or slug.                                                                                                                                                                                                                                                              |
-| `device`           | Only telemetry from this controller: its name, hostname, hardware ID or ID.                                                                                                                                                                                                                      |
-| `driverVersion`    | Only telemetry from this driver version: the version your deploy returned, or `latest` for the highest version in the newest telemetry. Someone else may deploy to the same controller, so a version number is safer than `latest`. The server can't see your deploys, so `current` is rejected. |
-| `since`            | Where the window starts: a duration back from now (`30s`, `10m`, `2h`, `1d`) or a time with a timezone, such as `2026-11-05T09:00:00Z` or `2026-11-05T19:00:00+10:00`. A time in the future is rejected. Takes precedence over `timeRangeMinutes`.                                               |
-| `timeRangeMinutes` | How far back to look, in minutes, when `since` isn't given. At most 129600 (90 days).                                                                                                                                                                                                            |
-| `drivers`          | Only entries from one of these drivers, such as `poolpump.c4z`.                                                                                                                                                                                                                                  |
-| `controllers`      | Only entries from one of these controllers, by hardware ID. `device` takes precedence.                                                                                                                                                                                                           |
-| `limit`            | The most entries to return.                                                                                                                                                                                                                                                                      |
-| `cursor`           | Fetch the next, older page: pass `nextCursor` from the previous result.                                                                                                                                                                                                                          |
-| `maxPayloadBytes`  | Cap each entry's message or payload at this many bytes. Defaults to 16384; `0` for no cap; at most 1048576 (1 MiB).                                                                                                                                                                              |
-
-Each result reports the scope it actually read (`project`, `device`,
-`driverVersion`, `since`) and `windowMinutes`, the look-back that was searched.
-Your [plan's retention](/platform/plans) can make that shorter than you asked
-for.
-
-Results can carry warnings, each with a stable `code`:
-
-| Code                | Meaning                                                                                                                              |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `no_entries`        | Nothing matched the scope and filters.                                                                                               |
-| `retention_clamped` | The window reached past your plan's retention, so older entries weren't searched.                                                    |
-| `payload_truncated` | Some entries were cut at `maxPayloadBytes`. Each is listed by ID; `get_event`, `get_log` or `get_error_occurrence` fetches it whole. |
-
 ## Events
 
 ### `list_events`
@@ -126,8 +99,8 @@ Control4 callback your driver handled, with its status, driver version,
 controller, duration, arguments and result. This is how an agent finds out what
 your driver actually did, and which callbacks Control4 called in what order.
 
-Takes the shared inputs above (`limit` defaults to 25, at most 500;
-`timeRangeMinutes` defaults to 15), plus:
+Takes the [shared scoping inputs](#scoping-telemetry-reads)
+(`limit` defaults to 25, at most 500; `timeRangeMinutes` defaults to 15), plus:
 
 | Input        | Required | Description                                                       |
 | ------------ | -------- | ----------------------------------------------------------------- |
@@ -156,8 +129,8 @@ Nothing is cut, so this is also where an agent goes after `list_events` warns
 Lists the [log lines](/platform/logs) a project recorded, newest first, so the
 agent can read your driver's output without you pasting it in.
 
-Takes the shared inputs above (`limit` defaults to 100, at most 1000;
-`timeRangeMinutes` defaults to 15), plus:
+Takes the [shared scoping inputs](#scoping-telemetry-reads)
+(`limit` defaults to 100, at most 1000; `timeRangeMinutes` defaults to 15), plus:
 
 | Input           | Required | Description                                                           |
 | --------------- | -------- | --------------------------------------------------------------------- |
@@ -216,8 +189,8 @@ message, the callback it was raised in, its arguments and the last log line
 before it. Scoped to a `driverVersion`, it answers "did my change raise any
 errors?".
 
-Takes the shared inputs above (`limit` defaults to 25, at most 500;
-`timeRangeMinutes` defaults to 1440), plus:
+Takes the [shared scoping inputs](#scoping-telemetry-reads)
+(`limit` defaults to 25, at most 500; `timeRangeMinutes` defaults to 1440), plus:
 
 | Input     | Required | Description                                              |
 | --------- | -------- | -------------------------------------------------------- |
@@ -266,7 +239,8 @@ cut at `maxPayloadBytes` still lists what was cut in its own `truncated` field:
 fetch it whole with `get_event`, `get_log` or `get_error_occurrence`. While it
 waits, the server sends progress notifications to agents that ask for them.
 
-Takes `projectId`, `device` and `driverVersion` as above, plus:
+Takes `projectId`, `device` and `driverVersion` as in
+[Scoping telemetry reads](#scoping-telemetry-reads), plus:
 
 | Input             | Required | Description                                                                                                                                                                                    |
 | ----------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -280,11 +254,43 @@ Takes `projectId`, `device` and `driverVersion` as above, plus:
 | `traceId`         | No       | Only entries from the event with this `traceId`.                                                                                                                                               |
 | `maxPayloadBytes` | No       | Cap each entry's message or payload. Defaults to 16384; `0` for no cap; at most 1048576 (1 MiB).                                                                                               |
 
+### Scoping telemetry reads
+
+`list_events`, `list_logs` and `list_error_occurrences` share these inputs, so
+an agent can scope every read the same way.
+
+| Input              | Description                                                                                                                                                                                                                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `projectId`        | Required. The project's ID or slug.                                                                                                                                                                                                                                                              |
+| `device`           | Only telemetry from this controller: its name, hostname, hardware ID or ID.                                                                                                                                                                                                                      |
+| `driverVersion`    | Only telemetry from this driver version: the version your deploy returned, or `latest` for the highest version in the newest telemetry. Someone else may deploy to the same controller, so a version number is safer than `latest`. The server can't see your deploys, so `current` is rejected. |
+| `since`            | Where the window starts: a duration back from now (`30s`, `10m`, `2h`, `1d`) or a time with a timezone, such as `2026-11-05T09:00:00Z` or `2026-11-05T19:00:00+10:00`. A time in the future is rejected. Takes precedence over `timeRangeMinutes`.                                               |
+| `timeRangeMinutes` | How far back to look, in minutes, when `since` isn't given. At most 129600 (90 days).                                                                                                                                                                                                            |
+| `drivers`          | Only entries from one of these drivers, such as `poolpump.c4z`.                                                                                                                                                                                                                                  |
+| `controllers`      | Only entries from one of these controllers, by hardware ID. `device` takes precedence.                                                                                                                                                                                                           |
+| `limit`            | The most entries to return.                                                                                                                                                                                                                                                                      |
+| `cursor`           | Fetch the next, older page: pass `nextCursor` from the previous result.                                                                                                                                                                                                                          |
+| `maxPayloadBytes`  | Cap each entry's message or payload at this many bytes. Defaults to 16384; `0` for no cap; at most 1048576 (1 MiB).                                                                                                                                                                              |
+
+Each result reports the scope it actually read (`project`, `device`,
+`driverVersion`, `since`) and `windowMinutes`, the look-back that was searched.
+Your [plan's retention](/platform/plans) can make that shorter than you asked
+for.
+
+Results can carry warnings, each with a stable `code`:
+
+| Code                | Meaning                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `no_entries`        | Nothing matched the scope and filters.                                                                                               |
+| `retention_clamped` | The window reached past your plan's retention, so older entries weren't searched.                                                    |
+| `payload_truncated` | Some entries were cut at `maxPayloadBytes`. Each is listed by ID; `get_event`, `get_log` or `get_error_occurrence` fetches it whole. |
+
 ## When a tool fails
 
 A call that can't return what was asked is marked as an error, and its result
 carries a stable code in its `status` field and a `message` saying what to do
-next.
+next. A failed result comes back as text only; the output schemas describe
+successful results.
 
 Any tool that needs sign-in can return:
 
