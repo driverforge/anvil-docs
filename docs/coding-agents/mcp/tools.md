@@ -283,9 +283,8 @@ Takes `projectId`, `device` and `driverVersion` as above, plus:
 ## When a tool fails
 
 A call that can't return what was asked is marked as an error, and its result
-carries a stable code and a `message` saying what to do next. The code is in
-the result's `status` field, or in its `error` field for `get_error`,
-`get_project` and the failures any tool can hit.
+carries a stable code in its `status` field and a `message` saying what to do
+next.
 
 Any tool that needs sign-in can return:
 
@@ -320,6 +319,9 @@ Other tools have their own:
 | `organization_ambiguous` | `list_devices`                                              | You belong to more than one organization. `candidates` lists them. |
 | `access_denied`          | `list_devices`                                              | Listing devices needs admin access to the organization.            |
 | `platform_not_supported` | `get_integration_guide`                                     | The platform isn't Control4.                                       |
+| `expired_token`          | `authenticate`                                              | The sign-in link expired before you finished. Call it again.       |
+| `access_denied`          | `authenticate`                                              | You declined the sign-in request in the browser.                   |
+| `auth_failed`            | `authenticate`                                              | Sign-in couldn't start or finish. Try again.                       |
 
 ## Prompts
 
