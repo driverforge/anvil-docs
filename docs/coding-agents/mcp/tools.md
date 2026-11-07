@@ -15,11 +15,14 @@ projects your account belongs to. Every tool only reads: none of them changes a
 project, a device or a driver. Tools that take a `projectId` accept either the
 project's ID or its slug.
 
-All results are JSON. Every tool publishes an output schema describing its
-successful result, so an agent that supports structured tool output can read
-the result's shape before calling the tool. A successful result comes back as
-structured content that matches the schema, and as text for agents that don't
-read structured content.
+All results are JSON. Apart from the two sign-in tools, a successful result
+carries `status: "ok"` and a failed one a
+[failure code](#when-a-tool-fails) in the same field.
+
+Every tool publishes an output schema describing its successful result, so an
+agent that supports structured tool output can read the result's shape before
+calling the tool. A successful result comes back as structured content that
+matches the schema, and as text for agents that don't read structured content.
 
 ## Signing in
 
@@ -152,15 +155,13 @@ this is where an agent goes after `list_logs` warns `payload_truncated`.
 
 ### `list_errors`
 
-Lists the [errors](/platform/errors) a project recorded in a time window,
-grouped by cause and most frequent first. Each one carries the reference to pass
-to `get_error`.
+Lists the [errors](/platform/errors) a project recorded, grouped by cause and
+most frequent first. Each one carries the reference to pass to `get_error`.
+Scoped to a `driverVersion`, `device` or `since`, a group's count and affected
+drivers and versions cover only the occurrences in that scope.
 
-| Input              | Required | Description                                                                              |
-| ------------------ | -------- | ---------------------------------------------------------------------------------------- |
-| `projectId`        | Yes      | The project's ID or slug.                                                                |
-| `timeRangeMinutes` | No       | How far back to look, in minutes. Defaults to 1440 (24 hours); at most 129600 (90 days). |
-| `limit`            | No       | The most errors to return. Defaults to 25; at most 100.                                  |
+Takes the [shared scoping inputs](#scoping-telemetry-reads)
+(`limit` defaults to 25, at most 100; `timeRangeMinutes` defaults to 1440).
 
 ### `get_error`
 
@@ -254,10 +255,10 @@ Takes `projectId`, `device` and `driverVersion` as in
 | `traceId`         | No       | Only entries from the event with this `traceId`.                                                                                                                                               |
 | `maxPayloadBytes` | No       | Cap each entry's message or payload. Defaults to 16384; `0` for no cap; at most 1048576 (1 MiB).                                                                                               |
 
-### Scoping telemetry reads
+## Scoping telemetry reads
 
-`list_events`, `list_logs` and `list_error_occurrences` share these inputs, so
-an agent can scope every read the same way.
+`list_events`, `list_logs`, `list_errors` and `list_error_occurrences` share
+these inputs, so an agent can scope every read the same way.
 
 | Input              | Description                                                                                                                                                                                                                                                                                      |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -301,8 +302,8 @@ Any tool that needs sign-in can return:
 | `access_denied`       | Your account can't see this.                                                                            |
 | `service_unavailable` | Anvil couldn't load the data. Try again.                                                                |
 
-The telemetry tools (`list_events`, `list_logs`, `list_error_occurrences` and
-`wait_for_telemetry`) check their scope first:
+The telemetry tools (`list_events`, `list_logs`, `list_errors`,
+`list_error_occurrences` and `wait_for_telemetry`) check their scope first:
 
 | Code                | Meaning                                                                           |
 | ------------------- | --------------------------------------------------------------------------------- |
