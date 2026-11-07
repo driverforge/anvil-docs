@@ -330,6 +330,7 @@ Other tools have their own:
 | `access_denied`          | `authenticate`                                              | You declined the sign-in request in the browser.                   |
 | `auth_failed`            | `authenticate`                                              | Sign-in couldn't start or finish. Try again.                       |
 | `session_required`       | `authenticate`                                              | The agent keeps no MCP session. Sign in through its MCP settings.  |
+| `service_unavailable`    | `authenticate`, `auth_status`                               | The sign-in couldn't be read. Try again shortly.                   |
 
 ## Prompts
 
