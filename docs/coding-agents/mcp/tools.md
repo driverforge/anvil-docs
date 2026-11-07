@@ -329,6 +329,7 @@ Other tools have their own:
 | `expired_token`          | `authenticate`                                              | The sign-in link expired before you finished. Call it again.       |
 | `access_denied`          | `authenticate`                                              | You declined the sign-in request in the browser.                   |
 | `auth_failed`            | `authenticate`                                              | Sign-in couldn't start or finish. Try again.                       |
+| `session_required`       | `authenticate`                                              | The agent keeps no MCP session. Sign in through its MCP settings.  |
 
 ## Prompts
 

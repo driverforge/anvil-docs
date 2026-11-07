@@ -164,10 +164,17 @@ account it's acting as.
 
 ## Sessions
 
-The agent's connection to the server is a session, and the sign-in belongs to
-that session. A session ends after an hour without any requests. If a tool
-replies that authentication is required, sign in again the same way; agents
-that signed in through the browser usually do this for you.
+The server keeps nothing about the agent's connection between requests, so a
+server restart or deploy doesn't sign you out.
+
+- **Signed in through the browser:** the agent sends its sign-in with every
+  request and renews it itself.
+- **Signed in with `authenticate`:** the sign-in belongs to the agent's MCP
+  session. It lasts until the sign-in expires, about an hour, or until the agent
+  ends the session.
+
+If a tool replies that authentication is required, sign in again the same way;
+agents that signed in through the browser usually do this for you.
 
 ## Next steps
 
