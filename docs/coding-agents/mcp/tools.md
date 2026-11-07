@@ -131,6 +131,7 @@ Takes the shared inputs above (`limit` defaults to 25, at most 500;
 | ------------ | -------- | ------------------------------------------------------------ |
 | `eventNames` | No       | Only callbacks with one of these names, such as `ExecuteCommand`. |
 | `statuses`   | No       | Only events with one of these statuses.                      |
+| `traceId`    | No       | Only the event with this `traceId`.                          |
 
 ### `get_event`
 
