@@ -170,8 +170,8 @@ server restart or deploy doesn't sign you out.
 - **Signed in through the browser:** the agent sends its sign-in with every
   request and renews it itself.
 - **Signed in with `authenticate`:** the sign-in belongs to the agent's MCP
-  session. It lasts until the sign-in expires, about an hour, or until the agent
-  ends the session.
+  session, and the server renews it for you. It lasts until the agent ends the
+  session, or until the session goes a week without being used.
 
 If a tool replies that authentication is required, sign in again the same way;
 agents that signed in through the browser usually do this for you.
