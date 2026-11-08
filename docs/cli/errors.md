@@ -19,7 +19,8 @@ driverforge errors [options]
 `errors` lists individual error occurrences, oldest first, each with its
 message, error type, stack trace and the arguments of the event it was raised
 in. Occurrences are listed one by one, not grouped the way the web app's errors
-view groups them, so you see every time it happened.
+view groups them, so you see every time it happened. To read the group, run
+[`driverforge get <ref>`](/cli/get#error-groups) with the `ref` an error carries.
 
 It works exactly like [`driverforge logs`](/cli/logs): the same
 [scope rules](/cli/logs#choosing-what-to-read), [versions](/cli/logs#versions),
@@ -67,6 +68,17 @@ around an error:
 driverforge logs --correlation-id <id>
 ```
 
+Its `ref` is the reference of the error group it belongs to, such as
+`POOL-PUMP-4F2A9C1B`, or `null` if its fingerprint can't form one. Pass it to
+[`driverforge get`](/cli/get#error-groups) for the group's history: how often
+the error has occurred, since when, and on which versions and controllers. To
+start from the latest error:
+
+```bash
+driverforge errors --tail 1
+driverforge get <ref>
+```
+
 ## Output
 
 In a terminal the output is for reading. Under a [coding agent](/coding-agents/skills/cli), or with `DRIVERFORGE_OUTPUT=json`, the result is one JSON document on stdout and progress is one JSON object per line on stderr.
@@ -75,9 +87,9 @@ In a terminal the output is for reading. Under a [coding agent](/coding-agents/s
 <TabItem value="interactive" label="Interactive">
 
 ```text
-scope: org=acme project=poolpump device=Living Room version=20261105.2
+scope: org=acme project=pool-pump device=Living Room version=20261105.2
 
-2026-11-05T03:12:44.231Z  ERROR  v20261105.2  ExecuteCommand  attempt to index a nil value (field 'episode')
+2026-11-05T03:12:44.231Z  ERROR  v20261105.2  ExecuteCommand  POOL-PUMP-4F2A9C1B  attempt to index a nil value (field 'episode')
     {
       "type": "lua:runtime_error",
       "stacktrace": "driver.lua:212: in function 'PlayEpisode'\ndriver.lua:88: in function 'ExecuteCommand'",
@@ -97,7 +109,7 @@ stdout:
 {
   "scope": {
     "org": "acme",
-    "project": "poolpump",
+    "project": "pool-pump",
     "device": { "id": "9e8d7c6b-5a4f-4e3d-a2c1-b0a9f8e7d6c5", "name": "Living Room" },
     "version": "20261105.2",
     "since": null,
@@ -120,6 +132,7 @@ stdout:
       "status": null,
       "duration_ms": null,
       "error_id": null,
+      "ref": "POOL-PUMP-4F2A9C1B",
       "driver": "poolpump.c4z",
       "driver_version": "20261105.2",
       "device": { "id": "000FFF1A2B3C", "name": "Living Room" },

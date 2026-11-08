@@ -115,6 +115,7 @@ stdout:
       "status": "ok",
       "duration_ms": 31.4,
       "error_id": null,
+      "ref": null,
       "driver": "poolpump.c4z",
       "driver_version": "20261105.2",
       "device": { "id": "000FFF1A2B3C", "name": "Living Room" },

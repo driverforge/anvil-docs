@@ -52,6 +52,10 @@ A flag only affects that one run; it never changes your selection. With
 `--org`, `--project`, `--device` and `--version`, the command works anywhere,
 with no project and no saved selection, which is what CI needs.
 
+Without `--since`, a read searches as far back as your plan keeps telemetry,
+and so does `--version latest`. `--since` takes a duration such as `30s`, `10m`
+or `720h` (30 days), or an RFC 3339 time.
+
 The CLI never prompts here. If no controller is selected and your organization
 has more than one, the command stops and lists them so you can pass `--device`.
 
@@ -163,6 +167,7 @@ stdout:
       "status": null,
       "duration_ms": null,
       "error_id": null,
+      "ref": null,
       "driver": "poolpump.c4z",
       "driver_version": "20261105.2",
       "device": { "id": "000FFF1A2B3C", "name": "Living Room" },
