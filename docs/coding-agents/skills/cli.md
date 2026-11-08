@@ -52,8 +52,8 @@ the result without wading through progress.
 **stdout** carries one JSON document: the command's result, or an
 [error](#errors-an-agent-can-act-on). [`logs`](/cli/logs),
 [`errors`](/cli/errors), [`events`](/cli/events) and [`get`](/cli/get) write
-their documents here as before. [`debug`](/cli/debug), and `logs --follow`,
-write one JSON object per line as entries arrive.
+their documents here as before. `logs --follow` writes one JSON object per
+line as entries arrive.
 
 **stderr** carries one JSON object per line as the command works:
 

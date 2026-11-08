@@ -11,9 +11,9 @@ Run your driver's Lua on your own machine while a real controller drives it.
 Set breakpoints in your IDE, inspect variables, step through handlers, and save
 a file to have the next event run the new code. No rebuild, no redeploy.
 
-:::note[Beta]
-Live debugging is new. If something doesn't behave the way this page describes,
-tell us.
+:::info[Coming soon]
+`driverforge debug` isn't available in the current release; running it reports
+that it's coming soon. This page describes how live debugging will work.
 :::
 
 ## Usage

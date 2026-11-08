@@ -94,7 +94,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'cli/build',
         'cli/completion',
-        {type: 'doc', id: 'cli/debug', className: 'menu-experimental'},
+        {type: 'doc', id: 'cli/debug', className: 'menu-coming-soon'},
         'cli/deploy',
         'cli/device',
         'cli/doctor',
