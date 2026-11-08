@@ -52,7 +52,7 @@ function DownloadButton({ label, manifestPath }: { label: string; manifestPath: 
 }
 
 export default function DownloadSDK() {
-  return <DownloadButton label="Download Anvil SDK" manifestPath="anvil-sdk" />;
+  return <DownloadButton label="Download Driverforge SDK" manifestPath="driverforge-sdk" />;
 }
 
 export function DownloadAgent() {
