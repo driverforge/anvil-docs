@@ -33,6 +33,11 @@ The command prints the version it deployed. Pass it to
 [`driverforge logs --version`](/cli/logs#versions) (and `errors` and `events`)
 to read back exactly what that deploy reported.
 
+Navigators cache each driver's UI schema. After a first deploy or a structural
+change to `driver.xml` (such as screens, tabs, properties, or actions), deploy
+automatically refreshes them so they load the new UI. Use
+`--refresh-navigators` to force the refresh when `driver.xml` is unchanged.
+
 ## Prerequisites
 
 - The project is [initialised](/cli/init) (`driverforge init`)
@@ -47,6 +52,7 @@ to read back exactly what that deploy reported.
 | `--device`              | Controller to deploy to (name, hostname, or id); overrides the selected one |
 | `--select`              | Re-select the target controller before deploying                             |
 | `--configuration`, `-c` | Build configuration to build and deploy                                      |
+| `--refresh-navigators`  | Refresh navigators even when `driver.xml` is unchanged                       |
 
 ## Output
 
@@ -125,6 +131,12 @@ Build and deploy the `release` configuration to a specific controller:
 
 ```bash
 driverforge deploy --configuration release --device "Plant Room"
+```
+
+Force a navigator refresh without changing the driver's structure:
+
+```bash
+driverforge deploy --refresh-navigators
 ```
 
 ## First deploy

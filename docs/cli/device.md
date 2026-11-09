@@ -155,6 +155,22 @@ stdout:
 </TabItem>
 </Tabs>
 
+### driverforge device refresh-navigators
+
+Make the controller's navigators re-read cached driver UI schemas. Use this
+when a driver's screens or tabs look stale. A deploy refreshes navigators
+automatically after a structural `driver.xml` change; this command is the
+standalone option when you need to refresh them on demand.
+
+```bash
+driverforge device refresh-navigators
+```
+
+Pass `--device <name-or-id>` to target a controller other than the selected
+one, or `--select` to choose the target again before refreshing. The controller
+agent must support navigator refresh; update it with
+[`driverforge upgrade`](/cli/upgrade) if it does not.
+
 See [Organizations & devices](/cli/context) for how the deploy target is resolved.
 
 ## Global flags

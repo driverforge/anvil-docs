@@ -68,6 +68,7 @@ Keep these in mind:
 | `--select`              | Re-select the target controller first                                      |
 | `--configuration`, `-c` | Build configuration to build and sync                                      |
 | `--deploy`              | Do a full [deploy](/cli/deploy) instead of a hot-swap                      |
+| `--refresh-navigators`  | When sync performs a full deploy, refresh navigators even if `driver.xml` is unchanged |
 
 ## Output
 
