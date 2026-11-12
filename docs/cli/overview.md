@@ -87,7 +87,7 @@ driverforge deploy
 
 **Coming soon**
 
-- [`driverforge debug`](/cli/debug): Live debugging with IDE support
+- [`driverforge run`](/cli/run): Run your driver locally against a real controller, with no build or deploy between changes, and an optional debugger
 
 Run `driverforge <command> --help` (or `driverforge help <command>`) for the full flags and
 usage of any command.
