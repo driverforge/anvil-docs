@@ -169,7 +169,7 @@ driver project:
 }
 ```
 
-1. Set breakpoints in your driver's files under `src/`.
+1. Set breakpoints in your driver's source files.
 2. Start the **driverforge run --debug** configuration (F5). VS Code waits for
    a connection on port 8172.
 3. In a terminal in the project, run `driverforge run --debug`.
@@ -185,7 +185,7 @@ only when `run` connects from another machine (`--debug=<your-ip>:8172`).
 1. Open your driver project's folder and set it as the project directory
    (**Project → Project Directory → Choose…**).
 2. Choose **Project → Start Debugger Server**. ZeroBrane listens on port 8172.
-3. Set breakpoints in your driver's files under `src/`.
+3. Set breakpoints in your driver's source files.
 4. In a terminal in the project, run `driverforge run --debug`.
 5. ZeroBrane stops on the first line after the debugger connects, which is in
    `run`'s own loader. Continue (F5), then trigger the action on the
@@ -246,8 +246,8 @@ In a terminal the output is for reading. Under a [coding agent](/coding-agents/s
 ✓ Stub online as poolpump; starting the driver locally
 ✓ Local network relay up through the agent: C4 calls skip the cloud
 ✓ Driver running locally (12 handlers)
-← ExecuteCommand("PLAY",{})
-  | playing episode 4812
+← ExecuteCommand("SET_SPEED",{SPEED="2400"})
+  | pump speed set to 2400 rpm
   changed: driver.lua
 ✓ Reloaded driver source
 ```
@@ -262,8 +262,8 @@ stdout:
 ```json
 {"event": "stub_online", "driver": "poolpump"}
 {"event": "ready", "handlers": ["ExecuteCommand", "ReceivedFromProxy", "OnPropertyChanged"]}
-{"event": "callback", "summary": "ExecuteCommand(\"PLAY\",{})", "name": "ExecuteCommand", "args": ["PLAY", {}]}
-{"event": "print", "text": "playing episode 4812"}
+{"event": "callback", "summary": "ExecuteCommand(\"SET_SPEED\",{SPEED=\"2400\"})", "name": "ExecuteCommand", "args": ["SET_SPEED", {"SPEED": "2400"}]}
+{"event": "print", "text": "pump speed set to 2400 rpm"}
 {"event": "callback_result", "name": "ExecuteCommand", "ok": true, "handled": true}
 ```
 
@@ -349,8 +349,8 @@ A few things behave differently because of that:
   `driverforge run --debug`, and check that the port matches (`--debug=host:port`).
   For a debugger on another machine, it must listen on all interfaces
   (`listenPublicly: true` in VS Code).
-- **Breakpoints aren't hit**: set them in the files under your project's `src/`
-  folder, the ones `run` loads, not in a built copy under `dist/`.
+- **Breakpoints aren't hit**: set them in your project's source files, the ones
+  `run` loads, not in a built copy under `dist/`.
 - **You quit without deploying**: the stub is still installed, and does nothing.
   Run [`driverforge deploy`](/cli/deploy) whenever you're ready; the next
   `run` replaces it too.
