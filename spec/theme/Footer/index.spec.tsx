@@ -50,16 +50,16 @@ describe('Footer', () => {
     );
   });
 
-  it('draws the classified column as redaction bars: three links home, of different lengths', () => {
+  it('draws the classified column as redaction bars: four links home, of different lengths', () => {
     const { container } = render(<Footer />);
 
     const links = screen.getAllByRole('link', { name: 'Coming soon' });
-    expect(links).toHaveLength(3);
+    expect(links).toHaveLength(4);
     for (const link of links) expect(link).toHaveAttribute('href', 'https://driverforge.com');
     const widths = links.map(
       (link) => (link.querySelector('.df-redacted__bar') as HTMLElement).style.width,
     );
-    expect(new Set(widths).size).toBe(3);
+    expect(new Set(widths).size).toBe(4);
     expect(container.textContent?.toLowerCase()).not.toContain('marketplace');
   });
 

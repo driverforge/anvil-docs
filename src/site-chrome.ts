@@ -58,7 +58,7 @@ const docsSection = (section: string) => `${SITE_URLS.docs}/${section}/overview/
 /** The footer's link columns. Company ends with the cookie-preferences action. */
 export const SITE_FOOTER_COLUMNS: SiteFooterLinkColumn[] = [
   // The marketplace, unnamed until it launches: a redacted heading stamped
-  // Soon over three redacted links home, of different lengths. At launch it
+  // Soon over four redacted links home, of different lengths. At launch it
   // becomes a real column, or a { label: 'Marketplace' } link in Developers.
   {
     heading: 'Something new, coming soon',
@@ -67,25 +67,25 @@ export const SITE_FOOTER_COLUMNS: SiteFooterLinkColumn[] = [
       { label: COMING_SOON, href: SITE_URLS.home, redactedWidth: 10 },
       { label: COMING_SOON, href: SITE_URLS.home, redactedWidth: 7 },
       { label: COMING_SOON, href: SITE_URLS.home, redactedWidth: 12 },
+      { label: COMING_SOON, href: SITE_URLS.home, redactedWidth: 8 },
     ],
   },
   {
     heading: 'Developers',
     links: [
       { label: 'Anvil', href: SITE_URLS.anvil },
-      { label: 'Docs', href: SITE_URLS.docs },
-      { label: 'Roadmap', href: SITE_URLS.roadmap },
+      { label: 'SDK', href: docsSection('sdk') },
+      { label: 'CLI', href: docsSection('cli') },
+      { label: 'CI/CD', href: docsSection('cicd') },
+      { label: 'Coding Agents', href: docsSection('coding-agents') },
     ],
   },
   {
     heading: 'Learn',
     links: [
-      { label: 'Platform', href: SITE_URLS.docs },
-      { label: 'SDK', href: docsSection('sdk') },
-      { label: 'Agent', href: docsSection('agent') },
-      { label: 'CLI', href: docsSection('cli') },
-      { label: 'CI/CD', href: docsSection('cicd') },
-      { label: 'Coding Agents', href: docsSection('coding-agents') },
+      { label: 'Docs', href: SITE_URLS.docs },
+      { label: "What's New", href: SITE_URLS.whatsNew },
+      { label: 'Roadmap', href: SITE_URLS.roadmap },
     ],
   },
   {
@@ -104,7 +104,6 @@ export const SITE_FOOTER_COLUMNS: SiteFooterLinkColumn[] = [
       { label: 'GitHub', href: SITE_URLS.github },
       { label: 'YouTube', href: SITE_URLS.youtube },
       { label: 'Support', href: SITE_URLS.support },
-      { label: "What's New", href: SITE_URLS.whatsNew },
       { label: 'Share Feedback', href: SITE_URLS.feedback },
     ],
   },
