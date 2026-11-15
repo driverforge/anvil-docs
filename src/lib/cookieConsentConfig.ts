@@ -71,3 +71,32 @@ export const cookieConsentConfig: CookieConsentConfig = {
     },
   },
 };
+
+/** vanilla-cookieconsent's consent cookie. Named here so every site agrees. */
+export const CONSENT_COOKIE_NAME = 'cc_cookie';
+
+const SHARED_DOMAIN = 'driverforge.com';
+
+/**
+ * The domain to hold the consent cookie on: driverforge.com for it and every
+ * subdomain, so the docs share one consent with driverforge.com, /anvil and
+ * /blog. Elsewhere, local dev included, undefined: the browser would refuse a
+ * driverforge.com cookie, so it stays on the host. Kept in step with the
+ * other properties' copy by the Driverforge monorepo.
+ */
+export function sharedConsentDomain(hostname: string): string | undefined {
+  return hostname === SHARED_DOMAIN || hostname.endsWith(`.${SHARED_DOMAIN}`)
+    ? SHARED_DOMAIN
+    : undefined;
+}
+
+/** `config` with its consent cookie on the shared domain, when `hostname` is under it. */
+export function withSharedConsentCookie(
+  config: CookieConsentConfig,
+  hostname: string,
+): CookieConsentConfig {
+  const domain = sharedConsentDomain(hostname);
+  return domain
+    ? { ...config, cookie: { ...config.cookie, name: CONSENT_COOKIE_NAME, domain } }
+    : config;
+}

@@ -7,7 +7,7 @@ describe('WaitlistNavbarItem', () => {
   it('links to the waitlist', () => {
     render(<WaitlistNavbarItem />);
 
-    expect(screen.getByRole('link', { name: 'Join the Waitlist' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Join the Anvil waitlist' })).toHaveAttribute(
       'href',
       'https://driverforge.com/anvil/#waitlist',
     );
@@ -16,7 +16,7 @@ describe('WaitlistNavbarItem', () => {
   it('is marked signed-out only, so it hides from anyone with an account', () => {
     render(<WaitlistNavbarItem />);
 
-    expect(screen.getByRole('link', { name: 'Join the Waitlist' })).toHaveClass('df-auth-out');
+    expect(screen.getByRole('link', { name: 'Join the Anvil waitlist' })).toHaveClass('df-auth-out');
   });
 
   it('carries the classes the CTA styling keys off', () => {
@@ -24,7 +24,7 @@ describe('WaitlistNavbarItem', () => {
     // Dropping them degrades the button to a plain text link, silently.
     render(<WaitlistNavbarItem />);
 
-    expect(screen.getByRole('link', { name: 'Join the Waitlist' })).toHaveClass(
+    expect(screen.getByRole('link', { name: 'Join the Anvil waitlist' })).toHaveClass(
       'navbar__link',
       'navbar-cta',
     );
@@ -34,6 +34,6 @@ describe('WaitlistNavbarItem', () => {
     // Rendering it conditionally removed it from the served HTML entirely.
     render(<WaitlistNavbarItem />);
 
-    expect(screen.getByRole('link', { name: 'Join the Waitlist' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Join the Anvil waitlist' })).toBeInTheDocument();
   });
 });

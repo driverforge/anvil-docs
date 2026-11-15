@@ -1,7 +1,8 @@
-import {themes as prismThemes} from 'prism-react-renderer';
+import { SITE_URLS, siteCopyright } from './src/site-chrome';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import {cliVersionRemark} from './src/lib/cliVersion';
+import {githubDark, githubLight} from './src/lib/prismThemes';
 import llmsPlugin from './src/plugins/llms';
 
 // Load .env at config-load time so values are available for fields like
@@ -115,7 +116,7 @@ const config: Config = {
         },
         blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: ['./src/css/custom.css', './src/css/site-chrome.css'],
         },
       } satisfies Preset.Options,
     ],
@@ -201,16 +202,24 @@ const config: Config = {
     colorMode: {
       defaultMode: 'dark',
       respectPrefersColorScheme: true,
-      // Built-in toggle removed in favour of the custom Theme selector navbar
-      // item (src/components/ThemeSelector). The colorMode API still works.
-      disableSwitch: true,
+      // Not disableSwitch: that makes Docusaurus delete the stored choice on
+      // every load, so the theme reset on refresh. The built-in toggle is
+      // hidden instead by src/theme/Navbar/ColorModeToggle, in favour of the
+      // Theme selector navbar item (src/components/ThemeSelector).
+      disableSwitch: false,
     },
+    // The header the public properties share: the brand tile home to
+    // driverforge.com, then the docs' own sections, search, help, theme and
+    // the sign-in / waitlist pair. Styled in src/css/site-chrome.css.
     navbar: {
-      title: 'Anvil Documentation',
+      title: 'Driverforge',
       logo: {
         alt: 'Driverforge',
-        src: 'img/logo.svg',
-        srcDark: 'img/logo_dark.svg',
+        src: 'img/logo-tile.svg',
+        // Theme-invariant, like the kit's tile; without srcDark the dark theme hides it.
+        srcDark: 'img/logo-tile.svg',
+        href: SITE_URLS.home,
+        target: '_self',
       },
       items: [
         {
@@ -290,81 +299,15 @@ const config: Config = {
         },
       ],
     },
+    // The footer the public properties share, rendered by the swizzled
+    // src/theme/Footer from src/site-chrome.ts; only the copyright comes from here.
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Learn',
-          items: [
-            {
-              label: 'Platform',
-              to: '/',
-            },
-            {
-              label: 'SDK',
-              to: '/sdk/overview',
-            },
-            {
-              label: 'Agent',
-              to: '/agent/overview',
-            },
-            {
-              label: 'CLI',
-              to: '/cli/overview',
-            },
-            {
-              label: 'CI/CD',
-              to: '/cicd/overview',
-            },
-            {
-              label: 'Coding Agents',
-              to: '/coding-agents/overview',
-            },
-          ],
-        },
-        {
-          title: 'Resources',
-          items: [
-            {
-              label: 'Support',
-              href: 'https://support.driverforge.com',
-            },
-            {
-              label: "What's New",
-              href: 'https://driverforge.canny.io/changelog',
-            },
-            {
-              label: 'Share Feedback',
-              href: 'https://driverforge.canny.io/feature-requests',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/driverforge',
-            },
-          ],
-        },
-        {
-          title: 'Legal',
-          items: [
-            {
-              label: 'Terms',
-              href: 'https://driverforge.com/terms',
-            },
-            {
-              label: 'Privacy',
-              href: 'https://driverforge.com/privacy',
-            },
-            {
-              html: '<button type="button" class="footer__link-item footer__cookie-preferences" data-cc="show-preferencesModal">Cookie preferences</button>',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Driverforge Pty Ltd`,
+      copyright: siteCopyright(),
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: githubLight,
+      darkTheme: githubDark,
       additionalLanguages: ['lua'],
     },
     zoom: {

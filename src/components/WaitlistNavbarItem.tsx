@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WAITLIST_URL = 'https://driverforge.com/anvil/#waitlist';
+import { SITE_URLS, SITE_WAITLIST_LABEL } from '../site-chrome';
 
 /**
  * The navbar's sign-up call to action.
@@ -19,8 +19,8 @@ const WAITLIST_URL = 'https://driverforge.com/anvil/#waitlist';
  */
 export default function WaitlistNavbarItem() {
   return (
-    <a className="navbar__item navbar__link navbar-cta df-auth-out" href={WAITLIST_URL}>
-      Join the Waitlist
+    <a className="navbar__item navbar__link navbar-cta df-auth-out" href={SITE_URLS.waitlist}>
+      {SITE_WAITLIST_LABEL}
     </a>
   );
 }

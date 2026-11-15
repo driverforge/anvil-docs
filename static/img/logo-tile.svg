@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Driverforge">
+  <!--
+    Blue brand favicon: the canonical Driverforge mark (white) on the primary
+    #669DF1 rounded-square tile — the same lockup used as the top-left logo on
+    the .com product surfaces. Reserved for driverforge.com hosts; the .dev
+    dev-tools use the adaptive transparent mark instead.
+  -->
+  <rect width="64" height="64" rx="16" fill="#669DF1" />
+  <g transform="translate(8.533 8.533) scale(1.1733)" fill="#ffffff">
+    <path d="M8 32h24v4H8v-4Z" />
+    <path d="M10 24h20v6H10v-6Z" />
+    <path d="M6 20h28v2H6v-2Z" />
+    <path d="M14 8h12v10H14V8Z" />
+    <path d="M18 4h4v4h-4V4Z" />
+  </g>
+</svg>

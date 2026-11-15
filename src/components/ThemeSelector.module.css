@@ -8,33 +8,29 @@
   appearance: none;
   -webkit-appearance: none;
   box-sizing: border-box;
-  /* Match the "Join the Waitlist" CTA rendered height (34.25px). Fixed px (not
-     rem — the base font is ~15px here) + border-box so the <select>'s taller
-     intrinsic line-box doesn't inflate it. */
-  height: 34px;
-  padding: 0 1.7rem 0 2rem;
+  /* The shared header's ThemeSelect: h-8, the kit's border and
+     radius, the primary border on hover. Tokens: src/css/site-chrome.css. */
+  height: 32px;
+  padding: 0 28px 0 32px;
   font: inherit;
-  font-size: 0.875rem; /* match .navbar__link */
+  font-size: 14px;
   font-weight: 500;
   line-height: 1;
-  color: var(--ifm-navbar-link-color);
+  color: var(--df-foreground);
   background: transparent;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 0.5rem;
+  border: 1px solid var(--df-border);
+  border-radius: var(--df-radius-md);
   cursor: pointer;
-  transition:
-    color var(--ifm-transition-fast),
-    border-color var(--ifm-transition-fast);
+  transition: border-color var(--ifm-transition-fast);
 }
 
 .select:hover {
-  color: var(--ifm-navbar-link-hover-color);
-  border-color: var(--ifm-color-primary);
+  border-color: var(--df-primary);
 }
 
 .select:focus-visible {
   outline: none;
-  border-color: var(--ifm-color-primary);
+  border-color: var(--df-primary);
 }
 
 /* Icon + chevron are decorative overlays; pointer-events off so clicks open
@@ -43,17 +39,17 @@
 .chevron {
   position: absolute;
   pointer-events: none;
-  color: var(--ifm-navbar-link-color);
+  color: var(--df-foreground);
 }
 
 .icon {
-  left: 0.5rem;
-  width: 18px;
-  height: 18px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
 }
 
 .chevron {
-  right: 0.4rem;
+  right: 6px;
   width: 16px;
   height: 16px;
   opacity: 0.7;

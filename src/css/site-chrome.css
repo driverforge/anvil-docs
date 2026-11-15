@@ -1,0 +1,372 @@
+/**
+ * The header and footer the public driverforge.com properties share,
+ * rebuilt for Docusaurus because the docs site can't import Driverforge's UI
+ * kit. The --df-* values are copies of the kit's tokens, and the site's
+ * whole palette (custom.css) is drawn from them, so docs read like the other
+ * properties in both themes. The Driverforge monorepo checks the copies
+ * match. Loaded after custom.css, so the chrome rules here win.
+ */
+
+/* ==========================================================================
+   Tokens (the kit's values)
+   ========================================================================== */
+:root {
+  --df-background: oklch(1 0 0);
+  --df-foreground: oklch(0.145 0 0);
+  --df-card: oklch(1 0 0);
+  --df-muted-foreground: oklch(0.556 0 0);
+  --df-ring: oklch(0.488 0.243 264.376);
+  --df-prose-body: color-mix(in oklab, var(--df-foreground) 82%, var(--df-background));
+  --df-primary: oklch(0.488 0.243 264.376);
+  --df-primary-foreground: oklch(0.97 0.014 254.604);
+  --df-link: oklch(0.488 0.243 264.376);
+  --df-secondary: oklch(0.967 0.001 286.375);
+  --df-secondary-foreground: oklch(0.21 0.006 285.885);
+  --df-muted: oklch(0.97 0 0);
+  --df-border: oklch(0.922 0 0);
+  --df-ink: oklch(0.965 0.012 250);
+  --df-ink-foreground: oklch(0.21 0.02 264);
+  --df-radius-md: 8px;
+
+  /* The kit header's h-16 plus its 1px bottom border. */
+  --ifm-navbar-height: 65px;
+}
+
+[data-theme='dark'] {
+  --df-background: oklch(0.145 0 0);
+  --df-foreground: oklch(0.985 0 0);
+  --df-card: oklch(0.205 0 0);
+  --df-muted-foreground: oklch(0.708 0 0);
+  --df-ring: oklch(0.623 0.214 259.815);
+  --df-prose-body: color-mix(in oklab, var(--df-foreground) 80%, var(--df-background));
+  --df-primary: oklch(0.424 0.199 265.638);
+  --df-primary-foreground: oklch(0.97 0.014 254.604);
+  --df-link: oklch(0.76 0.1 262);
+  --df-secondary: oklch(0.274 0.006 286.033);
+  --df-secondary-foreground: oklch(0.985 0 0);
+  --df-muted: oklch(0.269 0 0);
+  --df-border: oklch(1 0 0 / 10%);
+  --df-ink: oklch(0.2 0.0024 286);
+  --df-ink-foreground: oklch(0.8652 0.0025 286);
+}
+
+/* ==========================================================================
+   Header (the kit's StoreHeader)
+   ========================================================================== */
+.navbar {
+  height: var(--ifm-navbar-height);
+  background-color: color-mix(in oklab, var(--df-background) 90%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--df-border);
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom-color: var(--df-border);
+}
+
+/* The brand tile and wordmark: the kit's `tile` lockup. */
+.navbar__brand {
+  gap: 10px;
+  margin-right: 8px;
+  transition: opacity var(--ifm-transition-fast);
+}
+
+.navbar__brand:hover {
+  opacity: 0.8;
+}
+
+.navbar__logo {
+  height: 32px;
+  margin-right: 0;
+}
+
+.navbar__logo img {
+  height: 32px;
+  width: 32px;
+  border-radius: var(--df-radius-md);
+}
+
+.navbar__title {
+  color: var(--df-foreground);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+/* Section links and Help: the kit's ghost button (size sm), with the current
+   section on its secondary variant, as the marketing nav marks its property. */
+.navbar__items:not(.navbar__items--right) .navbar__link,
+.navbar__items--right > .navbar__item.dropdown > .navbar__link,
+.navbar__link.df-auth-out:not(.navbar-cta),
+.navbar__link.df-auth-in {
+  /* No display here: .df-auth-in/.df-auth-out (custom.css) hide one of the
+     sign-in pair by display, and setting it would show both. */
+  height: 32px;
+  line-height: 32px;
+  padding: 0 12px;
+  border-radius: var(--df-radius-md);
+  color: var(--df-foreground);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color var(--ifm-transition-fast);
+}
+
+.navbar__items:not(.navbar__items--right) .navbar__link:hover,
+.navbar__items--right > .navbar__item.dropdown > .navbar__link:hover,
+.navbar__link.df-auth-out:not(.navbar-cta):hover,
+.navbar__link.df-auth-in:hover {
+  background-color: var(--df-muted);
+  color: var(--df-foreground);
+}
+
+.navbar__items:not(.navbar__items--right) .navbar__link--active {
+  background-color: var(--df-secondary);
+  color: var(--df-secondary-foreground);
+}
+
+/* The waitlist call to action: the kit's primary button (size sm). */
+.navbar__link.navbar-cta {
+  /* No display: it is .df-auth-out, hidden by display for signed-in readers. */
+  height: 32px;
+  line-height: 32px;
+  padding: 0 12px;
+  margin-left: 0;
+  border: 0;
+  border-radius: var(--df-radius-md);
+  background: var(--df-primary);
+  color: var(--df-primary-foreground);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.navbar__link.navbar-cta:hover {
+  background: color-mix(in oklab, var(--df-primary) 80%, transparent);
+  border-color: transparent;
+  color: var(--df-primary-foreground);
+  transform: none;
+}
+
+.navbar__items--right {
+  column-gap: 4px;
+}
+
+/* ==========================================================================
+   Footer (the kit's InkFooter), rendered by src/theme/Footer
+   ========================================================================== */
+.df-footer {
+  border-top: 1px solid var(--df-border);
+  background-color: var(--df-ink);
+  color: var(--df-ink-foreground);
+}
+
+.df-footer__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 56px 16px;
+}
+
+@media (min-width: 640px) {
+  .df-footer__container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.df-footer__grid {
+  display: grid;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .df-footer__grid {
+    grid-template-columns: 1.4fr repeat(var(--df-footer-columns), 1fr);
+  }
+}
+
+.df-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.df-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.df-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.df-lockup__tile {
+  height: 32px;
+  width: 32px;
+  border-radius: var(--df-radius-md);
+}
+
+.df-lockup__word {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.df-footer__blurb {
+  max-width: 320px;
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.df-footer__column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.df-footer__heading {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  /* Faded through its colour, so the linked stamp can still show full red. */
+  color: color-mix(in oklab, var(--df-ink-foreground) 50%, transparent);
+}
+
+.df-footer__link,
+.df-footer .footer__cookie-preferences {
+  color: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 0.75;
+  transition: opacity var(--ifm-transition-fast);
+}
+
+.df-footer__link:hover,
+.df-footer .footer__cookie-preferences:hover {
+  color: inherit;
+  text-decoration: none;
+  opacity: 1;
+}
+
+.df-footer .footer__cookie-preferences {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.df-footer__bottom {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid color-mix(in oklab, var(--df-ink-foreground) 10%, transparent);
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.df-footer__bottom p {
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   Buttons in content (the download buttons): the kit's primary button, size
+   default. Infima would choose the text colour itself, and on the kit's
+   dark-mode primary it chooses black.
+   ========================================================================== */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--df-radius-md);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color var(--ifm-transition-fast);
+}
+
+.button--primary {
+  border-color: transparent;
+  background-color: var(--df-primary);
+  color: var(--df-primary-foreground);
+}
+
+.button--primary:hover,
+.button--primary:focus-visible {
+  border-color: transparent;
+  background-color: color-mix(in oklab, var(--df-primary) 80%, transparent);
+  color: var(--df-primary-foreground);
+  text-decoration: none;
+}
+
+/* The redacted footer entries: the kit's Redacted, a bar as wide as the word
+   it hides (width set inline), the heading's stamped Soon, for the
+   marketplace until it launches. It shimmers, still for readers who prefer
+   reduced motion. */
+.df-redacted {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.df-redacted__bar {
+  display: inline-block;
+  height: 0.8em;
+  border-radius: 2px;
+  background-color: currentColor;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .df-redacted__bar {
+    animation: df-redacted-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes df-redacted-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.df-redacted__stamp {
+  padding: 0 4px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* The linked stamp (the classified heading's Soon): unchanged at rest,
+   YouTube red on hover. */
+a.df-redacted__stamp {
+  color: inherit;
+  text-decoration: none;
+  transition:
+    color var(--ifm-transition-fast),
+    opacity var(--ifm-transition-fast);
+}
+
+a.df-redacted__stamp:hover,
+a.df-redacted__stamp:focus-visible {
+  color: #ff0000;
+  opacity: 1;
+  text-decoration: none;
+}

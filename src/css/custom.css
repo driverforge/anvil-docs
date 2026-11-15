@@ -12,18 +12,21 @@
    ========================================================================== */
 :root {
   /* Brand colors */
-  --ifm-color-primary: #3b82f6;
-  --ifm-color-primary-dark: #2563eb;
-  --ifm-color-primary-darker: #1d4ed8;
-  --ifm-color-primary-darkest: #1e40af;
-  --ifm-color-primary-light: #60a5fa;
-  --ifm-color-primary-lighter: #93c5fd;
-  --ifm-color-primary-lightest: #dbeafe;
+  /* Brand colors: the kit's primary (tokens in site-chrome.css), with the
+     shades Infima derives states from. */
+  --ifm-color-primary: var(--df-primary);
+  --ifm-color-primary-dark: color-mix(in oklab, var(--df-primary) 90%, black);
+  --ifm-color-primary-darker: color-mix(in oklab, var(--df-primary) 82%, black);
+  --ifm-color-primary-darkest: color-mix(in oklab, var(--df-primary) 70%, black);
+  --ifm-color-primary-light: color-mix(in oklab, var(--df-primary) 88%, white);
+  --ifm-color-primary-lighter: color-mix(in oklab, var(--df-primary) 75%, white);
+  --ifm-color-primary-lightest: color-mix(in oklab, var(--df-primary) 25%, white);
 
   /* Typography */
   --ifm-font-family-base: 'Geist', system-ui, -apple-system, sans-serif;
   --ifm-font-family-monospace: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
-  --ifm-font-size-base: 0.9375rem; /* 15px - slightly smaller than default */
+  /* 16px, as on the other properties: rem means the same everywhere. */
+  --ifm-font-size-base: 100%;
   --ifm-line-height-base: 1.6;
   --ifm-heading-font-weight: 600;
   --ifm-font-weight-semibold: 500;
@@ -38,10 +41,15 @@
   --ifm-code-border-radius: 0.375rem;
 
   /* Colors */
-  --ifm-font-color-base: #18181b;
-  --ifm-font-color-secondary: #52525b;
-  --ifm-background-color: #ffffff;
-  --ifm-background-surface-color: #fafafa;
+  /* The kit's palette, as the blog's article pages use it: body copy a step
+     softer than headings. Follows the theme through the --df-* tokens. */
+  --ifm-font-color-base: var(--df-prose-body);
+  --ifm-heading-color: var(--df-foreground);
+  --ifm-font-color-secondary: var(--df-muted-foreground);
+  --ifm-background-color: var(--df-background);
+  --ifm-background-surface-color: var(--df-card);
+  --ifm-navbar-background-color: var(--df-background);
+  --ifm-code-background: var(--df-muted);
 
   /* Navbar */
   --ifm-navbar-height: 3.5rem;
@@ -52,53 +60,17 @@
   --doc-sidebar-width: 280px;
 
   /* Links */
-  --ifm-link-color: var(--ifm-color-primary-dark);
-  --ifm-link-hover-color: var(--ifm-color-primary-darker);
+  --ifm-link-color: var(--df-link);
+  --ifm-link-hover-color: var(--df-link);
   --ifm-link-hover-decoration: none;
 
   /* Code highlighting */
-  --docusaurus-highlighted-code-line-bg: rgba(59, 130, 246, 0.08);
+  --docusaurus-highlighted-code-line-bg: color-mix(in oklab, var(--df-primary) 10%, transparent);
 
   /* Borders */
-  --ifm-hr-border-color: #e4e4e7;
-  --ifm-toc-border-color: #e4e4e7;
-  --ifm-table-border-color: #e4e4e7;
-}
-
-/* ==========================================================================
-   Dark Theme Variables
-   ========================================================================== */
-[data-theme='dark'] {
-  /* Brand colors - slightly muted for dark mode */
-  --ifm-color-primary: #669DF1;
-  --ifm-color-primary-dark: #4A8BEE;
-  --ifm-color-primary-darker: #3A7FEB;
-  --ifm-color-primary-darkest: #1F68E0;
-  --ifm-color-primary-light: #8FB8F6;
-  --ifm-color-primary-lighter: #A8C8F8;
-  --ifm-color-primary-lightest: #D4E4FC;
-
-  /* Background - Driverforge dark palette */
-  --ifm-background-color: #1F1F21;
-  --ifm-background-surface-color: #242528;
-  --ifm-navbar-background-color: #18191A;
-  --ifm-footer-background-color: #18191A;
-
-  /* Text - Driverforge palette */
-  --ifm-font-color-base: #CECFD2;
-  --ifm-font-color-secondary: #9ca3af;
-
-  /* Links */
-  --ifm-link-color: #8FB8F6;
-  --ifm-link-hover-color: #ADCBFB;
-
-  /* Borders */
-  --ifm-hr-border-color: #3f3f46;
-  --ifm-toc-border-color: #3f3f46;
-  --ifm-table-border-color: #3f3f46;
-
-  /* Code highlighting */
-  --docusaurus-highlighted-code-line-bg: rgba(102, 157, 241, 0.15);
+  --ifm-hr-border-color: var(--df-border);
+  --ifm-toc-border-color: var(--df-border);
+  --ifm-table-border-color: var(--df-border);
 }
 
 /* ==========================================================================
@@ -141,19 +113,11 @@ html {
   color: var(--ifm-color-primary);
 }
 
-[data-theme='dark'] .navbar {
-  border-bottom-color: #3f3f46;
-}
-
 /* ==========================================================================
    Sidebar Navigation
    ========================================================================== */
 .theme-doc-sidebar-container {
   border-right: 1px solid var(--ifm-hr-border-color);
-}
-
-[data-theme='dark'] .theme-doc-sidebar-container {
-  border-right-color: #3f3f46;
 }
 
 /* Sidebar menu styling */
@@ -171,10 +135,6 @@ html {
   padding-left: 0.75rem;
   margin-left: 0.5rem;
   border-left: 1px solid var(--ifm-hr-border-color);
-}
-
-[data-theme='dark'] .menu__list .menu__list {
-  border-left-color: #3f3f46;
 }
 
 /* Category titles */
@@ -202,12 +162,8 @@ html {
 }
 
 .menu__link:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--df-muted);
   color: var(--ifm-font-color-base);
-}
-
-[data-theme='dark'] .menu__link:hover {
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .menu__link--sublist-caret:after {
@@ -217,14 +173,10 @@ html {
 
 /* Active link */
 .menu__link--active:not(.menu__link--sublist) {
-  background: rgba(59, 130, 246, 0.08);
-  color: var(--ifm-color-primary);
+  /* The kit's secondary, as the header marks the current section. */
+  background: var(--df-secondary);
+  color: var(--df-secondary-foreground);
   font-weight: 500;
-}
-
-[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
-  background: rgba(102, 157, 241, 0.12);
-  color: var(--ifm-color-primary-light);
 }
 
 /* "Soon" pill on coming-soon sidebar items (className: menu-coming-soon) */
@@ -245,10 +197,6 @@ html {
   border-radius: 999px;
   background: var(--ifm-color-emphasis-200);
   color: var(--ifm-font-color-secondary);
-}
-
-[data-theme='dark'] .menu-coming-soon > .menu__link::after {
-  background: rgba(255, 255, 255, 0.08);
 }
 
 /* "Experimental" pill on a sidebar item (className: menu-experimental) */
@@ -280,7 +228,8 @@ html {
    Main Content Area
    ========================================================================== */
 .markdown {
-  --ifm-heading-color: var(--ifm-font-color-base);
+  /* Headings at full strength over the softer body copy, as on the blog. */
+  --ifm-heading-color: var(--df-foreground);
 }
 
 /* Headings */
@@ -299,10 +248,6 @@ html {
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--ifm-hr-border-color);
   letter-spacing: -0.01em;
-}
-
-[data-theme='dark'] .markdown h2 {
-  border-bottom-color: #3f3f46;
 }
 
 .markdown h3 {
@@ -354,7 +299,7 @@ table td {
 }
 
 table th {
-  background-color: var(--ifm-background-surface-color);
+  background-color: var(--df-muted);
   font-weight: 600;
   font-size: 0.8125rem;
   text-transform: uppercase;
@@ -362,16 +307,8 @@ table th {
   color: var(--ifm-font-color-secondary);
 }
 
-[data-theme='dark'] table th {
-  background-color: #2B2C2F;
-}
-
 table tr:hover td {
-  background-color: rgba(0, 0, 0, 0.02);
-}
-
-[data-theme='dark'] table tr:hover td {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: color-mix(in oklab, var(--df-muted) 50%, transparent);
 }
 
 /* ==========================================================================
@@ -381,24 +318,24 @@ table tr:hover td {
 /* Inline code */
 code {
   font-size: 0.875em;
-  border-radius: 0.375rem;
+  border-radius: 0.25rem;
   padding: 0.125rem 0.375rem;
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--df-muted);
+  border: 1px solid var(--df-border);
   font-weight: 400;
 }
 
 
 /* Code block container - this is the outer wrapper */
 div[class*='codeBlockContainer'] {
-  border-radius: 0.5rem !important;
+  /* The blog's code block (ui-kit Prose's pre): a bordered, rounded box on
+     the highlighting theme's own background (Prism's github themes in
+     src/lib/prismThemes.ts, as the blog's Shiki github-light/-dark). */
+  border: 1px solid var(--df-border);
+  border-radius: 0.625rem !important;
   overflow: hidden;
   box-shadow: none !important;
-  margin: 1rem 0;
-}
-
-[data-theme='dark'] div[class*='codeBlockContainer'] {
-  background-color: #18191A !important;
-  border: 1px solid #3f3f46;
+  margin: 1.5rem 0;
 }
 
 /* The pre element inside code blocks - remove duplicate styling */
@@ -407,13 +344,14 @@ div[class*='codeBlockContainer'] pre {
   border: none !important;
   margin: 0 !important;
   background: transparent !important;
-  font-size: 0.8125rem !important;
-  line-height: 1.6 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.625 !important;
 }
 
 /* Code inside pre blocks - reset inline code styling */
 pre code {
   background: transparent;
+  border: 0;
   padding: 0;
   border-radius: 0;
   font-size: inherit;
@@ -429,12 +367,7 @@ div[class*='codeBlockTitle'] {
   font-weight: 500;
   letter-spacing: 0.025em;
   border-bottom: 1px solid var(--ifm-hr-border-color);
-  background-color: var(--ifm-background-surface-color);
-}
-
-[data-theme='dark'] div[class*='codeBlockTitle'] {
-  background-color: #242528;
-  border-bottom-color: #3f3f46;
+  background-color: var(--df-card);
 }
 
 /* Copy button styling */
@@ -444,11 +377,7 @@ button[class*='copyButton'] {
 
 /* Lua syntax highlighting */
 .language-lua .token.function {
-  color: #3b82f6;
-}
-
-[data-theme='dark'] .language-lua .token.function {
-  color: #8FB8F6;
+  color: var(--df-ring);
 }
 
 /* ==========================================================================
@@ -473,58 +402,6 @@ button[class*='copyButton'] {
 
 .table-of-contents__link--active {
   font-weight: 500;
-}
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-.footer {
-  border-top: 1px solid var(--ifm-hr-border-color);
-  padding: 2rem 1.5rem;
-  background-color: #f4f4f5;
-}
-
-[data-theme='dark'] .footer {
-  border-top-color: #27272a;
-  background-color: #18181b;
-}
-
-.footer__title {
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #71717a;
-  margin-bottom: 0.75rem;
-}
-
-[data-theme='dark'] .footer__title {
-  color: #a1a1aa;
-}
-
-.footer__link-item {
-  font-size: 0.875rem;
-  line-height: 2;
-  color: #3f3f46;
-}
-
-[data-theme='dark'] .footer__link-item {
-  color: #d4d4d8;
-}
-
-.footer__link-item:hover {
-  text-decoration: none;
-  color: var(--ifm-color-primary);
-}
-
-.footer__copyright {
-  font-size: 0.8125rem;
-  color: #71717a;
-  margin-top: 1.5rem;
-}
-
-[data-theme='dark'] .footer__copyright {
-  color: #a1a1aa;
 }
 
 /* ==========================================================================
@@ -574,10 +451,6 @@ button[class*='copyButton'] {
 .pagination-nav__link:hover {
   border-color: var(--ifm-color-primary);
   background: transparent;
-}
-
-[data-theme='dark'] .pagination-nav__link {
-  border-color: #3f3f46;
 }
 
 [data-theme='dark'] .pagination-nav__link:hover {
@@ -685,14 +558,11 @@ button[class*='copyButton'] {
   --cc-btn-primary-hover-border-color: var(--ifm-color-primary-dark);
 
   --cc-toggle-on-bg: var(--ifm-color-primary);
+  --cc-btn-primary-color: var(--df-primary-foreground);
+  --cc-btn-primary-hover-color: var(--df-primary-foreground);
+  --cc-toggle-readonly-bg: color-mix(in oklab, var(--df-primary) 45%, var(--df-background));
 
   --cc-overlay-bg: rgba(0, 0, 0, 0.55);
-}
-
-[data-theme='dark'] #cc-main {
-  --cc-btn-primary-color: #1f1f21;
-  --cc-btn-primary-hover-color: #1f1f21;
-  --cc-toggle-readonly-bg: #33477a;
 }
 
 /* The footer "Cookie preferences" trigger is a <button> amongst links —
