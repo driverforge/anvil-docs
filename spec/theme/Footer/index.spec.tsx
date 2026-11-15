@@ -26,16 +26,24 @@ describe('Footer', () => {
     expect(screen.getByText(/Guides and reference for Anvil/)).toBeInTheDocument();
   });
 
-  it('renders the classified column, then Developers, Company, Legal and Connect', () => {
+  it('renders the classified column, then Developers, Learn, Company and Connect', () => {
     render(<Footer />);
 
     expect(screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual([
       'Something new, coming soonSoon',
       'Developers',
+      'Learn',
       'Company',
-      'Legal',
       'Connect',
     ]);
+    expect(screen.getByRole('link', { name: 'Coding Agents' })).toHaveAttribute(
+      'href',
+      'https://docs.driverforge.com/coding-agents/overview/',
+    );
+    expect(screen.getByRole('link', { name: 'Support' })).toHaveAttribute(
+      'href',
+      'mailto:support@driverforge.com',
+    );
     expect(screen.getByRole('link', { name: 'Roadmap' })).toHaveAttribute(
       'href',
       'https://driverforge.canny.io/',
@@ -55,13 +63,12 @@ describe('Footer', () => {
     expect(container.textContent?.toLowerCase()).not.toContain('marketplace');
   });
 
-  it('keeps the cookie preferences trigger and the shared copyright line', () => {
+  it('keeps the cookie preferences trigger, under Company, and the shared copyright line', () => {
     render(<Footer />);
 
-    expect(screen.getByRole('button', { name: 'Cookie preferences' })).toHaveAttribute(
-      'data-cc',
-      'show-preferencesModal',
-    );
+    const trigger = screen.getByRole('button', { name: 'Cookie Preferences' });
+    expect(trigger).toHaveAttribute('data-cc', 'show-preferencesModal');
+    expect(trigger.closest('nav')).toHaveAttribute('aria-label', 'Company');
     expect(
       screen.getByText('Copyright © 2026 Driverforge Pty Ltd. All rights reserved.'),
     ).toBeInTheDocument();

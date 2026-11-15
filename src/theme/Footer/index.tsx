@@ -48,7 +48,7 @@ function Redacted({
  * The footer the public driverforge.com properties share, rebuilt for
  * Docusaurus because the docs site can't import the UI kit: the brand lockup
  * and blurb, the link columns from src/site-chrome.ts (redacted ones drawn as
- * bars), cookie preferences under Legal, and the copyright from
+ * bars), cookie preferences at the end of Company, and the copyright from
  * docusaurus.config.ts. Styled in src/css/site-chrome.css.
  */
 export default function Footer(): React.JSX.Element | null {
@@ -97,13 +97,13 @@ export default function Footer(): React.JSX.Element | null {
                   {link.redactedWidth ? <Redacted width={link.redactedWidth} /> : link.label}
                 </Link>
               ))}
-              {column.heading === 'Legal' && (
+              {column.cookiePreferences && (
                 <button
                   type="button"
                   className="footer__link-item footer__cookie-preferences"
                   data-cc="show-preferencesModal"
                 >
-                  Cookie preferences
+                  Cookie Preferences
                 </button>
               )}
             </nav>

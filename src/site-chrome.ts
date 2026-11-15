@@ -18,6 +18,9 @@ export const SITE_URLS = {
   terms: 'https://driverforge.com/terms',
   github: 'https://github.com/driverforge',
   youtube: 'https://www.youtube.com/@driverforge',
+  support: 'mailto:support@driverforge.com',
+  whatsNew: 'https://driverforge.canny.io/changelog',
+  feedback: 'https://driverforge.canny.io/feature-requests',
   // The footer's Soon stamp links here: Ob-La-Di, Ob-La-Da ("Desmond has a
   // barrow in the marketplace").
   soonSong: 'https://www.youtube.com/watch?v=9x5WY_jmsko&list=RD9x5WY_jmsko',
@@ -43,11 +46,16 @@ export interface SiteFooterLinkColumn {
    */
   redactedWidth?: number;
   links: SiteFooterLink[];
+  /** Ends the column with the cookie-preferences action. */
+  cookiePreferences?: boolean;
 }
 
 const COMING_SOON = 'Coming soon';
 
-/** The footer's link columns. Legal also carries a cookie-preferences action. */
+/** A docs section's landing page. */
+const docsSection = (section: string) => `${SITE_URLS.docs}/${section}/overview/`;
+
+/** The footer's link columns. Company ends with the cookie-preferences action. */
 export const SITE_FOOTER_COLUMNS: SiteFooterLinkColumn[] = [
   // The marketplace, unnamed until it launches: a redacted heading stamped
   // Soon over three redacted links home, of different lengths. At launch it
@@ -70,24 +78,34 @@ export const SITE_FOOTER_COLUMNS: SiteFooterLinkColumn[] = [
     ],
   },
   {
+    heading: 'Learn',
+    links: [
+      { label: 'Platform', href: SITE_URLS.docs },
+      { label: 'SDK', href: docsSection('sdk') },
+      { label: 'Agent', href: docsSection('agent') },
+      { label: 'CLI', href: docsSection('cli') },
+      { label: 'CI/CD', href: docsSection('cicd') },
+      { label: 'Coding Agents', href: docsSection('coding-agents') },
+    ],
+  },
+  {
     heading: 'Company',
     links: [
       { label: 'Blog', href: SITE_URLS.blog },
       { label: 'Contact', href: SITE_URLS.contact },
-    ],
-  },
-  {
-    heading: 'Legal',
-    links: [
       { label: 'Privacy', href: SITE_URLS.privacy },
       { label: 'Terms', href: SITE_URLS.terms },
     ],
+    cookiePreferences: true,
   },
   {
     heading: 'Connect',
     links: [
       { label: 'GitHub', href: SITE_URLS.github },
       { label: 'YouTube', href: SITE_URLS.youtube },
+      { label: 'Support', href: SITE_URLS.support },
+      { label: "What's New", href: SITE_URLS.whatsNew },
+      { label: 'Share Feedback', href: SITE_URLS.feedback },
     ],
   },
 ];
