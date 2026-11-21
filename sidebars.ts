@@ -7,6 +7,7 @@ const sidebars: SidebarsConfig = {
   platformSidebar: [
     'platform/overview',
     'platform/quick-start',
+    'platform/start-from-a-template',
     {
       type: 'category',
       label: 'Events',
@@ -80,6 +81,7 @@ const sidebars: SidebarsConfig = {
     'cli/authentication',
     'cli/context',
     'cli/build-configuration',
+    'cli/templates',
     'cli/versioning',
     'cli/source-maps',
     'cli/error-reporting',
@@ -104,6 +106,7 @@ const sidebars: SidebarsConfig = {
         'cli/login',
         'cli/logout',
         'cli/logs',
+        'cli/new',
         'cli/org',
         {type: 'doc', id: 'cli/run', className: 'menu-coming-soon'},
         'cli/sync',

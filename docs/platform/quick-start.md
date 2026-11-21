@@ -8,6 +8,9 @@ Install the agent on your controller, let the `driverforge` CLI set up your
 driver, and deploy it. Events start streaming to Anvil as soon as the driver
 loads.
 
+Starting a new driver rather than adding Anvil to an existing one? See
+[Start a driver from a template](/platform/start-from-a-template).
+
 ## Prerequisites
 
 - **Control4 OS 3.3.1 or newer** on the controller running your driver

@@ -34,6 +34,9 @@ script can run it without a terminal (see
 project (see [Running it again](#running-it-again)). SDK updates have one
 owner, the [`driverforge upgrade`](/cli/upgrade) picker.
 
+To start a new driver instead, [`driverforge new`](/cli/new) creates the
+project from a template and runs `init` in it.
+
 ## Prerequisites
 
 - An existing Control4 driver project
